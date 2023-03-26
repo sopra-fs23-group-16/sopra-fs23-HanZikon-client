@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getDomain } from 'helpers/getDomain';
 
 export const api = axios.create({
-  baseURL: getDomain(),
+  baseURL: `http://${getDomain()}`,
   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
 });
 
