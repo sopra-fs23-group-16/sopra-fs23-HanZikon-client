@@ -6,6 +6,7 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import {doTouristCreation} from "./Tourist";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -62,6 +63,10 @@ const Login = props => {
   const history = useHistory();  
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [userList, setUserList] = useState([]);
+  const [timeOut, setTimeOut] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [warnMessage, setWarnMessage] = useState(null);
 
   const doLogin = async () => {
     try {
@@ -88,6 +93,39 @@ const Login = props => {
     }
   };
 
+    // Tourist will be automatically created, and direct to game mode page
+    const doTouristLogin = () => {
+        try {
+            const newUserGanerated = doTouristCreation();
+            setUserList([...userList, newUserGanerated]);
+
+            // Method 1:
+            // alert("Dear tourist, You will login the game with tourist mode! you could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ</p>");
+
+            // Method 2:
+            // const myWindow = window.open("", "", "width=400,height=150,textColor=Orange");
+            // myWindow.document.title = "Warm Note";
+            // myWindow.document.write("<p>Dear tourist,</p> \n <p>You will login the game with tourist mode!</p> \n <p>  You could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ</p>");
+            // myWindow.document.body.style.background = "#262632";
+            // myWindow.document.body.style.textColor = "White";
+
+            setWarnMessage("You will login the game with tourist mode! You could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ");
+
+            setTimeout(() => {
+                setTimeOut(1);
+                //myWindow.close();
+
+            }, 2000);
+
+            setTimeout(() => {
+                history.push(`/dashboard?mode=tourist`);
+            }, 2000);
+
+
+        } catch (error) {
+            alert(`Register failed: \n${handleError(error)}`);
+        }
+    };
 
   return (
     <BaseContainer>
@@ -113,14 +151,32 @@ const Login = props => {
           Login
         </Button>
     </div>
-  <div className="login button-container">
+    <div className="login button-container">
         <Button
           width="80%"
           onClick={() => doRegister()}
         >
           Register
         </Button>
-          </div>
+    </div>
+
+            <div className="login button-container">
+                <Button
+                    width="80%"
+                    onClick={() => doTouristLogin()}
+                >
+                    Tourist Mode
+                </Button>
+            </div>
+
+            {errorMessage &&
+                <div className="login errorMessage">{errorMessage.response.data.message}</div>
+            }
+
+            {warnMessage &&
+                <div className="login warnMessage">{warnMessage}</div>
+            }
+
         </div>
       </div>
     </BaseContainer>

@@ -5,8 +5,11 @@ import React, { useEffect } from 'react'
 const CreateRoom = () => {
 
     return (
-        <BaseContainer className="game container">
-            <h2>Happy Playing!</h2>
+        <BaseContainer className="room container">
+            <h2>Welcome to Game Room X!</h2>
+            <p className="room paragraph">
+                Click to invite friends to play:
+            </p>
         </BaseContainer>
     );
 }

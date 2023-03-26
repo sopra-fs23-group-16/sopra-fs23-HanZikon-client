@@ -16,7 +16,7 @@
     justify-content: center;
     width: 60%;
     max-width: 30em;
-    height: 20em;
+    height: 24em;
     font-size: 18px;
     font-weight: 300;
     padding-left: 35px;
@@ -53,5 +53,12 @@
     justify-content: center;
     margin-top: 1em;
   }
-
+  &.errorMessage {
+    color: indianred;
+  }
+  &.warnMessage {
+    margin-top: 12px;
+    // background-color: darkslategrey;
+    color: white;
+  }
 }
