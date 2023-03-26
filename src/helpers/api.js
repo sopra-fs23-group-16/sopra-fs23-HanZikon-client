@@ -33,3 +33,13 @@ export const handleError = error => {
     return error.message;
   }
 };
+
+export const websocket = new WebSocket(`ws://${getDomain()}/websocket`);
+
+websocket.onopen = () => {
+    console.log('Connected to websocket server');
+};
+
+websocket.onerror = function (event) {
+    console.error("WebSocket error: ", event);
+};
