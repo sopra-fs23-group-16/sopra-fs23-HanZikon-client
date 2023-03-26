@@ -1,7 +1,16 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\public",
+    "\\src",
+    "\\src\\components",
+    "\\src\\components\\routing",
+    "\\src\\components\\ui",
+    "\\src\\components\\views",
+    "\\src\\helpers",
+    "\\src\\image",
+    "\\src\\models"
   ],
-  "SelectedNode": "\\C:\\Users\\fionnualaji\\sopra-fs23-template-client",
+  "SelectedNode": "\\src\\components\\views\\CreateRoom.js",
   "PreviewInSolutionExplorer": false
 }
