@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getDomain } from 'helpers/getDomain';
 
 export const api = axios.create({
-  baseURL: `http://${getDomain()}`,
+  baseURL: `https://${getDomain()}`,
   headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }
 });
 
@@ -34,7 +34,7 @@ export const handleError = error => {
   }
 };
 
-export const websocket = new WebSocket(`ws://${getDomain()}/websocket`);
+export const websocket = new WebSocket(`wss://${getDomain()}/websocket`);
 
 websocket.onopen = () => {
     console.log('Connected to websocket server');
