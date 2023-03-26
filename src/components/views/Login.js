@@ -65,6 +65,7 @@ const Login = props => {
     }
   };
 
+
   return (
     <BaseContainer>
       <div className="login container">
@@ -98,7 +99,7 @@ const Login = props => {
             </Button>
           </div>
         </div>
-      </div>
+      </div> 
     </BaseContainer>
   );
 };
