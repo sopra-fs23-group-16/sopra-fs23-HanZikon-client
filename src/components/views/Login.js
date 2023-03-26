@@ -13,7 +13,7 @@ however be sure not to clutter your files with an endless amount!
 As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
-const FormField = props => {
+const FormFieldUsername = props => {
   return (
     <div className="login field">
       <label className="login label">
@@ -21,7 +21,7 @@ const FormField = props => {
       </label>
       <input
         className="login input"
-        placeholder="Please enter here:"
+        placeholder="Enter your username here"
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
       />
@@ -29,7 +29,30 @@ const FormField = props => {
   );
 };
 
-FormField.propTypes = {
+FormFieldUsername.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
+};
+
+const FormFieldPassword = props => {
+  return (
+    <div className="login field">
+      <label className="login label">
+        {props.label}
+      </label>
+      <input
+        type = "password"
+        className="login input"
+        placeholder="Enter your password here"
+        value={props.value}
+        onChange={e => props.onChange(e.target.value)}
+      />
+    </div>
+  );
+};
+
+FormFieldPassword.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func
@@ -69,37 +92,37 @@ const Login = props => {
   return (
     <BaseContainer>
       <div className="login container">
+      <h2 className="login title">Please login into your account!</h2>
         <div className="login form">
-		  <h2>Login</h2>
-          <FormField
+          <FormFieldUsername
             label="Username"
             value={username}
             onChange={un => setUsername(un)}
           />
-          <FormField
+          <FormFieldPassword
             label="Password"
             value={password}
             onChange={n => setPassword(n)}
           />
           <div className="login button-container">
-            <Button
-              disabled={!username || !password}
-              width="80%"
-              onClick={() => doLogin()}
-            >
-              Login
-            </Button>
-	      </div>
-		  <div className="login button-container">
-            <Button
-              width="80%"
-              onClick={() => doRegister()}
-            >
-              Register
-            </Button>
+          <Button
+          disabled={!username || !password}
+          width="80%"
+          onClick={() => doLogin()}
+        >
+          Login
+        </Button>
+    </div>
+  <div className="login button-container">
+        <Button
+          width="80%"
+          onClick={() => doRegister()}
+        >
+          Register
+        </Button>
           </div>
         </div>
-      </div> 
+      </div>
     </BaseContainer>
   );
 };

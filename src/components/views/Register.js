@@ -3,7 +3,7 @@ import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Login.scss';
+import 'styles/views/Register.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -14,15 +14,15 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 // Still use designs of login.scss
-const FormField = props => {
+const FormFieldUsername = props => {
   return (
-    <div className="login field">
-      <label className="login label">
+    <div className="register field">
+      <label className="register label">
         {props.label}
       </label>
       <input
-        className="login input"
-        placeholder="Please enter here:"
+        className="register input"
+        placeholder="Enter your username here"
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
       />
@@ -30,7 +30,30 @@ const FormField = props => {
   );
 };
 
-FormField.propTypes = {
+FormFieldUsername.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func
+};
+
+const FormFieldPassword = props => {
+  return (
+    <div className="register field">
+      <label className="register label">
+        {props.label}
+      </label>
+      <input
+        type = "password"
+        className="register input"
+        placeholder="Enter your password here"
+        value={props.value}
+        onChange={e => props.onChange(e.target.value)}
+      />
+    </div>
+  );
+};
+
+FormFieldPassword.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func
@@ -68,31 +91,31 @@ const Register = props => {
 
   return (
     <BaseContainer>
-      <div className="login container">
-        <div className="login form">
-		  <h2>Register</h2>
-          <FormField
+    <div className="register container">
+    <h2 className="login title">No account? Register here!</h2>
+      <div className="register form">
+          <FormFieldUsername
             label="Username"
             value={username}
             onChange={un => setUsername(un)}
           />
-          <FormField
+          <FormFieldPassword
             label="Password"
             value={password}
             onChange={n => setPassword(n)}
           />
-          <div className="login button-container">
-            <Button
+          <div className="register button-container">
+          <Button 
+              width="70%"
               disabled={!username || !password}
-              width="100%"
               onClick={() => doRegister()}
             >
               Register
             </Button>
           </div>
-		  <div className="login button-container">
+          <div className="register button-container">
             <Button
-              width="100%"
+              width="70%"
               onClick={() => doLogin()}
             >
               Back to Login
