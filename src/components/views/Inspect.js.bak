@@ -12,9 +12,6 @@ const Player = ({user}) => (
     <div className="player container">
         <div className="player id">id: {user.id}</div>
         <div className="player username">{user.username}</div>
-        <div className="creation date">{user.creationDate}</div>
-        <div className="status">{user.status}</div>
-        <div className="birthday">{user.birthday}</div>
     </div>
 );
 
@@ -95,11 +92,6 @@ const Inspect = () => {
                     value={user.map(itm => itm.username)}
                     onChange={un => setUsername(un)}
                     />
-
-                <FormField
-                    label="online"
-                    value={user.map(itm => itm.status)}
-                />
 
                 <Button
                     disabled={userId !== localStorage.getItem("loggedInUser")}

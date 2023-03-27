@@ -111,6 +111,12 @@ const Setting = props => {
         content = (
             <div className="user overview">
 
+				<FormField
+                    label="picture"
+                    //value={username}
+                    //onChange={un => setUsername(un)}
+                />
+
                 <FormField
                     label="username"
                     value={username}
