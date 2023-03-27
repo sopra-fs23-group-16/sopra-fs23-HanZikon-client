@@ -87,6 +87,14 @@ const Inspect = () => {
         content = (
             <div className="user overview">
 
+				window.onload = function(){
+					var img = document.createElement("img");
+					img.src = "../image/dog.png"
+					img.width = "80";
+					var myp = document.getElementById('myp');
+					myp.appendChild(img);
+				};
+
                 <FormField
                     label="username"
                     value={user.map(itm => itm.username)}
