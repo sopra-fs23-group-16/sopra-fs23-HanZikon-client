@@ -20,6 +20,7 @@ const Player = ({user}) => (
         <div className="player id">id: {user.id}</div>
         <div className="player username">{user.username}</div>
 		<div className="player password">{user.password}</div>
+        <div className="birthday">{user.birthday}</div>
     </div>
 );
 
@@ -54,13 +55,14 @@ const Setting = props => {
   const [user, setUser] = useState(null);
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
+  const [birthday, setBirthday] = useState(null);
   let {userId} = useParams();
   
   const confirm = async () => {
-        let item = {username, password}
+        let item = {username, password, birthday}
         console.warn("item", item)
             try {
-                const requestBody = JSON.stringify({username, password});
+                const requestBody = JSON.stringify({username, password, birthday});
                 const response = await api.put('/users/' + userId, requestBody);
 
                 // Get the returned user and update a new object.
@@ -122,9 +124,16 @@ const Setting = props => {
                     value={password}
                     onChange={p => setPassword(p)}
                 />
+				
+				<FormField
+                    label="birthday (yyyy-mm-dd)"
+                    value={birthday}
+                    type={"date"}
+                    onChange={b => setBirthday(b)}
+                />
 
                 <Button
-					disabled={!username && !password}
+					disabled={!username && !password && !birthday}
                     width="100%"
                     onClick={() => confirm()}
                 >
@@ -146,7 +155,7 @@ const Setting = props => {
 		  <div className="login container">
             <div className="game form">
               <p className="inspect paragraph">
-                  You could change your username and password here. (Optional)
+                  You could change your username, password and birthday here. (Optional)
               </p>
               {content}
 			</div>
