@@ -1,6 +1,7 @@
 {
   "ExpandedNodes": [
     "",
+    "\\public",
     "\\src",
     "\\src\\components",
     "\\src\\components\\routing",
@@ -11,6 +12,6 @@
     "\\src\\image",
     "\\src\\models"
   ],
-  "SelectedNode": "\\src\\helpers\\api.js",
+  "SelectedNode": "\\src\\components\\views\\CreateRoom.js",
   "PreviewInSolutionExplorer": false
 }
