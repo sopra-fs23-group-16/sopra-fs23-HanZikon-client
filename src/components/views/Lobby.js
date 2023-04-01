@@ -28,6 +28,9 @@ const Lobby = () => {
       alert(`Inspect failed: \n${handleError(error)}`);
     }
   };
+  
+  const params = new URLSearchParams(window.location.search);
+  
 
   return (
     <BaseContainer>
