@@ -4,9 +4,10 @@ import {Button} from 'components/ui/Button';
 import {Link, useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import "styles/views/Lobby.scss";
+import "styles/views/RoomCreation.scss";
 
-const Lobby = () => {
+
+const RoomCreation = () => {
 
   const history = useHistory();
 
@@ -20,19 +21,10 @@ const Lobby = () => {
     history.push('/login');
 }
 
-  const doInspect = async () => {
-	let id = localStorage.getItem("loggedInUser");
-    try {
-      history.push(`/users/${id}`);
-    } catch (error) {
-      alert(`Inspect failed: \n${handleError(error)}`);
-    }
-  };
-
-  const goCompetition = async () => {
+  const goLobby = async () => {
     let id = localStorage.getItem("loggedInUser");
       try {
-        history.push(`/roomcreation`);
+        history.push(`/lobby`);
       } catch (error) {
         alert(`Something went room: \n${handleError(error)}`);
       }
@@ -40,34 +32,34 @@ const Lobby = () => {
 
   return (
     <BaseContainer>
-	<div className="lobby container">
+	<div className="creation container">
     <h1>Game Overview</h1>
-      <div className="lobby form">
-          <div className="lobby button-container">
+      <div className="creation form">
+          <div className="creation button-container">
             <Button 
               width="70%"
               //onClick={() => }
             >
-              Single Mode
+              Create A New Room
             </Button>
           </div>
-          <div className="lobby button-container">
+          <div className="creation button-container">
             <Button
               width="70%"
-              onClick={() => goCompetition()}
+              //onClick={() => }
             >
-              Competition Mode
+              Join An Existing Room
             </Button>
           </div>
-		  <div className="lobby button-container">
+		  <div className="creation button-container">
             <Button
               width="70%"
-              onClick={() => doInspect()}
+              onClick={() => goLobby()}
             >
-              Your Profile
+              Back to Lobby
             </Button>
           </div>
-		  <div className="lobby button-container">
+		  <div className="creation button-container">
             <Button
               width="70%"
               onClick={() => logout()}
@@ -81,4 +73,4 @@ const Lobby = () => {
   );
 }
 
-export default Lobby;
+export default RoomCreation;
