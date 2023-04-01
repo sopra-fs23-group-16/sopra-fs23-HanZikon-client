@@ -12,7 +12,7 @@ import "styles/views/Header.scss";
  */
 const Header = props => (
   <div className="header container" style={{height: props.height}}>
-    <h1 className="header title">Welcome to Hanzikon!</h1>
+    <h1 className="header title">Welcome to HanZikon!</h1>
   </div>
 );
 

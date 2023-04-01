@@ -4,7 +4,7 @@ import User from 'models/User';
 import {useHistory, useParams} from 'react-router-dom';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Game.scss';
+import 'styles/views/Lobby.scss';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";

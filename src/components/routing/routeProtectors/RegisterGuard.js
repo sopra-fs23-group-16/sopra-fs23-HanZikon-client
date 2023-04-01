@@ -5,7 +5,7 @@ export const RegisterGuard = props => {
   if (!localStorage.getItem("token")) {
     return props.children;
   }
-  return <Redirect to="/game"/>;
+  return <Redirect to="/lobby"/>;
 };
 
 RegisterGuard.propTypes = {

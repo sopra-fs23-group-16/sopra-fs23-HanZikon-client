@@ -66,8 +66,7 @@ const Register = props => {
 
   const doRegister = async () => {
     try {
-	  let creationDate = new Date();
-      const requestBody = JSON.stringify({username, password: password, creationDate});
+      const requestBody = JSON.stringify({username, password: password});
       const response = await api.post('/users', requestBody);
 
       const user = new User(response.data);
@@ -75,7 +74,7 @@ const Register = props => {
       localStorage.setItem('token', user.token);
 	  localStorage.setItem('loggedInUser', user.id);
 
-      history.push(`/game`);
+      history.push(`/lobby`);
     } catch (error) {
       alert(`Register failed: \n${handleError(error)}`);
     }
@@ -85,14 +84,14 @@ const Register = props => {
     try {
       history.push(`/login`);
     } catch (error) {
-      alert(`Register failed: \n${handleError(error)}`);
+      alert(`Login failed: \n${handleError(error)}`);
     }
   };
 
   return (
     <BaseContainer>
     <div className="register container">
-    <h2 className="login title">No account? Register here!</h2>
+    <h2 className="login title">No account? Please register here!</h2>
       <div className="register form">
           <FormFieldUsername
             label="Username"

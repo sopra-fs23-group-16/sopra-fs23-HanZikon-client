@@ -1,4 +1,5 @@
 import {Redirect, Route} from "react-router-dom";
+import Lobby from "components/views/Lobby";
 import Game from "components/views/Game";
 import CreateRoom from "components/views/CreateRoom";
 import PropTypes from 'prop-types';
@@ -10,7 +11,7 @@ const GameRouter = props => {
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <Route exact path={`${props.base}/dashboard`}>
-        <Game/>
+        <Lobby/>
       </Route>
       <Route exact path={`${props.base}/rooms/create`}>
         <CreateRoom/>

@@ -3,8 +3,7 @@ import {api, handleError} from 'helpers/api';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory, useParams} from 'react-router-dom';
-import 'styles/views/Game.scss';
-import 'styles/views/Login.scss';
+import 'styles/views/Inspect.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -17,12 +16,12 @@ const Player = ({user}) => (
 
 const FormField = props => {
   return (
-    <div className="login field">
-      <label className="login label">
+    <div className="inspect field">
+      <label className="inspect label">
         {props.label}
       </label>
       <input
-        className="login input"
+        className="inspect input"
 		placeholder="Not defined"
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
@@ -91,30 +90,35 @@ const Inspect = () => {
                     label="username"
                     value={user.map(itm => itm.username)}
                     onChange={un => setUsername(un)}
-                    />
+                />
 
-                <Button
-                    disabled={userId !== localStorage.getItem("loggedInUser")}
-                    width="100%"
-                    onClick={() => history.push(`/Setting/${user.map(itm => itm.id)}`)}>
-                    Edit
-                </Button>
-                &nbsp;
-                <Button
-                    width="100%"
-                    onClick={() => history.push('/game')}
-                >
-                    Back to user overview
-                </Button>
+                
             </div>
         );
     }
 	
 	return (
     <BaseContainer>
-      <div className="login container">
-        <div className="game form">
+      <div className="inspect container">
+	  <h2>My profile</h2>
+        <div className="inspect form">
           {content}
+		      <div className="inspect button-container">
+		        <Button
+                    disabled={userId !== localStorage.getItem("loggedInUser")}
+                    width="70%"
+                    onClick={() => history.push(`/Setting/${user.map(itm => itm.id)}`)}>
+                    Edit
+                </Button>
+              </div>
+			  <div className="inspect button-container">
+                <Button
+                    width="70%"
+                    onClick={() => history.push('/game')}
+                >
+                    Back to user overview
+                </Button>
+			  </div>
         </div>
       </div>
     </BaseContainer>

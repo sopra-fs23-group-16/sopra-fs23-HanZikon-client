@@ -5,7 +5,7 @@ import {Button} from 'components/ui/Button';
 import {Link, useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import "styles/views/Game.scss";
+import "styles/views/Lobby.scss";
 
 const Player = ({user}) => (
   <div className="player container">
@@ -79,7 +79,7 @@ const Game = () => {
   if (users) {
     content = (
       <div className="game">
-        <ul className="game user-list">
+        <ul className="lobby user-list">
           {users.map(user => (
             <li>
               <button className="user-button"
@@ -100,9 +100,9 @@ const Game = () => {
   }
 
   return (
-    <BaseContainer className="game container">
+    <BaseContainer className="lobby container">
       <h2>Happy Coding!</h2>
-      <p className="game paragraph">
+      <p className="lobby paragraph">
         Click to inspect a user's profile:
       </p>
       {content}

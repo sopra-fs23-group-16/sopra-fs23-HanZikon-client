@@ -1,24 +1,21 @@
 @import 'styles/theme';
 
-.register {
+.lobby {
   &.container {
-    margin-top: 2.5em;
-    min-height: 300px;
+    margin-top: 3em;
+    min-height: 250px;
     @include center;
     flex-direction: column;
   }
-  // &h2 {
-  //   color:#e28411;
-  // }
   &.form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 50%;
+    width: 232%;
 	margin-top: 0.5em;
-    max-width: 30em;
-    height: 21em;
-    font-size: 20px;
+    max-width: 100em;
+    height: 20em;
+    font-size: 22px;
     font-weight: 400;
     padding-left: 30px;
     padding-right: 30px;
@@ -32,27 +29,10 @@
     flex-direction: column;
     justify-content: center;
   }
-  &.input {
-    height: 40px;
-    padding-left: 15px;
-    margin-left: 0px;
-    border: none;
-    border-radius: 0.75em;
-    margin-bottom: 15px;
-    background: transparentize(white, 0.85);
-    color: $textColor;
-  }
-  &.label {
-    color: $textColor;
-    margin-bottom: 12px;
-    text-transform: capitalize;
-    font-weight: 350;
-	  justify-content: center;
-  }
+  
   &.button-container {
     display: flex;
     justify-content: center;
-    margin-top: 1.2em;
+    margin-top: 1.5em;
   }
-
 }

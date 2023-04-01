@@ -6,7 +6,7 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import {doTouristCreation} from "./Tourist";
+import {faker} from "@faker-js/faker";
 
 /*
 It is possible to add multiple components inside a single file,
@@ -78,7 +78,7 @@ const Login = props => {
       localStorage.setItem('token', user.token);
 	  localStorage.setItem('loggedInUser', user.id);
 
-      history.push(`/game`);
+      history.push(`/lobby`);
     } catch (error) {
       alert(`Login failed: \n${handleError(error)}`);
 	  history.push(`/register`);
@@ -92,6 +92,7 @@ const Login = props => {
       alert(`Register failed: \n${handleError(error)}`);
     }
   };
+
 
     // Tourist will be automatically created, and direct to game mode page
     const doTouristLogin = () => {
@@ -112,25 +113,38 @@ const Login = props => {
             setWarnMessage("You will login the game with tourist mode! You could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ");
 
             setTimeout(() => {
-                setTimeOut(1);
-                //myWindow.close();
-
+                history.push(`/register?mode=tourist`);
             }, 2000);
-
-            setTimeout(() => {
-                history.push(`/dashboard?mode=tourist`);
-            }, 2000);
-
-
-        } catch (error) {
-            alert(`Register failed: \n${handleError(error)}`);
-        }
+			} catch (error) {
+				alert(`Register failed: \n${handleError(error)}`);
+			}
     };
+	
+	const doTouristCreation = async () => {
+    const randomUserId = faker.datatype.number({ max: 10 });
+    const randomUsername = faker.name.fullName();
+    const randomToken = faker.datatype.number(20);
+
+    const newUser = new User();
+    newUser.id = randomUserId;
+    newUser.token = randomToken;
+    newUser.username = randomUsername;
+
+    console.log('newUser =', newUser);
+
+    const touristUser= JSON.stringify({randomUserId, randomUsername, randomToken});
+    localStorage.setItem('touristUser'+randomUserId, touristUser);
+
+    console.log('touristUser =', touristUser);
+
+	return newUser;
+	};
+
 
   return (
     <BaseContainer>
       <div className="login container">
-      <h2 className="login title">Please login into your account!</h2>
+      <h2 className="login title">Please log into your account!</h2>
         <div className="login form">
           <FormFieldUsername
             label="Username"
@@ -148,7 +162,7 @@ const Login = props => {
           width="80%"
           onClick={() => doLogin()}
         >
-          Login
+          Log in
         </Button>
     </div>
     <div className="login button-container">
@@ -156,7 +170,7 @@ const Login = props => {
           width="80%"
           onClick={() => doRegister()}
         >
-          Register
+          Go to Register
         </Button>
     </div>
 
