@@ -3,6 +3,7 @@ import Lobby from "components/views/Lobby";
 import Game from "components/views/Game";
 import CreateRoom from "components/views/CreateRoom";
 import PropTypes from 'prop-types';
+import RoomCreation from "components/views/RoomCreation";
 
 const GameRouter = props => {
   /**
@@ -13,8 +14,12 @@ const GameRouter = props => {
       <Route exact path={`${props.base}/dashboard`}>
         <Lobby/>
       </Route>
-      <Route exact path={`${props.base}/rooms/create`}>
+      {/* <Route exact path={`${props.base}/rooms/create`}>
         <CreateRoom/>
+      </Route> */}
+      <Route exact path={`${props.base}/roomcreation`}>
+        <RoomCreation/>
+        {/* <CreateRoom/> */}
       </Route>
       <Route exact path={`${props.base}`}>
         <Redirect to={`${props.base}/dashboard`}/>

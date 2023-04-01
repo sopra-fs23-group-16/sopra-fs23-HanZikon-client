@@ -9,6 +9,8 @@ import Register from "components/views/Register";
 import {InspectGuard} from "components/routing/routeProtectors/InspectGuard";
 import Inspect from "components/views/Inspect";
 import Setting from "components/views/Setting";
+import {RoomCreationGuard} from "components/routing/routeProtectors/RoomCreationGuard";
+import RoomCreation from "components/views/RoomCreation";
 
 /**
  * Main router of your application.
@@ -35,7 +37,13 @@ const AppRouter = () => {
             <GameRouter base="/lobby"/>
           </LobbyGuard>
         </Route>
-		
+
+				<Route path="/roomcreation">
+          <RoomCreationGuard>
+            <RoomCreation/>
+          </RoomCreationGuard>
+        </Route>
+
         <Route exact path="/login">
           <LoginGuard>
             <Login/>
