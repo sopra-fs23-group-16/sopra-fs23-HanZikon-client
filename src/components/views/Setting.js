@@ -4,8 +4,7 @@ import User from 'models/User';
 import {useHistory, useParams} from 'react-router-dom';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
-import 'styles/views/Lobby.scss';
-import 'styles/views/Login.scss';
+import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
@@ -16,7 +15,7 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 const Player = ({user}) => (
-    <div className="player container">
+    <div className="">
         <div className="player id">id: {user.id}</div>
         <div className="player username">{user.username}</div>
 		<div className="player password">{user.password}</div>
@@ -25,12 +24,12 @@ const Player = ({user}) => (
 
 const FormField = props => {
   return (
-    <div className="login field">
-      <label className="login label">
+    <div className="setting field">
+      <label className="setting label">
         {props.label}
       </label>
       <input
-        className="login input"
+        className="setting input"
         placeholder="Change your information:"
         value={props.value}
         onChange={e => props.onChange(e.target.value)}
@@ -149,9 +148,9 @@ const Setting = props => {
 
     return (
         <BaseContainer>
-		  <div className="login container">
-            <div className="game form">
-              <p className="inspect paragraph">
+		  <div className="setting container">
+            <div className="">
+              <p className="setting text">
                   You could change your username and password here. (Optional)
               </p>
               {content}

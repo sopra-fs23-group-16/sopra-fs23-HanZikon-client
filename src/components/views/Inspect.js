@@ -8,7 +8,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
 const Player = ({user}) => (
-    <div className="player container">
+    <div className="">
         <div className="player id">id: {user.id}</div>
         <div className="player username">{user.username}</div>
     </div>
@@ -100,7 +100,7 @@ const Inspect = () => {
 	return (
     <BaseContainer>
       <div className="inspect container">
-	  <h2>My profile</h2>
+	  <h1>My Profile</h1>
         <div className="inspect form">
           {content}
 		      <div className="inspect button-container">

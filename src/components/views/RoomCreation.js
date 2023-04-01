@@ -33,7 +33,7 @@ const RoomCreation = () => {
   return (
     <BaseContainer>
 	<div className="creation container">
-    <h1>Game Overview</h1>
+    <h1>Competition Mode</h1>
       <div className="creation form">
           <div className="creation button-container">
             <Button 
