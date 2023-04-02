@@ -26,7 +26,7 @@ const RoomCreation = () => {
       try {
         history.push(`/lobby`);
       } catch (error) {
-        alert(`Something went room: \n${handleError(error)}`);
+        alert(`Something went wrong: \n${handleError(error)}`);
       }
     };
 

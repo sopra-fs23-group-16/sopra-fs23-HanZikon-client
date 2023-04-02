@@ -1,6 +1,6 @@
 @import 'styles/theme';
 
-.lobby{
+.lobby {
   &.container {
     margin-top: 3em;
     min-height: 250px;

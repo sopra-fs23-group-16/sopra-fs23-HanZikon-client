@@ -91,7 +91,7 @@ const Register = props => {
   return (
     <BaseContainer>
     <div className="register container">
-    <h2 className="login title">No account? Please register here!</h2>
+    <h2 className="register title">No account? Please register here!</h2>
       <div className="register form">
           <FormFieldUsername
             label="Username"
