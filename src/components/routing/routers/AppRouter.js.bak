@@ -40,12 +40,6 @@ const AppRouter = () => {
             <Lobby/>
           </LobbyGuard>
         </Route>
-		
-		<Route path="/roomsetting">
-          <RoomSettingGuard>
-            <RoomSetting/>
-          </RoomSettingGuard>
-        </Route>
 
 				<Route path="/roomcreation">
           <RoomCreationGuard>

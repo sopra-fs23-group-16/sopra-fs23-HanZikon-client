@@ -38,4 +38,4 @@ const CreateRoom = () => {
     );
 }
 
-export default CreateRoom;
+export default RoomSetting;

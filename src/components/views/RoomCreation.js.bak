@@ -47,7 +47,7 @@ const RoomCreation = () => {
           <div className="creation button-container">
             <Button 
               width="70%"
-              onClick={() => goSetting()}
+              //onClick={() => }
             >
               Create A New Room
             </Button>
