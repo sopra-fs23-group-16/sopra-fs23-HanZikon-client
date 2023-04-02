@@ -12,8 +12,12 @@ import Inspect from "components/views/Inspect";
 import Setting from "components/views/Setting";
 import {RoomCreationGuard} from "components/routing/routeProtectors/RoomCreationGuard";
 import RoomCreation from "components/views/RoomCreation";
+<<<<<<< HEAD
 import {RoomSettingGuard} from "components/routing/routeProtectors/RoomSettingGuard";
 import RoomSetting from "components/views/RoomSetting";
+=======
+import RoomEntrance from "components/views/RoomEntrance";
+>>>>>>> main
 
 /**
  * Main router of your application.
@@ -51,6 +55,10 @@ const AppRouter = () => {
           <RoomCreationGuard>
             <RoomCreation/>
           </RoomCreationGuard>
+        </Route>
+
+        <Route path="/roomentrance">
+            <RoomEntrance/>
         </Route>
 
         <Route exact path="/login">

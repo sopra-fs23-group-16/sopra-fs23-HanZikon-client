@@ -39,6 +39,15 @@ const RoomCreation = () => {
       }
     };
 
+    const enterRoomDetail = async () => {
+      let id = localStorage.getItem("loggedInUser");
+        try {
+          history.push(`/roomentrance`);
+        } catch (error) {
+          alert(`Something went wrong: \n${handleError(error)}`);
+        }
+      };
+
   return (
     <BaseContainer>
 	<div className="creation container">
@@ -55,7 +64,7 @@ const RoomCreation = () => {
           <div className="creation button-container">
             <Button
               width="70%"
-              //onClick={() => }
+              onClick={() => enterRoomDetail()}
             >
               Join An Existing Room
             </Button>
