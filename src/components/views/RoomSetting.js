@@ -162,12 +162,8 @@ const RoomSetting = () => {
         fetchData();
 		}, []);*/
 	
-	const goBack = async () => {
-    try {
-      history.push(`/roomcreation`);
-    } catch (error) {
-      alert(`Something is wrong: \n${handleError(error)}`);
-    }
+	const goBack = () => {
+        history.push(`/roomcreation`);
     };
 
 	const goWaiting = async () => {

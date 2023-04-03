@@ -40,13 +40,9 @@ const RoomCreation = () => {
     history.push('/login');
 }
 
-  const goLobby = async () => {
+  const goLobby = () => {
     let id = localStorage.getItem("loggedInUser");
-      try {
-        history.push(`/lobby`);
-      } catch (error) {
-        alert(`Something went wrong: \n${handleError(error)}`);
-      }
+    history.push(`/lobby`);
     };
 	
   const goSetting = async () => {

@@ -20,13 +20,9 @@ const Lobby = () => {
     history.push('/login');
 }
 
-  const doInspect = async () => {
+  const doInspect = () => {
 	let id = localStorage.getItem("loggedInUser");
-    try {
-      history.push(`/users/${id}`);
-    } catch (error) {
-      alert(`Inspect failed: \n${handleError(error)}`);
-    }
+    history.push(`/users/${id}`);
   };
   
   const params = new URLSearchParams(window.location.search);
