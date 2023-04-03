@@ -10,7 +10,7 @@ import "styles/views/RoomCreation.scss";
 
 const RoomCreation = () => {
 
-	const socket = new WebSocket('ws://example.com/socket');
+	/*const socket = new WebSocket('ws://example.com/socket');
 	
 	socket.onopen = function(event) {
 		console.log('WebSocket opened:', event);
@@ -26,7 +26,7 @@ const RoomCreation = () => {
 
 	socket.onclose = function(event) {
 		console.log('WebSocket closed:', event);
-	};
+	};*/
 
   const history = useHistory();
 
