@@ -56,7 +56,7 @@ const RoomCreation = () => {
 		destination: '/topic/multi/player/{room.id}'
 	};
 
-socket.send(JSON.stringify(request));
+//socket.send(JSON.stringify(request));
 	  
 	const room = new Room();
     localStorage.setItem('roomid', room.id);
