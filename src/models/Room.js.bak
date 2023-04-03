@@ -3,7 +3,7 @@
  */
 class Room {
     constructor(data = {}) {
-      this.id = null;
+      int id;
       this.code = null;
 	  this.numPlayers = null;
 	  this.level = null;

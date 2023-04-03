@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import {Button} from 'components/ui/Button';
+import Room from 'models/Room';
 import {Link, useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -8,6 +9,24 @@ import "styles/views/RoomCreation.scss";
 
 
 const RoomCreation = () => {
+
+	const socket = new WebSocket('ws://example.com/socket');
+	
+	socket.onopen = function(event) {
+		console.log('WebSocket opened:', event);
+	};
+
+	socket.onmessage = function(event) {
+		console.log('WebSocket message received:', event.data);
+	};
+
+	socket.onerror = function(error) {
+		console.error('WebSocket error:', error);
+	};
+
+	socket.onclose = function(event) {
+		console.log('WebSocket closed:', event);
+	};
 
   const history = useHistory();
 
@@ -30,14 +49,23 @@ const RoomCreation = () => {
       }
     };
 	
-	const goSetting = async () => {
-    let id = localStorage.getItem("loggedInUser");
+  const goSetting = async () => {
+	  
+	const request = {
+		type: 'subscribe',
+		destination: '/topic/multi/player/{room.id}'
+	};
+
+socket.send(JSON.stringify(request));
+	  
+	const room = new Room();
+    localStorage.setItem('roomid', room.id);
       try {
-        history.push(`/roomsetting`);
+        history.push(`/roomsetting/{room.id}`);
       } catch (error) {
         alert(`Something went wrong: \n${handleError(error)}`);
       }
-    };
+  };
 
     const enterRoomDetail = async () => {
       let id = localStorage.getItem("loggedInUser");
