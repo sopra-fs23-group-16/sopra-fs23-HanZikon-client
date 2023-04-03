@@ -33,16 +33,18 @@ FormFieldRoomCode.propTypes = {
 const FormFieldNumofPlayers = props => {
   return (
     <div className="roomsetting field">
-      <label className="roomsetting label">
-        {props.label}
-      </label>
-      <input
-        className="roomsetting input"
-        placeholder="number of players"
-        value={props.value}
-
-        onChange={e => props.onChange(e.target.value)}
-      />
+        <label className="roomsetting label">
+			{props.label}
+        </label>
+		<select id="1" className="roomsetting select">
+            <option value="-" selected>Please select...</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+			<option value="5">5</option>
+            <option value="6">6</option>
+			value={props.value}
+			onChange={e => props.onChange(e.target.value)}
+        </select>
     </div>
   );
 };
@@ -56,15 +58,17 @@ FormFieldNumofPlayers.propTypes = {
 const FormFieldQuestionType = props => {
   return (
     <div className="roomsetting field">
-      <label className="roomsetting label">
-        {props.label}
-      </label>
-      <input
-        className="roomsetting input"
-        placeholder="question type"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
+		<label className="roomsetting label">
+			{props.label}
+		</label>
+		<select id="2" className="roomsetting select">
+            <option value="-" selected>Please select...</option>
+            <option value="single">single choice</option>
+            <option value="imitation">imitation</option>
+			<option value="mixed">mixed</option>
+			value={props.value}
+			onChange={e => props.onChange(e.target.value)}
+        </select>
     </div>
   );
 };
@@ -150,6 +154,7 @@ const RoomSetting = () => {
     };
 
 	const goWaiting = async () => {
+		var NumofPlayers = document.getElementById("1");
 		let item = {RoomCode, NumofPlayers, QuestionType}
         console.warn("item", item)
 		try {
@@ -188,7 +193,7 @@ const RoomSetting = () => {
 				<FormFieldNumofPlayers
 					label="Number of Players"
 					value={NumofPlayers}
-					onChange={un => setNumofPlayers(un)}
+					onChange={value => setNumofPlayers(value)}
 				/>
 				<FormFieldQuestionType
 					label="Question Type"
@@ -198,6 +203,7 @@ const RoomSetting = () => {
 			  
 				<div className="lobby button-container">
 					<Button
+						disabled={!RoomCode || !NumofPlayers || !QuestionType}
 						width="100%"
 						onClick={() => goWaiting()}
 					>
