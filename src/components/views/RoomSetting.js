@@ -86,11 +86,32 @@ const RoomSetting = () => {
     const [RoomCode, setRoomCode] = useState(null);
 	const [NumofPlayers, setNumofPlayers] = useState(null);
 	const [QuestionType, setQuestionType] = useState(null);
-	let {roomId} = useParams();  
+	let {roomId} = useParams();
 
-    client.connect({}, function (frame) {
+    useEffect(() => {
+        // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
+        async function stompConnect() {
+            try {
+
+                if (!client.isconnected) {
+                    client.connect({}, function (frame) {
+                        console.log('connected to stomp');
+                    });
+                }
+
+            } catch (error) {
+                console.error(`Something went wrong: \n${handleError(error)}`);
+                console.error("Details:", error);
+                alert("Something went wrong! See the console for details.");
+            }
+        }
+        stompConnect();
+    }, []);
+
+    
+    /*client.connect({}, function (frame) {
         console.log('connected to stomp');
-    });
+    });*/
 
     //send to server
     //"/path",{},JSON
