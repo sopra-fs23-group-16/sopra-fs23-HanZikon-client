@@ -1,5 +1,6 @@
 import axios from 'axios';
 import SockJS from 'sockjs-client';
+import Stomp from 'stompjs';
 import { getDomain } from 'helpers/getDomain';
 
 export const api = axios.create({
@@ -35,7 +36,7 @@ export const handleError = error => {
   }
 };
 
-export const websocket = new SockJS(`${getDomain()}/websocket`);
+const websocket = new SockJS(`${getDomain()}/websocket`);
 
 websocket.onopen = () => {
     console.log('Connected to websocket server');
@@ -44,3 +45,5 @@ websocket.onopen = () => {
 websocket.onerror = function (event) {
     console.error("WebSocket error: ", event);
 };
+
+export const client = Stomp.over(websocket);

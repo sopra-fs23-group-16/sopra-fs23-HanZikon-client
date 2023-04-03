@@ -1,5 +1,4 @@
-import {api, handleError, websocket } from 'helpers/api';
-import Stomp from 'stompjs';
+import { api, handleError, client } from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import BaseContainer from "components/ui/BaseContainer";
@@ -87,13 +86,10 @@ const RoomSetting = () => {
     const [RoomCode, setRoomCode] = useState(null);
 	const [NumofPlayers, setNumofPlayers] = useState(null);
 	const [QuestionType, setQuestionType] = useState(null);
-	let {roomId} = useParams();
-
-	const socket = new WebSocket('ws://example.com/socket');
-    const client = Stomp.over(socket);
+	let {roomId} = useParams();  
 
     client.connect({}, function (frame) {
-        console.log('connected to websocket');
+        console.log('connected to stomp');
     });
 
     //send to server
