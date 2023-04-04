@@ -13,7 +13,6 @@ however be sure not to clutter your files with an endless amount!
 As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
-// Still use designs of login.scss
 const FormFieldUsername = props => {
   return (
     <div className="register field">

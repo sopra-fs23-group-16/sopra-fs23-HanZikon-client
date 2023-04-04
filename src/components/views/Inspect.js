@@ -7,13 +7,6 @@ import 'styles/views/Inspect.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
-const Player = ({user}) => (
-    <div className="">
-        <div className="player id">id: {user.id}</div>
-        <div className="player username">{user.username}</div>
-    </div>
-);
-
 const FormField = props => {
   return (
     <div className="inspect field">
@@ -34,10 +27,6 @@ FormField.propTypes = {
   label: PropTypes.string,
   value: PropTypes.string,
   onChange: PropTypes.func
-};
-
-Player.propTypes = {
-    user: PropTypes.object
 };
 
 const Inspect = () => {
@@ -85,44 +74,40 @@ const Inspect = () => {
     if (user) {
         content = (
             <div className="user overview">
-
                 <FormField
                     label="username"
-                    value={user.map(itm => itm.username)}
+                    value={Object.values(user).map(itm => itm.username)}
                     onChange={un => setUsername(un)}
                 />
-
-                
             </div>
         );
     }
 	
 	return (
-    <BaseContainer>
-      <div className="inspect container">
-	  <h1>My Profile</h1>
-        <div className="inspect form">
-          {content}
-		      <div className="inspect button-container">
-		        <Button
-                    disabled={userId !== localStorage.getItem("loggedInUser")}
-                    width="70%"
-                    onClick={() => history.push(`/Setting/${user.map(itm => itm.id)}`)}>
-                    Edit
-                </Button>
-              </div>
-			  <div className="inspect button-container">
-                <Button
-                    width="70%"
-                    onClick={() => history.push('/lobby')}
-                >
-                    Back to user overview
-                </Button>
-			  </div>
-        </div>
-      </div>
-    </BaseContainer>
-  );
+		<BaseContainer>
+		<div className="inspect container">
+			<h1>My Profile</h1>
+			<div className="inspect form">
+				{content}
+				<div className="inspect button-container">
+					<Button
+						width="70%"
+						onClick={() => history.push(`/Setting/${user.map(itm => itm.id)}`)}>
+						Edit
+					</Button>
+				</div>
+				<div className="inspect button-container">
+					<Button
+						width="70%"
+						onClick={() => history.push('/lobby')}>
+						Back to user overview
+					</Button>
+				</div>
+			</div>
+		</div>
+		</BaseContainer>
+	);
+
 }
 
 
