@@ -34,7 +34,7 @@ const Inspect = () => {
     // use react-router-dom's hook to access the history
     const history = useHistory();
     const [user, setUser] = useState(null);
-    const [username, setUsername] = useState(null);
+    const [username, setUsername] = useState("");
     let {userId} = useParams();
 
     useEffect(() => {
