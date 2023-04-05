@@ -8,69 +8,50 @@ import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
-const Player = ({user}) => (
-    <div className="">
-        <div className="player id">id: {user.id}</div>
-        <div className="player username">{user.username}</div>
-		<div className="player password">{user.password}</div>
-    </div>
-);
-
 const FormField = props => {
-  return (
-    <div className="setting field">
-      <label className="setting label">
-        {props.label}
-      </label>
-      <input
-        className="setting input"
-        placeholder="Change your information:"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
+	return (
+		<div className="setting field">
+		<label className="setting label">
+			{props.label}
+		</label>
+		<input
+			className="setting input"
+			placeholder="Change your information:"
+			value={props.value}
+			onChange={e => props.onChange(e.target.value)}
+		/>
+		</div>
+	);
 };
 
 FormField.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
-};
-
-Player.propTypes = {
-    user: PropTypes.object
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 const Setting = props => {
-  const history = useHistory();
-  const [user, setUser] = useState(null);
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
-  let {userId} = useParams();
+	const history = useHistory();
+	const [user, setUser] = useState(null);
+	const [username, setUsername] = useState(null);
+	const [password, setPassword] = useState(null);
+	let {userId} = useParams();
   
-  const confirm = async () => {
+	const confirm = async () => {
         let item = {username, password}
         console.warn("item", item)
-            try {
-                const requestBody = JSON.stringify({username, password});
-                const response = await api.put('/users/' + userId, requestBody);
+        try {
+            const requestBody = JSON.stringify({username, password});
+            const response = await api.put('/users/' + userId, requestBody);
 
-                // Get the returned user and update a new object.
-                const user = new User(response.data);
-                history.push(`/users/${userId}`);
+            // Get the returned user and update a new object.
+            const user = new User(response.data);
+            history.push(`/users/${userId}`);
 
-
-            } catch (error) {
-                alert(`Something went wrong: \n${handleError(error)}`);
-            }
+        } catch (error) {
+            alert(`Something went wrong: \n${handleError(error)}`);
         }
+    }
 
     useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
@@ -115,19 +96,17 @@ const Setting = props => {
                     //value={username}
                     //onChange={un => setUsername(un)}
                 />
-
                 <FormField
                     label="username"
                     value={username}
                     onChange={un => setUsername(un)}
                 />
-
                 <FormField
                     label="password"
                     value={password}
                     onChange={p => setPassword(p)}
                 />
-
+				&nbsp;
                 <Button
 					disabled={!username && !password}
                     width="100%"
@@ -148,14 +127,14 @@ const Setting = props => {
 
     return (
         <BaseContainer>
-		  <div className="setting container">
-            <div className="">
-              <p className="setting text">
-                  You could change your username and password here. (Optional)
-              </p>
-              {content}
+			<div className="setting container">
+				<div className="">
+					<p className="setting text">
+						You could change your username and password here. (Optional)
+					</p>
+					{content}
+				</div>
 			</div>
-		  </div>
         </BaseContainer>
     );
 

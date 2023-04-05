@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
+import User from 'models/User';
 import {Spinner} from 'components/ui/Spinner';
 import {Button} from 'components/ui/Button';
 import {useHistory, useParams} from 'react-router-dom';
@@ -34,7 +35,7 @@ const Inspect = () => {
     const history = useHistory();
     const [user, setUser] = useState(null);
     const [username, setUsername] = useState(null);
-    let {userId} = useParams(); // get current parameters of clicked user
+    let {userId} = useParams();
 
     useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
@@ -76,7 +77,7 @@ const Inspect = () => {
             <div className="user overview">
                 <FormField
                     label="username"
-                    value={Object.values(user).map(itm => itm.username)}
+                    value={Object.values(user).map(user => user.username)}
                     onChange={un => setUsername(un)}
                 />
             </div>
@@ -92,7 +93,7 @@ const Inspect = () => {
 				<div className="inspect button-container">
 					<Button
 						width="70%"
-						onClick={() => history.push(`/Setting/${user.map(itm => itm.id)}`)}>
+						onClick={() => history.push(`/Setting/${userId}`)}>
 						Edit
 					</Button>
 				</div>
