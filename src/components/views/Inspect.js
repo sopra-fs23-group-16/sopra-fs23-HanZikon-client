@@ -77,7 +77,7 @@ const Inspect = () => {
             <div className="user overview">
                 <FormField
                     label="username"
-                    value={Object.values(user).map(user => user.username)}
+                    value={Object.values(user).map(user => user.username).join('')}
                     onChange={un => setUsername(un)}
                 />
             </div>
