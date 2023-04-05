@@ -70,27 +70,19 @@ const Inspect = () => {
 
         fetchData();
     }, []);
-
-    let content = <Spinner/>;
-
-    if (user) {
-        content = (
-            <div className="user overview">
-                <FormField
-                    label="username"
-                    value={user.map(itm => itm.username)}
-                    onChange={un => setUsername(un)}
-                />
-            </div>
-        );
-    }
 	
-	return (
+	return user && (
 		<BaseContainer>
 		<div className="inspect container">
 			<h1>My Profile</h1>
 			<div className="inspect form">
-				{content}
+                    <div className="user overview">
+                        <FormField
+                            label="username"
+                            value={user.username}
+                            onChange={un => setUsername(un)}
+                        />
+                    </div>
 				<div className="inspect button-container">
 					<Button
 						width="70%"
