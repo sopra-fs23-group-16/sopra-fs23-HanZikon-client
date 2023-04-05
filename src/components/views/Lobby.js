@@ -9,7 +9,6 @@ import "styles/views/Lobby.scss";
 const Lobby = () => {
 
   const history = useHistory();
-
   const [users, setUsers] = useState(null);
 
   const logout = () => {
@@ -29,7 +28,6 @@ const Lobby = () => {
   
 
   const goCompetition = async () => {
-    let id = localStorage.getItem("loggedInUser");
       try {
         history.push(`/roomcreation`);
       } catch (error) {

@@ -35,6 +35,7 @@ const Inspect = () => {
     const history = useHistory();
     const [user, setUser] = useState(null);
     const [username, setUsername] = useState("");
+	const [status, setStatus] = useState(null);
     let {userId} = useParams();
 
     useEffect(() => {
@@ -77,7 +78,7 @@ const Inspect = () => {
             <div className="user overview">
                 <FormField
                     label="username"
-                    value={Object.values(user).map(user => user.username).join('')}
+                    value={user.map(itm => itm.username)}
                     onChange={un => setUsername(un)}
                 />
             </div>

@@ -117,7 +117,7 @@ const Setting = props => {
                 &nbsp;
                 <Button
                     width="100%"
-                    onClick={() => history.push(`/users/${user.map(itm => itm.id)}`)}
+                    onClick={() => history.push(`/users/${userId}`)}
                 >
                     Cancel
                 </Button>

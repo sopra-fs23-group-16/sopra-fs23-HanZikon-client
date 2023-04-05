@@ -15,83 +15,83 @@ As a rule of thumb, use one file per component and only add small,
 specific components that belong to the main one in the same file.
  */
 const FormFieldUsername = props => {
-  return (
-    <div className="login field">
-      <label className="login label">
-        {props.label}
-      </label>
-      <input
-        className="login input"
-        placeholder="Enter your username here"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
+	return (
+		<div className="login field">
+			<label className="login label">
+				{props.label}
+			</label>
+			<input
+				className="login input"
+				placeholder="Enter your username here"
+				value={props.value}
+				onChange={e => props.onChange(e.target.value)}
+			/>
+		</div>
+	);
 };
 
 FormFieldUsername.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 const FormFieldPassword = props => {
-  return (
-    <div className="login field">
-      <label className="login label">
-        {props.label}
-      </label>
-      <input
-        type = "password"
-        className="login input"
-        placeholder="Enter your password here"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
+	return (
+		<div className="login field">
+			<label className="login label">
+				{props.label}
+			</label>
+			<input
+				type = "password"
+				className="login input"
+				placeholder="Enter your password here"
+				value={props.value}
+				onChange={e => props.onChange(e.target.value)}
+			/>
+		</div>
+	);
 };
 
 FormFieldPassword.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 const Login = props => {
-  const history = useHistory();  
-  const [username, setUsername] = useState(null);
-  const [password, setPassword] = useState(null);
-  const [userList, setUserList] = useState([]);
-  const [timeOut, setTimeOut] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [warnMessage, setWarnMessage] = useState(null);
+	const history = useHistory();  
+	const [username, setUsername] = useState(null);
+	const [password, setPassword] = useState(null);
+	const [userList, setUserList] = useState([]);
+	const [timeOut, setTimeOut] = useState(null);
+	const [errorMessage, setErrorMessage] = useState(null);
+	const [warnMessage, setWarnMessage] = useState(null);
 
-  const doLogin = async () => {
-    try {
-      const requestBody = JSON.stringify({username, password: password});
-      const response = await api.post('/login', requestBody);
+	const doLogin = async () => {
+		try {
+			const requestBody = JSON.stringify({username, password: password});
+			const response = await api.post('/login', requestBody);
 
-      const user = new User(response.data);
+			const user = new User(response.data);
 
-      localStorage.setItem('token', user.token);
-	  localStorage.setItem('loggedInUser', user.id);
+			localStorage.setItem('token', user.token);
+			localStorage.setItem('loggedInUser', user.id);
 
-      history.push(`/lobby`);
-    } catch (error) {
-      alert(`Login failed: \n${handleError(error)}`);
-	  history.push(`/register`);
-    }
-  };
+			history.push(`/lobby`);
+		} catch (error) {
+			alert(`Login failed: \n${handleError(error)}`);
+			history.push(`/register`);
+		}
+	};
   
-  const doRegister = async () => {
-    try {
-      history.push(`/register`);
-    } catch (error) {
-      alert(`Register failed: \n${handleError(error)}`);
-    }
-  };
+	const doRegister = async () => {
+		try {
+			history.push(`/register`);
+		} catch (error) {
+			alert(`Register failed: \n${handleError(error)}`);
+		}
+	};
 
 
     // Tourist will be automatically created, and direct to game mode page
@@ -141,60 +141,56 @@ const Login = props => {
 	};
 
 
-  return (
-    <BaseContainer>
-      <div className="login container">
-      <h2 className="login title">Please log into your account!</h2>
-        <div className="login form">
-          <FormFieldUsername
-            label="Username"
-            value={username}
-            onChange={un => setUsername(un)}
-          />
-          <FormFieldPassword
-            label="Password"
-            value={password}
-            onChange={n => setPassword(n)}
-          />
-          <div className="login button-container">
-          <Button
-          disabled={!username || !password}
-          width="80%"
-          onClick={() => doLogin()}
-        >
-          Log in
-        </Button>
-    </div>
-    <div className="login button-container">
-        <Button
-          width="80%"
-          onClick={() => doRegister()}
-        >
-          Go to Register
-        </Button>
-    </div>
-
-            <div className="login button-container">
-                <Button
-                    width="80%"
-                    onClick={() => doTouristLogin()}
-                >
-                    Tourist Mode
-                </Button>
-            </div>
-
-            {errorMessage &&
-                <div className="login errorMessage">{errorMessage.response.data.message}</div>
-            }
-
-            {warnMessage &&
-                <div className="login warnMessage">{warnMessage}</div>
-            }
-
-        </div>
-      </div>
-    </BaseContainer>
-  );
+	return (
+		<BaseContainer>
+			<div className="login container">
+				<h2>Please log into your account!</h2>
+				<div className="login form">
+					<FormFieldUsername
+						label="Username"
+						value={username}
+						onChange={un => setUsername(un)}
+					/>
+					<FormFieldPassword
+						label="Password"
+						value={password}
+						onChange={n => setPassword(n)}
+					/>
+					<div className="login button-container">
+						<Button
+							disabled={!username || !password}
+							width="80%"
+							onClick={() => doLogin()}
+						>
+							Log in
+						</Button>
+					</div>
+					<div className="login button-container">
+						<Button
+							width="80%"
+							onClick={() => doRegister()}
+						>
+							Go to Register
+						</Button>
+					</div>
+					<div className="login button-container">
+						<Button
+							width="80%"
+							onClick={() => doTouristLogin()}
+						>
+							Tourist Mode
+						</Button>
+					</div>
+					{errorMessage &&
+						<div className="login errorMessage">{errorMessage.response.data.message}</div>
+					}
+					{warnMessage &&
+						<div className="login warnMessage">{warnMessage}</div>
+					}
+				</div>
+			</div>
+		</BaseContainer>
+	);
 };
 
 /**
