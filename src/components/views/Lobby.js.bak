@@ -28,6 +28,7 @@ const Lobby = () => {
   
 
   const goCompetition = async () => {
+    let id = localStorage.getItem("loggedInUser");
       try {
         history.push(`/roomcreation`);
       } catch (error) {
