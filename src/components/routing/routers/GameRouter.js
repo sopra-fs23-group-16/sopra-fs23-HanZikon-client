@@ -25,7 +25,7 @@ const GameRouter = props => {
         <RoomEntrance/>
       </Route>
       <Route exact path={`${props.base}`}>
-        <Redirect to={`${props.base}/dashboard`}/>
+        <Redirect to={`${props.base}/login`}/>
       </Route>
     </div>
   );

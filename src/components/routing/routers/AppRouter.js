@@ -26,77 +26,76 @@ import RoomEntrance from "components/views/RoomEntrance";
  * Documentation about routing in React: https://reacttraining.com/react-router/web/guides/quick-start
  */
 const AppRouter = () => {
-  return (
-    <BrowserRouter>
-      <Switch>
-	  
-        <Route path="/game">
-          <GameGuard>
-            <GameRouter base="/game"/>
-          </GameGuard>
-        </Route>
+	return (
+		<BrowserRouter>
+			<Switch>
+				<Route path="/game">
+					<GameGuard>
+						<GameRouter base="/game"/>
+					</GameGuard>
+				</Route>
+				
+				<Route exact path="/">
+					<Redirect to="/login"/>
+				</Route>
+				
+				<Route path="/lobby">
+					<LobbyGuard>
+						<Lobby/>
+					</LobbyGuard>
+				</Route>
 		
-		<Route path="/lobby">
-          <LobbyGuard>
-            <Lobby/>
-          </LobbyGuard>
-        </Route>
-		
-		<Route path="/roomsetting">
-          <RoomSettingGuard>
-            <RoomSetting/>
-          </RoomSettingGuard>
-        </Route>
+				<Route path="/roomsetting">
+					<RoomSettingGuard>
+						<RoomSetting/>
+					</RoomSettingGuard>
+				</Route>
 
 				<Route path="/roomcreation">
-          <RoomCreationGuard>
-            <RoomCreation/>
-          </RoomCreationGuard>
-        </Route>
+					<RoomCreationGuard>
+						<RoomCreation/>
+					</RoomCreationGuard>
+				</Route>
 
-        <Route path="/roomentrance">
-            <RoomEntrance/>
-        </Route>
+				<Route path="/roomentrance">
+					<RoomEntrance/>
+				</Route>
 
-        <Route exact path="/login">
-          <LoginGuard>
-            <Login/>
-          </LoginGuard>
-        </Route>
+				<Route exact path="/login">
+					<LoginGuard>
+						<Login/>
+					</LoginGuard>
+				</Route>
 		
-		<Route exact path="/register">
-          <RegisterGuard>
-            <Register/>
-          </RegisterGuard>
-        </Route>
+				<Route exact path="/register">
+					<RegisterGuard>
+						<Register/>
+					</RegisterGuard>
+				</Route>
 		
-        <Route exact path="/">
-          <Redirect to="/login"/>
-        </Route>
+				<Route path ="/users/:userId">
+					<Inspect/>
+				</Route>
+				
+				<Route path ="/users/:userId">
+					<InspectGuard>
+						<Inspect/>
+					</InspectGuard>
+				</Route>
 		
-        <Route path ="/users/:userId">
-          <Inspect/>
-        </Route>
-        <Route path ="/users/:userId">
-          <InspectGuard>
-            <Inspect/>
-          </InspectGuard>
-        </Route>
+				<Route path ="/Setting/:userId">
+					<Setting/>
+				</Route>
 		
-        <Route path ="/Setting/:userId">
-          <Setting/>
-        </Route>
+				<Route path ="/users/:userId">
+					<Setting/>
+				</Route>
 		
-		<Route path ="/users/:userId">
-		  <Setting/>
-		</Route>
-		
-        <Route path ="/logout/:userId">
-          <LoginGuard>
-            <Login/>
-          </LoginGuard>
-        </Route>
-		
+				<Route path ="/logout/:userId">
+					<LoginGuard>
+						<Login/>
+					</LoginGuard>
+				</Route>
       </Switch>
     </BrowserRouter>
   );

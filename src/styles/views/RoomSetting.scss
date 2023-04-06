@@ -68,11 +68,11 @@
     justify-content: center;
     margin-top: 0.8em;
   }
-.select-wrapper {
+&.select-wrapper {
   position: relative;
 }
 
-.select {
+&.select {
   position: relative;
   width: 160px;
   height: 40px;
@@ -81,7 +81,7 @@
   cursor: pointer;
 }
 
-.select-value {
+&.select-value {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,7 +91,7 @@
   font-family: Arial, sans-serif;
 }
 
-.select-options {
+&.select-options {
   position: absolute;
   top: 100%;
   left: 0;
@@ -107,7 +107,7 @@
   margin: 0;
 }
 
-.select-option {
+&.select-option {
   display: flex;
   align-items: center;
   height: 40px;
@@ -118,8 +118,8 @@
   transition: all 0.2s ease-in-out;
 }
 
-.select-option:hover,
-.select-option:focus {
+&.select-option:hover,
+&.select-option:focus {
   background-color: #2196f3;
   color: #fff;
 }

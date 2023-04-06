@@ -6,76 +6,78 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
 import 'styles/views/RoomSetting.scss';
 
-const FormFieldRoomCode = props => {
-  return (
-    <div className="roomsetting field">
-      <label className="roomsetting label">
-        {props.label}
-      </label>
-      <input
-        className="roomsetting input"
-        placeholder="room code"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
-};
-
-FormFieldRoomCode.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
-};
-
-
 const FormFieldNumofPlayers = props => {
-  return (
-    <div className="roomsetting field">
-        <label className="roomsetting label">
-			{props.label}
-        </label>
-		<select id="1" className="roomsetting select">
-            <option value="-" selected>Please select...</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-			<option value="5">5</option>
-            <option value="6">6</option>
-			value={props.value}
-			onChange={e => props.onChange(e.target.value)}
-        </select>
-    </div>
-  );
+	return (
+		<div className="roomsetting field">
+			<label className="roomsetting label">
+				{props.label}
+			</label>
+			<select id="1" className="roomsetting select">
+				<option value="-" selected>Please select...</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				value={props.value}
+				onChange={e => props.onChange(e.target.value)}
+			</select>
+		</div>
+	);
 };
 
 FormFieldNumofPlayers.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 const FormFieldQuestionType = props => {
-  return (
-    <div className="roomsetting field">
-		<label className="roomsetting label">
-			{props.label}
-		</label>
-		<select id="2" className="roomsetting select">
-            <option value="-" selected>Please select...</option>
-            <option value="single">single choice</option>
-            <option value="imitation">imitation</option>
-			<option value="mixed">mixed</option>
-			value={props.value}
-			onChange={e => props.onChange(e.target.value)}
-        </select>
-    </div>
-  );
+	return (
+		<div className="roomsetting field">
+			<label className="roomsetting label">
+				{props.label}
+			</label>
+			<select id="2" className="roomsetting select">
+				<option value="-" selected>Please select...</option>
+				<option value="single">single choice</option>
+				<option value="imitation">imitation</option>
+				<option value="mixed">mixed</option>
+				value={props.value}
+				onChange={e => props.onChange(e.target.value)}
+			</select>
+		</div>
+	);
 };
 
 FormFieldQuestionType.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
+};
+
+const FormFieldDifficultyLevel = props => {
+	return (
+		<div className="roomsetting field">
+			<label className="roomsetting label">
+				{props.label}
+			</label>
+			<select id="3" className="roomsetting select">
+				<option value="-" selected>Please select...</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>				
+				value={props.value}
+				onChange={e => props.onChange(e.target.value)}
+			</select>
+		</div>
+	);
+};
+
+FormFieldDifficultyLevel.propTypes = {
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 const RoomSetting = () => {
@@ -83,8 +85,8 @@ const RoomSetting = () => {
 	const history = useHistory();
 	
 	const [Room, setRoom] = useState(null);
-    const [RoomCode, setRoomCode] = useState(null);
 	const [NumofPlayers, setNumofPlayers] = useState(null);
+	const [DifficultyLevel, setDifficultyLevel] = useState(null);
 	const [QuestionType, setQuestionType] = useState(null);
 	let {roomId} = useParams();
 
@@ -92,13 +94,11 @@ const RoomSetting = () => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
-
                 if (!client.isconnected) {
                     client.connect({}, function (frame) {
                         console.log('connected to stomp');
                     });
                 }
-
             } catch (error) {
                 console.error(`Something went wrong: \n${handleError(error)}`);
                 console.error("Details:", error);
@@ -107,7 +107,6 @@ const RoomSetting = () => {
         }
         stompConnect();
     }, []);
-
     
     /*client.connect({}, function (frame) {
         console.log('connected to stomp');
@@ -161,17 +160,13 @@ const RoomSetting = () => {
         }
         fetchData();
 		}, []);*/
-	
-	const goBack = () => {
-        history.push(`/roomcreation`);
-    };
 
 	const goWaiting = async () => {
 		var NumofPlayers = document.getElementById("1");
-		let item = {RoomCode, NumofPlayers, QuestionType}
+		let item = {NumofPlayers, QuestionType, DifficultyLevel}
         console.warn("item", item)
 		try {
-			const requestBody = JSON.stringify({RoomCode, NumofPlayers, QuestionType});
+			const requestBody = JSON.stringify({NumofPlayers, QuestionType, DifficultyLevel});
             /*const response = await api.put('/room/' + RoomID, requestBody);
 
             const room = new Room(response.data);
@@ -181,7 +176,7 @@ const RoomSetting = () => {
 		}
     };
 	
-	const goInvite = async () => {
+	const goInvite = () => {
     /*try {
       history.push(`/invitation`);
     } catch (error) {
@@ -191,56 +186,54 @@ const RoomSetting = () => {
 
     return (
 		<BaseContainer>
-		  <div className="roomsetting container">
-		  <h2>Welcome to Game Room X!</h2>
-            <div className="">
-              <p className="roomsetting text">
-                  You could set parameters of your game here.
-              </p>
-			  
-				<FormFieldRoomCode
-					label="Room Code"
-					value={RoomCode}
-					onChange={un => setRoomCode(un)}
-				/>
-				<FormFieldNumofPlayers
-					label="Number of Players"
-					value={NumofPlayers}
-					onChange={value => setNumofPlayers(value)}
-				/>
-				<FormFieldQuestionType
-					label="Question Type"
-					value={QuestionType}
-					onChange={un => setQuestionType(un)}
-				/>
-			  
-				<div className="lobby button-container">
-					<Button
-						disabled={!RoomCode || !NumofPlayers || !QuestionType}
-						width="100%"
-						onClick={() => goWaiting()}
-					>
-					Confirm
-					</Button>
-				</div>
-				<div className="lobby button-container">
-					<Button
-					width="100%"
-					onClick={() => goBack()}
-					>
-					Cancel
-					</Button>
-				</div>
-                <div className="lobby button-container">
-					<Button
-					width="100%"
-					onClick={() => goInvite()}
-					>
-					Generate Invitation Link
-					</Button>
+			<div className="roomsetting container">
+			<h2>Welcome to Game Room X!</h2>
+				<div className="">
+					<p className="roomsetting text">
+						You could set parameters of your game here.
+					</p>
+					<FormFieldNumofPlayers
+						label="Number of Players"
+						value={NumofPlayers}
+						onChange={value => setNumofPlayers(value)}
+					/>
+					<FormFieldQuestionType
+						label="Question Type"
+						value={QuestionType}
+						onChange={un => setQuestionType(un)}
+					/>
+					<FormFieldDifficultyLevel
+						label="Difficulty Level"
+						value={DifficultyLevel}
+						onChange={un => setDifficultyLevel(un)}
+					/>
+					<div className="lobby button-container">
+						<Button
+							disabled={!DifficultyLevel || !NumofPlayers || !QuestionType}
+							width="100%"
+							onClick={() => goWaiting()}
+						>
+						Confirm
+						</Button>
+					</div>
+					<div className="lobby button-container">
+						<Button
+							width="100%"
+							onClick={() => history.push(`/roomcreation`)}
+						>
+						Cancel
+						</Button>
+					</div>
+					<div className="lobby button-container">
+						<Button
+							width="100%"
+							onClick={() => goInvite()}
+						>
+						Generate Invitation Link
+						</Button>
+					</div>
 				</div>
 			</div>
-		  </div>
         </BaseContainer>
     );
 }

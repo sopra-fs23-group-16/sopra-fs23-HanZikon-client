@@ -9,25 +9,25 @@ import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 
 const FormField = props => {
-  return (
-    <div className="inspect field">
-      <label className="inspect label">
-        {props.label}
-      </label>
-      <input
-        className="inspect input"
-		placeholder="Not defined"
-        value={props.value}
-        onChange={e => props.onChange(e.target.value)}
-      />
-    </div>
-  );
+	return (
+		<div className="inspect field">
+			<label className="inspect label">
+				{props.label}
+			</label>
+			<input
+				className="inspect input"
+				placeholder="Not defined"
+				value={props.value}
+				onChange={e => props.onChange(e.target.value)}
+			/>
+		</div>
+	);
 };
 
 FormField.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func
+	label: PropTypes.string,
+	value: PropTypes.string,
+	onChange: PropTypes.func
 };
 
 const Inspect = () => {
@@ -46,7 +46,7 @@ const Inspect = () => {
                 // delays continuous execution of an async operation for 1 second.
                 // This is just a fake async call, so that the spinner can be displayed
                 // feel free to remove it :)
-                //await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve => setTimeout(resolve, 1000));
 
                 // Get the returned users and update the state.
                 setUser(response.data);
@@ -69,8 +69,6 @@ const Inspect = () => {
 
         fetchData();
     }, []);
-
-    let content = <Spinner/>;
 	
 	return user && (
 		<BaseContainer>
@@ -102,7 +100,6 @@ const Inspect = () => {
 		</div>
 		</BaseContainer>
 	);
-
 }
 
 

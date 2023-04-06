@@ -8,74 +8,60 @@ import "styles/views/Lobby.scss";
 
 const Lobby = () => {
 
-  const history = useHistory();
-  const [users, setUsers] = useState(null);
-
-  const logout = () => {
-    localStorage.removeItem('token');
+	const history = useHistory();
+	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
-    localStorage.removeItem("loggedInUser");
-    const response = api.get('/logout/'+id);
-    history.push('/login');
-}
 
-  const doInspect = () => {
-	let id = localStorage.getItem("loggedInUser");
-    history.push(`/users/${id}`);
-  };
+	const logout = () => {
+		localStorage.removeItem('token');
+		localStorage.removeItem("loggedInUser");
+		const response = api.get('/logout/'+id);
+		history.push('/login');
+	}
   
-  const params = new URLSearchParams(window.location.search);
-  
+	//const params = new URLSearchParams(window.location.search);
 
-  const goCompetition = async () => {
-      try {
-        history.push(`/roomcreation`);
-      } catch (error) {
-        alert(`Something went wrong: \n${handleError(error)}`);
-      }
-    };
-
-  return (
-    <BaseContainer>
-	<div className="lobby container">
-    <h1>Game Overview</h1>
-      <div className="lobby form">
-          <div className="lobby button-container">
-            <Button 
-              width="70%"
-              //onClick={() => }
-            >
-              Single Mode
-            </Button>
-          </div>
-          <div className="lobby button-container">
-            <Button
-              width="70%"
-              onClick={() => goCompetition()}
-            >
-              Competition Mode
-            </Button>
-          </div>
-		  <div className="lobby button-container">
-            <Button
-              width="70%"
-              onClick={() => doInspect()}
-            >
-              Your Profile
-            </Button>
-          </div>
-		  <div className="lobby button-container">
-            <Button
-              width="70%"
-              onClick={() => logout()}
-            >
-              Exit
-            </Button>
-          </div>
-        </div>
-	</div>
-    </BaseContainer>
-  );
+	return (
+		<BaseContainer>
+			<div className="lobby container">
+				<h1>Game Overview</h1>
+				<div className="lobby form">
+					<div className="lobby button-container">
+						<Button 
+							width="70%"
+							//onClick={() => }
+						>
+						Single Mode
+						</Button>
+					</div>
+					<div className="lobby button-container">
+						<Button
+							width="70%"
+							onClick={() => history.push(`/roomcreation`)}
+						>
+						Competition Mode
+						</Button>
+					</div>
+					<div className="lobby button-container">
+						<Button
+							width="70%"
+							onClick={() => history.push(`/users/${id}`)}
+						>
+						Your Profile
+						</Button>
+					</div>
+					<div className="lobby button-container">
+						<Button
+							width="70%"
+							onClick={() => logout()}
+						>
+						Exit
+						</Button>
+					</div>
+				</div>
+			</div>
+		</BaseContainer>
+	);
 }
 
 export default Lobby;
