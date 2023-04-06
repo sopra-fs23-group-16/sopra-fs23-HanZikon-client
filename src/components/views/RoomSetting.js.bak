@@ -190,6 +190,7 @@ const RoomSetting = () => {
 		try {
 			const requestBody = JSON.stringify({numPlayers, questionType, level});
             const response = await client.send('/app/multi/create' + userId, {}, requestBody)
+			})
 
 			//listen to server
 			client.subscribe('/topic/multi/create/' + userId, function (message) {
