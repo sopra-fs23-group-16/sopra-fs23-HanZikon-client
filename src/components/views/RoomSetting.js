@@ -5,101 +5,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
 import 'styles/views/RoomSetting.scss';
-
-const FormFieldNumofPlayers = props => {
-	return (
-		<div className="roomsetting field">
-			<label className="roomsetting label">
-				{props.label}
-			</label>
-			<input
-				className="roomsetting input"
-				placeholder="number of players:"
-				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
-			/>
-		</div>
-	);
-};
-
-			/* <select id="1" className="roomsetting select">
-				<option value="-" selected>Please select...</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
-			</select> */
-
-FormFieldNumofPlayers.propTypes = {
-	label: PropTypes.string,
-	value: PropTypes.string,
-	onChange: PropTypes.func
-};
-
-const FormFieldQuestionType = props => {
-	return (
-		<div className="roomsetting field">
-			<label className="roomsetting label">
-				{props.label}
-			</label>
-			<input
-				className="roomsetting input"
-				placeholder="question type:"
-				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
-			/>
-		</div>
-	);
-};
-
-/*<select id="2" className="roomsetting select">
-				<option value="-" selected>Please select...</option>
-				<option value="single">single choice</option>
-				<option value="imitation">imitation</option>
-				<option value="mixed">mixed</option>
-				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
-			</select>*/
-
-FormFieldQuestionType.propTypes = {
-	label: PropTypes.string,
-	value: PropTypes.string,
-	onChange: PropTypes.func
-};
-
-const FormFieldDifficultyLevel = props => {
-	return (
-		<div className="roomsetting field">
-			<label className="roomsetting label">
-				{props.label}
-			</label>
-			<input
-				className="roomsetting input"
-				placeholder="difficulty level:"
-				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
-			/>
-		</div>
-	);
-};
-
-			/*<select id="3" className="roomsetting select">
-				<option value="-" selected>Please select...</option>
-				<option value="1">1</option>
-				<option value="2">2</option>
-				<option value="3">3</option>
-				<option value="4">4</option>
-				<option value="5">5</option>				
-				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
-			</select>*/
-
-FormFieldDifficultyLevel.propTypes = {
-	label: PropTypes.string,
-	value: PropTypes.string,
-	onChange: PropTypes.func
-};
+import SockJSClient from 'react-stomp';
 
 const RoomSetting = () => {
 
@@ -108,12 +14,23 @@ const RoomSetting = () => {
 	let userId = localStorage.getItem("loggedInUser");
 	
 	const [Room, setRoom] = useState(null);
-	const [numPlayers, setNumPlayers] = useState(null);
-	const [level, setLevel] = useState(null);
-	const [questionType, setQuestionType] = useState(null);
+	const [numPlayers, setNumPlayers] = useState("");
+	const [level, setLevel] = useState("");
+	const [questionType, setQuestionType] = useState("");
+	const [client, setClient] = useState("");
 	let {roomId} = useParams();
+	
+	const handleChangenp = (event) =>{
+		setNumPlayers(event.target.value);
+	};
+	const handleChangeqt = (event) =>{
+		setQuestionType(event.target.value);
+	};
+	const handleChangedl = (event) =>{
+		setLevel(event.target.value);
+	};
 
-    useEffect(() => {
+    /*useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
@@ -129,7 +46,7 @@ const RoomSetting = () => {
             }
         }
         stompConnect();
-    }, []);
+    }, []);*/
     
     /*client.connect({}, function (frame) {
         console.log('connected to stomp');
@@ -203,7 +120,32 @@ const RoomSetting = () => {
     };*/
 	
 	const goWaiting = async () => {
+		let item = {numPlayers, questionType, level}
+        console.warn("item", item)
+		try {
+			const requestBody = JSON.stringify({numPlayers, questionType, level});
+            const response = await client.sendMessage('/app/multi/create/' + userId, requestBody)
+			const subscription = subscription(response.data);
+		} catch (error) {
+			alert(`Something is wrong: \n${handleError(error)}`);
+		}
+    };
+	
+	const subscription = async (data) => {
+		console.log('Received message');
 		await client.subscribe('/topic/multi/create/' + userId, function (response) {
+				console.log('Received message:' + response.body);
+				const room = new Room (data);
+				console.log('Received message:' + room.roomID);
+				//history.push(`/`);
+			}, function(error){
+				console.log('Not received:' + error);
+			});
+    };
+	
+	/*const goWaiting = () => {
+		console.log('Received message');
+		client.subscribe('/topic/multi/create/' + userId, function (response) {
 				console.log('Received message:' + response.body);
 				const room = new Room (paramSetting());
 				console.log('Received message:' + room.roomID);
@@ -220,11 +162,12 @@ const RoomSetting = () => {
 			const requestBody = JSON.stringify({numPlayers, questionType, level});
             const response = await client.send('/app/multi/create/' + userId, {}, requestBody)
 			return response.data;
+			console.log('Sent');
 			
 		} catch (error) {
 			alert(`Something is wrong: \n${handleError(error)}`);
 		}
-    };
+    };*/
 	
 	const goInvite = () => {
     /*try {
@@ -233,29 +176,58 @@ const RoomSetting = () => {
       alert(`Something is wrong: \n${handleError(error)}`);
     }*/
     };
+	
+	const handleMsg = () => {
+		console.log("sent");
+	}
 
     return (
 		<BaseContainer>
+			<SockJSClient url = {"http://localhost:8080/websocket"} topics = {["topic/multi/create/1"]}
+				onMessage={handleMsg} ref = {(client) => setClient(client)}
+				onConnect = {console.log("connected")}
+				onDisconnect = {console.log("disconnected")}
+				debug = {false} />
 			<div className="roomsetting container">
 				<div className="">
 					<p className="roomsetting text">
 						You could set parameters of your game here.
 					</p>
-					<FormFieldNumofPlayers
-						label="Number of Players"
-						value={numPlayers}
-						onChange={value => setNumPlayers(value)}
-					/>
-					<FormFieldQuestionType
-						label="Question Type"
-						value={questionType}
-						onChange={un => setQuestionType(un)}
-					/>
-					<FormFieldDifficultyLevel
-						label="Difficulty Level"
-						value={level}
-						onChange={un => setLevel(un)}
-					/>
+					<div className="roomsetting field">
+						<label className="roomsetting label">
+							Number of Players
+						</label>
+						<select value = {numPlayers} className="roomsetting select" onChange = {handleChangenp}>
+							<option value="-" selected>Please select...</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+						</select>
+					</div>
+					<div className="roomsetting field">
+						<label className="roomsetting label">
+							Question Type
+						</label>
+						<select value = {questionType} className="roomsetting select" onChange = {handleChangeqt}>
+							<option value="-" selected>Please select...</option>
+							<option value="single">single choice</option>
+							<option value="imitation">imitation</option>
+							<option value="mixed">mixed</option>
+						</select>
+					</div>
+					<div className="roomsetting field">
+						<label className="roomsetting label">
+							Difficulty Level
+						</label>
+						<select value = {level} className="roomsetting select" onChange = {handleChangedl}>
+							<option value="-" selected>Please select...</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>				
+						</select>
+					</div>
 					<div className="roomsetting button-container">
 						<Button
 							disabled={!level || !numPlayers || !questionType}
