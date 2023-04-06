@@ -46,7 +46,7 @@ const Inspect = () => {
                 // delays continuous execution of an async operation for 1 second.
                 // This is just a fake async call, so that the spinner can be displayed
                 // feel free to remove it :)
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                //await new Promise(resolve => setTimeout(resolve, 1000));
 
                 // Get the returned users and update the state.
                 setUser(response.data);
@@ -69,6 +69,7 @@ const Inspect = () => {
 
         fetchData();
     }, []);
+<<<<<<< HEAD
 
     let content = <Spinner/>;
 
@@ -83,13 +84,21 @@ const Inspect = () => {
             </div>
         );
     }
+=======
+>>>>>>> aef190faa0f1a0715ad45d22774c9bc2c59e03ab
 	
 	return user && (
 		<BaseContainer>
 		<div className="inspect container">
 			<h1>My Profile</h1>
 			<div className="inspect form">
-				{content}
+                    <div className="user overview">
+                        <FormField
+                            label="username"
+                            value={user.username}
+                            onChange={un => setUsername(un)}
+                        />
+                    </div>
 				<div className="inspect button-container">
 					<Button
 						width="70%"
