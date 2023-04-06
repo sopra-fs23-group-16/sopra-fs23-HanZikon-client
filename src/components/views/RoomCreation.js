@@ -10,24 +10,6 @@ import "styles/views/RoomCreation.scss";
 
 const RoomCreation = () => {
 
-	/*const socket = new WebSocket('ws://example.com/socket');
-	
-	socket.onopen = function(event) {
-		console.log('WebSocket opened:', event);
-	};
-
-	socket.onmessage = function(event) {
-		console.log('WebSocket message received:', event.data);
-	};
-
-	socket.onerror = function(error) {
-		console.error('WebSocket error:', error);
-	};
-
-	socket.onclose = function(event) {
-		console.log('WebSocket closed:', event);
-	};*/
-
 	const history = useHistory();
 	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
@@ -38,23 +20,6 @@ const RoomCreation = () => {
 		const response = api.get('/logout/'+id);
 		history.push('/login');
 	}
-	
-	const goSetting = async () => {
-		const request = {
-			type: 'subscribe',
-			destination: '/topic/multi/player/{room.id}'
-		};
-
-		//socket.send(JSON.stringify(request));
-	  
-		const room = new Room();
-		localStorage.setItem('roomid', room.id);
-		try {
-			history.push(`/roomsetting/{room.id}`);
-		} catch (error) {
-			alert(`Something went wrong: \n${handleError(error)}`);
-		}
-	};
 
 	return (
 		<BaseContainer>
@@ -64,7 +29,7 @@ const RoomCreation = () => {
 					<div className="creation button-container">
 						<Button 
 							width="70%"
-							onClick={() => goSetting()}
+							onClick={() => history.push(`/roomsetting/`)}
 						>
 						Create A New Room
 						</Button>

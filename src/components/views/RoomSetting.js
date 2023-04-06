@@ -184,12 +184,12 @@ const RoomSetting = () => {
         fetchData();
 		}, []);*/
 
-	const goWaiting = async () => {
+	/*const goWaiting = async () => {
 		let item = {numPlayers, questionType, level}
         console.warn("item", item)
 		try {
 			const requestBody = JSON.stringify({numPlayers, questionType, level});
-            const response = await client.send('/app/multi/create' + userId, {}, requestBody)
+            const response = await client.send('/app/multi/create/' + userId, {}, requestBody)
 
 			//listen to server
 			client.subscribe('/topic/multi/create/' + userId, function (message) {
@@ -197,6 +197,30 @@ const RoomSetting = () => {
 			});
             const room = new Room(response.data);
 			//history.push(`/`);
+		} catch (error) {
+			alert(`Something is wrong: \n${handleError(error)}`);
+		}
+    };*/
+	
+	const goWaiting = async () => {
+		await client.subscribe('/topic/multi/create/' + userId, function (response) {
+				console.log('Received message:' + response.body);
+				const room = new Room (paramSetting());
+				console.log('Received message:' + room.roomID);
+				//history.push(`/`);
+			}, function(error){
+				console.log('Not received:' + error);
+			});
+    };
+	
+	const paramSetting = async () => {
+		let item = {numPlayers, questionType, level}
+        console.warn("item", item)
+		try {
+			const requestBody = JSON.stringify({numPlayers, questionType, level});
+            const response = await client.send('/app/multi/create/' + userId, {}, requestBody)
+			return response.data;
+			
 		} catch (error) {
 			alert(`Something is wrong: \n${handleError(error)}`);
 		}
