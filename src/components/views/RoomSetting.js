@@ -5,7 +5,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
 import 'styles/views/RoomSetting.scss';
-import SockJSClient from 'react-stomp';
+/*import SockJSClient from 'react-stomp';*/
 
 const RoomSetting = () => {
 
@@ -17,7 +17,7 @@ const RoomSetting = () => {
 	const [numPlayers, setNumPlayers] = useState("");
 	const [level, setLevel] = useState("");
 	const [questionType, setQuestionType] = useState("");
-	const [client, setClient] = useState("");
+/*	const [client, setClient] = useState("");*/
 	let {roomId} = useParams();
 	
 	const handleChangenp = (event) =>{
@@ -30,7 +30,7 @@ const RoomSetting = () => {
 		setLevel(event.target.value);
 	};
 
-    /*useEffect(() => {
+    useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
@@ -45,8 +45,16 @@ const RoomSetting = () => {
                 alert("Something went wrong! See the console for details.");
             }
         }
-        stompConnect();
-    }, []);*/
+		stompConnect();
+		// return a function to disconnect on unmount
+		return function cleanup() {
+			if (client && client.isconnected) {
+				client.disconnect(function () {
+					console.log('disconnected from stomp');
+				});
+			}
+		};
+    }, []);
     
     /*client.connect({}, function (frame) {
         console.log('connected to stomp');
@@ -124,24 +132,23 @@ const RoomSetting = () => {
         console.warn("item", item)
 		try {
 			const requestBody = JSON.stringify({numPlayers, questionType, level});
-            const response = await client.sendMessage('/app/multi/create/' + userId, requestBody)
-			const subscription = subscription(response.data);
+			client.send('/app/multi/create/' + userId, {}, requestBody)
 		} catch (error) {
 			alert(`Something is wrong: \n${handleError(error)}`);
 		}
     };
 	
-	const subscription = async (data) => {
-		console.log('Received message');
-		await client.subscribe('/topic/multi/create/' + userId, function (response) {
-				console.log('Received message:' + response.body);
-				const room = new Room (data);
-				console.log('Received message:' + room.roomID);
-				//history.push(`/`);
-			}, function(error){
-				console.log('Not received:' + error);
-			});
-    };
+//	const subscription = async (data) => {
+//		console.log('Received message');
+//		await client.subscribe('/topic/multi/create/' + userId, function (response) {
+//				console.log('Received message:' + response.body);
+///*				const room = new Room (data);*/
+//				console.log('Received message:' + room.roomID);
+//				//history.push(`/`);
+//			}, function(error){
+//				console.log('Not received:' + error);
+//			});
+//    };
 	
 	/*const goWaiting = () => {
 		console.log('Received message');
@@ -177,17 +184,17 @@ const RoomSetting = () => {
     }*/
     };
 	
-	const handleMsg = () => {
-		console.log("sent");
-	}
+	//const handleMsg = () => {
+	//	console.log("sent");
+	//}
 
     return (
 		<BaseContainer>
-			<SockJSClient url = {"http://localhost:8080/websocket"} topics = {["topic/multi/create/1"]}
-				onMessage={handleMsg} ref = {(client) => setClient(client)}
-				onConnect = {console.log("connected")}
-				onDisconnect = {console.log("disconnected")}
-				debug = {false} />
+			{/*<SockJSClient url = {"http://localhost:8080/websocket"} topics = {["topic/create"]}*/}
+			{/*	onMessage={handleMsg} ref = {(client) => setClient(client)}*/}
+			{/*	onConnect = {console.log("connected")}*/}
+			{/*	onDisconnect = {console.log("disconnected")}*/}
+			{/*	debug = {false} />*/}
 			<div className="roomsetting container">
 				<div className="">
 					<p className="roomsetting text">
