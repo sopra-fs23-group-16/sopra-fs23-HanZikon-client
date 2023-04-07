@@ -112,29 +112,29 @@ const Login = props => {
     };
 	
 	const doTouristCreation = async () => {
-    const randomUserId = faker.datatype.number({ max: 10 });
-    const randomUsername = faker.name.fullName();
-    const randomToken = faker.datatype.number(20);
+		const randomUserId = faker.datatype.number({ max: 10 });
+		const randomUsername = faker.name.fullName();
+		const randomToken = faker.datatype.number(20);
 
-    const newUser = new User();
-    newUser.id = randomUserId;
-    newUser.token = randomToken;
-    newUser.username = randomUsername;
+		const newUser = new User();
+		newUser.id = randomUserId;
+		newUser.token = randomToken;
+		newUser.username = randomUsername;
 
-    console.log('newUser =', newUser);
+		console.log('newUser =', newUser);
 
-    const touristUser= JSON.stringify({randomUserId, randomUsername, randomToken});
-    localStorage.setItem('touristUser'+randomUserId, touristUser);
+		const touristUser= JSON.stringify({randomUserId, randomUsername, randomToken});
+		localStorage.setItem('touristUser'+randomUserId, touristUser);
 
-    console.log('touristUser =', touristUser);
+		console.log('touristUser =', touristUser);
 
-	return newUser;
+		return newUser;
 	};
 
 	return (
 		<BaseContainer>
 			<div className="login container">
-				<h2>Please log into your account!</h2>
+				<h1>Please log into your account!</h1>
 				<div className="login form">
 					<FormFieldUsername
 						label="Username"
