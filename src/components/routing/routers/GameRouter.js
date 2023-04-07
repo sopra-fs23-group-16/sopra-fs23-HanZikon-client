@@ -5,6 +5,8 @@ import RoomSetting from "components/views/RoomSetting";
 import PropTypes from 'prop-types';
 import RoomCreation from "components/views/RoomCreation";
 import RoomEntrance from "components/views/RoomEntrance";
+import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
+import NormalWaitingRoom from "components/views/NormalWaitingRoom";
 
 const GameRouter = props => {
   /**
@@ -21,8 +23,14 @@ const GameRouter = props => {
       <Route exact path={`${props.base}/roomcreation`}>
         <RoomCreation/>
       </Route>
+      <Route exact path={`${props.base}/room/:roomId`}>
+        <OwnerWaitingRoom/>
+      </Route>
       <Route exact path={`${props.base}/roomentrance`}>
         <RoomEntrance/>
+      </Route>
+      <Route exact path={`${props.base}/room/:roomId`}>
+        <NormalWaitingRoom/>
       </Route>
       <Route exact path={`${props.base}`}>
         <Redirect to={`${props.base}/login`}/>

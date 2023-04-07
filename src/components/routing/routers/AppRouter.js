@@ -15,6 +15,10 @@ import RoomCreation from "components/views/RoomCreation";
 import {RoomSettingGuard} from "components/routing/routeProtectors/RoomSettingGuard";
 import RoomSetting from "components/views/RoomSetting";
 import RoomEntrance from "components/views/RoomEntrance";
+import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
+import {OwnerWaitingRoomGuard} from "components/routing/routeProtectors/OwnerWaitingRoomGuard";
+import NormalWaitingRoom from "components/views/NormalWaitingRoom";
+import {NormalWaitingRoomGuard} from "components/routing/routeProtectors/NormalWaitingRoomGuard";
 
 /**
  * Main router of your application.
@@ -57,8 +61,20 @@ const AppRouter = () => {
 					</RoomCreationGuard>
 				</Route>
 
+				<Route path="/rooms/:roomId">
+					<OwnerWaitingRoomGuard>
+						<OwnerWaitingRoom/>
+					</OwnerWaitingRoomGuard>
+				</Route>
+
 				<Route path="/roomentrance">
 					<RoomEntrance/>
+				</Route>
+
+				<Route path="/rooms/:roomId">
+					<NormalWaitingRoomGuard>
+						<NormalWaitingRoom/>
+					</NormalWaitingRoomGuard>
 				</Route>
 
 				<Route exact path="/login">

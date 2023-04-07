@@ -18,7 +18,6 @@ const RoomSetting = () => {
 	const [level, setLevel] = useState("");
 	const [questionType, setQuestionType] = useState("");
 /*	const [client, setClient] = useState("");*/
-	let {roomId} = useParams();
 	
 	const handleChangenp = (event) =>{
 		setNumPlayers(event.target.value);
@@ -37,6 +36,9 @@ const RoomSetting = () => {
                 if (!client.isconnected) {
                     client.connect({}, function (frame) {
                         console.log('connected to stomp');
+						client.subscribe("topic/multi/create/" + userId, function (message) {
+							console.log('Received message:', message.body)
+						});
                     });
                 }
             } catch (error) {
@@ -74,7 +76,7 @@ const RoomSetting = () => {
     //listen to server
     /*client.subscribe('/topic/multi/player/1', function (message) {
         console.log('Received message:', message.body);
-        // ÔÚÕâÀïÊ¹ÓÃ newPlayerInfo ¶ÔÏóÖÐµÄÍ·ÏñºÍÃû³ÆÐÅÏ¢¸üÐÂ HTML Ò³Ãæ
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ newPlayerInfo ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Í·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ HTML Ò³ï¿½ï¿½
     });*/
 	
 	    /*useEffect(() => {
@@ -127,7 +129,7 @@ const RoomSetting = () => {
 		}
     };*/
 	
-	const goWaiting = async () => {
+	const goWaitingOld = async () => {
 		let item = {numPlayers, questionType, level}
         console.warn("item", item)
 		try {
@@ -137,6 +139,17 @@ const RoomSetting = () => {
 			alert(`Something is wrong: \n${handleError(error)}`);
 		}
     };
+
+	//////////////////////////////////////////////////////////// å¤„ç†è¿”å›žçš„messageï¼Œè§£åŒ…roomidå’Œroomcode
+	const roomid = 1;
+	const goWaiting = () => {
+		if (roomid){
+			const requestBody = JSON.stringify({numPlayers, questionType, level});
+			client.send('/app/multi/create/' + userId, {}, requestBody)
+			history.push("/rooms/" + roomid)
+		}		
+    };
+
 	
 //	const subscription = async (data) => {
 //		console.log('Received message');
