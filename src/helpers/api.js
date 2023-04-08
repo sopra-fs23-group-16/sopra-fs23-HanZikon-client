@@ -42,6 +42,10 @@ websocket.onopen = () => {
     console.log('Connected to websocket server');
 };
 
+websocket.onmessage = function (msg) {
+    console.log("WebSocket message: ", msg);
+};
+
 websocket.onerror = function (event) {
     console.error("WebSocket error: ", event);
 };

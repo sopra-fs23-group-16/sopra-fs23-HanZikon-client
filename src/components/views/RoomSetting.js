@@ -35,8 +35,11 @@ const RoomSetting = () => {
             try {
                 if (!client.isconnected) {
                     client.connect({}, function (frame) {
-                        console.log('connected to stomp');
-						client.subscribe("topic/multi/create/" + userId, function (message) {
+						console.log('connected to stomp');
+						client.subscribe('/topic/greeting', message => {
+							console.log('Received message:', message.body)
+						});
+						client.subscribe('/topic/multi/create/' + userId, message => {
 							console.log('Received message:', message.body)
 						});
                     });
