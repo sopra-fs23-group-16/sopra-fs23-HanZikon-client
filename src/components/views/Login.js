@@ -61,8 +61,8 @@ FormFieldPassword.propTypes = {
 
 const Login = props => {
 	const history = useHistory();  
-	const [username, setUsername] = useState(null);
-	const [password, setPassword] = useState(null);
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
 	const [userList, setUserList] = useState([]);
 	const [timeOut, setTimeOut] = useState(null);
 	const [errorMessage, setErrorMessage] = useState(null);
