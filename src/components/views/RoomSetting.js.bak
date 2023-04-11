@@ -63,8 +63,20 @@ const RoomSetting = () => {
 	const goWaiting = () => {
 		if (roomid){
 			const requestBody = JSON.stringify({numPlayers, questionType, level});
+<<<<<<< HEAD
+			client.send('/app/multi/create/' + userId, {}, requestBody);
+			client.subscribe('/topic/multi/create/' + userId, function (response){
+				console.log(response.body);
+			});
+			/*response.onmessage(message => {
+				console.log(message.body);
+			});*/
+			//console.log(response)
+			history.push("/rooms/" + roomid)
+=======
 			client.send('/app/multi/create/' + userId, {}, requestBody)
 			history.push("/rooms/" + roomid + "/owner")
+>>>>>>> 8ba59b106bd067b41f21ae3cf0163599ab8ce984
 		}		
     };
 	

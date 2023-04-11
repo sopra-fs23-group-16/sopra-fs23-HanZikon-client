@@ -23,13 +23,13 @@ const GameRouter = props => {
       <Route exact path={`${props.base}/roomcreation`}>
         <RoomCreation/>
       </Route>
-      <Route exact path={`${props.base}/room/:roomId`}>
+      <Route exact path={`${props.base}/room/:roomId/owner`}>
         <OwnerWaitingRoom/>
       </Route>
       <Route exact path={`${props.base}/roomentrance`}>
         <RoomEntrance/>
       </Route>
-      <Route exact path={`${props.base}/room/:roomId`}>
+      <Route exact path={`${props.base}/room/:roomId/participants`}>
         <NormalWaitingRoom/>
       </Route>
       <Route exact path={`${props.base}`}>
