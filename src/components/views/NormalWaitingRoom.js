@@ -7,6 +7,7 @@ import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router-dom';
+import myImage from 'image/background.jpeg';
 
 /*
 It is possible to add multiple components inside a single file,
@@ -50,6 +51,7 @@ const NormalWaitingRoom = props => {
 			<div className="normalwaiting col">
 				<div className="normalwaiting row">
 					<div className="normalwaiting card">
+						<img src= {myImage} alt="player1" style={{ width: '172px', height: '100px' }}/>
 						player1
 					</div>
 					<div className="normalwaiting card">

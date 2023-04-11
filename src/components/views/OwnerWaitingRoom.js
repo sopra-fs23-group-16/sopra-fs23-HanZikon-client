@@ -7,7 +7,7 @@ import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router-dom';
-
+import myImage from 'image/background.jpeg';
 /*
 It is possible to add multiple components inside a single file,
 however be sure not to clutter your files with an endless amount!
@@ -48,7 +48,8 @@ const OwnerWaitingRoom = props => {
 			<div className="ownerwaiting col">
 				<div className="ownerwaiting row">
 					<div className="ownerwaiting card">
-						player1
+					<img src= {myImage} alt="player1" style={{ width: '172px', height: '100px' }}/>
+					player1
 					</div>
 					<div className="ownerwaiting card">
 						player2
