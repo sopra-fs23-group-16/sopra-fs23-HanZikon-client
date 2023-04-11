@@ -70,7 +70,7 @@ const RoomSetting = () => {
 			/*response.onmessage(message => {
 				console.log(message.body);
 			});*/
-			//console.log(response)
+			console.log(response)
 			history.push("/rooms/" + roomid)
 		}		
     };
