@@ -7,7 +7,7 @@ import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router-dom';
-import myImage from 'image/background.jpeg';
+import dog from 'image/dog.png';
 
 /*
 It is possible to add multiple components inside a single file,
@@ -49,21 +49,27 @@ const NormalWaitingRoom = props => {
 		<BaseContainer>
 		<div  className="normalwaiting container">
 			<div className="normalwaiting col">
-				<div className="normalwaiting row">
 					<div className="normalwaiting card">
-						<img src= {myImage} alt="player1" style={{ width: '172px', height: '100px' }}/>
-						player1
+    					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto', display: 'block', margin: 'auto' }} />
+					&#x274C; player1 
+					</div>
+					
+					<div className="normalwaiting card">
+						<center>
+					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto' }} /></center>
+					&#x2705; player2 
 					</div>
 					<div className="normalwaiting card">
-						player2
+					&#x2705; player3
 					</div>
 					<div className="normalwaiting card">
-						player3
+					&#x2705; player4
 					</div>
 					<div className="normalwaiting card">
-						player4
+					&#x2705; player5
 					</div>
 				</div>
+				<div className="normalwaiting col">
 				<div className="normalwaiting form">
 					<center>
 					<div className="normalwaiting button-container">
@@ -74,7 +80,6 @@ const NormalWaitingRoom = props => {
 					Get Ready
 				</Button>
 				</div>
-
 				</center>
 				</div>
 			</div>

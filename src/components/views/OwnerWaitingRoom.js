@@ -7,7 +7,7 @@ import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import { useParams } from 'react-router-dom';
-import myImage from 'image/background.jpeg';
+import dog from 'image/dog.png';
 /*
 It is possible to add multiple components inside a single file,
 however be sure not to clutter your files with an endless amount!
@@ -46,21 +46,27 @@ const OwnerWaitingRoom = props => {
 		<BaseContainer>
 			<div  className="ownerwaiting container">
 			<div className="ownerwaiting col">
-				<div className="ownerwaiting row">
 					<div className="ownerwaiting card">
-					<img src= {myImage} alt="player1" style={{ width: '172px', height: '100px' }}/>
-					player1
+    					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto', display: 'block', margin: 'auto' }} />
+					&#x274C; player1 
+					</div>
+					
+					<div className="ownerwaiting card">
+						<center>
+					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto' }} /></center>
+					&#x2705; player2 
 					</div>
 					<div className="ownerwaiting card">
-						player2
+					&#x2705; player3
 					</div>
 					<div className="ownerwaiting card">
-						player3
+					&#x2705; player4
 					</div>
 					<div className="ownerwaiting card">
-						player4
+					&#x2705; player5
 					</div>
 				</div>
+				<div className="ownerwaiting col">
 				<div className="ownerwaiting form">
 					<center>
 					<div className="ownerwaiting button-container">
@@ -69,14 +75,6 @@ const OwnerWaitingRoom = props => {
 					//onClick={() => }
 					>
 					Start Game
-				</Button>
-				</div>
-				<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					//onClick={() => }
-					>
-					Room Management
 				</Button>
 				</div>
 				</center>

@@ -61,7 +61,7 @@ const AppRouter = () => {
 					</RoomCreationGuard>
 				</Route>
 
-				<Route path="/rooms/:roomId/owner">
+				<Route path="/rooms/:roomID/owner">
 					<OwnerWaitingRoomGuard>
 						<OwnerWaitingRoom/>
 					</OwnerWaitingRoomGuard>
@@ -71,7 +71,7 @@ const AppRouter = () => {
 					<RoomEntrance/>
 				</Route>
 
-				<Route path="/rooms/:roomId/participants">
+				<Route path="/rooms/:roomID/participants">
 					<NormalWaitingRoomGuard>
 						<NormalWaitingRoom/>
 					</NormalWaitingRoomGuard>
