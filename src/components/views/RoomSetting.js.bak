@@ -65,9 +65,9 @@ const RoomSetting = () => {
 		client.send('/app/multi/create/' + userId, {}, requestBody)
 		client.subscribe('/topic/multi/create/' + userId, function (response){
 			const room = response.body;
-			const roomnew = eval('('+room+')');
-			//console.log(roomnew["roomID"]);
-			history.push("/rooms/" + roomnew["roomID"] + "/owner");
+			const roomnew = room.replace(/\"/g, "");
+			console.log(roomnew["roomID"]);
+			//history.push("/rooms/" + roomnew["roomID"] + "/owner");
 		});
 					
     };
