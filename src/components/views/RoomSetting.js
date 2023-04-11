@@ -149,7 +149,7 @@ const RoomSetting = () => {
 		if (roomid){
 			const requestBody = JSON.stringify({numPlayers, questionType, level});
 			client.send('/app/multi/create/' + userId, {}, requestBody)
-			history.push("/rooms/" + roomid)
+			history.push("/rooms/" + roomid + "/owner")
 		}		
     };
 
