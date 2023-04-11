@@ -46,9 +46,40 @@ const NormalWaitingRoom = props => {
 
 	return (
 		<BaseContainer>
-			<div className="normalwaiting container">
+		<div  className="normalwaiting container">
+			<div className="normalwaiting col">
+				<div className="normalwaiting row">
+					<div className="normalwaiting card">
+						player1
+					</div>
+					<div className="normalwaiting card">
+						player2
+					</div>
+					<div className="normalwaiting card">
+						player3
+					</div>
+					<div className="normalwaiting card">
+						player4
+					</div>
+				</div>
 				<div className="normalwaiting form">
-			
+					<center>
+					<div className="normalwaiting button-container">
+				<Button
+					width="15%"
+					//onClick={() => }
+					>
+					Get Ready
+				</Button>
+				</div>
+
+				</center>
+				</div>
+			</div>
+			<div className="normalwaiting col">
+					<div className="normalwaiting card-rule">
+						Game Rule
+					</div>
 				</div>
 			</div>
 		</BaseContainer>

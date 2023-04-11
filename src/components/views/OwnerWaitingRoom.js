@@ -44,11 +44,51 @@ const OwnerWaitingRoom = props => {
 
 	return (
 		<BaseContainer>
-			<div className="ownerwaiting container">
+			<div  className="ownerwaiting container">
+			<div className="ownerwaiting col">
+				<div className="ownerwaiting row">
+					<div className="ownerwaiting card">
+						player1
+					</div>
+					<div className="ownerwaiting card">
+						player2
+					</div>
+					<div className="ownerwaiting card">
+						player3
+					</div>
+					<div className="ownerwaiting card">
+						player4
+					</div>
+				</div>
 				<div className="ownerwaiting form">
-			
+					<center>
+					<div className="ownerwaiting button-container">
+				<Button
+					width="15%"
+					//onClick={() => }
+					>
+					Start Game
+				</Button>
+				</div>
+				<div className="ownerwaiting button-container">
+				<Button
+					width="15%"
+					//onClick={() => }
+					>
+					Room Management
+				</Button>
+				</div>
+				</center>
 				</div>
 			</div>
+			<div className="ownerwaiting col">
+					<div className="ownerwaiting card-rule">
+						Game Rule
+					</div>
+				</div>
+			</div>
+
+				
 		</BaseContainer>
 	);
 };
