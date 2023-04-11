@@ -59,14 +59,12 @@ const RoomSetting = () => {
 		};
     }, []);
 
-	//const roomid = 1;
 	const goWaiting = () => {
 		const requestBody = JSON.stringify({numPlayers, questionType, level});
 		client.send('/app/multi/create/' + userId, {}, requestBody)
 		client.subscribe('/topic/multi/create/' + userId, function (response){
 			const room = response.body;
-			const roomnew = eval('('+room+')');
-			//console.log(roomnew["roomID"]);
+			const roomnew = JSON.parse(room);
 			history.push("/rooms/" + roomnew["roomID"] + "/owner");
 		});
 					
