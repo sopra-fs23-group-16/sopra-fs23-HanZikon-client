@@ -35,7 +35,7 @@ const RoomEntrance = props => {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [roomcode, setRoomCode] = useState("");
-	let id = localStorage.getItem("loggedInUser");
+	let userID = localStorage.getItem("loggedInUser");
 	
 	const handleChangerc = (event) =>{
 		setRoomCode(event.target.value);
@@ -44,7 +44,7 @@ const RoomEntrance = props => {
 	const logout = () => {
 		localStorage.removeItem('token');
 		localStorage.removeItem("loggedInUser");
-		const response = api.get('/logout/'+id);
+		const response = api.get('/logout/'+userID);
 		history.push('/login');
 	}
 	
@@ -55,8 +55,10 @@ const RoomEntrance = props => {
                 if (!client.isconnected) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
-						client.subscribe('/topic/greeting', message => {
-							console.log('Received message:', message.body)
+						client.subscribe('/topic/multi/rooms/' + roomcode + '/join', function (response){
+							const room = response.body;
+							const roomparse = JSON.parse(room);
+							history.push("/rooms/" + roomparse["roomID"] + "/participants");
 						});
                     });
                 }
@@ -78,13 +80,8 @@ const RoomEntrance = props => {
     }, []);
 
 	const enterRoom = () => {
-		client.send('/app/multi/rooms/' + roomcode + '/join', {}, roomcode);
-		client.subscribe('/topic/multi/rooms/' + roomcode + '/join', function (response){
-			console.log(response.body);
-			//const room = response.body;
-			//const roomnew = JSON.parse(room);
-			//history.push("/rooms/" + roomnew["roomID"] + "/owner");
-		});
+		const requestBody = JSON.stringify({userID});
+		client.send('/app/multi/rooms/' + roomcode + '/join', {}, requestBody);
 	};
 
 	return (

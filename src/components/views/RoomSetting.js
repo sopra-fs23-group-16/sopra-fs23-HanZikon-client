@@ -39,10 +39,11 @@ const RoomSetting = () => {
 						//});
 						client.subscribe('/topic/multi/create/' + userId, function (response) {
 							const room = response.body;
-							const roomnew = JSON.parse(room);
-							history.push("/rooms/" + roomnew["roomID"] + "/owner");
+							const roomparse = JSON.parse(room);
+							console.log(roomparse);
+							history.push("/rooms/" + roomparse["roomID"] + "/owner");
 						});
-                    });
+					});
                 }
             } catch (error) {
                 console.error(`Something went wrong: \n${handleError(error)}`);
@@ -63,7 +64,7 @@ const RoomSetting = () => {
 
 	const goWaiting = () => {
 		const requestBody = JSON.stringify({numPlayers, questionType, level});
-		client.send('/app/multi/create/' + userId, {}, requestBody)					
+		client.send('/app/multi/create/' + userId, {}, requestBody);	
     };
 	
 	const goInvite = () => {
