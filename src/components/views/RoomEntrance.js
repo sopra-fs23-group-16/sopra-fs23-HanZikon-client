@@ -55,7 +55,7 @@ const RoomEntrance = props => {
                 if (!client.isconnected) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
-						client.subscribe('/topic/multi/rooms/' + roomcode + '/join', function (response){
+						client.subscribe('/topic/multi/rooms' + roomcode + '/join', function (response){
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							history.push("/rooms/" + roomparse["roomID"] + "/participants");
