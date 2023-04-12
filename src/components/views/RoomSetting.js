@@ -34,11 +34,13 @@ const RoomSetting = () => {
                 if (!client.isconnected) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
-						client.subscribe('/topic/greeting', message => {
-							console.log('Received message:', message.body)
-						});
-						client.subscribe('/topic/multi/create/' + userId, message => {
-							console.log('Received message:', message.body)
+						//client.subscribe('/topic/greeting', message => {
+						//	console.log('Received message:', message.body)
+						//});
+						client.subscribe('/topic/multi/create/' + userId, function (response) {
+							const room = response.body;
+							const roomnew = JSON.parse(room);
+							history.push("/rooms/" + roomnew["roomID"] + "/owner");
 						});
                     });
                 }
@@ -61,13 +63,7 @@ const RoomSetting = () => {
 
 	const goWaiting = () => {
 		const requestBody = JSON.stringify({numPlayers, questionType, level});
-		client.send('/app/multi/create/' + userId, {}, requestBody)
-		client.subscribe('/topic/multi/create/' + userId, function (response){
-			const room = response.body;
-			const roomnew = JSON.parse(room);
-			history.push("/rooms/" + roomnew["roomID"] + "/owner");
-		});
-					
+		client.send('/app/multi/create/' + userId, {}, requestBody)					
     };
 	
 	const goInvite = () => {
