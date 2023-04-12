@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import {api, handleError} from 'helpers/api';
+import React, {useEffect, useState} from 'react';
+import {api, handleError, client} from 'helpers/api';
 // import User from 'models/User';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/RoomEntrance.scss';
 import BaseContainer from "components/ui/BaseContainer";
@@ -32,11 +32,14 @@ FormFieldRoomCode.propTypes = {
 
 const RoomEntrance = props => {
 	const history = useHistory();  
-	const [username, setUsername] = useState(null);
-	const [password, setPassword] = useState(null);
-	const [roomid, setRoomID] = useState(null);
-	const [roomcode, setRoomCode] = useState(null);
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [roomcode, setRoomCode] = useState("");
 	let id = localStorage.getItem("loggedInUser");
+	
+	const handleChangerc = (event) =>{
+		setRoomCode(event.target.value);
+	};
 
 	const logout = () => {
 		localStorage.removeItem('token');
@@ -44,14 +47,44 @@ const RoomEntrance = props => {
 		const response = api.get('/logout/'+id);
 		history.push('/login');
 	}
+	
+	useEffect(() => {
+        // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
+        async function stompConnect() {
+            try {
+                if (!client.isconnected) {
+                    client.connect({}, function (frame) {
+						console.log('connected to stomp');
+						client.subscribe('/topic/greeting', message => {
+							console.log('Received message:', message.body)
+						});
+                    });
+                }
+            } catch (error) {
+                console.error(`Something went wrong: \n${handleError(error)}`);
+                console.error("Details:", error);
+                alert("Something went wrong! See the console for details.");
+            }
+        }
+		stompConnect();
+		// return a function to disconnect on unmount
+		return function cleanup() {
+			if (client && client.isconnected) {
+				client.disconnect(function () {
+					console.log('disconnected from stomp');
+				});
+			}
+		};
+    }, []);
 
-	const enterRoom = async () => {
-		try {
-			history.push(`/rooms/{roomid}`);
-		} catch (error) {
-			alert(`Something went wrong: \n${handleError(error)}`);
-			history.push(`/roomentrance`);
-		}
+	const enterRoom = () => {
+		client.send('/app/multi/rooms/' + roomcode + '/join', {}, roomcode);
+		client.subscribe('/topic/multi/rooms/' + roomcode + '/join', function (response){
+			console.log(response.body);
+			//const room = response.body;
+			//const roomnew = JSON.parse(room);
+			//history.push("/rooms/" + roomnew["roomID"] + "/owner");
+		});
 	};
 
 	return (

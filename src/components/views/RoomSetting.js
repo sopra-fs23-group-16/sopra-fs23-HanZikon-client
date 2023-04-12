@@ -70,32 +70,6 @@ const RoomSetting = () => {
 					
     };
 	
-	/*const goWaiting = () => {
-		console.log('Received message');
-		client.subscribe('/topic/multi/create/' + userId, function (response) {
-				console.log('Received message:' + response.body);
-				const room = new Room (paramSetting());
-				console.log('Received message:' + room.roomID);
-				//history.push(`/`);
-			}, function(error){
-				console.log('Not received:' + error);
-			});
-    };
-	
-	const paramSetting = async () => {
-		let item = {numPlayers, questionType, level}
-        console.warn("item", item)
-		try {
-			const requestBody = JSON.stringify({numPlayers, questionType, level});
-            const response = await client.send('/app/multi/create/' + userId, {}, requestBody)
-			return response.data;
-			console.log('Sent');
-			
-		} catch (error) {
-			alert(`Something is wrong: \n${handleError(error)}`);
-		}
-    };*/
-	
 	const goInvite = () => {
     /*try {
       history.push(`/invitation`);
@@ -103,10 +77,6 @@ const RoomSetting = () => {
       alert(`Something is wrong: \n${handleError(error)}`);
     }*/
     };
-	
-	//const handleMsg = () => {
-	//	console.log("sent");
-	//}
 
     return (
 		<BaseContainer>
