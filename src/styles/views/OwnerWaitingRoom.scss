@@ -44,6 +44,10 @@
     padding-left: 50px;
     }
   &.col{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     flex-basis: 10%
     }
   &.card{
@@ -62,7 +66,6 @@
     border-radius: 10px;
     padding: 10px 15px;
     background-color: rgba(255, 255, 255, .2);
-    margin-top: 7%;
     }
   &.field {
     display: flex;
