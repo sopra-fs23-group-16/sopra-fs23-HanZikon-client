@@ -1,18 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
-//import User from 'models/User';
-import {useHistory} from 'react-router-dom';
+import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-//import PropTypes from "prop-types";
-import { useParams } from 'react-router-dom';
+import PropTypes from "prop-types";
 import dog from 'image/dog.png';
 
 const OwnerWaitingRoom = props => {
 	const history = useHistory();  
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
+	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 
@@ -63,6 +62,10 @@ const OwnerWaitingRoom = props => {
 			}
 		};
     }, []);
+	
+	const kickout = () => {
+		//
+    };
 	
 
 	return (
