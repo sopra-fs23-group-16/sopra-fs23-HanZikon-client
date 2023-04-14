@@ -75,48 +75,48 @@ const NormalWaitingRoom = props => {
 		<BaseContainer>
 			<div  className="normalwaiting container">
 			<div className="normalwaiting col">
-					<div className="ownerwaiting card">
+					<div className="normalwaiting card">
 						{players.length > 1 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						) : null}
 					</div>
 					{playerNames.length > 1 && players[1]?.ready ? (
-						<div className="ownerwaiting label">&#x2705; {playerNames[1]}</div>
+						<div className="normalwaiting label">&#x2705; {playerNames[1]}</div>
 						) : (playerNames.length > 1 && !players[1]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[1]}</div>
+						<div className="normalwaiting label">&#x274C; {playerNames[1]}</div>
 					) : null)}
 					
-					<div className="ownerwaiting card">
+					<div className="normalwaiting card">
 						{players.length > 2 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						) : null}
 					</div>
 					{playerNames.length > 2 && players[2]?.ready ? (
-						<div className="ownerwaiting label">&#x2705; {playerNames[2]}</div>
+						<div className="normalwaiting label">&#x2705; {playerNames[2]}</div>
 						) : (playerNames.length > 2 && !players[2]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[2]}</div>
+						<div className="normalwaiting label">&#x274C; {playerNames[2]}</div>
 					) : null)}
 
-					<div className="ownerwaiting card">
+					<div className="normalwaiting card">
 						{players.length > 3 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						) : null}
 					</div>
 					{playerNames.length > 3 && players[3]?.ready ? (
-						<div className="ownerwaiting label">&#x2705; {playerNames[3]}</div>
+						<div className="normalwaiting label">&#x2705; {playerNames[3]}</div>
 						) : (playerNames.length > 3 && !players[3]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[3]}</div>
+						<div className="normalwaiting label">&#x274C; {playerNames[3]}</div>
 					) : null)}
 
-					<div className="ownerwaiting card">
+					<div className="normalwaiting card">
 						{players.length > 4 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						) : null}
 					</div>
 					{playerNames.length > 4 && players[4]?.ready ? (
-						<div className="ownerwaiting label">&#x2705; {playerNames[4]}</div>
+						<div className="normalwaiting label">&#x2705; {playerNames[4]}</div>
 						) : (playerNames.length > 4 && !players[4]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[4]}</div>
+						<div className="normalwaiting label">&#x274C; {playerNames[4]}</div>
 					) : null)}
 
 					{/* <div className="ownerwaiting card">
@@ -126,15 +126,15 @@ const NormalWaitingRoom = props => {
 					) : (
 					  <div className="ownerwaiting label">&#x274C; {playerNames[5]}</div>
 					)} */}
-					<div className="ownerwaiting card">
+					<div className="normalwaiting card">
 						{players.length > 5 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						) : null}
 					</div>
 					{playerNames.length > 5 && players[5]?.ready ? (
-						<div className="ownerwaiting label">&#x2705; {playerNames[5]}</div>
+						<div className="normalwaiting label">&#x2705; {playerNames[5]}</div>
 						) : (playerNames.length > 5 && !players[5]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[5]}</div>
+						<div className="normalwaiting label">&#x274C; {playerNames[5]}</div>
 					) : null)}
 				</div>
 				<div className="normalwaiting col">
