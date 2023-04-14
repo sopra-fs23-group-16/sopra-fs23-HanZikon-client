@@ -46,28 +46,26 @@ const NormalWaitingRoom = props => {
 	
 
 	return (
-		//<BaseContainer>
-		<div  className="normalwaiting container">
+		<BaseContainer>
+			<div  className="normalwaiting container">
 			<div className="normalwaiting col">
 					<div className="normalwaiting card">
-    					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto', display: 'block', margin: 'auto' }} />
-					&#x274C; player1 
+    					<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 					</div>
-					
+					<div className="normalwaiting label">&#x274C; player1 </div>
 					<div className="normalwaiting card">
-						<center>
-					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto' }} /></center>
-					&#x2705; player2 
+						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto'  }} />
 					</div>
+					<div className="normalwaiting label">&#x2705; player2 </div>
 					<div className="normalwaiting card">
-					&#x2705; player3
 					</div>
+					<div className="normalwaiting label">&#x2705; player3</div>
 					<div className="normalwaiting card">
-					&#x2705; player4
 					</div>
+					<div className="normalwaiting label">&#x2705; player4</div>
 					<div className="normalwaiting card">
-					&#x2705; player5
 					</div>
+					<div className="normalwaiting label">&#x2705; player5</div>
 				</div>
 				<div className="normalwaiting col">
 				<div className="normalwaiting form">
@@ -89,7 +87,7 @@ const NormalWaitingRoom = props => {
 					</div>
 				</div>
 			</div>
-		//</BaseContainer>
+		</BaseContainer>
 	);
 };
 
