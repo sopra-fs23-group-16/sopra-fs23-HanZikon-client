@@ -1,22 +1,68 @@
-import React, {useState} from 'react';
-import {api, handleError} from 'helpers/api';
-import User from 'models/User';
+import React, {useEffect, useState} from 'react';
+import {api, handleError, client} from 'helpers/api';
+//import User from 'models/User';
 import {useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import { useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
+
 const OwnerWaitingRoom = props => {
 	const history = useHistory();  
-    const {roomId} = useParams();
+    const {roomID} = useParams();
+	const [roomCode, setRoomcode] = useState('');
+	const [players, setPlayers] = useState([]);
+	const playerNames = players.map(player => player.playerName)
+
+	const requestBody = JSON.stringify({ roomID });
+
+	useEffect(() => {
+        // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
+        async function stompConnect() {
+            try {
+                if (!client.isconnected) {
+                    client.connect({}, function (frame) {
+						console.log('connected to stomp');
+						//client.subscribe('/topic/greeting', message => {
+						//	console.log('Received message:', message.body)
+						//});
+						client.subscribe("/topic/multi/rooms/"+ roomID +"/info", function (response) {
+							const room = response.body;
+							const roomparse = JSON.parse(room);
+							const roomcode = roomparse["roomCode"]
+							const players = roomparse["players"]
+							console.log(roomparse);	
+							setRoomcode(roomcode);	
+							setPlayers(players);					
+						});
+						setTimeout(function () {
+							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
+						},100);
+						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
+							const room = response.body;
+							const roomparse = JSON.parse(room);
+							console.log(roomparse);							
+						});
+					});
+                }
+            } catch (error) {
+                console.error(`Something went wrong: \n${handleError(error)}`);
+                console.error("Details:", error);
+                alert("Something went wrong! See the console for details.");
+            }
+        }
+		stompConnect();
+		// return a function to disconnect on unmount
+		return function cleanup() {
+			if (client && client.isconnected) {
+				client.disconnect(function () {
+					console.log('disconnected from stomp');
+				});
+			}
+		};
+    }, []);
 	
 
 	return (
@@ -26,20 +72,40 @@ const OwnerWaitingRoom = props => {
 					<div className="ownerwaiting card">
     					<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 					</div>
-					<div className="ownerwaiting label">&#x274C; player1 </div>
+					{players[1]?.ready ? (
+ 					 <div className="ownerwaiting label">&#x2705; {playerNames[1]}</div>
+					) : (
+					  <div className="ownerwaiting label">&#x274C; {playerNames[1]}</div>
+					)}
 					<div className="ownerwaiting card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto'  }} />
+						<img src={dog} alt="player2" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto'  }} />
 					</div>
-					<div className="ownerwaiting label">&#x2705; player2 </div>
+					{players[2]?.ready ? (
+ 					 <div className="ownerwaiting label">&#x2705; {playerNames[2]}</div>
+					) : (
+					  <div className="ownerwaiting label">&#x274C; {playerNames[2]}</div>
+					)}
 					<div className="ownerwaiting card">
 					</div>
-					<div className="ownerwaiting label">&#x2705; player3</div>
+					{players[3]?.ready ? (
+ 					 <div className="ownerwaiting label">&#x2705; {playerNames[3]}</div>
+					) : (
+					  <div className="ownerwaiting label">&#x274C; {playerNames[3]}</div>
+					)}
 					<div className="ownerwaiting card">
 					</div>
-					<div className="ownerwaiting label">&#x2705; player4</div>
+					{players[4]?.ready ? (
+ 					 <div className="ownerwaiting label">&#x2705; {playerNames[4]}</div>
+					) : (
+					  <div className="ownerwaiting label">&#x274C; {playerNames[4]}</div>
+					)}
 					<div className="ownerwaiting card">
 					</div>
-					<div className="ownerwaiting label">&#x2705; player5</div>
+					{players[5]?.ready ? (
+ 					 <div className="ownerwaiting label">&#x2705; {playerNames[5]}</div>
+					) : (
+					  <div className="ownerwaiting label">&#x274C; {playerNames[5]}</div>
+					)}
 				</div>
 				<div className="ownerwaiting col">
 				<div className="ownerwaiting form">
@@ -52,7 +118,7 @@ const OwnerWaitingRoom = props => {
 					Start Game
 				</Button>
 				</div>
-				<div className="ownerwaiting input">Room Code: xxxxxx</div>
+				<div className="ownerwaiting input">Room Code: {roomCode}</div>
 				</center>
 				</div>
 			</div>
