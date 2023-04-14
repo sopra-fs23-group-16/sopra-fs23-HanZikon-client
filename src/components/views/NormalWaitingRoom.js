@@ -46,7 +46,7 @@ const NormalWaitingRoom = props => {
 	
 
 	return (
-		<BaseContainer>
+		//<BaseContainer>
 		<div  className="normalwaiting container">
 			<div className="normalwaiting col">
 					<div className="normalwaiting card">
@@ -89,7 +89,7 @@ const NormalWaitingRoom = props => {
 					</div>
 				</div>
 			</div>
-		</BaseContainer>
+		//</BaseContainer>
 	);
 };
 

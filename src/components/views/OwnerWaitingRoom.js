@@ -47,24 +47,22 @@ const OwnerWaitingRoom = props => {
 			<div  className="ownerwaiting container">
 			<div className="ownerwaiting col">
 					<div className="ownerwaiting card">
-    					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto', display: 'block', margin: 'auto' }} />
-					&#x274C; player1 
+    					<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 					</div>
-					
+					<div className="ownerwaiting label">&#x274C; player1 </div>
 					<div className="ownerwaiting card">
-						<center>
-					<img src={dog} alt="player1" style={{ width: '70%', height: 'auto' }} /></center>
-					&#x2705; player2 
+						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto'  }} />
 					</div>
+					<div className="ownerwaiting label">&#x2705; player2 </div>
 					<div className="ownerwaiting card">
-					&#x2705; player3
 					</div>
+					<div className="ownerwaiting label">&#x2705; player3</div>
 					<div className="ownerwaiting card">
-					&#x2705; player4
 					</div>
+					<div className="ownerwaiting label">&#x2705; player4</div>
 					<div className="ownerwaiting card">
-					&#x2705; player5
 					</div>
+					<div className="ownerwaiting label">&#x2705; player5</div>
 				</div>
 				<div className="ownerwaiting col">
 				<div className="ownerwaiting form">
