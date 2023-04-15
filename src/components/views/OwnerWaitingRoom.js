@@ -64,7 +64,7 @@ const OwnerWaitingRoom = props => {
     }, []);
 	
 	const kickout = () => {
-		//
+		console.log('kicked out');
     };
 	
 
@@ -80,7 +80,7 @@ const OwnerWaitingRoom = props => {
 					{playerNames.length > 1 && players[1]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[1]}</div>
 						) : (playerNames.length > 1 && !players[1]?.ready ? (
-						<div className="ownerwaiting label">&#x1F6AB; &#x274C; {playerNames[1]}</div>
+						<div className="ownerwaiting label" onClick={() => kickout()}>&#x1F6AB; &#x274C; {playerNames[1]}</div>
 					) : null)}
 					
 					<div className="ownerwaiting card">
@@ -91,7 +91,7 @@ const OwnerWaitingRoom = props => {
 					{playerNames.length > 2 && players[2]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[2]}</div>
 						) : (playerNames.length > 2 && !players[2]?.ready ? (
-						<div className="ownerwaiting label">&#x1F6AB; &#x274C; {playerNames[2]}</div>
+						<div className="ownerwaiting label" onClick={() => kickout()}>&#x1F6AB; &#x274C; {playerNames[2]}</div>
 					) : null)}
 
 					<div className="ownerwaiting card">
@@ -102,7 +102,7 @@ const OwnerWaitingRoom = props => {
 					{playerNames.length > 3 && players[3]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[3]}</div>
 						) : (playerNames.length > 3 && !players[3]?.ready ? (
-						<div className="ownerwaiting label">&#x1F6AB; &#x274C; {playerNames[3]}</div>
+						<div className="ownerwaiting label" onClick={() => kickout()}>&#x1F6AB; &#x274C; {playerNames[3]}</div>
 					) : null)}
 
 					<div className="ownerwaiting card">
@@ -113,7 +113,7 @@ const OwnerWaitingRoom = props => {
 					{playerNames.length > 4 && players[4]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[4]}</div>
 						) : (playerNames.length > 4 && !players[4]?.ready ? (
-						<div className="ownerwaiting label">&#x1F6AB; &#x274C; {playerNames[4]}</div>
+						<div className="ownerwaiting label" onClick={() => kickout()}>&#x1F6AB; &#x274C; {playerNames[4]}</div>
 					) : null)}
 
 					<div className="ownerwaiting card">
@@ -124,7 +124,7 @@ const OwnerWaitingRoom = props => {
 					{playerNames.length > 5 && players[5]?.ready ? (
 						<div className="ownerwaiting label">&#x2705; {playerNames[5]}</div>
 						) : (playerNames.length > 5 && !players[5]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[5]}</div>
+						<div className="ownerwaiting label" onClick={() => kickout()}>&#x274C; {playerNames[5]}</div>
 					) : null)}
 				</div>
 				<div className="ownerwaiting col">
