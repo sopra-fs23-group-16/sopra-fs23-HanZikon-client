@@ -13,15 +13,6 @@ const NormalWaitingRoom = props => {
 	const history = useHistory();  
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
-	
-	let userId = localStorage.getItem("loggedInUser");
-
-	const index = players.findIndex(player => player.userID == userId);
-	if (index !== -1) {
-  	const player = players.splice(index, 1)[0];
-  	players.unshift(player);
-	}
-
 	const playerNames = players.map(player => player.playerName)
 
 	const requestBody = JSON.stringify({ roomID });
@@ -41,16 +32,25 @@ const NormalWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"]
 							console.log(roomparse);	
+
+							let userId = localStorage.getItem("loggedInUser");
+
+							const index = players.findIndex(player => player.userID == userId);
+							if (index !== -1) {
+							  const player = players.splice(index, 1)[0];
+							  players.unshift(player);
+							}
+
 							setPlayers(players);						
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
-						},100);
-						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							console.log(roomparse);							
-						});
+						},1000);
+						// client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
+						// 	const room = response.body;
+						// 	const roomparse = JSON.parse(room);
+						// 	console.log(roomparse);							
+						// });
 					});
                 }
             } catch (error) {
