@@ -38,7 +38,7 @@ const OwnerWaitingRoom = props => {
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
-						},100);
+						},1000);
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
@@ -74,7 +74,7 @@ const OwnerWaitingRoom = props => {
 			//history.push("/rooms/" + roomparse["roomID"] + "/owner");
 		});
 		setTimeout(function () {
-			client.send("/app/multi/rooms/"+ roomID + "/drop",{}, JSON.stringify(players));
+			client.send("/app/multi/rooms/"+ roomID + "/info",{}, JSON.stringify(players));
 		},100);
 		
     };
