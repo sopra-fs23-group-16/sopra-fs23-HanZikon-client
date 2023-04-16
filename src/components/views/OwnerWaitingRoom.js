@@ -38,7 +38,7 @@ const OwnerWaitingRoom = props => {
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
-						},1000);
+						},5000);
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
