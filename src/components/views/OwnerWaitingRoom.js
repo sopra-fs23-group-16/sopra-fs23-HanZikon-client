@@ -91,7 +91,7 @@ const OwnerWaitingRoom = props => {
 					{playerNames.length > 0 && players[0]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[0]}</div>
 						) : (playerNames.length > 0 && !players[0]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[0])}>&#x1F6AB; &#x274C; {playerNames[0]}</div>
+						<div className="ownerwaiting label">&#x274C; {playerNames[0]}</div>
 					) : null)}
 
 				{players.length > 1 ? (
