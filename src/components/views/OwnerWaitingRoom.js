@@ -64,7 +64,19 @@ const OwnerWaitingRoom = props => {
     }, []);
 	
 	const kickout = (players) => {
-		console.log(players);
+		//console.log(players);
+		client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
+			const room = response.body;
+			const roomparse = JSON.parse(room);
+			const players = roomparse["players"];
+			console.log(roomparse);	
+			window.location.reload();
+			//history.push("/rooms/" + roomparse["roomID"] + "/owner");
+		});
+		setTimeout(function () {
+			client.send("/app/multi/rooms/"+ roomID + "/drop",{}, JSON.stringify(players));
+		},100);
+		
     };
 	
 
