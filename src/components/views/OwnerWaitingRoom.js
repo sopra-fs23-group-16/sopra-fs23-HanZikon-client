@@ -74,7 +74,7 @@ const OwnerWaitingRoom = props => {
 			//history.push("/rooms/" + roomparse["roomID"] + "/owner");
 		});
 		setTimeout(function () {
-			client.send("/app/multi/rooms/"+ roomID + "/info",{}, JSON.stringify(players));
+			client.send("/app/multi/rooms/"+ roomID + "/drop",{}, JSON.stringify(players));
 		},100);
 		
     };
