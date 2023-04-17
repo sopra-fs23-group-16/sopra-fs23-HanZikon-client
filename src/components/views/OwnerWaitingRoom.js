@@ -38,7 +38,7 @@ const OwnerWaitingRoom = props => {
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
-						},1000);
+						},500);
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
@@ -76,7 +76,6 @@ const OwnerWaitingRoom = props => {
 		setTimeout(function () {
 			client.send("/app/multi/rooms/"+ roomID + "/drop",{}, JSON.stringify(players));
 		},100);
-		
     };
 	
 
@@ -84,55 +83,60 @@ const OwnerWaitingRoom = props => {
 		<BaseContainer>
 			<div  className="ownerwaiting container">
 			<div className="ownerwaiting col">
+				{players.length > 0 ? (
 					<div className="ownerwaiting card">
-						{players.length > 1 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						) : null}
-					</div>
+					</div>) : null}
+					{playerNames.length > 0 && players[0]?.ready ? (
+						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[0]}</div>
+						) : (playerNames.length > 0 && !players[0]?.ready ? (
+						<div className="ownerwaiting label">&#x274C; {playerNames[0]}</div>
+					) : null)}
+
+				{players.length > 1 ? (
+					<div className="ownerwaiting card">
+						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+					</div>) : null}
 					{playerNames.length > 1 && players[1]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[1]}</div>
 						) : (playerNames.length > 1 && !players[1]?.ready ? (
 						<div className="ownerwaiting label" onClick={() => kickout(players[1])}>&#x1F6AB; &#x274C; {playerNames[1]}</div>
 					) : null)}
-					
+
+				{players.length > 2 ? (	
 					<div className="ownerwaiting card">
-						{players.length > 2 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						) : null}
-					</div>
+					</div>) : null}
 					{playerNames.length > 2 && players[2]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[2]}</div>
 						) : (playerNames.length > 2 && !players[2]?.ready ? (
 						<div className="ownerwaiting label" onClick={() => kickout(players[2])}>&#x1F6AB; &#x274C; {playerNames[2]}</div>
 					) : null)}
 
-					<div className="ownerwaiting card">
-						{players.length > 3 ? (
+				{players.length > 3 ? (
+					<div className="ownerwaiting card">			
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						) : null}
-					</div>
+					</div>) : null}
 					{playerNames.length > 3 && players[3]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[3]}</div>
 						) : (playerNames.length > 3 && !players[3]?.ready ? (
 						<div className="ownerwaiting label" onClick={() => kickout(players[3])}>&#x1F6AB; &#x274C; {playerNames[3]}</div>
 					) : null)}
 
-					<div className="ownerwaiting card">
-						{players.length > 4 ? (
+				{players.length > 4 ? (
+					<div className="ownerwaiting card">					
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						) : null}
-					</div>
+					</div>) : null}
 					{playerNames.length > 4 && players[4]?.ready ? (
 						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[4]}</div>
 						) : (playerNames.length > 4 && !players[4]?.ready ? (
 						<div className="ownerwaiting label" onClick={() => kickout(players[4])}>&#x1F6AB; &#x274C; {playerNames[4]}</div>
 					) : null)}
 
+				{players.length > 5 ? (
 					<div className="ownerwaiting card">
-						{players.length > 5 ? (
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						) : null}
-					</div>
+					</div>) : null}
 					{playerNames.length > 5 && players[5]?.ready ? (
 						<div className="ownerwaiting label">&#x2705; {playerNames[5]}</div>
 						) : (playerNames.length > 5 && !players[5]?.ready ? (

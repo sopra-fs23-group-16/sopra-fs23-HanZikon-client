@@ -63,10 +63,10 @@ const Login = props => {
 	const history = useHistory();  
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	const [userList, setUserList] = useState([]);
-	const [timeOut, setTimeOut] = useState(null);
-	const [errorMessage, setErrorMessage] = useState(null);
-	const [warnMessage, setWarnMessage] = useState(null);
+	//const [userList, setUserList] = useState([]);
+	//const [timeOut, setTimeOut] = useState(null);
+	//const [errorMessage, setErrorMessage] = useState(null);
+	//const [warnMessage, setWarnMessage] = useState(null);
 
 	const doLogin = async () => {
 		try {
@@ -86,7 +86,7 @@ const Login = props => {
 	};
 
     // Tourist will be automatically created, and direct to game mode page
-    const doTouristLogin = () => {
+    /*const doTouristLogin = () => {
         try {
             const newUserGanerated = doTouristCreation();
             setUserList([...userList, newUserGanerated]);
@@ -129,7 +129,7 @@ const Login = props => {
 		console.log('touristUser =', touristUser);
 
 		return newUser;
-	};
+	};*/
 
 	return (
 		<BaseContainer>
@@ -166,22 +166,25 @@ const Login = props => {
 					<div className="login button-container">
 						<Button
 							width="80%"
-							onClick={() => doTouristLogin()}
+							//onClick={() => doTouristLogin()}
 						>
 							Tourist Mode
 						</Button>
 					</div>
-					{errorMessage &&
-						<div className="login errorMessage">{errorMessage.response.data.message}</div>
-					}
-					{warnMessage &&
-						<div className="login warnMessage">{warnMessage}</div>
-					}
+
 				</div>
 			</div>
 		</BaseContainer>
 	);
 };
+
+
+					/*{errorMessage &&
+						<div className="login errorMessage">{errorMessage.response.data.message}</div>
+					}
+					{warnMessage &&
+						<div className="login warnMessage">{warnMessage}</div>
+					}*/
 
 /**
  * You can get access to the history object's properties via the withRouter.
