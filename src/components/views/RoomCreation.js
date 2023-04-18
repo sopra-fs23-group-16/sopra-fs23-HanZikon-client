@@ -21,6 +21,11 @@ const RoomCreation = () => {
 		history.push('/login');
 	}
 
+	const handleButtonClick = () => {
+		// Load a new page from scratch
+		window.location.href = '/roomsetting/';
+	};
+
 	return (
 		<BaseContainer>
 			<div className="creation container">
@@ -29,7 +34,10 @@ const RoomCreation = () => {
 					<div className="creation button-container">
 						<Button 
 							width="70%"
-							onClick={() => history.push(`/roomsetting/`)}
+							onClick={
+							//() => history.push(`/roomsetting/`)
+								handleButtonClick
+						}
 						>
 						Create A New Room
 						</Button>

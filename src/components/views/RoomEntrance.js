@@ -52,7 +52,7 @@ const RoomEntrance = props => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
-                if (!client.isconnected) {
+                if (!client['connected']) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
 						
@@ -67,7 +67,7 @@ const RoomEntrance = props => {
 		stompConnect();
 		// return a function to disconnect on unmount
 		return function cleanup() {
-			if (client && client.isconnected) {
+			if (client && client['connected']) {
 				client.disconnect(function () {
 					console.log('disconnected from stomp');
 				});

@@ -21,7 +21,7 @@ const NormalWaitingRoom = props => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
-                if (!client.isconnected) {
+                if (!client['connected']) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
 						//client.subscribe('/topic/greeting', message => {
@@ -31,7 +31,8 @@ const NormalWaitingRoom = props => {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"]
-							console.log(roomparse);	
+
+							console.log(roomparse);
 
 							// let userId = localStorage.getItem("loggedInUser");
 
@@ -52,6 +53,7 @@ const NormalWaitingRoom = props => {
 						// 	console.log(roomparse);							
 						// });
 					});
+					//console.log("2 the client is ",client['connected'])
                 }
             } catch (error) {
                 console.error(`Something went wrong: \n${handleError(error)}`);
@@ -60,9 +62,11 @@ const NormalWaitingRoom = props => {
             }
         }
 		stompConnect();
+
 		// return a function to disconnect on unmount
 		return function cleanup() {
-			if (client && client.isconnected) {
+			if (client && client['connected']) {
+				//controller.abort();
 				client.disconnect(function () {
 					console.log('disconnected from stomp');
 				});

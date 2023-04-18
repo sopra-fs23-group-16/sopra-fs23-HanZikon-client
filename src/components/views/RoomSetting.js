@@ -29,19 +29,16 @@ const RoomSetting = () => {
 
     useEffect(() => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
-        async function stompConnect() {
+		async function stompConnect() {
             try {
-                if (!client.isconnected) {
-                    client.connect({}, function (frame) {
+				if (!client['connected']) {
+                    client.connect({}, () => {
 						console.log('connected to stomp');
-						//client.subscribe('/topic/greeting', message => {
-						//	console.log('Received message:', message.body)
-						//});
 						client.subscribe('/topic/multi/create/' + userId, function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
-							history.push("/rooms/" + roomparse["roomID"] + "/owner");
+							window.location.href = "/rooms/" + roomparse["roomID"] + "/owner";
 						});
 					});
                 }
@@ -52,9 +49,10 @@ const RoomSetting = () => {
             }
         }
 		stompConnect();
+
 		// return a function to disconnect on unmount
 		return function cleanup() {
-			if (client && client.isconnected) {
+			if (client && client['connected']) {
 				client.disconnect(function () {
 					console.log('disconnected from stomp');
 				});
@@ -64,7 +62,7 @@ const RoomSetting = () => {
 
 	const goWaiting = () => {
 		const requestBody = JSON.stringify({numPlayers, questionType, level});
-		client.send('/app/multi/create/' + userId, {}, requestBody);	
+		client.send('/app/multi/create/' + userId, {}, requestBody);
     };
 	
 	const goInvite = () => {
