@@ -81,7 +81,7 @@ const RoomEntrance = props => {
 			console.log(response.body)
 			const room = response.body;
 			const roomparse = JSON.parse(room);
-			history.push("/rooms/" + roomparse["roomID"] + "/participants");
+			window.location.href = "/rooms/" + roomparse["roomID"] + "/participants";
 		});
 		setTimeout(function () {
 			client.send('/app/multi/rooms/' + roomcode + '/join', {}, requestBody);
@@ -110,7 +110,7 @@ const RoomEntrance = props => {
 					<div className="entrance button-container">
 						<Button
 							width="80%"
-							onClick={() => history.push(`/roomcreation`)}
+							onClick={() => window.location.href = `/roomcreation`}
 						>
 						Cancel
 						</Button>

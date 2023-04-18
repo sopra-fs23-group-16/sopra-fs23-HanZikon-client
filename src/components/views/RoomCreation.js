@@ -45,7 +45,7 @@ const RoomCreation = () => {
 					<div className="creation button-container">
 						<Button
 							width="70%"
-							onClick={() => history.push(`/roomentrance`)}
+							onClick={() => window.location.href =`/roomentrance`}
 						>
 						Join An Existing Room
 						</Button>
@@ -53,7 +53,7 @@ const RoomCreation = () => {
 					<div className="creation button-container">
 						<Button
 							width="70%"
-							onClick={() => history.push(`/lobby`)}
+							onClick={() => window.location.href = `/lobby`}
 						>
 						Back to Lobby
 						</Button>
