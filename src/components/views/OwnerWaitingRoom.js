@@ -77,7 +77,8 @@ const OwnerWaitingRoom = props => {
     };
 	
 	const startGame = (players) => {
-		window.location.href = '/games/multiplechoice/'+ gameID;
+		client.send("/app/multi/games/" + roomID + "/start", {}, '');
+		window.location.href = '/games/multiplechoice/'+ roomID;
     };
 
 	return (
