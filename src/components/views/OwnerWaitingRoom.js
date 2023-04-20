@@ -88,7 +88,7 @@ const OwnerWaitingRoom = props => {
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 					</div>) : null}
 					{playerNames.length > 0 && players[0]?.ready ? (
-						<div className="ownerwaiting label">&#x1F6AB; &#x2705; {playerNames[0]}</div>
+						<div className="ownerwaiting label">&#x2705; {playerNames[0]}</div>
 						) : (playerNames.length > 0 && !players[0]?.ready ? (
 						<div className="ownerwaiting label">&#x274C; {playerNames[0]}</div>
 					) : null)}
