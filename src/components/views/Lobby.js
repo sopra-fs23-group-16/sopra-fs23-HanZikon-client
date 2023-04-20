@@ -26,14 +26,14 @@ const Lobby = () => {
 			<div className="lobby container">
 				<h1>Game Overview</h1>
 				<div className="lobby form">
-					<div className="lobby button-container">
+					{/* <div className="lobby button-container">
 						<Button 
 							width="70%"
 							//onClick={() => }
 						>
 						Single Mode
 						</Button>
-					</div>
+					</div> */}
 					<div className="lobby button-container">
 						<Button
 							width="70%"

@@ -67,7 +67,7 @@ const OwnerWaitingRoom = props => {
 			const roomparse = JSON.parse(room);
 			const players = roomparse["players"];
 			console.log(roomparse);	
-			window.location.reload();
+			//window.location.reload();
 			//history.push("/rooms/" + roomparse["roomID"] + "/owner");
 		});
 		setTimeout(function () {
@@ -75,6 +75,9 @@ const OwnerWaitingRoom = props => {
 		},100);
     };
 	
+	const startGame = (players) => {
+		window.location.href = '/games/multiplechoice/:gameID';
+    };
 
 	return (
 		<BaseContainer>
@@ -146,7 +149,7 @@ const OwnerWaitingRoom = props => {
 					<div className="ownerwaiting button-container">
 				<Button
 					width="15%"
-					//onClick={() => }
+					onClick={() => startGame() }
 					>
 					Start Game
 				</Button>
