@@ -132,7 +132,7 @@ const ChoiceGame = props => {
 				<div className="choicegame col">
 				<div className="choicegame form">
 					<center>
-                    <img src={dog} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+                    <img src="http://pic.guoxuemi.com//zixyb/1/A00068i001.png" alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
                     <br />
                     <br />
                     <br />
@@ -148,7 +148,7 @@ const ChoiceGame = props => {
 				</center>
 				</div>
 			</div>
-			<div className="choicegame col">
+			{/* <div className="choicegame col">
 					<div className="choicegame card-rule">
                         <center>
                     <div className="choicegame label"> Score Board</div>
@@ -173,7 +173,7 @@ const ChoiceGame = props => {
                     <br />
                     <div className="choicegame label-rangking"> No.6 </div>                   
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</BaseContainer>
 	);

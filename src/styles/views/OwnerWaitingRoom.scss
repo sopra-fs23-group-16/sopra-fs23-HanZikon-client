@@ -13,7 +13,7 @@
     box-shadow: $dropShadow;
     width: 98%;
     height: 90%;
-    padding-left: 1%;
+    //padding-left: 1%;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -30,11 +30,11 @@
     box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
     transition: opacity 0.5s ease, transform 0.5s ease;
     box-shadow: $dropShadow;
-    width: 78%;
+    width: 89%;
     height: 97%;
     position: absolute;
     top: 50%;
-    left: 48%;
+    left: 52%;
     transform: translate(-47%, -50%);
   }
   &.row{
@@ -51,7 +51,7 @@
     flex-basis: 10%
     }
   &.card{
-    width: 92%;
+    width: 70%;
     height: 14.5%;
     display: inline-block;
     border-radius: 10px;
@@ -59,14 +59,14 @@
     background-color: rgba(255, 255, 255, .2);
     margin-top: 5%;
     }
-  &.card-rule{
-    width: 95%;
-    height: 97%;
-    display: inline-block;
-    border-radius: 10px;
-    padding: 10px 15px;
-    background-color: rgba(255, 255, 255, .2);
-    }
+  // &.card-rule{
+  //   width: 95%;
+  //   height: 97%;
+  //   display: inline-block;
+  //   border-radius: 10px;
+  //   padding: 10px 15px;
+  //   background-color: rgba(255, 255, 255, .2);
+  //   }
   &.field {
     display: flex;
     flex-direction: column;
