@@ -14,6 +14,7 @@ const NormalWaitingRoom = props => {
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -34,7 +35,7 @@ const NormalWaitingRoom = props => {
 
 							console.log(roomparse);
 
-							// let userId = localStorage.getItem("loggedInUser");
+							
 
 							// const index = players.findIndex(player => player.userID == userId);
 							// if (index !== -1) {
@@ -46,12 +47,22 @@ const NormalWaitingRoom = props => {
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
-						},500);
-						// client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-						// 	const room = response.body;
-						// 	const roomparse = JSON.parse(room);
-						// 	console.log(roomparse);							
-						// });
+						},100);
+						client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
+							const room = response.body;
+							const roomparse = JSON.parse(room);
+							console.log(roomparse);	
+
+							const players = roomparse["players"]
+							setPlayers(players);		
+						
+							const userIDs = players.map(player => player.userID)
+							let userId = localStorage.getItem("loggedInUser");
+							if (!userIDs.includes(userId)) {
+								alert("You have been kicked out!");
+								window.location.href = "/lobby";
+							}
+						});
 					});
 					//console.log("2 the client is ",client['connected'])
                 }
