@@ -4,11 +4,10 @@ import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import PropTypes from "prop-types";
 import dog from 'image/dog.png';
 
 const OwnerWaitingRoom = props => {
-	const history = useHistory();  
+	
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
@@ -94,6 +93,9 @@ const OwnerWaitingRoom = props => {
 		client.send("/app/multi/games/" + roomID + "/start", {}, '');
     };
 
+	const exitRoom = () => {
+		window.location.href = "/lobby";
+    };
 	return (
 		<BaseContainer>
 			<div  className="ownerwaiting container">
@@ -167,6 +169,14 @@ const OwnerWaitingRoom = props => {
 					onClick={() => startGame() }
 					>
 					Start Game
+				</Button>
+				</div>
+				<div className="ownerwaiting button-container">
+				<Button
+					width="15%"
+					onClick={() => exitRoom() }
+					>
+					Exit Room
 				</Button>
 				</div>
 				<div className="ownerwaiting input">Room Code: {roomCode}</div>

@@ -14,7 +14,9 @@ const ChoiceGame = props => {
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
+	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
+	//console.log(playerNames);
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -47,6 +49,7 @@ const ChoiceGame = props => {
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
+							console.log(players);
 							console.log(roomparse);	
 							setRoomcode(roomcode);	
 							setPlayers(players);					
