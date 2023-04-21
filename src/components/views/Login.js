@@ -163,15 +163,14 @@ const Login = props => {
 							Go to Register
 						</Button>
 					</div>
-					<div className="login button-container">
+					{/* <div className="login button-container">
 						<Button
 							width="80%"
 							//onClick={() => doTouristLogin()}
 						>
 							Tourist Mode
 						</Button>
-					</div>
-
+					</div> */}
 				</div>
 			</div>
 		</BaseContainer>

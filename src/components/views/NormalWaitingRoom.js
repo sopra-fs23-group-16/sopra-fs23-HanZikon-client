@@ -14,8 +14,10 @@ const NormalWaitingRoom = props => {
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
-	
 
+	const userID = localStorage.getItem("loggedInUser");
+	const playerToUpdate = players.find(player => player.userID == Number(userID));
+	
 	const requestBody = JSON.stringify({ roomID });
 
 	useEffect(() => {
@@ -25,24 +27,12 @@ const NormalWaitingRoom = props => {
                 if (!client['connected']) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
-						//client.subscribe('/topic/greeting', message => {
-						//	console.log('Received message:', message.body)
-						//});
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/info", function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"]
 
 							console.log(roomparse);
-
-							
-
-							// const index = players.findIndex(player => player.userID == userId);
-							// if (index !== -1) {
-							//   const player = players.splice(index, 1)[0];
-							//   players.unshift(player);
-							// }
-
 							setPlayers(players);						
 						});
 						setTimeout(function () {
@@ -99,6 +89,33 @@ const NormalWaitingRoom = props => {
 		};
     }, []);
 	
+	const getReady = () => {
+		const loggedInUserID = localStorage.getItem("loggedInUser");
+  		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+
+		const requestgetready = {
+			userID: playerToUpdate.userID,
+			ready: true
+		};
+		client.send("/app/multi/rooms/"+ roomID + "/players/status",{}, JSON.stringify(requestgetready))
+    };
+
+
+	const cancelReady = () => {
+		const loggedInUserID = localStorage.getItem("loggedInUser");
+  		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+		
+		const requestcancelready = {
+			userID: playerToUpdate.userID,
+			ready: false
+		};
+	
+		client.send("/app/multi/rooms/"+ roomID + "/players/status",{}, JSON.stringify(requestcancelready))
+    };
+
+	const exitRoom = () => {
+		window.location.href = "/lobby";
+    };
 
 	return (
 		<BaseContainer>
@@ -117,7 +134,7 @@ const NormalWaitingRoom = props => {
 					<div className="normalwaiting card">
 						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 					</div>) : null}
-					{playerNames.length > 1 && players[1]?.ready ? (
+					{playerNames.length > 1 && players[1]?.["ready"] ? (
 						<div className="normalwaiting label">&#x2705; {playerNames[1]}</div>
 						) : (playerNames.length > 1 && !players[1]?.ready ? (
 						<div className="normalwaiting label">&#x274C; {playerNames[1]}</div>
@@ -175,7 +192,7 @@ const NormalWaitingRoom = props => {
 					<div className="normalwaiting button-container">
 				<Button
 					width="15%"
-					//onClick={() => }
+					onClick={() => getReady()}
 					>
 					Get Ready
 				</Button>
@@ -183,9 +200,17 @@ const NormalWaitingRoom = props => {
 				<div className="normalwaiting button-container">
 				<Button
 					width="15%"
-					//onClick={() => }
+					onClick={() => cancelReady()}
 					>
 					Cancel Ready
+				</Button>
+				</div>
+				<div className="normalwaiting button-container">
+				<Button
+					width="15%"
+					onClick={() => exitRoom()}
+					>
+					Exit Room
 				</Button>
 				</div>
 				</center>

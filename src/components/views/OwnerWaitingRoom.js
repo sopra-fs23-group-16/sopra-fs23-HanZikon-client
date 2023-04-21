@@ -10,7 +10,6 @@ import dog from 'image/dog.png';
 const OwnerWaitingRoom = props => {
 	const history = useHistory();  
     const {roomID} = useParams();
-	const {gameID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
