@@ -16,6 +16,32 @@ const ChoiceGame = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 
+	const [selectedOption, setOption] = useState("");
+	const [isDisabled, setDisabled] = useState(false);
+
+	const handleClick0 = () => {
+		setOption(0);
+/*		setDisabled(true);*/
+	};
+
+	const handleClick1 = () => {
+		setOption(1);
+		setDisabled(true);
+		console.log("this option has been chosen: " + selectedOption);
+	};
+
+	const handleClick2 = () => {
+		setOption(2);
+		setDisabled(true);
+		console.log("this option has been chosen: " + selectedOption);
+	};
+
+	const handleClick3 = () => {
+		setOption(3);
+		setDisabled(true);
+		console.log("this option has been chosen: " + selectedOption);
+	};
+
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
 		alert("Game crashed! Retrieve questions failed!")
@@ -29,7 +55,6 @@ const ChoiceGame = props => {
 
 	const choices = currentQuestion.choices;
 	console.log(choices);
-
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -151,6 +176,42 @@ const ChoiceGame = props => {
                     <br />
                     <br />
                     <br />
+							<button
+								className="choicegame option"
+								selected={selectedOption===0}
+								isAnswer={questionList.answerIndex === 0}
+								disabled={isDisabled}
+								onClick={handleClick0}
+							>
+								{choices[0]}
+							</button>
+							<button
+								className="choicegame option"
+								selected={selectedOption === 1}
+								isAnswer={questionList.answerIndex === 1}
+								disabled={isDisabled}
+								onClick={handleClick1}
+							>
+								{choices[1]}
+							</button>
+							<button
+								className="choicegame option"
+								selected={selectedOption === 2}
+								isAnswer={questionList.answerIndex === 2}
+								disabled={isDisabled}
+								onClick={handleClick2}
+							>
+								{choices[2]}
+							</button>
+							<button
+								className="choicegame option"
+								selected={selectedOption === 3}
+								isAnswer={questionList.answerIndex === 3}
+								disabled={isDisabled}
+								onClick={handleClick3}
+							>
+								{choices[3]}
+							</button>
                     <br />
                     <div className="choicegame label-option"> {choices[0]} </div>
                     <br />
