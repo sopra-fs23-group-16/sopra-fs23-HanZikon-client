@@ -104,9 +104,9 @@ const RoomSetting = () => {
 						</label>
 						<select value = {questionType} className="roomsetting select" onChange = {handleChangeqt}>
 							<option value="-" selected>Please select...</option>
-							<option value="single">single choice</option>
-							<option value="imitation">imitation</option>
-							<option value="mixed">mixed</option>
+							<option value="MultipleChoice">Oracle Guessing</option>
+							<option value="HanziDrawing">Hanzi Imitation</option>
+							<option value="Mixed">I WANT BOTH</option>
 						</select>
 					</div>
 					<div className="roomsetting field">
