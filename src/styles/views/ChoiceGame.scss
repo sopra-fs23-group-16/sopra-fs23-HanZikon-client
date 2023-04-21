@@ -128,12 +128,21 @@
         margin-top: 0.8em;
     }
 
-    &.option {
-        /*background-color: yellow;
-        border: 1px solid black;*/
+    .option {
+        background-color: #fdd835;
+        border: 2px solid #d6d6d6;
+        border-radius: 20px;
+        box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+        color: #333;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 10px 20px;
+        transition: all 0.3s ease;
+    }
 
-        &[selected=true] {
-            background-color: green;
-        }
+    .option:hover {
+        background-color: #ffe082;
+        border: 2px solid #fff;
+        box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
     }
 }
