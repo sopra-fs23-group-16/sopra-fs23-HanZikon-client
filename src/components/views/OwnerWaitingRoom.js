@@ -48,7 +48,7 @@ const OwnerWaitingRoom = props => {
 
 							console.log(qListparse);
 
-							window.location.href = '/games/multiplechoice/' + roomID;
+							//window.location.href = '/games/multiplechoice/' + roomID;
 
 						});
 					});

@@ -61,7 +61,7 @@ const RoomSetting = () => {
     }, []);
 
 	const goWaiting = () => {
-		const requestBody = JSON.stringify({numPlayers, questionType, level});
+		const requestBody = JSON.stringify({level, numPlayers, questionType});
 		client.send('/app/multi/create/' + userId, {}, requestBody);
     };
 	
