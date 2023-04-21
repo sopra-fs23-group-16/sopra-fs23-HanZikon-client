@@ -18,6 +18,10 @@ const ChoiceGame = props => {
 	const playerNames = players.map(player => player.playerName)
 	//console.log(playerNames);
 
+	const [isDisabled, setDisabled] = useState(false);
+	const colorRight = "green";
+	const colorWrong = "red";
+
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
 		alert("Game crashed! Retrieve questions failed!")
@@ -32,6 +36,35 @@ const ChoiceGame = props => {
 	const choices = currentQuestion.choices;
 	console.log(choices);
 
+	const handleClick0 = () => {
+		console.log(questionList.answerIndex)
+		if (currentQuestion.answerIndex === 0) {
+			console.log("Bingo!")
+			document.getElementById("A").style.backgroundColor = colorRight
+		} else (document.getElementById("A").style.backgroundColor = colorWrong);
+		setDisabled(true);
+	};
+
+	const handleClick1 = () => {
+		if (currentQuestion.answerIndex === 1) {
+			document.getElementById("B").style.backgroundColor = colorRight;
+		} else (document.getElementById("B").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
+
+	const handleClick2 = () => {
+		if (currentQuestion.answerIndex === 2) {
+			document.getElementById("C").style.backgroundColor = colorRight;
+		} else (document.getElementById("C").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
+
+	const handleClick3 = () => {
+		if (currentQuestion.answerIndex === 3) {
+			document.getElementById("D").style.backgroundColor = colorRight;
+		} else (document.getElementById("D").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -154,15 +187,38 @@ const ChoiceGame = props => {
                     <br />
                     <br />
                     <br />
-                    <br />
-                    <div className="choicegame label-option"> {choices[0]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[1]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[2]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[3]} </div>
-					
+							<button
+								id = "A"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick0}
+							>
+								{choices[0]}
+							</button>
+							<button
+								id="B"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick1}
+							>
+								{choices[1]}
+							</button>
+							<button
+								id="C"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick2}
+							>
+								{choices[2]}
+							</button>
+							<button
+								id="D"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick3}
+							>
+								{choices[3]}
+							</button>					
 				</center>
 				</div>
 			</div>
