@@ -18,7 +18,7 @@ handlers:
     static_files: build/index.html
     upload: build/index.html
   - url: /.*
-    secure: never
+    secure: optional
     static_files: build/index.html
     upload: build/index.html
 
