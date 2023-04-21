@@ -42,6 +42,15 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);							
 						});
+						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
+							const questionList = response.body;
+							const qListparse = JSON.parse(questionList);
+
+							console.log(qListparse);
+
+							window.location.href = '/games/multiplechoice/' + roomID;
+
+						});
 					});
                 }
             } catch (error) {
@@ -77,7 +86,7 @@ const OwnerWaitingRoom = props => {
     };
 	
 	const startGame = (players) => {
-		window.location.href = '/games/multiplechoice/'+ gameID;
+		client.send("/app/multi/games/" + roomID + "/start", {}, '');
     };
 
 	return (

@@ -63,6 +63,15 @@ const NormalWaitingRoom = props => {
 								window.location.href = "/lobby";
 							}
 						});
+						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
+							const questionList = response.body;
+							const qListparse = JSON.parse(questionList);
+
+							console.log(qListparse);
+
+							window.location.href = '/games/multiplechoice/' + roomID;
+
+						});
 					});
 					//console.log("2 the client is ",client['connected'])
                 }
