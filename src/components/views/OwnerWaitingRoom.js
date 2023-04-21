@@ -48,7 +48,7 @@ const OwnerWaitingRoom = props => {
 							localStorage.setItem('round',1)
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
-							window.location.href = '/games/multiplechoice/' + roomID;
+							window.location.href = '/games/imitation/' + roomID;
 
 						});
 					});
