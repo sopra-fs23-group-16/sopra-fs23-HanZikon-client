@@ -16,31 +16,9 @@ const ChoiceGame = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 
-	const [selectedOption, setOption] = useState("");
 	const [isDisabled, setDisabled] = useState(false);
-
-	const handleClick0 = () => {
-		setOption(0);
-/*		setDisabled(true);*/
-	};
-
-	const handleClick1 = () => {
-		setOption(1);
-		setDisabled(true);
-		console.log("this option has been chosen: " + selectedOption);
-	};
-
-	const handleClick2 = () => {
-		setOption(2);
-		setDisabled(true);
-		console.log("this option has been chosen: " + selectedOption);
-	};
-
-	const handleClick3 = () => {
-		setOption(3);
-		setDisabled(true);
-		console.log("this option has been chosen: " + selectedOption);
-	};
+	const colorRight = "green";
+	const colorWrong = "red";
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -55,6 +33,36 @@ const ChoiceGame = props => {
 
 	const choices = currentQuestion.choices;
 	console.log(choices);
+
+	const handleClick0 = () => {
+		console.log(questionList.answerIndex)
+		if (currentQuestion.answerIndex === 0) {
+			console.log("Bingo!")
+			document.getElementById("A").style.backgroundColor = colorRight
+		} else (document.getElementById("A").style.backgroundColor = colorWrong);
+		setDisabled(true);
+	};
+
+	const handleClick1 = () => {
+		if (currentQuestion.answerIndex === 1) {
+			document.getElementById("B").style.backgroundColor = colorRight;
+		} else (document.getElementById("B").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
+
+	const handleClick2 = () => {
+		if (currentQuestion.answerIndex === 2) {
+			document.getElementById("C").style.backgroundColor = colorRight;
+		} else (document.getElementById("C").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
+
+	const handleClick3 = () => {
+		if (currentQuestion.answerIndex === 3) {
+			document.getElementById("D").style.backgroundColor = colorRight;
+		} else (document.getElementById("D").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -177,50 +185,37 @@ const ChoiceGame = props => {
                     <br />
                     <br />
 							<button
+								id = "A"
 								className="choicegame option"
-								selected={selectedOption===0}
-								isAnswer={questionList.answerIndex === 0}
 								disabled={isDisabled}
 								onClick={handleClick0}
 							>
 								{choices[0]}
 							</button>
 							<button
+								id="B"
 								className="choicegame option"
-								selected={selectedOption === 1}
-								isAnswer={questionList.answerIndex === 1}
 								disabled={isDisabled}
 								onClick={handleClick1}
 							>
 								{choices[1]}
 							</button>
 							<button
+								id="C"
 								className="choicegame option"
-								selected={selectedOption === 2}
-								isAnswer={questionList.answerIndex === 2}
 								disabled={isDisabled}
 								onClick={handleClick2}
 							>
 								{choices[2]}
 							</button>
 							<button
+								id="D"
 								className="choicegame option"
-								selected={selectedOption === 3}
-								isAnswer={questionList.answerIndex === 3}
 								disabled={isDisabled}
 								onClick={handleClick3}
 							>
 								{choices[3]}
-							</button>
-                    <br />
-                    <div className="choicegame label-option"> {choices[0]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[1]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[2]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[3]} </div>
-					
+							</button>					
 				</center>
 				</div>
 			</div>
