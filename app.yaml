@@ -20,7 +20,8 @@ handlers:
   - url: /.*
     static_files: build/index.html
     upload: build/index.html
-  secure: never
+
+secure: never
 
 network:
   session_affinity: true
