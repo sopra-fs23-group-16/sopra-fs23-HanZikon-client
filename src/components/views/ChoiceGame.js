@@ -16,6 +16,18 @@ const ChoiceGame = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 
+	const questionList = JSON.parse(localStorage.getItem('questionList'));
+	if (questionList === null) {
+		alert("Game crashed! Retrieve questions failed!")
+	}
+	const round = localStorage.getItem('round');
+	if (round === null) {
+		alert("Game crashed! Round is null!")
+	}
+	const currentQuestion = questionList[round - 1];
+	console.log(currentQuestion);
+
+
 	const requestBody = JSON.stringify({ roomID });
 
     
