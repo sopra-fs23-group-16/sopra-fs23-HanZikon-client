@@ -95,7 +95,7 @@ const NormalWaitingRoom = props => {
 
 		const requestgetready = {
 			userID: playerToUpdate.userID,
-			isReady: true
+			ready: true
 		};
 		client.send("/app/multi/rooms/"+ roomID + "/players/ready",{}, JSON.stringify(requestgetready))
     };
@@ -107,7 +107,7 @@ const NormalWaitingRoom = props => {
 		
 		const requestcancelready = {
 			userID: playerToUpdate.userID,
-			isReady: false
+			ready: false
 		};
 	
 		client.send("/app/multi/rooms/"+ roomID + "/players/ready",{}, JSON.stringify(requestcancelready))
