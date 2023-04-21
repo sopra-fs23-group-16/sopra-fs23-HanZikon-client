@@ -23,5 +23,5 @@ handlers:
 
 network:
   session_affinity: true
-  forwarded_ports: "*"
+  forwarded_ports:80, 8080
 
