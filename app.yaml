@@ -15,11 +15,9 @@ handlers:
     static_files: build/\1
     upload: build/.*\.(json|ico)$
   - url: /
-    secure: never
     static_files: build/index.html
     upload: build/index.html
   - url: /.*
-    secure: never
     static_files: build/index.html
     upload: build/index.html
 
