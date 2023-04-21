@@ -48,7 +48,7 @@ const OwnerWaitingRoom = props => {
 
 							console.log(qListparse);
 
-							window.location.href = '/games/multiplechoice/' + roomID;
+							//window.location.href = '/games/multiplechoice/' + roomID;
 
 						});
 					});
@@ -76,6 +76,7 @@ const OwnerWaitingRoom = props => {
 			const room = response.body;
 			const roomparse = JSON.parse(room);
 			const players = roomparse["players"];
+			setPlayers(players);
 			console.log(roomparse);	
 			//window.location.reload();
 			//history.push("/rooms/" + roomparse["roomID"] + "/owner");
