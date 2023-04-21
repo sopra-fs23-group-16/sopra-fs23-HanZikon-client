@@ -64,10 +64,15 @@ const NormalWaitingRoom = props => {
 							}
 						});
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
+							// clear
+							localStorage.removeItem('round');
+							localStorage.removeItem('questionList');
+
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
-
-							console.log(qListparse);
+							// initialise
+							localStorage.setItem('round', 1)
+							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
 							window.location.href = '/games/multiplechoice/' + roomID;
 

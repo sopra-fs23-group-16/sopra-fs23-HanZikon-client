@@ -45,10 +45,12 @@ const OwnerWaitingRoom = props => {
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
+							// initialise round
+							// save questions
+							localStorage.setItem('round',1)
+							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
-							console.log(qListparse);
-
-							//window.location.href = '/games/multiplechoice/' + roomID;
+							window.location.href = '/games/multiplechoice/' + roomID;
 
 						});
 					});
@@ -87,6 +89,9 @@ const OwnerWaitingRoom = props => {
     };
 	
 	const startGame = (players) => {
+		//clear round and questionList
+		localStorage.removeItem('round');
+		localStorage.removeItem('questionList');
 		client.send("/app/multi/games/" + roomID + "/start", {}, '');
     };
 

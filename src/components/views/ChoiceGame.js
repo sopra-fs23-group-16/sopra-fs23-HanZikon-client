@@ -16,6 +16,21 @@ const ChoiceGame = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 
+	const questionList = JSON.parse(localStorage.getItem('questionList'));
+	if (questionList === null) {
+		alert("Game crashed! Retrieve questions failed!")
+	}
+	const round = localStorage.getItem('round');
+	if (round === null) {
+		alert("Game crashed! Round is null!")
+	}
+	const currentQuestion = questionList[round - 1];
+	console.log(currentQuestion);
+
+	const choices = currentQuestion.choices;
+	console.log(choices);
+
+
 	const requestBody = JSON.stringify({ roomID });
 
     
@@ -132,18 +147,18 @@ const ChoiceGame = props => {
 				<div className="choicegame col">
 				<div className="choicegame form">
 					<center>
-                    <img src="http://pic.guoxuemi.com//zixyb/1/A00068i001.png" alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+                    <img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
                     <br />
                     <br />
                     <br />
                     <br />
-                    <div className="choicegame label-option"> A.  人</div>
+                    <div className="choicegame label-option"> {choices[0]} </div>
                     <br />
-                    <div className="choicegame label-option"> B.  从</div>
+					<div className="choicegame label-option"> {choices[1]} </div>
                     <br />
-                    <div className="choicegame label-option"> C.  众</div>
+					<div className="choicegame label-option"> {choices[2]} </div>
                     <br />
-                    <div className="choicegame label-option"> D.  森</div>
+					<div className="choicegame label-option"> {choices[3]} </div>
 					
 				</center>
 				</div>
