@@ -18,5 +18,15 @@ handlers:
     static_files: build/index.html
     upload: build/index.html
   - url: /.*
+    secure: never
     static_files: build/index.html
     upload: build/index.html
+
+network:
+  session_affinity: true
+  forwarded_ports:
+    - 80
+    - 8080
+    - 443
+
+
