@@ -78,7 +78,7 @@ const AppRouter = () => {
 					</NormalWaitingRoomGuard>
 				</Route>
 
-				<Route path="/games/multiplechoice/:gameID">
+				<Route path="/games/multiplechoice/:roomID">
 					<ChoiceGame/>
 				</Route>
 
