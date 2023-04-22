@@ -7,10 +7,10 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 
 const ChoiceGame = props => {
-	const history = useHistory();  
-    const {gameID} = useParams();
+	const history = useHistory(); 
 
-    const {roomID} = useParams();
+	const { roomID } = useParams();
+	console.log("roomID", roomID	)
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
@@ -124,7 +124,7 @@ const ChoiceGame = props => {
   
 			if (countdown <= 0) {
 				clearInterval(timer);
-				window.location.href = "/games/record";
+				window.location.href = "/games/record/"+ roomID;
 			}
 		}, 1000);
 	});

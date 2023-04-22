@@ -7,6 +7,7 @@ import RoomCreation from "components/views/RoomCreation";
 import RoomEntrance from "components/views/RoomEntrance";
 import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
 import NormalWaitingRoom from "components/views/NormalWaitingRoom";
+import ChoiceRecord from "components/views/ChoiceResult";
 
 const GameRouter = props => {
   /**
@@ -22,6 +23,9 @@ const GameRouter = props => {
       </Route>
       <Route exact path={`${props.base}/roomcreation`}>
         <RoomCreation/>
+      </Route>
+	  <Route exact path={`${props.base}/games/record/:roomID`}>
+        <ChoiceRecord/>
       </Route>
       <Route exact path={`${props.base}/room/:roomId/owner`}>
         <OwnerWaitingRoom/>
