@@ -7,10 +7,10 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 
 const ChoiceGame = props => {
-	const history = useHistory();  
-    const {gameID} = useParams();
+	const history = useHistory(); 
 
-    const {roomID} = useParams();
+	const { roomID } = useParams();
+	console.log("roomID", roomID	)
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
