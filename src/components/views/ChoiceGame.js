@@ -7,16 +7,20 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 
 const ChoiceGame = props => {
-	const history = useHistory();  
-    const {gameID} = useParams();
+	const history = useHistory(); 
 
-    const {roomID} = useParams();
+	const { roomID } = useParams();
+	console.log("roomID", roomID	)
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
 	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
 	//console.log(playerNames);
+
+	const [isDisabled, setDisabled] = useState(false);
+	const colorRight = "green";
+	const colorWrong = "red";
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -32,9 +36,37 @@ const ChoiceGame = props => {
 	const choices = currentQuestion.choices;
 	console.log(choices);
 
+	const handleClick0 = () => {
+		console.log(questionList.answerIndex)
+		if (currentQuestion.answerIndex === 0) {
+			console.log("Bingo!")
+			document.getElementById("A").style.backgroundColor = colorRight
+		} else (document.getElementById("A").style.backgroundColor = colorWrong);
+		setDisabled(true);
+	};
+
+	const handleClick1 = () => {
+		if (currentQuestion.answerIndex === 1) {
+			document.getElementById("B").style.backgroundColor = colorRight;
+		} else (document.getElementById("B").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
+
+	const handleClick2 = () => {
+		if (currentQuestion.answerIndex === 2) {
+			document.getElementById("C").style.backgroundColor = colorRight;
+		} else (document.getElementById("C").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
+
+	const handleClick3 = () => {
+		if (currentQuestion.answerIndex === 3) {
+			document.getElementById("D").style.backgroundColor = colorRight;
+		} else (document.getElementById("D").style.backgroundColor = colorWrong)
+		setDisabled(true);
+	};
 
 	const requestBody = JSON.stringify({ roomID });
-
     
 
 	useEffect(() => {
@@ -81,13 +113,28 @@ const ChoiceGame = props => {
 		};
     }, []);
 	
+	window.addEventListener("load", function() {
+		
+		var countdown = 20;
+		var countdownElement = document.getElementById("countdown");
+
+		var timer = setInterval(function() {
+			countdown--;
+			countdownElement.innerHTML = countdown + "s";
+  
+			if (countdown <= 0) {
+				clearInterval(timer);
+				window.location.href = "/games/record/"+ roomID;
+			}
+		}, 1000);
+	});
 	
 
 	return (
 		<BaseContainer>
 			<div  className="choicegame container">
 			<div className="choicegame col">
-
+				
 				{players.length > 0 ? (
 					<div className="choicegame card">
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
@@ -150,19 +197,46 @@ const ChoiceGame = props => {
 				<div className="choicegame col">
 				<div className="choicegame form">
 					<center>
+					<div id="countdown" className="">
+					</div>
+					<br />
+                    <br />
                     <img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
                     <br />
                     <br />
                     <br />
-                    <br />
-                    <div className="choicegame label-option"> {choices[0]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[1]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[2]} </div>
-                    <br />
-					<div className="choicegame label-option"> {choices[3]} </div>
-					
+							<button
+								id = "A"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick0}
+							>
+								{choices[0]}
+							</button>
+							<button
+								id="B"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick1}
+							>
+								{choices[1]}
+							</button>
+							<button
+								id="C"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick2}
+							>
+								{choices[2]}
+							</button>
+							<button
+								id="D"
+								className="choicegame option"
+								disabled={isDisabled}
+								onClick={handleClick3}
+							>
+								{choices[3]}
+							</button>					
 				</center>
 				</div>
 			</div>
