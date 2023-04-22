@@ -67,7 +67,6 @@ const ChoiceGame = props => {
 	};
 
 	const requestBody = JSON.stringify({ roomID });
-
     
 
 	useEffect(() => {
@@ -114,13 +113,28 @@ const ChoiceGame = props => {
 		};
     }, []);
 	
+	window.addEventListener("load", function() {
+		
+		var countdown = 20;
+		var countdownElement = document.getElementById("countdown");
+
+		var timer = setInterval(function() {
+			countdown--;
+			countdownElement.innerHTML = countdown + "s";
+  
+			if (countdown <= 0) {
+				clearInterval(timer);
+				window.location.href = "/games/record";
+			}
+		}, 1000);
+	});
 	
 
 	return (
 		<BaseContainer>
 			<div  className="choicegame container">
 			<div className="choicegame col">
-
+				
 				{players.length > 0 ? (
 					<div className="choicegame card">
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
@@ -183,6 +197,10 @@ const ChoiceGame = props => {
 				<div className="choicegame col">
 				<div className="choicegame form">
 					<center>
+					<div id="countdown" className="">
+					</div>
+					<br />
+                    <br />
                     <img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
                     <br />
                     <br />
