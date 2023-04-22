@@ -8,9 +8,9 @@
     "\\src\\components\\ui",
     "\\src\\components\\views",
     "\\src\\helpers",
-    "\\src\\image",
-    "\\src\\models"
+    "\\src\\models",
+    "\\src\\styles"
   ],
-  "SelectedNode": "\\src\\components\\views\\Login.js",
+  "SelectedNode": "\\src\\components\\views\\ImitationGame.js",
   "PreviewInSolutionExplorer": false
 }
