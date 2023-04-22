@@ -5,12 +5,12 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/ChoiceResult.scss';
 import BaseContainer from "components/ui/BaseContainer";
 
-const ChoiceGame = props => {
+const ChoiceResult = props => {
 	
 	const history = useHistory();  
-    //const {gameID} = useParams();
 
     const {roomID} = useParams();
+	console.log("roomID", roomID);
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
@@ -25,7 +25,7 @@ const ChoiceGame = props => {
                 if (!client['connected']) {
                     client.connect({}, function () {
 						console.log('connected to stomp');
-						client.subscribe("/topic/multi/rooms/"+ "1" +"/games/record", function (response) {
+						client.subscribe("/topic/multi/rooms/"+ roomID +"/games/record", function (response) {
 							/*const room = response.body;
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
@@ -129,4 +129,4 @@ const ChoiceGame = props => {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default ChoiceGame;
+export default ChoiceResult;
