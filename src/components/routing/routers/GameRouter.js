@@ -24,7 +24,7 @@ const GameRouter = props => {
       <Route exact path={`${props.base}/roomcreation`}>
         <RoomCreation/>
       </Route>
-	  <Route exact path={`${props.base}/games/record/choice`}>
+	  <Route exact path={`${props.base}/games/record/:roomID`}>
         <ChoiceRecord/>
       </Route>
       <Route exact path={`${props.base}/room/:roomId/owner`}>

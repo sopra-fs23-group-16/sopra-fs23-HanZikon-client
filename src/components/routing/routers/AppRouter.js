@@ -84,7 +84,7 @@ const AppRouter = () => {
 					<ChoiceGame/>
 				</Route>
 				
-				<Route path="/games/record/choice">
+				<Route path="/games/record/:roomID">
 					<ChoiceRecordGuard>
 						<ChoiceRecord/>
 					</ChoiceRecordGuard>

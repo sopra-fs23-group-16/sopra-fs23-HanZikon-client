@@ -124,7 +124,7 @@ const ChoiceGame = props => {
   
 			if (countdown <= 0) {
 				clearInterval(timer);
-				window.location.href = "/games/record/choice";
+				window.location.href = "/games/record/"+ roomID;
 			}
 		}, 1000);
 	});
