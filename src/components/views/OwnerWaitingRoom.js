@@ -10,9 +10,11 @@ const OwnerWaitingRoom = props => {
 	
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
-	const [numPlayers, setNumPlayers] = useState("");
+	// const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	const playerNames = players.map(player => player.playerName)
+	//const playerNames = players.map(player => player.playerName)
+	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
+
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -94,6 +96,10 @@ const OwnerWaitingRoom = props => {
     };
 
 	const exitRoom = () => {
+		const loggedInUserID = localStorage.getItem("loggedInUser");
+		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+		
+		client.send('/topic/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/lobby";
     };
 	return (
