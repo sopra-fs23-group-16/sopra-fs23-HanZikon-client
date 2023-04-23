@@ -125,8 +125,10 @@ const ChoiceGame = props => {
   
 			if (countdown <= 0) {
 				clearInterval(timer);
-				setTimeout(submitScore(), 50);				
-				window.location.href = "/games/record/"+ roomID;
+				setTimeout(submitScore(), 50);
+				setTimeout(function () {
+					window.location.href = "/games/record/" + roomID;
+				}, 4000);
 			}
 		}, 1000);
 	});
