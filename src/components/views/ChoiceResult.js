@@ -16,7 +16,7 @@ const ChoiceResult = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 
-	const requestBody = JSON.stringify({ roomID });
+	//const requestBody = JSON.stringify({ roomID });
     
 
 	useEffect(() => {
@@ -26,7 +26,9 @@ const ChoiceResult = props => {
                 if (!client['connected']) {
                     client.connect({}, function () {
 						console.log('connected to stomp');
-						client.subscribe("/topic/multi/rooms/"+ roomID +"/games/record", function (response) {
+						client.subscribe("/topic/multi/rooms/"+ roomID +"/scores", function (response) {
+							const ranking = response.body;
+							console.log(ranking);
 							/*const room = response.body;
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
@@ -37,8 +39,8 @@ const ChoiceResult = props => {
 							setPlayers(players);	*/				
 						});
 						setTimeout(function () {
-							client.send("/app/multi/rooms/"+ "1" + "/players/scoreBoard",{}, requestBody)
-						},500);
+							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
+						},100);
 						/*client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
@@ -62,6 +64,8 @@ const ChoiceResult = props => {
 			}
 		};
     }, []);
+	
+	//client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
 	
 	window.addEventListener("load", function() {
 		
