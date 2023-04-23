@@ -36,33 +36,15 @@ const ChoiceGame = props => {
 
 	const choices = currentQuestion.choices;
 
-	const handleClick0 = () => {
-		console.log(questionList.answerIndex)
-		if (currentQuestion.answerIndex === 0) {
-			console.log("Bingo!")
-			document.getElementById("A").style.backgroundColor = colorRight
-		} else (document.getElementById("A").style.backgroundColor = colorWrong);
-		setDisabled(true);
-	};
-
-	const handleClick1 = () => {
-		if (currentQuestion.answerIndex === 1) {
-			document.getElementById("B").style.backgroundColor = colorRight;
-		} else (document.getElementById("B").style.backgroundColor = colorWrong)
-		setDisabled(true);
-	};
-
-	const handleClick2 = () => {
-		if (currentQuestion.answerIndex === 2) {
-			document.getElementById("C").style.backgroundColor = colorRight;
-		} else (document.getElementById("C").style.backgroundColor = colorWrong)
-		setDisabled(true);
-	};
-
-	const handleClick3 = () => {
-		if (currentQuestion.answerIndex === 3) {
-			document.getElementById("D").style.backgroundColor = colorRight;
-		} else (document.getElementById("D").style.backgroundColor = colorWrong)
+	const handleClick = (idx) => {
+		const optionIDs = "ABCD"
+		if (currentQuestion.answerIndex === idx) {
+			document.getElementById(optionIDs[idx]).style.backgroundColor = colorRight
+			localStorage.setItem("roundPoints", 100)
+		} else {
+			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
+			localStorage.setItem("roundPoints", 0)
+		};
 		setDisabled(true);
 	};
 
@@ -209,7 +191,7 @@ const ChoiceGame = props => {
 								id = "A"
 								className="choicegame option"
 								disabled={isDisabled}
-								onClick={handleClick0}
+								onClick={() => handleClick(0)}
 							>
 								{choices[0]}
 							</button>
@@ -217,7 +199,7 @@ const ChoiceGame = props => {
 								id="B"
 								className="choicegame option"
 								disabled={isDisabled}
-								onClick={handleClick1}
+								onClick={() => handleClick(1)}
 							>
 								{choices[1]}
 							</button>
@@ -225,7 +207,7 @@ const ChoiceGame = props => {
 								id="C"
 								className="choicegame option"
 								disabled={isDisabled}
-								onClick={handleClick2}
+								onClick={() => handleClick(2)}
 							>
 								{choices[2]}
 							</button>
@@ -233,7 +215,7 @@ const ChoiceGame = props => {
 								id="D"
 								className="choicegame option"
 								disabled={isDisabled}
-								onClick={handleClick3}
+								onClick={() => handleClick(3)}
 							>
 								{choices[3]}
 							</button>					
