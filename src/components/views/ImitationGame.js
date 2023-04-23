@@ -1,19 +1,16 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { handleError, client } from 'helpers/api';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button } from 'components/ui/Button';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
+import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 
 const ImitationGame = props => {
 
 	const canvasRef = useRef(null);
-	const [lines, setLines] = useState([]);
+	const [lines, setLines] = useState([[],[]]);
 	const [isDrawing, setIsDrawing] = useState(false);
-
-	const history = useHistory();
-
 	const { roomID } = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
@@ -25,6 +22,9 @@ const ImitationGame = props => {
 	const [isDisabled, setDisabled] = useState(false);
 	const colorRight = "green";
 	const colorWrong = "red";
+	const [canvasSize,setcanvasSize] = useState([])
+
+	const strokeHistory = [[],[]];
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -89,6 +89,7 @@ const ImitationGame = props => {
 		const canvas = canvasRef.current;
 		canvas.width = window.innerWidth * 0.25;
 		canvas.height = window.innerHeight * 0.4;
+		setcanvasSize({width:canvas.width, height:canvas.height})
 		const context = canvas.getContext("2d");
 		context.lineCap = "round";
 		context.strokeStyle = "black";
@@ -119,6 +120,20 @@ const ImitationGame = props => {
 		context.moveTo(offsetX, offsetY);
 		setIsDrawing(true);
 	};
+
+	function saveStrokes(lines) {
+		for (const line in lines) {
+			//console.log("line",line)
+			for (const sample in lines[line]){
+				//console.log("sample",lines[line][sample])
+				strokeHistory[0].push(lines[line][sample].x);
+				strokeHistory[1].push(lines[line][sample].y)
+			}
+		}
+		console.log("Save strokes complete:",strokeHistory)
+	}
+
+
 
 	const finishDrawing = () => {
 		setLines(prevState => {
@@ -158,6 +173,42 @@ const ImitationGame = props => {
 	const clearCanvas = () => {
 		setLines([]);
 	};
+
+	const submitDrawing = () =>{
+		saveStrokes(lines);
+		console.log("canvasSize",canvasSize)
+		console.log("strokehIS",strokeHistory)
+		recognizeHandwriting(canvasSize,[strokeHistory],10,handleResponse)
+	}
+
+	function evaluateWriting(response, character) {
+		let answer  = character;
+		let candidates = response;
+		let score = 10;
+
+		for (let i= 0;i < candidates.length; i++) {
+			if(i!=0 && i% 3==0){
+				score = score - 2;
+			}
+			if (candidates[i] == answer){
+				break;
+			}
+		}
+		return score;
+	}
+
+	function handleResponse(response) {
+		if (response instanceof Error) {
+			console.error('Error:', response.message);
+			// Handle the error in some way, such as displaying a message to the user or logging it
+		} else {
+			console.log('Response:', response);
+			let score = evaluateWriting(response,currentQuestion.character)
+			console.log("Score",score)
+			// Handle the response data in some way, such as updating the UI or storing it in a database
+
+		}
+	}
 
 	return (
 		<BaseContainer>
@@ -235,6 +286,8 @@ const ImitationGame = props => {
 				<div>
 					<button onClick={undo}>Undo</button>
 					<button onClick={clearCanvas}>Clear</button>
+					<button onClick={submitDrawing}>Submit</button>
+
 				</div>
 			</div>
 		</BaseContainer>
