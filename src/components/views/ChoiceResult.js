@@ -11,15 +11,10 @@ const ChoiceResult = props => {
 	const history = useHistory();  
 
     const {roomID} = useParams();
-	console.log("roomID", roomID);
-	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	const playerNames = players.map(player => player.playerName)
+	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	
-	const [countdown, setCountdown] = useState(15);
-
-	//const requestBody = JSON.stringify({ roomID });
-    
+	const [countdown, setCountdown] = useState(10);
 
 	useEffect(() => {
 		startCountdown();
@@ -32,24 +27,13 @@ const ChoiceResult = props => {
 						console.log('connected to stomp');
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/scores", function (response) {
 							const ranking = response.body;
-							console.log(ranking);
-							/*const room = response.body;
-							const roomparse = JSON.parse(room);
-							const roomcode = roomparse["roomCode"]
-							const players = roomparse["players"]
-							console.log(players);
-							console.log(roomparse);	
-							setRoomcode(roomcode);	
-							setPlayers(players);	*/				
+							const players = JSON.parse(ranking);
+							console.log(Object.keys(players).length);
+							setPlayers(players);			
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
 						},100);
-						/*client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							console.log(roomparse);							
-						});*/
 					});
                 }
             } catch (error) {
@@ -68,10 +52,7 @@ const ChoiceResult = props => {
 			}
 		};
 		
-		
     }, []);
-	
-	//client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
 	
 	const startCountdown = () => {
 		
@@ -79,72 +60,77 @@ const ChoiceResult = props => {
 			setCountdown(countdown => countdown - 1);
 		}, 1000);
 
-    
 		setTimeout(() => {
 			clearInterval(timer);
 			nextRound(roomID);
-		}, 15000);
+		}, 10000);
 		
 		return () => clearInterval(timer);
 	};
-	
-	/*window.addEventListener("load", function() {
-		
-		var countdown = 15;
-		var countdownElement = document.getElementById("countdown");
-
-		var timer = setInterval(function() {
-			countdown--;
-			countdownElement.innerHTML = countdown + "s";
-  
-			if (countdown <= 0) {
-				clearInterval(timer);
-				nextRound(roomID);
-			}
-		}, 1000);
-	});*/
-	
 
 	return (
 		<BaseContainer>
-			<div  className="choicegame container">
-			<div className="choicegame col">
-
-				</div>
-				<div className="choicegame col">
-				<div className="choicegame form">
+			<div className="choiceresult container">
+			    <p className="choiceresult timer">{countdown}s</p>
+				<div className="choiceresult form">
 					<center>
-					<p>{countdown}s</p>
+						{Object.keys(players).length > 0 ? (
+							<div className="choiceresult record">
+								<Button
+									width="70%"
+								>
+								{Object.keys(players)[0] + ": " + players[Object.keys(players)[0]]}
+								</Button>
+							</div>) : null}
+							
+						{Object.keys(players).length > 1 ? (
+							<div className="choiceresult record">
+								<Button
+									width="70%"
+								>
+								{Object.keys(players)[1] + ": " + players[Object.keys(players)[1]]}
+								</Button>
+							</div>) : null}
+							
+						{Object.keys(players).length > 2 ? (
+							<div className="choiceresult record">
+								<Button
+									width="70%"
+								>
+								{Object.keys(players)[2] + ": " + players[Object.keys(players)[2]]}
+								</Button>
+							</div>) : null}
+							
+						{Object.keys(players).length > 3 ? (
+							<div className="choiceresult record">
+								<Button
+									width="70%"
+								>
+								{Object.keys(players)[3] + ": " + players[Object.keys(players)[3]]}
+								</Button>
+							</div>) : null}
+							
+						{Object.keys(players).length > 4 ? (
+							<div className="choiceresult record">
+								<Button
+									width="70%"
+								>
+								{Object.keys(players)[4] + ": " + players[Object.keys(players)[4]]}
+								</Button>
+							</div>) : null}
+							
+						{Object.keys(players).length > 5 ? (
+							<div className="choiceresult record">
+								<Button
+									width="70%"
+								>
+								{Object.keys(players)[5] + ": " + players[Object.keys(players)[5]]}
+								</Button>
+							</div>) : null}
 								
-				</center>
+					</center>
+				
 				</div>
-			</div>
-			{/* <div className="choicegame col">
-					<div className="choicegame card-rule">
-                        <center>
-                    <div className="choicegame label"> Score Board</div>
-                    </center>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <div className="choicegame label-rangking"> No.1  </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.2 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.3 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.4 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.5 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.6 </div>                   
-					</div>
-				</div> */}
 			</div>
 		</BaseContainer>
 	);
