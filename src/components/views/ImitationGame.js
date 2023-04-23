@@ -5,6 +5,8 @@ import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
+import writingBoard from 'image/writingBoard.png';
+import 'styles/views/ImitationGame.scss';
 
 const ImitationGame = props => {
 
@@ -88,15 +90,13 @@ const ImitationGame = props => {
 	useEffect(() => {
 		const canvas = canvasRef.current;
 		canvas.width = window.innerWidth * 0.25;
-		canvas.height = window.innerHeight * 0.4;
+		canvas.height = canvas.width;
 		setcanvasSize({width:canvas.width, height:canvas.height})
 		const context = canvas.getContext("2d");
 		context.lineCap = "round";
 		context.strokeStyle = "black";
 		context.lineWidth = 5;
-		context.strokeRect(0, 0, canvas.width, canvas.height);
-		context.fillStyle = "white";
-		context.fillRect(0, 0, canvas.width, canvas.height);
+/*		context.strokeRect(0, 0, canvas.width, canvas.height);*/
 
 		lines.forEach(line => {
 			context.beginPath();
@@ -272,7 +272,7 @@ const ImitationGame = props => {
 
 				</div>
 				<div className="choicegame col">
-					<div className="choicegame form">
+					<div className="imitationgame canvas-container">
 						<center>
 							<canvas
 								onMouseDown={startDrawing}
