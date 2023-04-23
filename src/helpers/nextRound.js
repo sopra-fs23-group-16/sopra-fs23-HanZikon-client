@@ -1,9 +1,15 @@
 export const nextRound = (roomID) => {
     // round++
     let round = parseInt(localStorage.getItem("round"));
+    // check if round == 10 (end game)
+    if (round == 10) {
+        // go back to lobby for now
+        // waitingRoom need clarify owner or player
+        window.location.href = "/lobby"
+    }
     round = round + 1;
     localStorage.setItem("round", round);
-    // check if round == 10 (end game)
+
     // clear roundPoints
     localStorage.removeItem("roundPoints");
     // check questionType

@@ -65,7 +65,7 @@ const ChoiceResult = props => {
 	
 	window.addEventListener("load", function() {
 		
-		var countdown = 20;
+		var countdown = 5;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
