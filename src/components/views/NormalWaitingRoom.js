@@ -6,6 +6,7 @@ import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
+import {nextRound} from "../../helpers/nextRound";
 
 const NormalWaitingRoom = props => {
     const {roomID} = useParams();
@@ -62,7 +63,9 @@ const NormalWaitingRoom = props => {
 							localStorage.setItem('round', 1)
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
-							window.location.href = '/games/multiplechoice/' + roomID;
+							nextRound(roomID);
+
+							// window.location.href = '/games/multiplechoice/' + roomID;
 
 						});
 					});

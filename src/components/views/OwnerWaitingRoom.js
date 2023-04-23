@@ -5,6 +5,7 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
+import { nextRound } from "helpers/nextRound";
 
 const OwnerWaitingRoom = props => {
 	
@@ -45,12 +46,14 @@ const OwnerWaitingRoom = props => {
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
-							// initialise round
+							// initialise round (0: not started)
 							// save questions
-							localStorage.setItem('round',1)
+							localStorage.setItem('round', 0)
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
-							window.location.href = '/games/imitation/' + roomID;
+							nextRound(roomID);
+
+							// window.location.href = '/games/imitation/' + roomID;
 
 						});
 						client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
