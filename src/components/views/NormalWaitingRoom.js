@@ -1,22 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {api, handleError, client} from 'helpers/api';
+import {handleError, client} from 'helpers/api';
 //import User from 'models/User';
-import {useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-//import PropTypes from "prop-types";
 import { useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
 
 const NormalWaitingRoom = props => {
-	const history = useHistory();  
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
-	const userID = localStorage.getItem("loggedInUser");
-	const playerToUpdate = players.find(player => player.userID == Number(userID));
+	// const userID = localStorage.getItem("loggedInUser");
+	// const playerToUpdate = players.find(player => player.userID == Number(userID));
 	
 	const requestBody = JSON.stringify({ roomID });
 
@@ -49,7 +47,7 @@ const NormalWaitingRoom = props => {
 							const userIDs = players.map(player => player.userID)
 							let userId = localStorage.getItem("loggedInUser");
 							if (!userIDs.includes(userId)) {
-								alert("You have been kicked out!");
+								alert("You are no longer in the room!");
 								window.location.href = "/lobby";
 							}
 						});
@@ -109,11 +107,14 @@ const NormalWaitingRoom = props => {
 			userID: playerToUpdate.userID,
 			ready: false
 		};
-	
 		client.send("/app/multi/rooms/"+ roomID + "/players/ready",{}, JSON.stringify(requestcancelready))
     };
 
 	const exitRoom = () => {
+		const loggedInUserID = localStorage.getItem("loggedInUser");
+		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+
+		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/lobby";
     };
 

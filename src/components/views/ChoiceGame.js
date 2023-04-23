@@ -7,10 +7,9 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 
 const ChoiceGame = props => {
-	const history = useHistory();  
-    const {gameID} = useParams();
+	const history = useHistory(); 
 
-    const {roomID} = useParams();
+	const { roomID } = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
@@ -30,11 +29,12 @@ const ChoiceGame = props => {
 	if (round === null) {
 		alert("Game crashed! Round is null!")
 	}
+	console.log("round",round);
+
 	const currentQuestion = questionList[round - 1];
 	console.log(currentQuestion);
 
 	const choices = currentQuestion.choices;
-	console.log(choices);
 
 	const handleClick0 = () => {
 		console.log(questionList.answerIndex)
@@ -67,7 +67,6 @@ const ChoiceGame = props => {
 	};
 
 	const requestBody = JSON.stringify({ roomID });
-
     
 
 	useEffect(() => {
@@ -114,13 +113,28 @@ const ChoiceGame = props => {
 		};
     }, []);
 	
+	window.addEventListener("load", function() {
+		
+		var countdown = 20;
+		var countdownElement = document.getElementById("countdown");
+
+		var timer = setInterval(function() {
+			countdown--;
+			countdownElement.innerHTML = countdown + "s";
+  
+			if (countdown <= 0) {
+				clearInterval(timer);
+				window.location.href = "/games/record/"+ roomID;
+			}
+		}, 1000);
+	});
 	
 
 	return (
 		<BaseContainer>
 			<div  className="choicegame container">
 			<div className="choicegame col">
-
+				
 				{players.length > 0 ? (
 					<div className="choicegame card">
 						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
@@ -183,6 +197,10 @@ const ChoiceGame = props => {
 				<div className="choicegame col">
 				<div className="choicegame form">
 					<center>
+					<div id="countdown" className="">
+					</div>
+					<br />
+                    <br />
                     <img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
                     <br />
                     <br />
