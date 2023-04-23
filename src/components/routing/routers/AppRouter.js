@@ -85,6 +85,16 @@ const AppRouter = () => {
 					<ChoiceGame/>
 				</Route>
 
+				<Route path="/games/record/:roomID">
+					<ChoiceRecordGuard>
+						<ChoiceRecord/>
+					</ChoiceRecordGuard>
+				</Route>
+
+				<Route path="/games/imitation/:gameID">
+					<ImitationGame />
+				</Route>
+
 				<Route exact path="/login">
 					<LoginGuard>
 						<Login/>

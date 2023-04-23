@@ -23,7 +23,7 @@ const ImitationGame = props => {
 	const colorRight = "green";
 	const colorWrong = "red";
 	const [canvasSize,setcanvasSize] = useState([])
-
+	const history = useHistory();
 	const strokeHistory = [[],[]];
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
