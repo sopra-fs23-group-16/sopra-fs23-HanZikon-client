@@ -93,7 +93,7 @@ const Inspect = () => {
 					<Button
 						width="70%"
 						onClick={() => history.push('/lobby')}>
-						Back to user overview
+						Back to game overview
 					</Button>
 				</div>
 			</div>
