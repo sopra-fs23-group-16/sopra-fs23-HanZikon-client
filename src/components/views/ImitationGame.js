@@ -202,12 +202,48 @@ const ImitationGame = props => {
 			// Handle the error in some way, such as displaying a message to the user or logging it
 		} else {
 			console.log('Response:', response);
-			let score = evaluateWriting(response,currentQuestion.character)
+			const score = evaluateWriting(response,currentQuestion.character);
+			localStorage.setItem("roundPoints", score);
 			console.log("Score",score)
 			// Handle the response data in some way, such as updating the UI or storing it in a database
 
 		}
 	}
+
+	const submitScore = () => {
+		///////////////////////////////////////////////
+		//    make sure it is the right userID       //
+		///////////////////////////////////////////////
+		const userID = localStorage.getItem('loggedInUser')
+		let systemScore = 0;
+		if (localStorage.getItem("roundPoints")) {
+			systemScore = parseInt(localStorage.getItem("roundPoints"));
+			setTimeout(function () {
+				console.log("roundPoints", systemScore);
+			}, 50);
+		}
+		const requestBody = {userID,scoreBoard: {systemScore}};
+		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+	}
+
+	window.addEventListener("load", function() {
+
+		var countdown = 15;
+		var countdownElement = document.getElementById("countdown");
+
+		var timer = setInterval(function() {
+			countdown--;
+			countdownElement.innerHTML = countdown + "s";
+
+			if (countdown <= 0) {
+				clearInterval(timer);
+				setTimeout(submitScore(), 50);
+				setTimeout(function () {
+					window.location.href = "/games/record/" + roomID;
+				}, 4000);
+			}
+		}, 1000);
+	});
 
 	return (
 		<BaseContainer>
@@ -271,6 +307,12 @@ const ImitationGame = props => {
 
 				</div>
 				<div className="choicegame col">
+					<center>
+						<div id="countdown" className="">
+						</div>
+						<br />
+						<br />
+					</center>
 					<div className="imitationgame canvas-container">
 						<center>
 							<canvas
