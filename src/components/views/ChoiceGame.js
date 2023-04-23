@@ -10,7 +10,6 @@ const ChoiceGame = props => {
 	const history = useHistory(); 
 
 	const { roomID } = useParams();
-	console.log("roomID", roomID	)
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
@@ -30,11 +29,12 @@ const ChoiceGame = props => {
 	if (round === null) {
 		alert("Game crashed! Round is null!")
 	}
+	console.log("round",round);
+
 	const currentQuestion = questionList[round - 1];
 	console.log(currentQuestion);
 
 	const choices = currentQuestion.choices;
-	console.log(choices);
 
 	const handleClick0 = () => {
 		console.log(questionList.answerIndex)

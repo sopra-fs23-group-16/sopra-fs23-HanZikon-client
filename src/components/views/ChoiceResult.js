@@ -4,6 +4,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/ChoiceResult.scss';
 import BaseContainer from "components/ui/BaseContainer";
+import { nextRound } from "helpers/nextRound";
 
 const ChoiceResult = props => {
 	
@@ -73,7 +74,7 @@ const ChoiceResult = props => {
   
 			if (countdown <= 0) {
 				clearInterval(timer);
-				window.location.href = "/games/record/choice";
+				nextRound(roomID);
 			}
 		}, 1000);
 	});
