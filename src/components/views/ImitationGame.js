@@ -5,7 +5,6 @@ import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
-import writingBoard from 'image/writingBoard.png';
 import 'styles/views/ImitationGame.scss';
 
 const ImitationGame = props => {
