@@ -116,7 +116,7 @@ const ChoiceGame = props => {
 	
 	window.addEventListener("load", function() {
 		
-		var countdown = 5;
+		var countdown = 15;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {

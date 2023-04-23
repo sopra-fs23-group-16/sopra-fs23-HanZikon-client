@@ -15,11 +15,15 @@ const ChoiceResult = props => {
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	
+	const [countdown, setCountdown] = useState(15);
 
 	//const requestBody = JSON.stringify({ roomID });
     
 
 	useEffect(() => {
+		startCountdown();
+		stompConnect();
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
@@ -54,7 +58,7 @@ const ChoiceResult = props => {
                 alert("Something went wrong! See the console for details.");
             }
         }
-		stompConnect();
+		
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
@@ -63,13 +67,30 @@ const ChoiceResult = props => {
 				});
 			}
 		};
+		
+		
     }, []);
 	
 	//client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
 	
-	window.addEventListener("load", function() {
+	const startCountdown = () => {
 		
-		var countdown = 5;
+		const timer = setInterval(() => {
+			setCountdown(countdown => countdown - 1);
+		}, 1000);
+
+    
+		setTimeout(() => {
+			clearInterval(timer);
+			nextRound(roomID);
+		}, 15000);
+		
+		return () => clearInterval(timer);
+	};
+	
+	/*window.addEventListener("load", function() {
+		
+		var countdown = 15;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
@@ -81,7 +102,7 @@ const ChoiceResult = props => {
 				nextRound(roomID);
 			}
 		}, 1000);
-	});
+	});*/
 	
 
 	return (
@@ -93,8 +114,7 @@ const ChoiceResult = props => {
 				<div className="choicegame col">
 				<div className="choicegame form">
 					<center>
-					<div id="countdown" className="">
-					</div>
+					<p>{countdown}s</p>
 								
 				</center>
 				</div>
