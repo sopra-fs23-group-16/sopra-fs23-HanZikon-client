@@ -36,18 +36,6 @@ const ChoiceGame = props => {
 
 	const choices = currentQuestion.choices;
 
-	const handleClick = (idx) => {
-		const optionIDs = "ABCD"
-		if (currentQuestion.answerIndex === idx) {
-			document.getElementById(optionIDs[idx]).style.backgroundColor = colorRight
-			localStorage.setItem("roundPoints", 100)
-		} else {
-			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
-			localStorage.setItem("roundPoints", 0)
-		};
-		setDisabled(true);
-	};
-
 	const requestBody = JSON.stringify({ roomID });
     
 
@@ -93,7 +81,38 @@ const ChoiceGame = props => {
 				});
 			}
 		};
-    }, []);
+	}, []);
+
+	const handleClick = (idx) => {
+		const optionIDs = "ABCD"
+		if (currentQuestion.answerIndex === idx) {
+			document.getElementById(optionIDs[idx]).style.backgroundColor = colorRight
+			localStorage.setItem("roundPoints", 10)
+			setTimeout(function () {
+				console.log("roundPoints put: ", localStorage.getItem("roundPoints"));
+			}, 100);
+		} else {
+			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
+			localStorage.setItem("roundPoints", 0)
+		};
+		setDisabled(true);
+	};
+
+	const submitScore = () => {
+		///////////////////////////////////////////////
+		//    make sure it is the right userID       //
+		///////////////////////////////////////////////
+		const userID = localStorage.getItem('loggedInUser')
+		let systemScore = 0;
+		if (localStorage.getItem("roundPoints")) {
+			systemScore = parseInt(localStorage.getItem("roundPoints"));
+			setTimeout(function () {
+				console.log("roundPoints", systemScore);
+			}, 50);
+		}
+		const requestBody = {userID,scoreBoard: {systemScore}};
+		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+	}
 	
 	window.addEventListener("load", function() {
 		
@@ -106,7 +125,8 @@ const ChoiceGame = props => {
   
 			if (countdown <= 0) {
 				clearInterval(timer);
-				window.location.href = "/games/record/"+ roomID;
+				setTimeout(submitScore(), 50);				
+/*				window.location.href = "/games/record/"+ roomID;*/
 			}
 		}, 1000);
 	});
