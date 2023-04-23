@@ -20,6 +20,7 @@ import {OwnerWaitingRoomGuard} from "components/routing/routeProtectors/OwnerWai
 import NormalWaitingRoom from "components/views/NormalWaitingRoom";
 import {NormalWaitingRoomGuard} from "components/routing/routeProtectors/NormalWaitingRoomGuard";
 import ChoiceGame from "components/views/ChoiceGame";
+import ImitationGame from "components/views/ImitationGame";
 import ChoiceRecord from "components/views/ChoiceResult";
 import {ChoiceRecordGuard} from "components/routing/routeProtectors/ChoiceRecordGuard";
 
@@ -80,14 +81,18 @@ const AppRouter = () => {
 					</NormalWaitingRoomGuard>
 				</Route>
 
-				<Route path="/games/multiplechoice/:roomID">
+				<Route path="/games/multiplechoice/:gameID">
 					<ChoiceGame/>
 				</Route>
-				
+
 				<Route path="/games/record/:roomID">
 					<ChoiceRecordGuard>
 						<ChoiceRecord/>
 					</ChoiceRecordGuard>
+				</Route>
+
+				<Route path="/games/imitation/:gameID">
+					<ImitationGame />
 				</Route>
 
 				<Route exact path="/login">
