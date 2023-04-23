@@ -53,6 +53,13 @@ const OwnerWaitingRoom = props => {
 							window.location.href = '/games/multiplechoice/' + roomID;
 
 						});
+						client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
+							const room = response.body;
+							const roomparse = JSON.parse(room);
+							const players = roomparse["players"];
+							setPlayers(players);
+							console.log(roomparse);	
+						});
 					});
                 }
             } catch (error) {
@@ -73,19 +80,7 @@ const OwnerWaitingRoom = props => {
     }, []);
 	
 	const kickout = (players) => {
-		//console.log(players);
-		client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
-			const room = response.body;
-			const roomparse = JSON.parse(room);
-			const players = roomparse["players"];
-			setPlayers(players);
-			console.log(roomparse);	
-			//window.location.reload();
-			//history.push("/rooms/" + roomparse["roomID"] + "/owner");
-		});
-		setTimeout(function () {
-			client.send("/app/multi/rooms/"+ roomID + "/drop",{}, JSON.stringify(players));
-		},100);
+		client.send("/app/multi/rooms/"+ roomID + "/drop",{}, JSON.stringify(players));
     };
 	
 	const startGame = (players) => {
@@ -99,7 +94,7 @@ const OwnerWaitingRoom = props => {
 		const loggedInUserID = localStorage.getItem("loggedInUser");
 		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
 		
-		client.send('/topic/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
+		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/lobby";
     };
 	return (

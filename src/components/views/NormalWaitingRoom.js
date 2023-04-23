@@ -47,7 +47,7 @@ const NormalWaitingRoom = props => {
 							const userIDs = players.map(player => player.userID)
 							let userId = localStorage.getItem("loggedInUser");
 							if (!userIDs.includes(userId)) {
-								alert("You have been kicked out!");
+								alert("You are no longer in the room!");
 								window.location.href = "/lobby";
 							}
 						});
@@ -107,18 +107,15 @@ const NormalWaitingRoom = props => {
 			userID: playerToUpdate.userID,
 			ready: false
 		};
-	
 		client.send("/app/multi/rooms/"+ roomID + "/players/ready",{}, JSON.stringify(requestcancelready))
     };
 
 	const exitRoom = () => {
 		const loggedInUserID = localStorage.getItem("loggedInUser");
 		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
-		console.log(playerToUpdate)
-		console.log(players)
-		client.send('/topic/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
-		//window.location.href = "/lobby";
-		//console.log(players)
+
+		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
+		window.location.href = "/lobby";
     };
 
 	return (
