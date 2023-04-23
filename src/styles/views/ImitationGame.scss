@@ -1,0 +1,19 @@
+@import 'styles/theme';
+
+.imitationgame {
+
+    &.canvas-container {
+        background-image: url('../../image/writingBoard2.png');
+        background-size: contain;
+        background-position: center;
+        position: relative;
+        padding: 30px;
+    }
+
+    &.canvas {
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
