@@ -12,6 +12,20 @@ const ImitationGame = props => {
 	const canvasRef = useRef(null);
 	const [lines, setLines] = useState([[],[]]);
 	const [isDrawing, setIsDrawing] = useState(false);
+
+	useEffect(() => {
+		const canvas = canvasRef.current;
+		const preventTouchScroll = (e) => {
+			if (e.target === canvas) {
+				e.preventDefault();
+			}
+		};
+		document.addEventListener("touchmove", preventTouchScroll, { passive: false });
+		return () => {
+			document.removeEventListener("touchmove", preventTouchScroll);
+		};
+	}, []);
+
 	const { roomID } = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
@@ -95,7 +109,7 @@ const ImitationGame = props => {
 		context.lineCap = "round";
 		context.strokeStyle = "black";
 		context.lineWidth = 5;
-/*		context.strokeRect(0, 0, canvas.width, canvas.height);*/
+		/*		context.strokeRect(0, 0, canvas.width, canvas.height);*/
 
 		lines.forEach(line => {
 			context.beginPath();
@@ -228,7 +242,7 @@ const ImitationGame = props => {
 
 	window.addEventListener("load", function() {
 
-		var countdown = 15;
+		var countdown = 8;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
@@ -237,10 +251,11 @@ const ImitationGame = props => {
 
 			if (countdown <= 0) {
 				clearInterval(timer);
+				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
 					window.location.href = "/games/record/" + roomID;
-				}, 4000);
+				}, 5000);
 			}
 		}, 1000);
 	});
@@ -319,6 +334,21 @@ const ImitationGame = props => {
 								onMouseDown={startDrawing}
 								onMouseUp={finishDrawing}
 								onMouseMove={draw}
+								onTouchStart={(e) => {
+									const touch = e.touches[0];
+									const { left, top } = canvasRef.current.getBoundingClientRect();
+									const touchX = touch.clientX - left;
+									const touchY = touch.clientY - top;
+									startDrawing({ nativeEvent: { offsetX: touchX, offsetY: touchY } });
+								}}
+								onTouchEnd={finishDrawing}
+								onTouchMove={(e) => {
+									const touch = e.touches[0];
+									const { left, top } = canvasRef.current.getBoundingClientRect();
+									const touchX = touch.clientX - left;
+									const touchY = touch.clientY - top;
+									draw({ nativeEvent: { offsetX: touchX, offsetY: touchY } });
+								}}
 								ref={canvasRef}
 							></canvas>
 						</center>

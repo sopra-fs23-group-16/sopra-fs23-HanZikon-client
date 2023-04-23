@@ -116,7 +116,7 @@ const ChoiceGame = props => {
 	
 	window.addEventListener("load", function() {
 		
-		var countdown = 15;
+		var countdown = 10;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
@@ -128,7 +128,7 @@ const ChoiceGame = props => {
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
 					window.location.href = "/games/record/" + roomID;
-				}, 4000);
+				}, 5000);
 			}
 		}, 1000);
 	});

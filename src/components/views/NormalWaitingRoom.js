@@ -60,7 +60,7 @@ const NormalWaitingRoom = props => {
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
 							// initialise
-							localStorage.setItem('round', 1)
+							localStorage.setItem('round', 0)
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
 							nextRound(roomID);
