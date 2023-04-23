@@ -12,6 +12,20 @@ const ImitationGame = props => {
 	const canvasRef = useRef(null);
 	const [lines, setLines] = useState([[],[]]);
 	const [isDrawing, setIsDrawing] = useState(false);
+
+	useEffect(() => {
+		const canvas = canvasRef.current;
+		const preventTouchScroll = (e) => {
+			if (e.target === canvas) {
+				e.preventDefault();
+			}
+		};
+		document.addEventListener("touchmove", preventTouchScroll, { passive: false });
+		return () => {
+			document.removeEventListener("touchmove", preventTouchScroll);
+		};
+	}, []);
+
 	const { roomID } = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
@@ -95,7 +109,7 @@ const ImitationGame = props => {
 		context.lineCap = "round";
 		context.strokeStyle = "black";
 		context.lineWidth = 5;
-/*		context.strokeRect(0, 0, canvas.width, canvas.height);*/
+		/*		context.strokeRect(0, 0, canvas.width, canvas.height);*/
 
 		lines.forEach(line => {
 			context.beginPath();
@@ -202,12 +216,48 @@ const ImitationGame = props => {
 			// Handle the error in some way, such as displaying a message to the user or logging it
 		} else {
 			console.log('Response:', response);
-			let score = evaluateWriting(response,currentQuestion.character)
+			const score = evaluateWriting(response,currentQuestion.character);
+			localStorage.setItem("roundPoints", score);
 			console.log("Score",score)
 			// Handle the response data in some way, such as updating the UI or storing it in a database
 
 		}
 	}
+
+	const submitScore = () => {
+		///////////////////////////////////////////////
+		//    make sure it is the right userID       //
+		///////////////////////////////////////////////
+		const userID = localStorage.getItem('loggedInUser')
+		let systemScore = 0;
+		if (localStorage.getItem("roundPoints")) {
+			systemScore = parseInt(localStorage.getItem("roundPoints"));
+			setTimeout(function () {
+				console.log("roundPoints", systemScore);
+			}, 50);
+		}
+		const requestBody = {userID,scoreBoard: {systemScore}};
+		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+	}
+
+	window.addEventListener("load", function() {
+
+		var countdown = 15;
+		var countdownElement = document.getElementById("countdown");
+
+		var timer = setInterval(function() {
+			countdown--;
+			countdownElement.innerHTML = countdown + "s";
+
+			if (countdown <= 0) {
+				clearInterval(timer);
+				setTimeout(submitScore(), 50);
+				setTimeout(function () {
+					window.location.href = "/games/record/" + roomID;
+				}, 4000);
+			}
+		}, 1000);
+	});
 
 	return (
 		<BaseContainer>
@@ -271,12 +321,33 @@ const ImitationGame = props => {
 
 				</div>
 				<div className="choicegame col">
+					<center>
+						<div id="countdown" className="">
+						</div>
+						<br />
+						<br />
+					</center>
 					<div className="imitationgame canvas-container">
 						<center>
 							<canvas
 								onMouseDown={startDrawing}
 								onMouseUp={finishDrawing}
 								onMouseMove={draw}
+								onTouchStart={(e) => {
+									const touch = e.touches[0];
+									const { left, top } = canvasRef.current.getBoundingClientRect();
+									const touchX = touch.clientX - left;
+									const touchY = touch.clientY - top;
+									startDrawing({ nativeEvent: { offsetX: touchX, offsetY: touchY } });
+								}}
+								onTouchEnd={finishDrawing}
+								onTouchMove={(e) => {
+									const touch = e.touches[0];
+									const { left, top } = canvasRef.current.getBoundingClientRect();
+									const touchX = touch.clientX - left;
+									const touchY = touch.clientY - top;
+									draw({ nativeEvent: { offsetX: touchX, offsetY: touchY } });
+								}}
 								ref={canvasRef}
 							></canvas>
 						</center>
