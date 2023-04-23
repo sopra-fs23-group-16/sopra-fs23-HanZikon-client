@@ -254,6 +254,7 @@ const ImitationGame = props => {
 				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
+					alert("score is sent!")
 					window.location.href = "/games/record/" + roomID;
 				}, 50);
 			}
