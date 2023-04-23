@@ -242,7 +242,7 @@ const ImitationGame = props => {
 
 	window.addEventListener("load", function() {
 
-		var countdown = 15;
+		var countdown = 8;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
@@ -254,9 +254,8 @@ const ImitationGame = props => {
 				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					alert("score is sent!")
 					window.location.href = "/games/record/" + roomID;
-				}, 50);
+				}, 5000);
 			}
 		}, 1000);
 	});
