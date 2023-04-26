@@ -27,9 +27,11 @@ const ChoiceResult = props => {
 						console.log('connected to stomp');
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/scores", function (response) {
 							const ranking = response.body;
-							const players = JSON.parse(ranking);
-							console.log(Object.keys(players).length);
-							setPlayers(players);			
+							const newPlayers = JSON.parse(ranking);
+							const sortedArray = Object.entries(newPlayers).sort((a, b) => b[1] - a[1]);
+							//const sortedObject = Object.fromEntries(sortedArray);
+							setPlayers(sortedArray);	
+							console.log(sortedArray[0][1]);							
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
@@ -79,7 +81,7 @@ const ChoiceResult = props => {
 								<Button
 									width="70%"
 								>
-								{Object.keys(players)[0] + ": " + players[Object.keys(players)[0]]}
+								{players[0][0] + ": " + players[0][1]}
 								</Button>
 							</div>) : null}
 							
@@ -88,7 +90,7 @@ const ChoiceResult = props => {
 								<Button
 									width="70%"
 								>
-								{Object.keys(players)[1] + ": " + players[Object.keys(players)[1]]}
+								{players[1][0] + ": " + players[1][1]}
 								</Button>
 							</div>) : null}
 							
@@ -97,7 +99,7 @@ const ChoiceResult = props => {
 								<Button
 									width="70%"
 								>
-								{Object.keys(players)[2] + ": " + players[Object.keys(players)[2]]}
+								{players[2][0] + ": " + players[2][1]}
 								</Button>
 							</div>) : null}
 							
@@ -106,7 +108,7 @@ const ChoiceResult = props => {
 								<Button
 									width="70%"
 								>
-								{Object.keys(players)[3] + ": " + players[Object.keys(players)[3]]}
+								{players[3][0] + ": " + players[3][1]}
 								</Button>
 							</div>) : null}
 							
@@ -115,7 +117,7 @@ const ChoiceResult = props => {
 								<Button
 									width="70%"
 								>
-								{Object.keys(players)[4] + ": " + players[Object.keys(players)[4]]}
+								{players[4][0] + ": " + players[4][1]}
 								</Button>
 							</div>) : null}
 							
@@ -124,7 +126,7 @@ const ChoiceResult = props => {
 								<Button
 									width="70%"
 								>
-								{Object.keys(players)[5] + ": " + players[Object.keys(players)[5]]}
+								{players[5][0] + ": " + players[5][1]}
 								</Button>
 							</div>) : null}
 								
