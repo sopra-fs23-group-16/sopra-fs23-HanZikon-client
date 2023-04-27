@@ -1,10 +1,9 @@
 import React, { useRef, useEffect, useState } from 'react';
 import {api, handleError, client } from 'helpers/api';
 import { useHistory, useParams } from 'react-router-dom';
-import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
-import 'styles/views/ImitationGame.scss';
+import 'styles/views/ImitationInspect.scss';
 import User from 'models/User';
 
 const ImitationInspect = props => {
@@ -13,7 +12,7 @@ const ImitationInspect = props => {
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
-	const [countdown, setCountdown] = useState(20);
+	const [countdown, setCountdown] = useState(15);
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -97,84 +96,87 @@ const ImitationInspect = props => {
 		setTimeout(() => {
 			clearInterval(timer);
 			window.location.href = "/games/imitation/" + roomID;
-		}, 20000);
+		}, 15000);
 		
 		return () => clearInterval(timer);
 	};
 
 	return (
 		<BaseContainer>
-			<div className="choicegame container">
+			<div className="imitationinspect container">
 				
-				<div className="choicegame col">
+				<div className="imitationinspect col">
 
 					{players.length > 0 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 0 ? (
-						<div className="choicegame label"> {playerNames[0]}</div>
+						<div className="imitationinspect label"> {playerNames[0]}</div>
 					) : null}
 					{players.length > 1 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 1 ? (
-						<div className="choicegame label"> {playerNames[1]}</div>
+						<div className="imitationinspect label"> {playerNames[1]}</div>
 					) : null}
 
 					{players.length > 2 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 2 ? (
-						<div className="choicegame label"> {playerNames[2]}</div>
+						<div className="imitationinspect label"> {playerNames[2]}</div>
 					) : null}
 
 					{players.length > 3 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 3 ? (
-						<div className="choicegame label"> {playerNames[3]}</div>
+						<div className="imitationinspect label"> {playerNames[3]}</div>
 					) : null}
 
 					{players.length > 4 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 4 ? (
-						<div className="choicegame label"> {playerNames[4]}</div>
+						<div className="imitationinspect label"> {playerNames[4]}</div>
 					) : null}
 
 					{players.length > 5 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 5 ? (
-						<div className="choicegame label"> {playerNames[5]}</div>
+						<div className="imitationinspect label"> {playerNames[5]}</div>
 					) : null}
 
 					{players.length > 6 ? (
-						<div className="choicegame card">
+						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 6 ? (
-						<div className="choicegame label"> {playerNames[6]}</div>
+						<div className="imitationinspect label"> {playerNames[6]}</div>
 					) : null}
 
 				</div>
-				<p className="choicegame timer">{countdown}s</p>
-				<div className="choicegame col">
-					<center>
-						<br />
-						<br />
-						<img src={url} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-						<br />
-						<br />
-					</center>
+				
+				<div className="imitationinspect col">
+					<div className="imitationinspect form">
+						<center>
+							<p className="imitationinspect timer">{countdown}s</p>
+							<br />
+							<br />
+							<img src={url} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<br />
+							<br />
+							<br />	
+						</center>
+					</div>
 				</div>
-
 			</div>
 		</BaseContainer>
 	);
