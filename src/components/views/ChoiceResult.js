@@ -84,7 +84,7 @@ const ChoiceResult = props => {
 		setTimeout(() => {
 			clearInterval(timer);
 			nextRound(roomID);
-		}, 500);
+		}, 5000);
 		
 		return () => clearInterval(timer);
 	};
