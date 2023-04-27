@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {handleError, client} from 'helpers/api';
+import {api, handleError, client} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
+import User from 'models/User';
 
 const ChoiceGame = props => {
 	const history = useHistory(); 
@@ -32,7 +33,7 @@ const ChoiceGame = props => {
 	console.log("round",round);
 
 	const currentQuestion = questionList[round - 1];
-	console.log(currentQuestion);
+	console.log(currentQuestion.oracleURL);
 
 	const choices = currentQuestion.choices;
 
@@ -40,6 +41,24 @@ const ChoiceGame = props => {
     
 
 	useEffect(() => {
+		
+		async function fetchLocalUser() {
+			try {
+				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
+				const response = await api.post(`/users/localUser`, requestBody);
+
+				const user = new User(response.data);
+				console.log("Confirm local user:",user);
+				localStorage.setItem('loggedInUser', user.id);
+
+			} catch (error) {
+				alert("You are not logged in!");
+				localStorage.removeItem('token');
+				history.push('/login');
+			}
+		}
+		fetchLocalUser();
+		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {

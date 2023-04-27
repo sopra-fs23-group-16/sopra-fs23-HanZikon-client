@@ -1,13 +1,15 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { handleError, client } from 'helpers/api';
+import {api, handleError, client } from 'helpers/api';
 import { useHistory, useParams } from 'react-router-dom';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import 'styles/views/ImitationGame.scss';
+import User from 'models/User';
 
 const ImitationInspect = props => {
 
+	const history = useHistory();
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
@@ -22,11 +24,30 @@ const ImitationInspect = props => {
 		alert("Game crashed! Round is null!")
 	}
 	const currentQuestion = questionList[round - 1];
-	console.log(currentQuestion.evolution[4]);
+	const url = currentQuestion.evolution[4];
+	console.log(url);
 
 	const requestBody = JSON.stringify({ roomID });
 
 	useEffect(() => {
+		
+		async function fetchLocalUser() {
+			try {
+				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
+				const response = await api.post(`/users/localUser`, requestBody);
+
+				const user = new User(response.data);
+				console.log("Confirm local user:",user);
+				localStorage.setItem('loggedInUser', user.id);
+
+			} catch (error) {
+				alert("You are not logged in!");
+				localStorage.removeItem('token');
+				history.push('/login');
+			}
+		}
+		fetchLocalUser();
+		
 		startCountdown();
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -146,16 +167,12 @@ const ImitationInspect = props => {
 				<p className="choicegame timer">{countdown}s</p>
 				<div className="choicegame col">
 					<center>
-						<div id="countdown" className="">
-						</div>
+						<br />
+						<br />
+						<img src={url} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
 						<br />
 						<br />
 					</center>
-					<div className="">
-						<center>
-
-						</center>
-					</div>
 				</div>
 
 			</div>

@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {handleError, client} from 'helpers/api';
-//import User from 'models/User';
+import {api, handleError, client} from 'helpers/api';
+import User from 'models/User';
 import {Button} from 'components/ui/Button';
 import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import { useParams } from 'react-router-dom';
+import {useHistory, useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
 import {nextRound} from "../../helpers/nextRound";
 
@@ -12,6 +12,8 @@ const NormalWaitingRoom = props => {
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	const history = useHistory();
+	
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
 	// const userID = localStorage.getItem("loggedInUser");
@@ -20,6 +22,24 @@ const NormalWaitingRoom = props => {
 	const requestBody = JSON.stringify({ roomID });
 
 	useEffect(() => {
+		
+		async function fetchLocalUser() {
+			try {
+				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
+				const response = await api.post(`/users/localUser`, requestBody);
+
+				const user = new User(response.data);
+				console.log("Confirm local user:",user);
+				localStorage.setItem('loggedInUser', user.id);
+
+			} catch (error) {
+				alert("You are not logged in!");
+				localStorage.removeItem('token');
+				history.push('/login');
+			}
+		}
+		fetchLocalUser();
+		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
