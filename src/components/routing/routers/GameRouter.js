@@ -8,6 +8,7 @@ import RoomEntrance from "components/views/RoomEntrance";
 import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
 import NormalWaitingRoom from "components/views/NormalWaitingRoom";
 import ChoiceRecord from "components/views/ChoiceResult";
+import ImitationInspect from "components/views/ImitationInspect";
 
 const GameRouter = props => {
   /**
@@ -35,6 +36,9 @@ const GameRouter = props => {
       </Route>
       <Route exact path={`${props.base}/room/:roomId/participants`}>
         <NormalWaitingRoom/>
+      </Route>
+	  <Route exact path={`${props.base}/games/imitationinspect/:roomID`}>
+        <ImitationInspect/>
       </Route>
       <Route exact path={`${props.base}`}>
         <Redirect to={`${props.base}/login`}/>

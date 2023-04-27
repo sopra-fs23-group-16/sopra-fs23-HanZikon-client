@@ -17,6 +17,6 @@ export const nextRound = (roomID) => {
     if (nextQuestion.questionType == "MultipleChoice") {
         window.location.href = "/games/multiplechoice/" + roomID;
     } else {
-        window.location.href = '/games/imitationinspect/' + roomID;
+        window.location.href = '/games/imitation/inspect/' + roomID;
     }
 }
