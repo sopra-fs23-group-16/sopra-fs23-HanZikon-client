@@ -147,7 +147,7 @@ const ChoiceGame = props => {
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
 					window.location.href = "/games/record/" + roomID;
-				}, 5000);
+				}, 500);
 			}
 		}, 1000);
 	});

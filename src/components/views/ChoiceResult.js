@@ -15,7 +15,7 @@ const ChoiceResult = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	
-	const [countdown, setCountdown] = useState(10);
+	const [countdown, setCountdown] = useState(5);
 
 	useEffect(() => {
 		
@@ -84,7 +84,7 @@ const ChoiceResult = props => {
 		setTimeout(() => {
 			clearInterval(timer);
 			nextRound(roomID);
-		}, 10000);
+		}, 500);
 		
 		return () => clearInterval(timer);
 	};
