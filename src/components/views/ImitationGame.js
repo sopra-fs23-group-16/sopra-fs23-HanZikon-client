@@ -100,6 +100,13 @@ const ImitationGame = props => {
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
 						});
+
+						// A channel to get the current room players' imitations
+						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
+							const playersImitations = response.body;
+							const playersImitationsParse = JSON.parse(playersImitations);
+							console.log(playersImitationsParse);
+						});
 					});
 				}
 			} catch (error) {
@@ -177,6 +184,7 @@ const ImitationGame = props => {
 			];
 		});
 		setIsDrawing(false);
+
 	};
 
 	const draw = ({ nativeEvent }) => {
@@ -206,11 +214,34 @@ const ImitationGame = props => {
 		setLines([]);
 	};
 
+	const saveCanvasImgs = () => {
+		const canvas = document.getElementById('imitationCanvas');
+		canvas.toBlob((blob) => {
+			const reader = new FileReader();
+			reader.readAsArrayBuffer(blob);
+			reader.onloadend = () => {
+				const buffer = reader.result;
+
+				const loggedInUserID = localStorage.getItem("loggedInUser");
+				const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+
+				const requestgetready = {
+					userID: playerToUpdate.userID,
+					imitationBytes: buffer
+				};
+				client.send("/app/multi/rooms/"+ roomID + "/players/imitations",{}, JSON.stringify(requestgetready))
+			};
+		}, 'image/png'); // Change the format here to jpeg, bmp, etc.
+	};
+
 	const submitDrawing = () =>{
 		saveStrokes(lines);
 		console.log("canvasSize",canvasSize)
 		console.log("strokehIS",strokeHistory)
 		recognizeHandwriting(canvasSize,[strokeHistory],10,handleResponse)
+
+		// process cancas strokes as bytes
+		saveCanvasImgs();
 	}
 
 	function evaluateWriting(response, character) {
@@ -349,7 +380,7 @@ const ImitationGame = props => {
 					</center>
 					<div className="imitationgame canvas-container">
 						<center>
-							<canvas
+							<canvas id = 'imitationCanvas'
 								onMouseDown={startDrawing}
 								onMouseUp={finishDrawing}
 								onMouseMove={draw}
