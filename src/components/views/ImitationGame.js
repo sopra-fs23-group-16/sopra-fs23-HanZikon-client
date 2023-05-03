@@ -41,6 +41,7 @@ const ImitationGame = props => {
 	const [canvasSize,setcanvasSize] = useState([])
 	const history = useHistory();
 	const strokeHistory = [[],[]];
+	const playerImitations = [[],[]];
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -105,7 +106,8 @@ const ImitationGame = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
 							const playersImitationsParse = JSON.parse(playersImitations);
-							console.log(playersImitationsParse);
+							console.log("playersImitationsParse = " + playersImitationsParse);
+
 						});
 					});
 				}
@@ -224,10 +226,26 @@ const ImitationGame = props => {
 
 				const loggedInUserID = localStorage.getItem("loggedInUser");
 				const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+				// convert the ArrayBuffer to a typed array
+				const byteArr = new Uint8Array(buffer);
+				const byteArrString = String.fromCharCode.apply(null, byteArr);
+				const byteArrString64 = btoa(byteArrString);
+				// const newblob = new Blob([byteArr.buffer], { type: "image/jpeg" });
+
+				console.log("Player is sending img:", playerToUpdate.userID);
+				console.log("The img buffer is sending :"+ byteArr); // Object ArrayBuffer
+				console.log("The img buffer string is sending :"+ byteArrString); // Object ArrayBuffer
+				console.log("The img buffer string 64 is sending :"+ byteArrString64); // Object ArrayBuffer  // This is working
+				// console.log("The img buffer string new blob is :"+ newblob); // Object ArrayBuffer
+
+				// Below only for testing purpose
+				// playerImitations[0].push(playerToUpdate.userID);
+				// playerImitations[1].push(byteArrString64)
+				// document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
 
 				const requestgetready = {
 					userID: playerToUpdate.userID,
-					imitationBytes: buffer
+					imitationBytes: byteArrString64
 				};
 				client.send("/app/multi/rooms/"+ roomID + "/players/imitations",{}, JSON.stringify(requestgetready))
 			};
@@ -410,6 +428,10 @@ const ImitationGame = props => {
 					<button onClick={submitDrawing}>Submit</button>
 
 				</div>
+
+				{playerImitations[1] &&
+					<img id="playerImitation" src="" ></img>
+				}
 			</div>
 		</BaseContainer>
 	);
