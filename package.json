@@ -5,6 +5,7 @@
   "dependencies": {
     "@faker-js/faker": "^7.6.0",
     "axios": "^0.24.0",
+    "hanzi-writer": "^3.5.0",
     "net": "^1.0.2",
     "node-gyp": "^8.4.1",
     "node-sass": "^8.0.0",
