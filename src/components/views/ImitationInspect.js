@@ -5,6 +5,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import 'styles/views/ImitationInspect.scss';
 import User from 'models/User';
+import HanziWriter from "hanzi-writer";
 
 const ImitationInspect = props => {
 
@@ -12,7 +13,14 @@ const ImitationInspect = props => {
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
-	const [countdown, setCountdown] = useState(15);
+	const [countdown, setCountdown] = useState(30);
+
+	const horizontalStyles = {
+		display: 'flex',
+		flexDirection: 'row', // align children horizontally
+		justifyContent: 'center', // distribute children evenly
+		alignItems: 'center', // vertically align children
+	};
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -23,8 +31,14 @@ const ImitationInspect = props => {
 		alert("Game crashed! Round is null!")
 	}
 	const currentQuestion = questionList[round - 1];
-	const url = currentQuestion.evolution[4];
-	console.log(url);
+
+	const jiaguwen = currentQuestion.evolution[0];
+	const jinwen = currentQuestion.evolution[1];
+	const zhuanshu = currentQuestion.evolution[2];
+	const lishu = currentQuestion.evolution[3];
+	const kaishu = currentQuestion.evolution[4];
+	const meaning = currentQuestion.meaning;
+	//console.log(url);
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -77,6 +91,25 @@ const ImitationInspect = props => {
 			}
 		}
 		stompConnect();
+
+		const writer = HanziWriter.create('character-demo-div', currentQuestion.character, {
+			width: 100,
+			height: 100,
+			padding: 5,
+			strokeAnimationSpeed: 2,
+			delayBetweenLoops: 500
+		});
+		writer.loopCharacterAnimation();
+
+		var imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
+			width: 100,
+			height: 100,
+			showCharacter: false,
+			showHintAfterMisses: 1,
+			padding: 5
+		});
+		imitator.quiz();
+
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
@@ -85,6 +118,7 @@ const ImitationInspect = props => {
 				});
 			}
 		};
+
 	}, []);
 
 	const startCountdown = () => {
@@ -167,15 +201,31 @@ const ImitationInspect = props => {
 				<div className="imitationinspect col">
 					<div className="imitationinspect form">
 						<center>
-							<p className="imitationinspect timer">{countdown}s</p>
-							<br />
-							<br />
-							<img src={url} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-							<br />
-							<br />
-							<br />	
+						<p className="imitationinspect timer">{countdown}s</p>
+							<div >
+								<text>
+									Demo
+								</text>
+								<div id="character-demo-div"></div>
+							</div>
+						<div>
+							<text>
+								Quiz Yourself
+							</text>
+							<div id="character-quiz-div"></div>
+						</div>
+						<br />
+						<div>
+							<img src={jiaguwen} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
+							<img src={jinwen} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
+							<img src={zhuanshu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
+							<img src={lishu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
+							<img src={kaishu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
+						</div>
+						<div className="imitationinspect label"> {meaning}</div>
 						</center>
 					</div>
+
 				</div>
 			</div>
 		</BaseContainer>

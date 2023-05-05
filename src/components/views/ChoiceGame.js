@@ -6,17 +6,14 @@ import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import User from 'models/User';
+import {Spinner} from 'components/ui/Spinner';
 
 const ChoiceGame = props => {
-	const history = useHistory(); 
-
+	const history = useHistory();
+	const [loaded, setLoaded] = useState(false);
 	const { roomID } = useParams();
-	const [roomCode, setRoomcode] = useState('');
-	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
-	//console.log(playerNames);
 
 	const [isDisabled, setDisabled] = useState(false);
 	const colorRight = "green";
@@ -31,14 +28,8 @@ const ChoiceGame = props => {
 		alert("Game crashed! Round is null!")
 	}
 	console.log("round",round);
-
 	const currentQuestion = questionList[round - 1];
-	console.log(currentQuestion.oracleURL);
-
-	const choices = currentQuestion.choices;
-
-	const requestBody = JSON.stringify({ roomID });
-    
+	const choices = currentQuestion.choices
 
 	useEffect(() => {
 		
@@ -48,7 +39,7 @@ const ChoiceGame = props => {
 				const response = await api.post(`/users/localUser`, requestBody);
 
 				const user = new User(response.data);
-				console.log("Confirm local user:",user);
+				// console.log("Confirm local user:",user);
 				localStorage.setItem('loggedInUser', user.id);
 
 			} catch (error) {
@@ -68,21 +59,13 @@ const ChoiceGame = props => {
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/info", function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							console.log(players);
-							console.log(roomparse);	
-							setRoomcode(roomcode);	
 							setPlayers(players);					
 						});
 						setTimeout(function () {
+							const requestBody = JSON.stringify({ roomID });
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
 						},500);
-						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							console.log(roomparse);							
-						});
 					});
                 }
             } catch (error) {
@@ -92,6 +75,27 @@ const ChoiceGame = props => {
             }
         }
 		stompConnect();
+
+		window.addEventListener("load", () => {
+			setLoaded(true);
+
+			var countdown = 10;
+			var countdownElement = document.getElementById("countdown");
+
+			var timer = setInterval(function() {
+				countdown--;
+				countdownElement.innerHTML = countdown + "s";
+
+				if (countdown <= 0) {
+					clearInterval(timer);
+					setTimeout(submitScore(), 50);
+					setTimeout(function () {
+						window.location.href = "/games/record/" + roomID;
+					}, 500);
+				}
+			}, 1000);
+		});
+
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
@@ -118,9 +122,6 @@ const ChoiceGame = props => {
 	};
 
 	const submitScore = () => {
-		///////////////////////////////////////////////
-		//    make sure it is the right userID       //
-		///////////////////////////////////////////////
 		const userID = localStorage.getItem('loggedInUser')
 		let systemScore = 0;
 		if (localStorage.getItem("roundPoints")) {
@@ -132,163 +133,42 @@ const ChoiceGame = props => {
 		const requestBody = {userID,scoreBoard: {systemScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 	}
-	
-	window.addEventListener("load", function() {
-		
-		var countdown = 10;
-		var countdownElement = document.getElementById("countdown");
 
-		var timer = setInterval(function() {
-			countdown--;
-			countdownElement.innerHTML = countdown + "s";
-  
-			if (countdown <= 0) {
-				clearInterval(timer);
-				setTimeout(submitScore(), 50);
-				setTimeout(function () {
-					window.location.href = "/games/record/" + roomID;
-				}, 500);
-			}
-		}, 1000);
-	});
-	
+	let content = <center><Spinner /></center>;
+
+	if (loaded) {
+		content = (
+			<center>
+				<div id="countdown" className="">
+				</div>
+				<br /><br />
+				<img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+				<br /><br /><br />
+				{choices.map((choice, index) => (
+					<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
+						{choice}
+					</button>
+				))}
+			</center>
+		);
+	}
 
 	return (
 		<BaseContainer>
 			<div  className="choicegame container">
-			<div className="choicegame col">
-				
-				{players.length > 0 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 0 ? (
-						<div className="choicegame label"> {playerNames[0]}</div>
-					) : null}
-	
-
-
-                {players.length > 1 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 1 ? (
-						<div className="choicegame label"> {playerNames[1]}</div>
-					) : null}
-
-                {players.length > 2 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 2 ? (
-						<div className="choicegame label"> {playerNames[2]}</div>
-					) : null}
-
-                {players.length > 3 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 3 ? (
-						<div className="choicegame label"> {playerNames[3]}</div>
-					) : null}
-
-                {players.length > 4 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 4 ? (
-						<div className="choicegame label"> {playerNames[4]}</div>
-					) : null}
-
-                {players.length > 5 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 5 ? (
-						<div className="choicegame label"> {playerNames[5]}</div>
-					) : null}
-
-                {players.length > 6 ? (
-					<div className="choicegame card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-                    {playerNames.length > 6 ? (
-						<div className="choicegame label"> {playerNames[6]}</div>
-					) : null}
-
+				<div className="choicegame col">
+					{players.map((player, index) => (
+						<div key={index} className="choicegame card">
+							<img src={dog} alt={`player${index+1}`} style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							{index < playerNames.length && <div className="choicegame label"><center>{playerNames[index]}</center></div>}
+						</div>
+					))}
 				</div>
 				<div className="choicegame col">
-				<div className="choicegame form">
-					<center>
-					<div id="countdown" className="">
+					<div className="choicegame form">
+						{content}
 					</div>
-					<br />
-                    <br />
-                    <img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-                    <br />
-                    <br />
-                    <br />
-							<button
-								id = "A"
-								className="choicegame option"
-								disabled={isDisabled}
-								onClick={() => handleClick(0)}
-							>
-								{choices[0]}
-							</button>
-							<button
-								id="B"
-								className="choicegame option"
-								disabled={isDisabled}
-								onClick={() => handleClick(1)}
-							>
-								{choices[1]}
-							</button>
-							<button
-								id="C"
-								className="choicegame option"
-								disabled={isDisabled}
-								onClick={() => handleClick(2)}
-							>
-								{choices[2]}
-							</button>
-							<button
-								id="D"
-								className="choicegame option"
-								disabled={isDisabled}
-								onClick={() => handleClick(3)}
-							>
-								{choices[3]}
-							</button>					
-				</center>
 				</div>
-			</div>
-			{/* <div className="choicegame col">
-					<div className="choicegame card-rule">
-                        <center>
-                    <div className="choicegame label"> Score Board</div>
-                    </center>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <div className="choicegame label-rangking"> No.1  </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.2 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.3 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.4 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.5 </div>
-                    <br />
-                    <div className="choicegame label-rangking"> No.6 </div>                   
-					</div>
-				</div> */}
 			</div>
 		</BaseContainer>
 	);
