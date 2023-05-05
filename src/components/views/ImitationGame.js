@@ -29,15 +29,10 @@ const ImitationGame = props => {
 
 	const { roomID } = useParams();
 	const [roomCode, setRoomcode] = useState('');
-	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
 	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
 	//console.log(playerNames);
-
-	const [isDisabled, setDisabled] = useState(false);
-	const colorRight = "green";
-	const colorWrong = "red";
 	const [canvasSize,setcanvasSize] = useState([])
 	const history = useHistory();
 	const strokeHistory = [[],[]];
@@ -102,13 +97,31 @@ const ImitationGame = props => {
 							console.log(roomparse);
 						});
 
+						// Below just used for testing
+						/**
 						// A channel to get the current room players' imitations
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
 							const playersImitationsParse = JSON.parse(playersImitations);
-							console.log("playersImitationsParse = " + playersImitationsParse);
+
+
+							const myMap = new Map();
+							for (const key in playersImitationsParse) {
+								if (playersImitationsParse.hasOwnProperty(key)) {
+									myMap.set(key, playersImitationsParse[key]);
+
+									const loggedInUserID = localStorage.getItem("loggedInUser");
+
+									playerImitations[0].push(loggedInUserID);
+									playerImitations[1].push(playersImitationsParse[loggedInUserID])
+									document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
+
+								}
+							}
+
 
 						});
+						 */
 					});
 				}
 			} catch (error) {
@@ -225,26 +238,16 @@ const ImitationGame = props => {
 				const buffer = reader.result;
 
 				const loggedInUserID = localStorage.getItem("loggedInUser");
-				const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
 				// convert the ArrayBuffer to a typed array
 				const byteArr = new Uint8Array(buffer);
 				const byteArrString = String.fromCharCode.apply(null, byteArr);
 				const byteArrString64 = btoa(byteArrString);
-				// const newblob = new Blob([byteArr.buffer], { type: "image/jpeg" });
 
-				console.log("Player is sending img:", playerToUpdate.userID);
-				console.log("The img buffer is sending :"+ byteArr); // Object ArrayBuffer
-				console.log("The img buffer string is sending :"+ byteArrString); // Object ArrayBuffer
+				console.log("Player is sending img:", loggedInUserID);
 				console.log("The img buffer string 64 is sending :"+ byteArrString64); // Object ArrayBuffer  // This is working
-				// console.log("The img buffer string new blob is :"+ newblob); // Object ArrayBuffer
-
-				// Below only for testing purpose
-				// playerImitations[0].push(playerToUpdate.userID);
-				// playerImitations[1].push(byteArrString64)
-				// document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
 
 				const requestgetready = {
-					userID: playerToUpdate.userID,
+					userID: loggedInUserID,
 					imitationBytes: byteArrString64
 				};
 				client.send("/app/multi/rooms/"+ roomID + "/players/imitations",{}, JSON.stringify(requestgetready))
@@ -268,10 +271,10 @@ const ImitationGame = props => {
 		let score = 10;
 
 		for (let i= 0;i < candidates.length; i++) {
-			if(i!=0 && i% 3==0){
+			if(i!==0 && i% 3===0){
 				score = score - 2;
 			}
-			if (candidates[i] == answer){
+			if (candidates[i] === answer){
 				break;
 			}
 		}
