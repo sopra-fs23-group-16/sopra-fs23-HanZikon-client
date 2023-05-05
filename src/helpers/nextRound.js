@@ -1,7 +1,12 @@
+import {client} from "./api";
+
 export const nextRound = (roomID) => {
     let round = parseInt(localStorage.getItem("round"));
     /**check if round == 10 (end game)*/
     if (round == 10) {
+        // Reset the game board after ending rounds
+        client.send("/app/multi/games/" + roomID + "/rounds/end", {})
+
         // go back to lobby for now
         // waitingRoom need clarify owner or player
         window.location.href = "/lobby"
