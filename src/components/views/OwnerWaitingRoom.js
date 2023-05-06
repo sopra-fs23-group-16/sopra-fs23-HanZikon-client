@@ -7,17 +7,17 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import { nextRound } from "helpers/nextRound";
 import User from 'models/User';
+import {Spinner} from "../ui/Spinner";
 
 const OwnerWaitingRoom = props => {
 	
 	const history = useHistory();
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
-	// const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	//const playerNames = players.map(player => player.playerName)
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
+	const [copied, setCopied] = useState(false);
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -120,6 +120,43 @@ const OwnerWaitingRoom = props => {
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/lobby";
     };
+
+	let content = <center><Spinner /></center>;
+
+	if (roomCode) {
+		content = (
+			<center>
+				<div className="ownerwaiting button-container">
+					<Button
+						width="15%"
+						disabled = {!players.every(player => player.ready)}
+						onClick={() => startGame() }
+					>
+						Start Game
+					</Button>
+				</div>
+				<div className="ownerwaiting button-container">
+					<Button
+						width="15%"
+						onClick={() => exitRoom() }
+					>
+						Exit Room
+					</Button>
+				</div>
+				<div className="ownerwaiting input">
+					{roomCode}
+					<button onClick ={ () => {
+						navigator.clipboard.writeText(roomCode);
+						setCopied(true);
+						setTimeout(() => {
+							setCopied(false);
+						}, 5000);
+					}} >{copied ? "Code copied!" : "Copy code"}</button>
+				</div>
+			</center>
+		)
+	}
+
 	return (
 		<BaseContainer>
 			<div  className="ownerwaiting container">
@@ -131,36 +168,24 @@ const OwnerWaitingRoom = props => {
 									<img src={dog} alt={`player${index + 1}`} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 								</div>
 							) : null}
-							{playerNames.length > index && players[index]?.ready ? (
+							{/* owner*/}
+							{playerNames.length > index && index == 0 ? (
+								<div className="ownerwaiting label" >&#x2705; {playerNames[index]}</div>
+							) : null}
+							{/*player ready*/}
+							{playerNames.length > index && index !== 0 && players[index]?.ready ? (
 								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x2705; {playerNames[index]}</div>
-							) : (playerNames.length > index && !players[index]?.ready ? (
+							) : null}
+							{/*player not ready*/}
+							{playerNames.length > index && index !== 0 && !players[index]?.ready ? (
 								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x274C; {playerNames[index]}</div>
-							) : null)}
+							) : null}
 						</>
 					))}
 				</div>
 				<div className="ownerwaiting col">
 				<div className="ownerwaiting form">
-					<center>
-					<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					disabled = {!players.every(player => player.ready)}
-					onClick={() => startGame() }
-					>
-					Start Game
-				</Button>
-				</div>
-				<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					onClick={() => exitRoom() }
-					>
-					Exit Room
-				</Button>
-				</div>
-				<div className="ownerwaiting input">Room Code: {roomCode}</div>
-				</center>
+					{content}
 				</div>
 			</div>
 			</div>
