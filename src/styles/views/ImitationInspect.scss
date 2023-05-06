@@ -65,6 +65,16 @@
         font-weight: bold;
         justify-content: center;
     }
+
+    &.meaninglabel {
+        font-style: sans-serif;
+        color: rgb(144, 172, 230);
+        text-transform: capitalize;
+        font-weight: 1000;
+        font-size: 20pt;
+        font-weight: bold;
+        justify-content: center;
+    }
 	
 	&.timer {
         height: 40px;

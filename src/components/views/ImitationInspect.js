@@ -222,7 +222,9 @@ const ImitationInspect = props => {
 							<img src={lishu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
 							<img src={kaishu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
 						</div>
-						<div className="imitationinspect label"> {meaning}</div>
+						<br />
+						<br />
+						<div className="imitationinspect meaninglabel"> {meaning}</div>
 						</center>
 					</div>
 
