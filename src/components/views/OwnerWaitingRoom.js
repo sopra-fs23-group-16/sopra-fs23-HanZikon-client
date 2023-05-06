@@ -7,6 +7,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import { nextRound } from "helpers/nextRound";
 import User from 'models/User';
+import {Spinner} from "../ui/Spinner";
 
 const OwnerWaitingRoom = props => {
 	
@@ -120,6 +121,34 @@ const OwnerWaitingRoom = props => {
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/lobby";
     };
+
+	let content = <center><Spinner /></center>;
+
+	if (roomCode) {
+		content = (
+			<center>
+				<div className="ownerwaiting button-container">
+					<Button
+						width="15%"
+						disabled = {!players.every(player => player.ready)}
+						onClick={() => startGame() }
+					>
+						Start Game
+					</Button>
+				</div>
+				<div className="ownerwaiting button-container">
+					<Button
+						width="15%"
+						onClick={() => exitRoom() }
+					>
+						Exit Room
+					</Button>
+				</div>
+				<div className="ownerwaiting input">Room Code: {roomCode}</div>
+			</center>
+		)
+	}
+
 	return (
 		<BaseContainer>
 			<div  className="ownerwaiting container">
@@ -141,26 +170,7 @@ const OwnerWaitingRoom = props => {
 				</div>
 				<div className="ownerwaiting col">
 				<div className="ownerwaiting form">
-					<center>
-					<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					disabled = {!players.every(player => player.ready)}
-					onClick={() => startGame() }
-					>
-					Start Game
-				</Button>
-				</div>
-				<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					onClick={() => exitRoom() }
-					>
-					Exit Room
-				</Button>
-				</div>
-				<div className="ownerwaiting input">Room Code: {roomCode}</div>
-				</center>
+					{content}
 				</div>
 			</div>
 			</div>
