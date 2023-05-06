@@ -20,6 +20,7 @@ const ChoiceGame = props => {
 	const [isDisabled, setDisabled] = useState(false);
 	const colorRight = "green";
 	const colorWrong = "red";
+	let systemScore = 0;
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -41,7 +42,6 @@ const ChoiceGame = props => {
 				const response = await api.post(`/users/localUser`, requestBody);
 
 				const user = new User(response.data);
-				// console.log("Confirm local user:",user);
 				localStorage.setItem('loggedInUser', user.id);
 
 			} catch (error) {
@@ -80,22 +80,6 @@ const ChoiceGame = props => {
 
 		window.addEventListener("load", () => {
 			setLoaded(true);
-			//
-			// var countdown = 10;
-			// var countdownElement = document.getElementById("countdown");
-			//
-			// var timer = setInterval(function() {
-			// 	countdown--;
-			// 	countdownElement.innerHTML = countdown + "s";
-			//
-			// 	if (countdown <= 0) {
-			// 		clearInterval(timer);
-			// 		setTimeout(submitScore(), 50);
-			// 		setTimeout(function () {
-			// 			window.location.href = "/games/record/" + roomID;
-			// 		}, 500);
-			// 	}
-			// }, 1000);
 		});
 
 		// return a function to disconnect on unmount
@@ -110,37 +94,34 @@ const ChoiceGame = props => {
 
 	const handleClick = (idx) => {
 		const optionIDs = "ABCD"
+		const userID = localStorage.getItem('loggedInUser')
 		if (currentQuestion.answerIndex === idx) {
-			document.getElementById(optionIDs[idx]).style.backgroundColor = colorRight
-			localStorage.setItem("roundPoints", 10)
-			setTimeout(function () {
-				console.log("roundPoints put: ", localStorage.getItem("roundPoints"));
-			}, 100);
+			document.getElementById(optionIDs[idx]).style.backgroundColor = colorRight;
+			systemScore = 10;
+			const requestBody = {userID,scoreBoard: {systemScore}};
+			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 		} else {
 			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
-			localStorage.setItem("roundPoints", 0)
+			const requestBody = {userID,scoreBoard: {systemScore}};
+			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 		};
 		setDisabled(true);
 	};
 
 	const submitScore = () => {
 		const userID = localStorage.getItem('loggedInUser')
-		let systemScore = 0;
-		if (localStorage.getItem("roundPoints")) {
-			systemScore = parseInt(localStorage.getItem("roundPoints"));
-			setTimeout(function () {
-				console.log("roundPoints", systemScore);
-			}, 50);
+		if (!isDisabled){
+			const requestBody = {userID,scoreBoard: {systemScore}};
+			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody));
 		}
-		const requestBody = {userID,scoreBoard: {systemScore}};
-		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 	}
 
 	const goNext = () => {
-		setTimeout(submitScore(), 50);
+		// setTimeout(submitScore(), 50);
+		submitScore();
 		setTimeout(function () {
 		window.location.href = "/games/record/" + roomID;
-		}, 200);
+		}, 50);
 	}
 
 	let content = <center><Spinner /></center>;

@@ -96,7 +96,7 @@ const ChoiceResult = props => {
 	// 	return () => clearInterval(timer);
 	// };
 
-	let content = <center><Spinner /></center>;
+	let content = <center><div className="choiceresult container"><Spinner /></div></center>;
 
 	if (loaded) {
 		content = (
