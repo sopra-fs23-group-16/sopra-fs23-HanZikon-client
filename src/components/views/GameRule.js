@@ -57,6 +57,24 @@ Quo cu ullum officiis detraxit. Semper deterruisset at nec, at congue appareat p
 
 Pri eu mollis verear, his et fuisset epicurei necessitatibus. His atqui deleniti ea. Et quot tota atqui est, cu quo eruditi laboramus. Mei ex probo doctus, ut tation deserunt pertinax usu.
                     </div>
+					<br />
+					<br />
+					<div className="lobby button-container">
+						<Button 
+							width="12%"
+							onClick={() => history.push(`/lobby`)}
+						>
+						Back to Lobby
+						</Button>
+					</div>
+					<div className="lobby button-container">
+						<Button
+							width="12%"
+							onClick={() => history.push(`/roomcreation`)}
+						>
+						Start a Game
+						</Button>
+					</div>	
 				</div>
         </center>
 		</BaseContainer>
