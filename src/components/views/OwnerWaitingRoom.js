@@ -168,11 +168,18 @@ const OwnerWaitingRoom = props => {
 									<img src={dog} alt={`player${index + 1}`} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 								</div>
 							) : null}
-							{playerNames.length > index && players[index]?.ready ? (
+							{/* owner*/}
+							{playerNames.length > index && index == 0 ? (
+								<div className="ownerwaiting label" >&#x2705; {playerNames[index]}</div>
+							) : null}
+							{/*player ready*/}
+							{playerNames.length > index && index !== 0 && players[index]?.ready ? (
 								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x2705; {playerNames[index]}</div>
-							) : (playerNames.length > index && !players[index]?.ready ? (
+							) : null}
+							{/*player not ready*/}
+							{playerNames.length > index && index !== 0 && !players[index]?.ready ? (
 								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x274C; {playerNames[index]}</div>
-							) : null)}
+							) : null}
 						</>
 					))}
 				</div>
