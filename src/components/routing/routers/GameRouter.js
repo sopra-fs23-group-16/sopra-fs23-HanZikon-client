@@ -10,6 +10,7 @@ import NormalWaitingRoom from "components/views/NormalWaitingRoom";
 import ChoiceRecord from "components/views/ChoiceResult";
 import ImitationInspect from "components/views/ImitationInspect";
 import ImitationVote from "components/views/ImitationVote";
+import GameRule from "components/views/GameRule";
 
 const GameRouter = props => {
   /**
@@ -18,6 +19,9 @@ const GameRouter = props => {
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
       <Route exact path={`${props.base}/lobby`}>
+        <GameRule/>
+      </Route>
+      <Route exact path={`${props.base}/gamerule`}>
         <Lobby/>
       </Route>
       <Route exact path={`${props.base}/roomsetting`}>
