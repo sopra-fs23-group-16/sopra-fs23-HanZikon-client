@@ -4,10 +4,14 @@ import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import dog from 'image/dog.png';
 import { nextRound } from "helpers/nextRound";
 import User from 'models/User';
 import {Spinner} from "../ui/Spinner";
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 
 const OwnerWaitingRoom = props => {
 	
@@ -51,7 +55,8 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							console.log(roomparse);	
+							console.log(players[0]);	
+							//console.log(getUserIcon(players[0]));	
 							setRoomcode(roomcode);	
 							setPlayers(players);					
 						});
@@ -165,7 +170,7 @@ const OwnerWaitingRoom = props => {
 						<>
 							{players.length > index ? (
 								<div className="ownerwaiting card">
-									<img src={dog} alt={`player${index + 1}`} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
+									<img src={dog}  style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 								</div>
 							) : null}
 							{/* owner*/}

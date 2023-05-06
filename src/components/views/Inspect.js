@@ -7,6 +7,11 @@ import {useHistory, useParams} from 'react-router-dom';
 import 'styles/views/Inspect.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 
 const FormField = props => {
 	return (
@@ -35,6 +40,24 @@ const Inspect = () => {
     const history = useHistory();
     const [user, setUser] = useState(null);
     const [username, setUsername] = useState("");
+	const [icon, setIcon] = useState(localStorage.getItem("icon") || "");
+	var userIcon;
+	if (icon == "dog"){
+		userIcon = dog;
+	}
+	else if (icon == "cat"){
+		userIcon = cat;
+	}
+	else if (icon == "seelion"){
+		userIcon = seelion;
+	}
+	else if (icon == "cattle"){
+		userIcon = cattle;
+	}
+	else if (icon == "owl"){
+		userIcon = owl;
+	}
+	
     let {userId} = useParams();
 
     useEffect(() => {
@@ -60,21 +83,8 @@ const Inspect = () => {
         async function fetchData() {
             try {
                 const response = await api.get('/users/'+userId);
-
-                // delays continuous execution of an async operation for 1 second.
-                // This is just a fake async call, so that the spinner can be displayed
-                // feel free to remove it :)
                 await new Promise(resolve => setTimeout(resolve, 1000));
-
-                // Get the returned users and update the state.
                 setUser(response.data);
-
-                // This is just some data for you to see what is available.
-                // Feel free to remove it.
-                console.log('request to:', response.request.responseURL);
-                console.log('status code:', response.status);
-                console.log('status text:', response.statusText);
-                console.log('requested data:', response.data);
 
                 // See here to get more data.
                 console.log(response);
@@ -93,6 +103,10 @@ const Inspect = () => {
 		<div className="inspect container">
 			<h1>My Profile</h1>
 			<div className="inspect form">
+					<div className="">
+						
+						<img src={userIcon} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} />
+					</div>
                     <div className="user overview">
                         <FormField
                             label="username"

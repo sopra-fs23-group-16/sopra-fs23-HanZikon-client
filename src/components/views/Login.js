@@ -63,10 +63,6 @@ const Login = props => {
 	const history = useHistory();  
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
-	//const [userList, setUserList] = useState([]);
-	//const [timeOut, setTimeOut] = useState(null);
-	//const [errorMessage, setErrorMessage] = useState(null);
-	//const [warnMessage, setWarnMessage] = useState(null);
 
 	const doLogin = async () => {
 		try {
@@ -84,52 +80,6 @@ const Login = props => {
 			history.push(`/register`);
 		}
 	};
-
-    // Tourist will be automatically created, and direct to game mode page
-    /*const doTouristLogin = () => {
-        try {
-            const newUserGanerated = doTouristCreation();
-            setUserList([...userList, newUserGanerated]);
-
-            // Method 1:
-            // alert("Dear tourist, You will login the game with tourist mode! you could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ</p>");
-
-            // Method 2:
-            // const myWindow = window.open("", "", "width=400,height=150,textColor=Orange");
-            // myWindow.document.title = "Warm Note";
-            // myWindow.document.write("<p>Dear tourist,</p> \n <p>You will login the game with tourist mode!</p> \n <p>  You could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ</p>");
-            // myWindow.document.body.style.background = "#262632";
-            // myWindow.document.body.style.textColor = "White";
-
-            setWarnMessage("You will login the game with tourist mode! You could also do registration to save the game record! ヽ(｡◕‿◕｡)ﾉﾟ");
-
-            setTimeout(() => {
-                history.push(`/register?mode=tourist`);
-            }, 2000);
-			} catch (error) {
-				alert(`Register failed: \n${handleError(error)}`);
-			}
-    };
-	
-	const doTouristCreation = async () => {
-		const randomUserId = faker.datatype.number({ max: 10 });
-		const randomUsername = faker.name.fullName();
-		const randomToken = faker.datatype.number(20);
-
-		const newUser = new User();
-		newUser.id = randomUserId;
-		newUser.token = randomToken;
-		newUser.username = randomUsername;
-
-		console.log('newUser =', newUser);
-
-		const touristUser= JSON.stringify({randomUserId, randomUsername, randomToken});
-		localStorage.setItem('touristUser'+randomUserId, touristUser);
-
-		console.log('touristUser =', touristUser);
-
-		return newUser;
-	};*/
 
 	return (
 		<BaseContainer>
@@ -163,27 +113,12 @@ const Login = props => {
 							Go to Register
 						</Button>
 					</div>
-					{/* <div className="login button-container">
-						<Button
-							width="80%"
-							//onClick={() => doTouristLogin()}
-						>
-							Tourist Mode
-						</Button>
-					</div> */}
 				</div>
 			</div>
 		</BaseContainer>
 	);
 };
 
-
-					/*{errorMessage &&
-						<div className="login errorMessage">{errorMessage.response.data.message}</div>
-					}
-					{warnMessage &&
-						<div className="login warnMessage">{warnMessage}</div>
-					}*/
 
 /**
  * You can get access to the history object's properties via the withRouter.
