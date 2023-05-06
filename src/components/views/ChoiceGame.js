@@ -22,6 +22,8 @@ const ChoiceGame = props => {
 	const colorWrong = "red";
 	let systemScore = 0;
 
+	const [countdownSeconds, setCountdownSeconds] = useState(10);
+
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
 		alert("Game crashed! Retrieve questions failed!")
@@ -116,6 +118,14 @@ const ChoiceGame = props => {
 		}
 	}
 
+	useEffect(() => {
+		const interval = setInterval(() => {
+			setCountdownSeconds((prevSeconds) => prevSeconds - 1);
+		}, 1000);
+
+		return () => clearInterval(interval);
+	}, []);
+
 	const goNext = () => {
 		// setTimeout(submitScore(), 50);
 		submitScore();
@@ -131,7 +141,7 @@ const ChoiceGame = props => {
 			<center>
 				<div>
 					<Countdown
-						date={Date.now() + 10000} // 10s
+						date={Date.now() + countdownSeconds * 1000} // 10s
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
 						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
