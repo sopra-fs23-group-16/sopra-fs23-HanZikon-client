@@ -7,6 +7,8 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import User from 'models/User';
 import {Spinner} from 'components/ui/Spinner';
+import Countdown from "react-countdown-now";
+import {nextRound} from "../../helpers/nextRound";
 
 const ChoiceGame = props => {
 	const history = useHistory();
@@ -78,22 +80,22 @@ const ChoiceGame = props => {
 
 		window.addEventListener("load", () => {
 			setLoaded(true);
-
-			var countdown = 10;
-			var countdownElement = document.getElementById("countdown");
-
-			var timer = setInterval(function() {
-				countdown--;
-				countdownElement.innerHTML = countdown + "s";
-
-				if (countdown <= 0) {
-					clearInterval(timer);
-					setTimeout(submitScore(), 50);
-					setTimeout(function () {
-						window.location.href = "/games/record/" + roomID;
-					}, 500);
-				}
-			}, 1000);
+			//
+			// var countdown = 10;
+			// var countdownElement = document.getElementById("countdown");
+			//
+			// var timer = setInterval(function() {
+			// 	countdown--;
+			// 	countdownElement.innerHTML = countdown + "s";
+			//
+			// 	if (countdown <= 0) {
+			// 		clearInterval(timer);
+			// 		setTimeout(submitScore(), 50);
+			// 		setTimeout(function () {
+			// 			window.location.href = "/games/record/" + roomID;
+			// 		}, 500);
+			// 	}
+			// }, 1000);
 		});
 
 		// return a function to disconnect on unmount
@@ -134,12 +136,26 @@ const ChoiceGame = props => {
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 	}
 
+	const goNext = () => {
+		setTimeout(submitScore(), 50);
+		setTimeout(function () {
+		window.location.href = "/games/record/" + roomID;
+		}, 200);
+	}
+
 	let content = <center><Spinner /></center>;
 
 	if (loaded) {
 		content = (
 			<center>
-				<div id="countdown" className="">
+				<div>
+					<Countdown
+						date={Date.now() + 10000} // 10s
+						intervalDelay={1000}
+						style={{ fontSize: '20px' }}
+						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
+						onComplete={() => goNext()}
+					/>
 				</div>
 				<br /><br />
 				<img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
