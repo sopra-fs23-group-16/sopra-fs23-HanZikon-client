@@ -9,6 +9,7 @@ import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
 import NormalWaitingRoom from "components/views/NormalWaitingRoom";
 import ChoiceRecord from "components/views/ChoiceResult";
 import ImitationInspect from "components/views/ImitationInspect";
+import ImitationVote from "components/views/ImitationVote";
 
 const GameRouter = props => {
   /**
@@ -28,17 +29,20 @@ const GameRouter = props => {
 	  <Route exact path={`${props.base}/games/record/:roomID`}>
         <ChoiceRecord/>
       </Route>
-      <Route exact path={`${props.base}/room/:roomId/owner`}>
+      <Route exact path={`${props.base}/room/:roomID/owner`}>
         <OwnerWaitingRoom/>
       </Route>
       <Route exact path={`${props.base}/roomentrance`}>
         <RoomEntrance/>
       </Route>
-      <Route exact path={`${props.base}/room/:roomId/participants`}>
+      <Route exact path={`${props.base}/room/:roomID/participants`}>
         <NormalWaitingRoom/>
       </Route>
 	  <Route exact path={`${props.base}/games/imitationinspect/:roomID`}>
         <ImitationInspect/>
+      </Route>
+      <Route exact path={`${props.base}/games/imitationvote/:roomID`}>
+        <ImitationVote/>
       </Route>
       <Route exact path={`${props.base}`}>
         <Redirect to={`${props.base}/login`}/>
