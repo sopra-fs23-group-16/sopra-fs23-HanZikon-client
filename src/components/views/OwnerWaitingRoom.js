@@ -14,11 +14,10 @@ const OwnerWaitingRoom = props => {
 	const history = useHistory();
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
-	// const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	//const playerNames = players.map(player => player.playerName)
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
+	const [copied, setCopied] = useState(false);
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -144,7 +143,16 @@ const OwnerWaitingRoom = props => {
 						Exit Room
 					</Button>
 				</div>
-				<div className="ownerwaiting input">Room Code: {roomCode}</div>
+				<div className="ownerwaiting input">
+					{roomCode}
+					<button onClick ={ () => {
+						navigator.clipboard.writeText(roomCode);
+						setCopied(true);
+						setTimeout(() => {
+							setCopied(false);
+						}, 5000);
+					}} >{copied ? "Code copied!" : "Copy code"}</button>
+				</div>
 			</center>
 		)
 	}
