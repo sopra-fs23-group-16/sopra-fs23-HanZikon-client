@@ -97,6 +97,12 @@ const ImitationGame = props => {
 							console.log(roomparse);
 						});
 
+						client.subscribe('/topic/multi/rooms/' + roomID + '/players/votes', function (response) {
+							const playerVotes = response.body;
+							const playerVotesParse = JSON.parse(playerVotes);
+							alert(playerVotesParse);
+						});
+
 						// Below just used for testing
 						/**
 						// A channel to get the current room players' imitations
@@ -255,6 +261,19 @@ const ImitationGame = props => {
 		}, 'image/png'); // Change the format here to jpeg, bmp, etc.
 	};
 
+	const updatePlayerVotes = () => {
+		const loggedInUserID = localStorage.getItem("loggedInUser");
+
+		const requestgetready = {
+			userID: loggedInUserID,
+			round: 1,
+			votedTimes: 1,
+			votedScore: 10
+		};
+		client.send("/app/multi/rooms/"+ roomID + "/players/votes",{}, JSON.stringify(requestgetready))
+
+	};
+
 	const submitDrawing = () =>{
 		saveStrokes(lines);
 		console.log("canvasSize",canvasSize)
@@ -263,6 +282,9 @@ const ImitationGame = props => {
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
+
+		// Test player votes
+		// updatePlayerVotes();
 	}
 
 	function evaluateWriting(response, character) {
