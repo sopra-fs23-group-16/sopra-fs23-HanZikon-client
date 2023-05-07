@@ -52,18 +52,19 @@
   }
   &.text {
     color: $textColor;
-	font-size: 18px;
-	    margin-top: 4px;
+	  font-size: 18px;
+	  margin-top: 4px;
     margin-bottom: 20px;
     font-weight: 350;
 	  justify-content: center;
   }
   &.label {
-    color: $textColor;
+    color: black;
+    //color: $textColor;
     margin-bottom: 12px;
     text-transform: capitalize;
     font-weight: 350;
-	justify-content: center;
+	  justify-content: center;
   }
   &.button-container {
     display: flex;
