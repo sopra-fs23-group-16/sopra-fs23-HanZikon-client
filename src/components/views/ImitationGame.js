@@ -96,32 +96,7 @@ const ImitationGame = props => {
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
 						});
-
-						// Below just used for testing
-						/**
-						// A channel to get the current room players' imitations
-						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
-							const playersImitations = response.body;
-							const playersImitationsParse = JSON.parse(playersImitations);
-
-
-							const myMap = new Map();
-							for (const key in playersImitationsParse) {
-								if (playersImitationsParse.hasOwnProperty(key)) {
-									myMap.set(key, playersImitationsParse[key]);
-
-									const loggedInUserID = localStorage.getItem("loggedInUser");
-
-									playerImitations[0].push(loggedInUserID);
-									playerImitations[1].push(playersImitationsParse[loggedInUserID])
-									document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
-
-								}
-							}
-
-
-						});
-						 */
+						 
 					});
 				}
 			} catch (error) {
@@ -432,9 +407,6 @@ const ImitationGame = props => {
 
 				</div>
 
-				{playerImitations[1] &&
-					<img id="playerImitation" src="" ></img>
-				}
 			</div>
 		</BaseContainer>
 	);
