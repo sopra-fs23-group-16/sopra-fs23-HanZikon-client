@@ -96,37 +96,6 @@ const ImitationGame = props => {
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
 						});
-
-						client.subscribe('/topic/multi/rooms/' + roomID + '/players/votes', function (response) {
-							const playerVotes = response.body;
-							const playerVotesParse = JSON.parse(playerVotes);
-							alert(playerVotesParse);
-						});
-
-						// Below just used for testing
-						
-						// A channel to get the current room players' imitations
-						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
-							const playersImitations = response.body;
-							const playersImitationsParse = JSON.parse(playersImitations);
-
-
-							const myMap = new Map();
-							for (const key in playersImitationsParse) {
-								if (playersImitationsParse.hasOwnProperty(key)) {
-									myMap.set(key, playersImitationsParse[key]);
-
-									const loggedInUserID = localStorage.getItem("loggedInUser");
-
-									playerImitations[0].push(loggedInUserID);
-									playerImitations[1].push(playersImitationsParse[loggedInUserID])
-									document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
-
-								}
-							}
-
-
-						});
 						 
 					});
 				}
@@ -261,19 +230,6 @@ const ImitationGame = props => {
 		}, 'image/png'); // Change the format here to jpeg, bmp, etc.
 	};
 
-	const updatePlayerVotes = () => {
-		const loggedInUserID = localStorage.getItem("loggedInUser");
-
-		const requestgetready = {
-			userID: loggedInUserID,
-			round: 1,
-			votedTimes: 1,
-			votedScore: 10
-		};
-		client.send("/app/multi/rooms/"+ roomID + "/players/votes",{}, JSON.stringify(requestgetready))
-
-	};
-
 	const submitDrawing = () =>{
 		saveStrokes(lines);
 		console.log("canvasSize",canvasSize)
@@ -282,9 +238,6 @@ const ImitationGame = props => {
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
-
-		// Test player votes
-		// updatePlayerVotes();
 	}
 
 	function evaluateWriting(response, character) {
