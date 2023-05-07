@@ -55,6 +55,10 @@ const ImitationVote = props => {
 				if (!client['connected']) {
 					client.connect({}, function () {
 						console.log('connected to stomp');
+						setTimeout(function () {
+							client.send("/app/multi/rooms/" + roomID + "/players/records", {}, requestBody)
+						}, 500);
+
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
 							const playersImitationsParse = JSON.parse(playersImitations);
@@ -227,6 +231,7 @@ const ImitationVote = props => {
 					) : null}
 
 				</div>
+
 				<div className="choicegame col">
 					<center>
 						<div id="countdown" className="">
@@ -240,6 +245,10 @@ const ImitationVote = props => {
 						</center>
 					</div>
 				</div>
+
+				{playerImitations[1] &&
+					<img id="playerImitation" src="" ></img>
+				}
 
 			</div>
 		</BaseContainer>

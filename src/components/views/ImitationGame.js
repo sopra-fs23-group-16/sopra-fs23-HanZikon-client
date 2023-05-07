@@ -407,9 +407,6 @@ const ImitationGame = props => {
 
 				</div>
 
-				{playerImitations[1] &&
-					<img id="playerImitation" src="" ></img>
-				}
 			</div>
 		</BaseContainer>
 	);
