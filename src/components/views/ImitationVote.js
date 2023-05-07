@@ -10,11 +10,10 @@ import User from 'models/User';
 const ImitationVote = props => {
 
 	const { roomID } = useParams();
-	const [roomCode, setRoomcode] = useState('');
 	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
+	const playerImitations = [[],[]];
 	//console.log(playerNames);
 
 	const history = useHistory();
@@ -31,8 +30,6 @@ const ImitationVote = props => {
 	console.log(currentQuestion);
 
 	const requestBody = JSON.stringify({ roomID });
-
-
 
 	useEffect(() => {
 		
@@ -53,30 +50,38 @@ const ImitationVote = props => {
 		}
 		fetchLocalUser();
 		
-		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
 			try {
 				if (!client['connected']) {
 					client.connect({}, function () {
 						console.log('connected to stomp');
-						client.subscribe("/topic/multi/rooms/" + roomID + "/info", function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							const roomcode = roomparse["roomCode"]
-							const players = roomparse["players"]
-							console.log(players);
-							console.log(roomparse);
-							setRoomcode(roomcode);
-							setPlayers(players);
+						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
+							const playersImitations = response.body;
+							const playersImitationsParse = JSON.parse(playersImitations);
+							console.log(playersImitationsParse);
+
+							const myMap = new Map();
+							for (const key in playersImitationsParse) {
+								if (playersImitationsParse.hasOwnProperty(key)) {
+									myMap.set(key, playersImitationsParse[key]);
+
+									const loggedInUserID = localStorage.getItem("loggedInUser");
+
+									playerImitations[0].push(loggedInUserID);
+									playerImitations[1].push(playersImitationsParse[loggedInUserID])
+									console.log(playerImitations[0])
+									document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
+								}
+							}
 						});
-						setTimeout(function () {
-							client.send("/app/multi/rooms/" + roomID + "/info", {}, requestBody)
+						/*setTimeout(function () {
+							client.send("/app/multi/rooms/" + roomID + "/info", {}, playerImitations)
 						}, 500);
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
-						});
+						});*/
 					});
 				}
 			} catch (error) {

@@ -98,7 +98,7 @@ const ImitationGame = props => {
 						});
 
 						// Below just used for testing
-						/**
+						
 						// A channel to get the current room players' imitations
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
@@ -121,7 +121,7 @@ const ImitationGame = props => {
 
 
 						});
-						 */
+						 
 					});
 				}
 			} catch (error) {
