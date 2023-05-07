@@ -226,13 +226,15 @@ const ImitationInspect = props => {
 								<br />
 								<div>
 									{evolutions.map((evolution, index) => (
-										<img
-											key={index}
-											src={evolution}
-											alt="player1"
-											onLoad={() => handleImgLoad(evolutions.length)}
-											style={{ width: '10%', height: 'auto', margin: 'auto' }}
-										/>
+										(evolution !== "n.a.") && (
+											<img
+												key={index}
+												src={evolution}
+												alt="player1"
+												onLoad={() => handleImgLoad(evolutions.length)}
+												style={{ width: '10%', height: 'auto', margin: 'auto' }}
+											/>
+										)
 									))}
 								</div>
 								<br />
