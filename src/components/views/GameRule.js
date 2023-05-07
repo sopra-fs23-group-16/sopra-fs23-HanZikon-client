@@ -47,15 +47,19 @@ const GameRule = () => {
 				<h1>Game Rule</h1>
 				<div className="gamerule form">
                 <div className="gamerule label">
-                Lorem ipsum dolor sit amet, has ut aeque omnium numquam. Ei pro augue epicurei, eum an duis posse moderatius. Cu eam nobis recusabo recteque, qualisque incorrupte intellegebat te est, ei mazim essent vim. Ne rebum omnes dicunt est.
-
-Modo delenit electram ea quo. Vide constituto cu eos, cibo malis molestiae eum ut. Ei facete audiam signiferumque has, mel malorum inermis voluptua ei, ei eius explicari gloriatur quo. Essent veritus scaevola no quo, vel tale tritani no.
-
-At lorem nostro sit, aeque gubergren vis ea. Ea habemus accommodare has, in nisl graeco platonem his, nam noster recusabo iracundia cu. Tempor delectus consequat vis id, utroque docendi cotidieque eu sea. Ad vis ferri dignissim gubergren. Nec eu salutandi efficiantur voluptatibus, id sit ferri habemus. Mea vide deleniti corrumpit id.
-
-Quo cu ullum officiis detraxit. Semper deterruisset at nec, at congue appareat pri, per legere virtute cu. No duo regione malorum, eu est meis inimicus. Tale altera senserit at mel. Id cum probo labore, pri graeci maiorum an.
-
-Pri eu mollis verear, his et fuisset epicurei necessitatibus. His atqui deleniti ea. Et quot tota atqui est, cu quo eruditi laboramus. Mei ex probo doctus, ut tation deserunt pertinax usu.
+                Game Modes:<br /><br />
+				<b>1. HanziDrawing</b><br /><br />
+					a. Learn to write Chinese characters from Live Demo and a guided imitation.<br />
+					b. Browse the evolution of Chinese characters dating back to 2nd millennium BC.<br />
+					c. "Draw" the Chinese character from your memory.<br />
+					d.Peer review all your teammates’ works and take a vote!.<br /><br />
+					<b>2. OracleGuessing</b><br /><br />
+					a. An Oracle bone script, together with the English meaning of the word, will be displayed.<br />
+					b. Four choices of modern Chinese characters will be displayed.<br />
+					c. Only one answer is correct.<br /><br />
+					<b>Note:</b> Empirical evidence suggests, a prior knowledge in Chinese isn’t going to help. Just trust your gut and have fun!<br /><br />
+					<b>3. A bit of Both</b><br /><br />
+					a. Just like its name, a bit of both modes coming in random order.
                     </div>
 					<br />
 					<br />
