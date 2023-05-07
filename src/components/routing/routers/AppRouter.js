@@ -26,6 +26,7 @@ import {ChoiceRecordGuard} from "components/routing/routeProtectors/ChoiceRecord
 import ImitationInspect from "components/views/ImitationInspect";
 import {ImitationInspectGuard} from "components/routing/routeProtectors/ImitationInspectGuard";
 import ImitationVote from "components/views/ImitationVote";
+import {ImitationVoteGuard} from "components/routing/routeProtectors/ImitationVoteGuard";
 import GameRule from "components/views/GameRule";
 
 /**
@@ -110,7 +111,9 @@ const AppRouter = () => {
 				</Route>
 
 				<Route path="/games/imitationvote/:roomID">
-					<ImitationVote/>
+					<ImitationVoteGuard>
+						<ImitationVote/>
+					</ImitationVoteGuard>
 				</Route>
 
 				<Route exact path="/login">

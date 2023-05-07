@@ -104,7 +104,7 @@ const ImitationGame = props => {
 						});
 
 						// Below just used for testing
-						/**
+						
 						// A channel to get the current room players' imitations
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
@@ -127,7 +127,7 @@ const ImitationGame = props => {
 
 
 						});
-						 */
+						 
 					});
 				}
 			} catch (error) {
@@ -347,7 +347,7 @@ const ImitationGame = props => {
 				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					window.location.href = "/games/record/" + roomID;
+					window.location.href = "/games/imitationvote/" + roomID;
 				}, 500);
 			}
 		}, 1000);
