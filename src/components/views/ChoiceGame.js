@@ -10,6 +10,7 @@ import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
 import {nextRound} from "../../helpers/nextRound";
 import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import getTranslation from "../../helpers/getTranslation";
 
 const ChoiceGame = props => {
 	const history = useHistory();
@@ -157,7 +158,7 @@ const ChoiceGame = props => {
 							<br /><br /><br />
 							{loaded && choices.map((choice, index) => (
 								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
-									{choice}
+									{choice + getTranslation(choice)}
 								</button>
 							))}
 						</center>
