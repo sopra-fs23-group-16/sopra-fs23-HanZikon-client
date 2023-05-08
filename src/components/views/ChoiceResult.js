@@ -12,14 +12,13 @@ import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ChoiceResult = props => {
 	
-	const history = useHistory();
-	const [loaded, setLoaded] = useState(false);
+	// const history = useHistory();
 
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	
-	const [countdown, setCountdown] = useState(5);
+	// const [countdown, setCountdown] = useState(5);
 
 	useEffect(() => {
 
@@ -52,10 +51,6 @@ const ChoiceResult = props => {
             }
         }
 		stompConnect();
-
-		window.addEventListener("load", () => {
-			setLoaded(true);
-		});
 		
 		// return a function to disconnect on unmount
 		return function cleanup() {
@@ -84,7 +79,7 @@ const ChoiceResult = props => {
 
 	let content = <center><div className="choiceresult container"><Spinner /></div></center>;
 
-	if (loaded) {
+	if (players.length !== 0) {
 		content = (
 			<div className="choiceresult container">
 				{/*<p className="choiceresult timer">{countdown}s</p>*/}
