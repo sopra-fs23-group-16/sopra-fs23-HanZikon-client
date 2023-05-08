@@ -4,20 +4,24 @@ import {useHistory, useParams} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import dog from 'image/dog.png';
 import { nextRound } from "helpers/nextRound";
 import User from 'models/User';
+import {Spinner} from "../ui/Spinner";
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 
 const OwnerWaitingRoom = props => {
 	
 	const history = useHistory();
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
-	// const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
-	//const playerNames = players.map(player => player.playerName)
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
+	const [copied, setCopied] = useState(false);
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -51,7 +55,8 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							console.log(roomparse);	
+							console.log(players[0]);	
+							//console.log(getUserIcon(players[0]));	
 							setRoomcode(roomcode);	
 							setPlayers(players);					
 						});
@@ -120,98 +125,74 @@ const OwnerWaitingRoom = props => {
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/lobby";
     };
+
+	let content = <center><Spinner /></center>;
+
+	if (roomCode) {
+		content = (
+			<center>
+				<div className="ownerwaiting button-container">
+					<Button
+						width="15%"
+						disabled = {!players.every(player => player.ready)}
+						onClick={() => startGame() }
+					>
+						Start Game
+					</Button>
+				</div>
+				<div className="ownerwaiting button-container">
+					<Button
+						width="15%"
+						onClick={() => exitRoom() }
+					>
+						Exit Room
+					</Button>
+				</div>
+				<div className="ownerwaiting input">
+					{roomCode}
+					<button onClick ={ () => {
+						navigator.clipboard.writeText(roomCode);
+						setCopied(true);
+						setTimeout(() => {
+							setCopied(false);
+						}, 5000);
+					}} >{copied ? "Code copied!" : "Copy code"}</button>
+				</div>
+			</center>
+		)
+	}
+
 	return (
 		<BaseContainer>
 			<div  className="ownerwaiting container">
-			<div className="ownerwaiting col">
-				{players.length > 0 ? (
-					<div className="ownerwaiting card">
-						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 0 && players[0]?.ready ? (
-						<div className="ownerwaiting label">&#x2705; {playerNames[0]}</div>
-						) : (playerNames.length > 0 && !players[0]?.ready ? (
-						<div className="ownerwaiting label">&#x274C; {playerNames[0]}</div>
-					) : null)}
-
-				{players.length > 1 ? (
-					<div className="ownerwaiting card">
-						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 1 && players[1]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[1])}>&#x1F6AB; &#x2705; {playerNames[1]}</div>
-						) : (playerNames.length > 1 && !players[1]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[1])}>&#x1F6AB; &#x274C; {playerNames[1]}</div>
-					) : null)}
-
-				{players.length > 2 ? (	
-					<div className="ownerwaiting card">
-						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 2 && players[2]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[2])}>&#x1F6AB; &#x2705; {playerNames[2]}</div>
-						) : (playerNames.length > 2 && !players[2]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[2])}>&#x1F6AB; &#x274C; {playerNames[2]}</div>
-					) : null)}
-
-				{players.length > 3 ? (
-					<div className="ownerwaiting card">			
-						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 3 && players[3]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[3])}>&#x1F6AB; &#x2705; {playerNames[3]}</div>
-						) : (playerNames.length > 3 && !players[3]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[3])}>&#x1F6AB; &#x274C; {playerNames[3]}</div>
-					) : null)}
-
-				{players.length > 4 ? (
-					<div className="ownerwaiting card">					
-						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 4 && players[4]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[4])}>&#x1F6AB; &#x2705; {playerNames[4]}</div>
-						) : (playerNames.length > 4 && !players[4]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[4])}>&#x1F6AB; &#x274C; {playerNames[4]}</div>
-					) : null)}
-
-				{players.length > 5 ? (
-					<div className="ownerwaiting card">
-						<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 5 && players[5]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[5])}>&#x2705; {playerNames[5]}</div>
-						) : (playerNames.length > 5 && !players[5]?.ready ? (
-						<div className="ownerwaiting label" onClick={() => kickout(players[5])}>&#x274C; {playerNames[5]}</div>
-					) : null)}
+				<div className="ownerwaiting col">
+					{players.map((player, index) => (
+						<>
+							{players.length > index ? (
+								<div className="ownerwaiting card">
+									<img src={dog}  style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
+								</div>
+							) : null}
+							{/* owner*/}
+							{playerNames.length > index && index == 0 ? (
+								<div className="ownerwaiting label" >&#x2705; {playerNames[index]}</div>
+							) : null}
+							{/*player ready*/}
+							{playerNames.length > index && index !== 0 && players[index]?.ready ? (
+								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x2705; {playerNames[index]}</div>
+							) : null}
+							{/*player not ready*/}
+							{playerNames.length > index && index !== 0 && !players[index]?.ready ? (
+								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x274C; {playerNames[index]}</div>
+							) : null}
+						</>
+					))}
 				</div>
 				<div className="ownerwaiting col">
 				<div className="ownerwaiting form">
-					<center>
-					<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					onClick={() => startGame() }
-					>
-					Start Game
-				</Button>
-				</div>
-				<div className="ownerwaiting button-container">
-				<Button
-					width="15%"
-					onClick={() => exitRoom() }
-					>
-					Exit Room
-				</Button>
-				</div>
-				<div className="ownerwaiting input">Room Code: {roomCode}</div>
-				</center>
+					{content}
 				</div>
 			</div>
-			{/* <div className="ownerwaiting col">
-					<div className="ownerwaiting card-rule">
-						Game Rule
-					</div>
-				</div> */}
 			</div>
 
 				

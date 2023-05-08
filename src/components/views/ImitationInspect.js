@@ -5,6 +5,8 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import 'styles/views/ImitationInspect.scss';
 import User from 'models/User';
+import HanziWriter from "hanzi-writer";
+import {Spinner} from "../ui/Spinner";
 
 const ImitationInspect = props => {
 
@@ -12,7 +14,15 @@ const ImitationInspect = props => {
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
-	const [countdown, setCountdown] = useState(15);
+	const [imgLoaded, setImgLoaded] = useState(false);
+	const [countdown, setCountdown] = useState(30);
+
+	const horizontalStyles = {
+		display: 'flex',
+		flexDirection: 'row', // align children horizontally
+		justifyContent: 'center', // distribute children evenly
+		alignItems: 'center', // vertically align children
+	};
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -23,8 +33,10 @@ const ImitationInspect = props => {
 		alert("Game crashed! Round is null!")
 	}
 	const currentQuestion = questionList[round - 1];
-	const url = currentQuestion.evolution[4];
-	console.log(url);
+
+	const evolutions = currentQuestion.evolution;
+	const meaning = currentQuestion.meaning;
+	//console.log(url);
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -77,6 +89,25 @@ const ImitationInspect = props => {
 			}
 		}
 		stompConnect();
+
+		const writer = HanziWriter.create('character-demo-div', currentQuestion.character, {
+			width: 100,
+			height: 100,
+			padding: 5,
+			strokeAnimationSpeed: 2,
+			delayBetweenLoops: 500
+		});
+		writer.loopCharacterAnimation();
+
+		var imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
+			width: 100,
+			height: 100,
+			showCharacter: false,
+			showHintAfterMisses: 1,
+			padding: 5
+		});
+		imitator.quiz();
+
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
@@ -85,6 +116,7 @@ const ImitationInspect = props => {
 				});
 			}
 		};
+
 	}, []);
 
 	const startCountdown = () => {
@@ -100,6 +132,15 @@ const ImitationInspect = props => {
 		
 		return () => clearInterval(timer);
 	};
+
+	let loadedImg = 0;
+
+	const handleImgLoad = (num) => {
+		loadedImg++;
+		if(loadedImg==num){
+			setImgLoaded(true);
+		}
+	}
 
 	return (
 		<BaseContainer>
@@ -166,16 +207,43 @@ const ImitationInspect = props => {
 				
 				<div className="imitationinspect col">
 					<div className="imitationinspect form">
-						<center>
-							<p className="imitationinspect timer">{countdown}s</p>
-							<br />
-							<br />
-							<img src={url} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-							<br />
-							<br />
-							<br />	
-						</center>
+						{!imgLoaded && <center><Spinner /></center>}
+						<div className={imgLoaded ? "content" : "content hidden"}>
+							<center>
+								<p className="imitationinspect timer">{countdown}s</p>
+								<div >
+									<text>
+										Demo
+									</text>
+									<div id="character-demo-div"></div>
+								</div>
+								<div>
+									<text>
+										Quiz Yourself
+									</text>
+									<div id="character-quiz-div"></div>
+								</div>
+								<br />
+								<div>
+									{evolutions.map((evolution, index) => (
+										(evolution !== "n.a.") && (
+											<img
+												key={index}
+												src={evolution}
+												alt="player1"
+												onLoad={() => handleImgLoad(evolutions.length)}
+												style={{ width: '10%', height: 'auto', margin: 'auto' }}
+											/>
+										)
+									))}
+								</div>
+								<br />
+								<br />
+								<div className="imitationinspect meaninglabel"> {meaning}</div>
+							</center>
+						</div>
 					</div>
+
 				</div>
 			</div>
 		</BaseContainer>

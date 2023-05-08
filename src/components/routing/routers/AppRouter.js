@@ -25,7 +25,9 @@ import ChoiceRecord from "components/views/ChoiceResult";
 import {ChoiceRecordGuard} from "components/routing/routeProtectors/ChoiceRecordGuard";
 import ImitationInspect from "components/views/ImitationInspect";
 import {ImitationInspectGuard} from "components/routing/routeProtectors/ImitationInspectGuard";
-
+import ImitationVote from "components/views/ImitationVote";
+import {ImitationVoteGuard} from "components/routing/routeProtectors/ImitationVoteGuard";
+import GameRule from "components/views/GameRule";
 
 /**
  * Main router of your application.
@@ -54,6 +56,10 @@ const AppRouter = () => {
 					<LobbyGuard>
 						<Lobby/>
 					</LobbyGuard>
+				</Route>
+
+				<Route path="/gamerule">
+						<GameRule/>
 				</Route>
 		
 				<Route path="/roomsetting">
@@ -102,6 +108,12 @@ const AppRouter = () => {
 					<ImitationInspectGuard>
 						<ImitationInspect/>
 					</ImitationInspectGuard>
+				</Route>
+
+				<Route path="/games/imitationvote/:roomID">
+					<ImitationVoteGuard>
+						<ImitationVote/>
+					</ImitationVoteGuard>
 				</Route>
 
 				<Route exact path="/login">

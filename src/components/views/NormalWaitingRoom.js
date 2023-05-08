@@ -67,9 +67,12 @@ const NormalWaitingRoom = props => {
 						
 							const userIDs = players.map(player => player.userID)
 							let userId = localStorage.getItem("loggedInUser");
-							if (!userIDs.includes(userId)) {
+
+							// console.log("userId",typeof userId)
+							// console.log("userIDS",typeof userIDs[0])
+							if (!userIDs.includes(parseInt(userId))) {
 								alert("You are no longer in the room!");
-								window.location.href = "/lobby";
+								 window.location.href = "/lobby";
 							}
 						});
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {

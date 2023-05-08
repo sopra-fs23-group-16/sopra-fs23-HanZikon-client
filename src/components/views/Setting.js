@@ -7,6 +7,7 @@ import {Button} from 'components/ui/Button';
 import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
+import dog from 'image/dog.png';
 
 const FormField = props => {
 	return (
@@ -35,8 +36,17 @@ const Setting = props => {
 	const [user, setUser] = useState(null);
 	const [username, setUsername] = useState(null);
 	const [password, setPassword] = useState(null);
+	const [icon, setIcon] = useState(null);
 	let {userId} = useParams();
-  
+	
+	const handleChangeIcon = (event) =>{
+		const icon = event.target.value;
+		setIcon(icon);
+		localStorage.setItem('icon', icon);
+		localStorage.setItem("loggedInUser", user.id);
+		console.log(icon);
+	};
+	
 	const confirm = async () => {
         let item = {username, password}
         console.warn("item", item)
@@ -46,6 +56,7 @@ const Setting = props => {
 
             // Get the returned user and update a new object.
             const user = new User(response.data);
+			//localStorage.setItem("loggedInUser", user.id);
             history.push(`/users/${userId}`);
 
         } catch (error) {
@@ -54,6 +65,11 @@ const Setting = props => {
     }
 
     useEffect(() => {
+		
+		const localIcon = localStorage.getItem("icon");
+		if (localIcon) {
+			setIcon(localIcon);
+		}
 		
 		async function fetchLocalUser() {
 			try {
@@ -77,22 +93,9 @@ const Setting = props => {
             try {
                 const response = await api.get('/users/'+userId);
 
-                // delays continuous execution of an async operation for 1 second.
-                // This is just a fake async call, so that the spinner can be displayed
-                // feel free to remove it :)
                 await new Promise(resolve => setTimeout(resolve, 1000));
-
-                // Get the returned users and update the state.
                 setUser(response.data);
 
-                // This is just some data for you to see what is available.
-                // Feel free to remove it.
-                console.log('request to:', response.request.responseURL);
-                console.log('status code:', response.status);
-                console.log('status text:', response.statusText);
-                console.log('requested data:', response.data);
-
-                // See here to get more data.
                 console.log(response);
             } catch (error) {
                 console.error(`Something went wrong: \n${handleError(error)}`);
@@ -107,13 +110,20 @@ const Setting = props => {
 
     if (user) {
         content = (
-            <div className="user overview">
-
-				<FormField
-                    label="picture"
-                    //value={username}
-                    //onChange={un => setUsername(un)}
-                />
+            <div className="">
+				<div className="setting field">
+					<label className="setting label">
+						icon
+					</label>
+					<select value = {icon} className="setting select" onChange = {handleChangeIcon}>
+						<option value="-" selected>Please select...</option>
+						<option value="cat">cat</option>
+						<option value="cattle">cattle</option>
+						<option value="dog">dog</option>
+						<option value="seelion">seelion</option>
+						<option value="owl">owl</option>
+					</select>
+				</div>
                 <FormField
                     label="username"
                     value={username}
@@ -126,7 +136,7 @@ const Setting = props => {
                 />
 				&nbsp;
                 <Button
-					disabled={!username && !password}
+					disabled={!icon && !username && !password}
                     width="100%"
                     onClick={() => confirm()}
                 >

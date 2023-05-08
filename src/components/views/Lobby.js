@@ -1,9 +1,8 @@
 import {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import {Button} from 'components/ui/Button';
-import {Link, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
-import PropTypes from "prop-types";
 import "styles/views/Lobby.scss";
 import User from 'models/User';
 
@@ -50,7 +49,7 @@ const Lobby = () => {
 					<div className="lobby button-container">
 						<Button 
 							width="70%"
-							//onClick={() => }
+							onClick={() => history.push(`/gamerule`)}
 						>
 						Game Rule
 						</Button>
