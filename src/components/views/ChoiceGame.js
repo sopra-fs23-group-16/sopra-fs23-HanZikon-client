@@ -80,10 +80,6 @@ const ChoiceGame = props => {
         }
 		stompConnect();
 
-		window.addEventListener("load", () => {
-			setLoaded(true);
-		});
-
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
@@ -134,30 +130,13 @@ const ChoiceGame = props => {
 		}, 50);
 	}
 
-	let content = <center><Spinner /></center>;
+	let loadedCmp = 0;
 
-	if (loaded) {
-		content = (
-			<center>
-				<div>
-					<Countdown
-						date={Date.now() + countdownSeconds * 1000} // 10s
-						intervalDelay={1000}
-						style={{ fontSize: '20px' }}
-						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
-						onComplete={() => goNext()}
-					/>
-				</div>
-				<br /><br />
-				<img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-				<br /><br /><br />
-				{choices.map((choice, index) => (
-					<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
-						{choice}
-					</button>
-				))}
-			</center>
-		);
+	const handleCmpLoad = (num) => {
+		loadedCmp++;
+		if(loadedCmp==num){
+			setLoaded(true);
+		}
 	}
 
 	return (
@@ -173,7 +152,29 @@ const ChoiceGame = props => {
 				</div>
 				<div className="choicegame col">
 					<div className="choicegame form">
-						{content}
+						{!loaded && <center><Spinner /></center>}
+						<div className={loaded ? "content" : "content hidden"}>
+						<center>
+							<div>
+								<Countdown
+									date={Date.now() + countdownSeconds * 1000} // 10s
+									intervalDelay={1000}
+									style={{ fontSize: '20px' }}
+									renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
+									onComplete={() => goNext()}
+								/>
+							</div>
+							<br /><br />
+							<img src={currentQuestion.oracleURL} alt="player1" onLoad={()=>handleCmpLoad(1)}
+								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<br /><br /><br />
+							{choices.map((choice, index) => (
+								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
+									{choice}
+								</button>
+							))}
+						</center>
+						</div>
 					</div>
 				</div>
 			</div>
