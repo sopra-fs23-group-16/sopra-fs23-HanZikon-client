@@ -70,20 +70,12 @@ const Register = props => {
 
 			const user = new User(response.data);
 
-			localStorage.setItem('token', user.token);
-			localStorage.setItem('loggedInUser', user.id);
+			await localStorage.setItem('token', user.token);
+			await localStorage.setItem('loggedInUser', user.id);
 
 			history.push(`/lobby`);
 			} catch (error) {
 				alert(`Register failed: \n${handleError(error)}`);
-			}
-	};
-  
-	const doLogin = async () => {
-		try {
-			history.push(`/login`);
-			} catch (error) {
-				alert(`Login failed: \n${handleError(error)}`);
 			}
 	};
 
@@ -114,7 +106,7 @@ const Register = props => {
 				<div className="register button-container">
 					<Button
 						width="70%"
-						onClick={() => doLogin()}
+						onClick={() => history.push(`/login`)}
 					>
 					Back to Login
 					</Button>

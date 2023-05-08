@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
 import 'styles/views/RoomSetting.scss';
 import User from 'models/User';
+import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const RoomSetting = () => {
 
@@ -29,22 +30,7 @@ const RoomSetting = () => {
 	};
 
     useEffect(() => {
-		
-		async function fetchLocalUser() {
-			try {
-				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
-				const response = await api.post(`/users/localUser`, requestBody);
 
-				const user = new User(response.data);
-				console.log("Confirm local user:",user);
-				localStorage.setItem('loggedInUser', user.id);
-
-			} catch (error) {
-				alert("You are not logged in!");
-				localStorage.removeItem('token');
-				history.push('/login');
-			}
-		}
 		fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:

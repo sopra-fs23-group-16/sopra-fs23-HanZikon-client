@@ -7,6 +7,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import {useHistory, useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
 import {nextRound} from "../../helpers/nextRound";
+import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const NormalWaitingRoom = props => {
     const {roomID} = useParams();
@@ -22,22 +23,7 @@ const NormalWaitingRoom = props => {
 	const requestBody = JSON.stringify({ roomID });
 
 	useEffect(() => {
-		
-		async function fetchLocalUser() {
-			try {
-				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
-				const response = await api.post(`/users/localUser`, requestBody);
 
-				const user = new User(response.data);
-				console.log("Confirm local user:",user);
-				localStorage.setItem('loggedInUser', user.id);
-
-			} catch (error) {
-				alert("You are not logged in!");
-				localStorage.removeItem('token');
-				history.push('/login');
-			}
-		}
 		fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:

@@ -9,6 +9,7 @@ import User from 'models/User';
 import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
 import {nextRound} from "../../helpers/nextRound";
+import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ChoiceGame = props => {
 	const history = useHistory();
@@ -37,21 +38,7 @@ const ChoiceGame = props => {
 	const choices = currentQuestion.choices
 
 	useEffect(() => {
-		
-		async function fetchLocalUser() {
-			try {
-				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
-				const response = await api.post(`/users/localUser`, requestBody);
 
-				const user = new User(response.data);
-				localStorage.setItem('loggedInUser', user.id);
-
-			} catch (error) {
-				alert("You are not logged in!");
-				localStorage.removeItem('token');
-				history.push('/login');
-			}
-		}
 		fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
@@ -79,10 +66,6 @@ const ChoiceGame = props => {
             }
         }
 		stompConnect();
-
-		window.addEventListener("load", () => {
-			setLoaded(true);
-		});
 
 		// return a function to disconnect on unmount
 		return function cleanup() {
@@ -134,30 +117,13 @@ const ChoiceGame = props => {
 		}, 50);
 	}
 
-	let content = <center><Spinner /></center>;
+	let loadedCmp = 0;
 
-	if (loaded) {
-		content = (
-			<center>
-				<div>
-					<Countdown
-						date={Date.now() + countdownSeconds * 1000} // 10s
-						intervalDelay={1000}
-						style={{ fontSize: '20px' }}
-						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
-						onComplete={() => goNext()}
-					/>
-				</div>
-				<br /><br />
-				<img src={currentQuestion.oracleURL} alt="player1" style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-				<br /><br /><br />
-				{choices.map((choice, index) => (
-					<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
-						{choice}
-					</button>
-				))}
-			</center>
-		);
+	const handleCmpLoad = (num) => {
+		loadedCmp++;
+		if(loadedCmp==num){
+			setLoaded(true);
+		}
 	}
 
 	return (
@@ -173,7 +139,29 @@ const ChoiceGame = props => {
 				</div>
 				<div className="choicegame col">
 					<div className="choicegame form">
-						{content}
+						{!loaded && <center><Spinner /></center>}
+						<div className={loaded ? "content" : "content hidden"}>
+							<center>
+							<div>
+								<Countdown
+									date={Date.now() + countdownSeconds * 1000} // 10s
+									intervalDelay={1000}
+									style={{ fontSize: '20px' }}
+									renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
+									onComplete={() => goNext()}
+								/>
+							</div>
+							<br /><br />
+							<img src={currentQuestion.oracleURL} alt="player1" onLoad={()=>handleCmpLoad(1)}
+								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<br /><br /><br />
+							{loaded && choices.map((choice, index) => (
+								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
+									{choice}
+								</button>
+							))}
+						</center>
+						</div>
 					</div>
 				</div>
 			</div>
