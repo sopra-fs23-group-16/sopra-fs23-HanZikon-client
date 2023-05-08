@@ -32,10 +32,10 @@ const Lobby = () => {
 	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
 
-	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem("loggedInUser");
-		const response = api.get('/logout/'+id);
+	const logout = async () => {
+		await localStorage.removeItem('token');
+		await localStorage.removeItem("loggedInUser");
+		const response = await api.get('/logout/'+id);
 		history.push('/login');
 	}
   
