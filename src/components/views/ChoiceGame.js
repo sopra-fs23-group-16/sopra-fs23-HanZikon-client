@@ -141,7 +141,7 @@ const ChoiceGame = props => {
 					<div className="choicegame form">
 						{!loaded && <center><Spinner /></center>}
 						<div className={loaded ? "content" : "content hidden"}>
-						<center>
+							<center>
 							<div>
 								<Countdown
 									date={Date.now() + countdownSeconds * 1000} // 10s
@@ -155,7 +155,7 @@ const ChoiceGame = props => {
 							<img src={currentQuestion.oracleURL} alt="player1" onLoad={()=>handleCmpLoad(1)}
 								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
 							<br /><br /><br />
-							{choices.map((choice, index) => (
+							{loaded && choices.map((choice, index) => (
 								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
 									{choice}
 								</button>
