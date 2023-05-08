@@ -1,40 +1,32 @@
 
 const getTranslation = (cn_character) => {
+    let fromLang = 'cn'; // from Chinese
+    let toLang = 'en'; // translate to English
+    let text = cn_character;
+    console.log("character to be tranlate is"+ cn_character)
 
-// Imports the Google Cloud client library
-    const {Translate} = require('@google-cloud/translate').v2;
+    const API_KEY = ["AIzaSyDAh5E59SyjmGb1MVMcruOnwlBmr-D9F-o"];
 
-    // Creates a client
-    const translate = new Translate();
+    let url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+    url += '&q=' + encodeURI(text);
+    url += `&source=${fromLang}`;
+    url += `&target=${toLang}`;
 
-    /**
-     * TODO(developer): Uncomment the following lines before running the sample.
-     */
-    // const text = 'The text to translate, e.g. Hello, world!';
-    // const target = 'The target language, e.g. ru';
-    // const model = 'The model to use, e.g. nmt';
-
-    async function translateTextWithModel() {
-        const options = {
-            // The target language, e.g. "ru"
-            to: "en",
-            // Make sure your project is on the allow list.
-            // Possible values are "base" and "nmt"
-            model: "base",
-        };
-
-        // Translates the text into the target language. "text" can be a string for
-        // translating a single piece of text, or an array of strings for translating
-        // multiple texts.
-        let [translations] = await translate.translate(cn_character, options);
-        translations = Array.isArray(translations) ? translations : [translations];
-        console.log('Translations:');
-        translations.forEach((translation, i) => {
-            console.log(`${text[i]} => (${target}) ${translation}`);
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+        }
+    })
+        .then(res => res.json())
+        .then((response) => {
+            console.log("response from google: ", response);
+            return response;
+        })
+        .catch(error => {
+            console.log("There was an error with the translation request: ", error);
         });
-        return translations;
-    }
-    return translateTextWithModel();
 
 }
 
