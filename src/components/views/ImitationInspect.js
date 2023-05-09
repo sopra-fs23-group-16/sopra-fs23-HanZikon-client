@@ -6,6 +6,8 @@ import dog from 'image/dog.png';
 import 'styles/views/ImitationInspect.scss';
 import User from 'models/User';
 import HanziWriter from "hanzi-writer";
+import {Spinner} from "../ui/Spinner";
+import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ImitationInspect = props => {
 
@@ -13,6 +15,7 @@ const ImitationInspect = props => {
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	const [imgLoaded, setImgLoaded] = useState(false);
 	const [countdown, setCountdown] = useState(30);
 
 	const horizontalStyles = {
@@ -32,11 +35,7 @@ const ImitationInspect = props => {
 	}
 	const currentQuestion = questionList[round - 1];
 
-	const jiaguwen = currentQuestion.evolution[0];
-	const jinwen = currentQuestion.evolution[1];
-	const zhuanshu = currentQuestion.evolution[2];
-	const lishu = currentQuestion.evolution[3];
-	const kaishu = currentQuestion.evolution[4];
+	const evolutions = currentQuestion.evolution;
 	const meaning = currentQuestion.meaning;
 	//console.log(url);
 
@@ -44,21 +43,7 @@ const ImitationInspect = props => {
 
 	useEffect(() => {
 		
-		async function fetchLocalUser() {
-			try {
-				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
-				const response = await api.post(`/users/localUser`, requestBody);
 
-				const user = new User(response.data);
-				console.log("Confirm local user:",user);
-				localStorage.setItem('loggedInUser', user.id);
-
-			} catch (error) {
-				alert("You are not logged in!");
-				localStorage.removeItem('token');
-				history.push('/login');
-			}
-		}
 		fetchLocalUser();
 		
 		startCountdown();
@@ -135,6 +120,15 @@ const ImitationInspect = props => {
 		return () => clearInterval(timer);
 	};
 
+	let loadedImg = 0;
+
+	const handleImgLoad = (num) => {
+		loadedImg++;
+		if(loadedImg==num){
+			setImgLoaded(true);
+		}
+	}
+
 	return (
 		<BaseContainer>
 			<div className="imitationinspect container">
@@ -200,32 +194,41 @@ const ImitationInspect = props => {
 				
 				<div className="imitationinspect col">
 					<div className="imitationinspect form">
-						<center>
-						<p className="imitationinspect timer">{countdown}s</p>
-							<div >
-								<text>
-									Demo
-								</text>
-								<div id="character-demo-div"></div>
-							</div>
-						<div>
-							<text>
-								Quiz Yourself
-							</text>
-							<div id="character-quiz-div"></div>
+						{!imgLoaded && <center><Spinner /></center>}
+						<div className={imgLoaded ? "content" : "content hidden"}>
+							<center>
+								<p className="imitationinspect timer">{countdown}s</p>
+								<div >
+									<text>
+										Demo
+									</text>
+									<div id="character-demo-div"></div>
+								</div>
+								<div>
+									<text>
+										Quiz Yourself
+									</text>
+									<div id="character-quiz-div"></div>
+								</div>
+								<br />
+								<div>
+									{evolutions.map((evolution, index) => (
+										(evolution !== "n.a.") && (
+											<img
+												key={index}
+												src={evolution}
+												alt="player1"
+												onLoad={() => handleImgLoad(evolutions.length)}
+												style={{ width: '10%', height: 'auto', margin: 'auto' }}
+											/>
+										)
+									))}
+								</div>
+								<br />
+								<br />
+								<div className="imitationinspect meaninglabel"> {meaning}</div>
+							</center>
 						</div>
-						<br />
-						<div>
-							<img src={jiaguwen} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
-							<img src={jinwen} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
-							<img src={zhuanshu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
-							<img src={lishu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
-							<img src={kaishu} alt="player1" style={{ width: '10%', height: 'auto', margin: 'auto' }} />
-						</div>
-						<br />
-						<br />
-						<div className="imitationinspect meaninglabel"> {meaning}</div>
-						</center>
 					</div>
 
 				</div>
