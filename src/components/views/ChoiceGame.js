@@ -1,15 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
-import User from 'models/User';
 import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
-import {nextRound} from "../../helpers/nextRound";
 import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import getTranslationURL from "../../helpers/getTranslation";
 
 const ChoiceGame = props => {
 	const history = useHistory();
@@ -36,6 +34,32 @@ const ChoiceGame = props => {
 	console.log("round",round);
 	const currentQuestion = questionList[round - 1];
 	const choices = currentQuestion.choices
+
+	const [choiceEN,setChoice] = useState();
+	const [choicesEN, setChoicesEN] = useState([]);
+
+
+	async function fetchTranslation(cn_character) {
+		try {
+			const url = getTranslationURL(cn_character)
+			console.log("URL of the character",url)
+			const response = await fetch(url);
+			const data = await response.json();
+
+			console.log("raw data",data)
+			setChoice({[cn_character]:data});
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	useEffect(() => {
+		//console.log('Choice has been updated:', choiceEN);
+		choicesEN.push(choiceEN)
+		console.log("choicesEN",choicesEN)
+	}, [choiceEN]);
+
+
 
 	useEffect(() => {
 
@@ -66,6 +90,15 @@ const ChoiceGame = props => {
             }
         }
 		stompConnect();
+
+		// initialize all the tranlsations when the page is mounted
+		for (const choice in choices) {
+			setTimeout(() => {
+				fetchTranslation(choices[choice]);
+			}, 100);
+		}
+		setChoicesEN(choicesEN.slice(1,5)) // choose those that corresponds to choices
+
 
 		// return a function to disconnect on unmount
 		return function cleanup() {
@@ -115,6 +148,7 @@ const ChoiceGame = props => {
 		setTimeout(function () {
 		window.location.href = "/games/record/" + roomID;
 		}, 50);
+		setChoicesEN([]) // reset the choices
 	}
 
 	let loadedCmp = 0;
@@ -124,6 +158,18 @@ const ChoiceGame = props => {
 		if(loadedCmp==num){
 			setLoaded(true);
 		}
+	}
+
+	// util function: input(Chinese) search and return translation(English)
+	const searchTranslation = (chinese) =>{
+		for (const Key in choicesEN) {
+			try {
+				 let value = choicesEN[Key][chinese]
+				return value['data']['translations'][0]['translatedText']
+			}
+			catch (e) {}
+		}
+		return chinese; // no corresponding English
 	}
 
 	return (
@@ -151,13 +197,14 @@ const ChoiceGame = props => {
 									onComplete={() => goNext()}
 								/>
 							</div>
+
 							<br /><br />
 							<img src={currentQuestion.oracleURL} alt="player1" onLoad={()=>handleCmpLoad(1)}
 								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
 							<br /><br /><br />
-							{loaded && choices.map((choice, index) => (
+							{choicesEN.length == 4 && loaded && choices.map((choice, index) => (
 								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
-									{choice}
+									{choice + " " + searchTranslation(choice)}
 								</button>
 							))}
 						</center>
