@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import User from 'models/User';
-import {useHistory, useParams} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {Button} from 'components/ui/Button';
 import 'styles/views/RoomEntrance.scss';
 import BaseContainer from "components/ui/BaseContainer";
@@ -31,10 +31,9 @@ FormFieldRoomCode.propTypes = {
 };
 
 const RoomEntrance = props => {
-	const history = useHistory();  
-	const [username, setUsername] = useState("");
-	const [password, setPassword] = useState("");
+	const history = useHistory();
 	const [roomcode, setRoomCode] = useState("");
+	let [roomFull, setRoomFull] = useState(false);
 	let userID = localStorage.getItem("loggedInUser");
 	
 	const handleChangerc = (event) =>{
@@ -73,7 +72,6 @@ const RoomEntrance = props => {
                 if (!client['connected']) {
                     client.connect({}, function (frame) {
 						console.log('connected to stomp');
-						
                     });
                 }
             } catch (error) {
@@ -93,13 +91,37 @@ const RoomEntrance = props => {
 		};
     }, []);
 
+	const checkRoomFull = (roomparse) => {
+		const players = roomparse["players"];
+
+		roomFull= true;
+		players.forEach(player => {
+			console.log("local userID is" + userID);
+			console.log("player userID is" +player.userID);
+			if(player.userID == userID){
+				roomFull= false;
+				setRoomFull(false);
+			}
+		});
+		setRoomFull(roomFull);
+
+	};
+
 	const enterRoom = () => {
 		const requestBody = JSON.stringify({ userID });
 		client.subscribe('/topic/multi/rooms/' + roomcode + '/join', function (response) {
 			console.log(response.body)
 			const room = response.body;
 			const roomparse = JSON.parse(room);
-			window.location.href = "/rooms/" + roomparse["roomID"] + "/participants";
+
+			checkRoomFull(roomparse);
+			if(roomFull === false){
+				console.log("The room is not full!");
+				window.location.href = "/rooms/" + roomparse["roomID"] + "/participants";
+			} else {
+				console.log("The room is full!");
+			}
+
 		});
 		setTimeout(function () {
 			client.send('/app/multi/rooms/' + roomcode + '/join', {}, requestBody);
@@ -141,6 +163,10 @@ const RoomEntrance = props => {
 						Exit
 						</Button>
 					</div>
+
+					{roomFull &&
+						<div className="entrance roomFull" >This room is full, you may join another one!</div>
+					}
 				</div>
 			</div>
 		</BaseContainer>
