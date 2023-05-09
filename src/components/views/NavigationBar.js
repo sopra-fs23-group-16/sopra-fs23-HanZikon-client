@@ -13,8 +13,9 @@ const NavigationBar = () => {
 	let id = localStorage.getItem("loggedInUser");
 
 	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem("loggedInUser");
+		// localStorage.removeItem('token');
+		// localStorage.removeItem("loggedInUser");
+    localStorage.clear();
 		const response = api.get('/logout/'+ id);
 		window.location.href = '/login';
 	}
