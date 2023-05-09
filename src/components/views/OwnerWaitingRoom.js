@@ -13,6 +13,7 @@ import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
 import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import copyToClipboard from "../../helpers/copyToClipboard";
 
 const OwnerWaitingRoom = props => {
 	
@@ -111,6 +112,8 @@ const OwnerWaitingRoom = props => {
 		window.location.href = "/lobby";
     };
 
+
+
 	let content = <center><Spinner /></center>;
 
 	if (roomCode) {
@@ -136,7 +139,8 @@ const OwnerWaitingRoom = props => {
 				<div className="ownerwaiting input">
 					{roomCode}
 					<button onClick ={ () => {
-						navigator.clipboard.writeText(roomCode);
+						// navigator.clipboard.writeText(roomCode);
+						copyToClipboard(roomCode)
 						setCopied(true);
 						setTimeout(() => {
 							setCopied(false);
