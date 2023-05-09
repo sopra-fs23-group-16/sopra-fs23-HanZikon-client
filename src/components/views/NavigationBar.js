@@ -12,11 +12,11 @@ const NavigationBar = () => {
 	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
 
-	const logout = () => {
+	const logout = async () => {
 		// localStorage.removeItem('token');
 		// localStorage.removeItem("loggedInUser");
-    localStorage.clear();
-		const response = api.get('/logout/'+ id);
+        await localStorage.clear();
+		const response = await api.get('/logout/'+ id);
 		window.location.href = '/login';
 	}
     
