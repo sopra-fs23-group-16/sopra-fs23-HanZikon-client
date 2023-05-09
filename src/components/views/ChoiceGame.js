@@ -118,12 +118,22 @@ const ChoiceGame = props => {
 			systemScore = 10;
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+
+			setTimeout(() => {
+				setDisabled(true);
+			}, 500);
+
 		} else {
 			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+			setTimeout(() => {
+				setDisabled(true);
+				// show the right answer after the choice
+				document.getElementById(optionIDs[currentQuestion.answerIndex]).style.backgroundColor = colorRight
+			}, 1500);
 		};
-		setDisabled(true);
+
 	};
 
 	const submitScore = () => {
@@ -202,9 +212,12 @@ const ChoiceGame = props => {
 							<img src={currentQuestion.oracleURL} alt="player1" onLoad={()=>handleCmpLoad(1)}
 								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
 							<br /><br /><br />
-							{choicesEN.length == 4 && loaded && choices.map((choice, index) => (
+							{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (
 								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
-									{choice + " " + searchTranslation(choice)}
+									{/*{isDisabled ?  choice + <span>searchTranslation(choice)</span>: choice}*/}
+									{choice} {isDisabled ? (
+										<button className="choicegame option small" disabled={true}>{searchTranslation(choice)}</button>
+									) : ("")}
 								</button>
 							))}
 						</center>

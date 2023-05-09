@@ -140,6 +140,16 @@
         transition: all 0.3s ease;
     }
 
+    .small {
+        background-color: #AFD3E2;
+        font-size: 12px;
+        padding: 3px;
+        color: #537188;
+        border: 1px solid #d6d6d6;
+        border-radius: 5px;
+        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+    }
+
     .option:hover {
         background-color: #ffe082;
         border: 2px solid #fff;
