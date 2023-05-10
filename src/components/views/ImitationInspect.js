@@ -16,7 +16,7 @@ const ImitationInspect = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const [imgLoaded, setImgLoaded] = useState(false);
-	const [countdown, setCountdown] = useState(30);
+	const [countdown, setCountdown] = useState(15);
 
 	const horizontalStyles = {
 		display: 'flex',

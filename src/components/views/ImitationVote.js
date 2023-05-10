@@ -7,6 +7,7 @@ import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationVote.scss';
 import User from 'models/User';
 import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 
 const ImitationVote = props => {
 
@@ -38,7 +39,17 @@ const ImitationVote = props => {
 							{
 								playersImitationsArray[i][1] = "data:image/png;base64," + playersImitationsArray[i][1];
 								const string = "playerImitation" + i;
+								/*const string2 = "playerImitation" + (i+1);
+								const string3 = "playerImitation" + (i+2);
+								const string4 = "playerImitation" + (i+3);
+								const string5 = "playerImitation" + (i+4);
+								const string6 = "playerImitation" + (i+5);*/
 								document.getElementById(string).src = playersImitationsArray[i][1];
+								/*document.getElementById(string2).src = playersImitationsArray[i][1];
+								document.getElementById(string3).src = playersImitationsArray[i][1];
+								document.getElementById(string4).src = playersImitationsArray[i][1];
+								document.getElementById(string5).src = playersImitationsArray[i][1];
+								document.getElementById(string6).src = playersImitationsArray[i][1];*/
 							}
 							setPlayers(playersImitationsArray);
 						});
@@ -174,13 +185,77 @@ const ImitationVote = props => {
 							<img id="playerImitation0" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 							<img id="playerImitation1" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 							<img id="playerImitation2" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+						</div>
+						<div className="imitationvote votevater">
+							{players.length > 0 ? (
+								<PrimaryButton
+									width="10%"
+									padding-right = "5%"
+								>
+									{"Like it"}
+								</PrimaryButton>
+							):null}
+							{players.length > 1 ? (
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							):null}
+							{players.length > 1 ? (
+								<PrimaryButton
+									width="10%"
+									padding-right = "5%"
+								>
+									{"Like it"}
+								</PrimaryButton>
+							):null}
+							{players.length > 2 ? (
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							):null}
+							{players.length > 2 ? (
+								<PrimaryButton
+									width="10%"
+									padding-right = "5%"
+								>
+									{"Like it"}
+								</PrimaryButton>
+							):null}
+						</div>
+						<br/>
+						<div>
 							<img id="playerImitation3" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 							<img id="playerImitation4" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 							<img id="playerImitation5" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 						</div>
-						
-						<div className="imitationvote label"> {"Like it"}</div>
-						<div className="imitationvote label"> {"Like it"}</div>
+						<div className="imitationvote votevater">	
+							{players.length > 3 ? (
+								<PrimaryButton
+									width="10%"
+									padding-right = "5%"
+								>
+									{"Like it"}
+								</PrimaryButton>
+							):null}
+							{players.length > 4 ? (
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							):null}
+							{players.length > 4 ? (
+								<PrimaryButton
+									width="10%"
+									padding-right = "5%"
+								>
+									{"Like it"}
+								</PrimaryButton>
+							):null}
+							{players.length > 5 ? (
+								<span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+							):null}
+							{players.length > 5 ? (
+								<PrimaryButton
+									width="10%"
+									padding-right = "5%"
+								>
+									{"Like it"}
+								</PrimaryButton>
+							):null}
+						</div>
 					</center>
 				</div>
 			</div>
