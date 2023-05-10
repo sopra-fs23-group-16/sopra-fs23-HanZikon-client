@@ -31,20 +31,20 @@ const Lobby = () => {
 			<div className="lobby container">
 				<h1>Game Overview</h1>
 				<div className="lobby form">
+				<div className="lobby button-container">
+						<PrimaryButton
+							width="70%"
+							onClick={() => history.push(`/roomcreation`)}
+						>
+						Competition Mode
+						</PrimaryButton>
+					</div>
 					<div className="lobby button-container">
 						<PrimaryButton 
 							width="70%"
 							onClick={() => history.push(`/gamerule`)}
 						>
 						Game Rule
-						</PrimaryButton>
-					</div>
-					<div className="lobby button-container">
-						<PrimaryButton
-							width="70%"
-							onClick={() => history.push(`/roomcreation`)}
-						>
-						Competition Mode
 						</PrimaryButton>
 					</div>
 					<div className="lobby button-container">
