@@ -63,6 +63,8 @@ const ChoiceResult = props => {
 		
     }, []);
 	
+	console.log(players[0]);
+	
 	// const startCountdown = () => {
 	//
 	// 	const timer = setInterval(() => {

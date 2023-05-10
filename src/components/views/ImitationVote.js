@@ -5,30 +5,18 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationVote.scss';
+import 'styles/views/ChoiceGame.scss';
 import User from 'models/User';
 import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ImitationVote = props => {
 
 	const { roomID } = useParams();
-	const [numPlayers, setNumPlayers] = useState("");
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const playerImitations = [[],[]];
-	//console.log(playerNames);
 
 	const history = useHistory();
-	
-	const questionList = JSON.parse(localStorage.getItem('questionList'));
-	if (questionList === null) {
-		alert("Game crashed! Retrieve questions failed!")
-	}
-	const round = localStorage.getItem('round');
-	if (round === null) {
-		alert("Game crashed! Round is null!")
-	}
-	const currentQuestion = questionList[round - 1];
-	console.log(currentQuestion);
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -41,37 +29,24 @@ const ImitationVote = props => {
 				if (!client['connected']) {
 					client.connect({}, function () {
 						console.log('connected to stomp');
+
+						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
+							setPlayers([]);
+							const playersImitations = response.body;
+							const playersImitationsParse = JSON.parse(playersImitations);
+							const playersImitationsArray = Object.entries(playersImitationsParse)
+							console.log(playersImitationsArray);
+							for (var i=0; i<playersImitationsArray.length; i++)
+							{
+								playersImitationsArray[i][1] = "data:image/png;base64," + playersImitationsArray[i][1];
+								const string = "playerImitation" + i;
+								document.getElementById(string).src = playersImitationsArray[i][1];
+							}
+							setPlayers(playersImitationsArray);
+						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/" + roomID + "/players/records", {}, requestBody)
 						}, 500);
-
-						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
-							const playersImitations = response.body;
-							const playersImitationsParse = JSON.parse(playersImitations);
-							console.log(playersImitationsParse);
-
-							const myMap = new Map();
-							for (const key in playersImitationsParse) {
-								if (playersImitationsParse.hasOwnProperty(key)) {
-									myMap.set(key, playersImitationsParse[key]);
-
-									const loggedInUserID = localStorage.getItem("loggedInUser");
-
-									playerImitations[0].push(loggedInUserID);
-									playerImitations[1].push(playersImitationsParse[loggedInUserID])
-									console.log(playerImitations[0])
-									document.getElementById("playerImitation").src = "data:image/png;base64," + playerImitations[1];
-								}
-							}
-						});
-						/*setTimeout(function () {
-							client.send("/app/multi/rooms/" + roomID + "/info", {}, playerImitations)
-						}, 500);
-						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							console.log(roomparse);
-						});*/
 					});
 				}
 			} catch (error) {
@@ -90,37 +65,12 @@ const ImitationVote = props => {
 			}
 		};
 	}, []);
+	
+	console.log(players);
+	console.log(players.length);
+	console.log(players[0]);
 
-	/*function evaluateWriting(response, character) {
-		let answer  = character;
-		let candidates = response;
-		let score = 10;
-
-		for (let i= 0;i < candidates.length; i++) {
-			if(i!=0 && i% 3==0){
-				score = score - 2;
-			}
-			if (candidates[i] == answer){
-				break;
-			}
-		}
-		return score;
-	}
-
-	function handleResponse(response) {
-		if (response instanceof Error) {
-			console.error('Error:', response.message);
-			// Handle the error in some way, such as displaying a message to the user or logging it
-		} else {
-			console.log('Response:', response);
-			const score = evaluateWriting(response,currentQuestion.character);
-			localStorage.setItem("roundPoints", score);
-			console.log("Score",score)
-			// Handle the response data in some way, such as updating the UI or storing it in a database
-
-		}
-	}
-
+	/*
 	const submitScore = () => {
 		///////////////////////////////////////////////
 		//    make sure it is the right userID       //
@@ -218,24 +168,23 @@ const ImitationVote = props => {
 
 				</div>
 
-				<div className="choicegame col">
+				<div className="choicegame form">
 					<center>
 						<div id="countdown" className="">
 						</div>
-						<br />
-						<br />
+						<div>
+							<img id="playerImitation0" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation1" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation2" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation3" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation4" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation5" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+						</div>
+						
+						<div className="choicegame label"> {"Like it"}</div>
+						<div className="choicegame label"> {"Like it"}</div>
 					</center>
-					<div className="">
-						<center>
-							
-						</center>
-					</div>
 				</div>
-
-				{playerImitations[1] &&
-					<img id="playerImitation" src="" ></img>
-				}
-
 			</div>
 		</BaseContainer>
 	);
