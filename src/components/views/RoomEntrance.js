@@ -42,12 +42,12 @@ const RoomEntrance = props => {
 		setRoomCode(event.target.value);
 	};
 
-	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem("loggedInUser");
-		const response = api.get('/logout/'+userID);
-		history.push('/login');
-	}
+	// const logout = () => {
+	// 	localStorage.removeItem('token');
+	// 	localStorage.removeItem("loggedInUser");
+	// 	const response = api.get('/logout/'+userID);
+	// 	history.push('/login');
+	// }
 	
 	useEffect(() => {
 
@@ -119,14 +119,14 @@ const RoomEntrance = props => {
 						Cancel
 						</PrimaryButton>
 					</div>
-					<div className="creation button-container">
+					{/* <div className="creation button-container">
 						<PrimaryButton
 							width="80%"
 							onClick={() => logout()}
 						>
 						Exit
 						</PrimaryButton>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</BaseContainer>

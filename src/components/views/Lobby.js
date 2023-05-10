@@ -17,12 +17,12 @@ const Lobby = () => {
 	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
 
-	const logout = async () => {
-		await localStorage.removeItem('token');
-		await localStorage.removeItem("loggedInUser");
-		const response = await api.get('/logout/'+id);
-		history.push('/login');
-	}
+	// const logout = async () => {
+	// 	await localStorage.removeItem('token');
+	// 	await localStorage.removeItem("loggedInUser");
+	// 	const response = await api.get('/logout/'+id);
+	// 	history.push('/login');
+	// }
   
 	//const params = new URLSearchParams(window.location.search);
 
@@ -55,14 +55,14 @@ const Lobby = () => {
 						Your Profile
 						</PrimaryButton>
 					</div>
-					<div className="lobby button-container">
+					{/* <div className="lobby button-container">
 						<PrimaryButton
 							width="70%"
 							onClick={() => logout()}
 						>
 						Exit
 						</PrimaryButton>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</BaseContainer>

@@ -21,12 +21,12 @@ const RoomCreation = () => {
 	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
 
-	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem("loggedInUser");
-		const response = api.get('/logout/'+id);
-		history.push('/login');
-	}
+	// const logout = () => {
+	// 	localStorage.removeItem('token');
+	// 	localStorage.removeItem("loggedInUser");
+	// 	const response = api.get('/logout/'+id);
+	// 	history.push('/login');
+	// }
 
 	const handleButtonClick = () => {
 		// Load a new page from scratch
@@ -65,14 +65,14 @@ const RoomCreation = () => {
 						Back to Lobby
 						</PrimaryButton>
 					</div>
-					<div className="creation button-container">
+					{/* <div className="creation button-container">
 						<PrimaryButton
 							width="70%"
 							onClick={() => logout()}
 						>
 						Exit
 						</PrimaryButton>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</BaseContainer>
