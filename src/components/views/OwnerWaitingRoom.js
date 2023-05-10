@@ -133,13 +133,13 @@ const OwnerWaitingRoom = props => {
 						width="15%"
 						onClick={() => exitRoom() }
 					>
-						Exit Room
+						Exit Room 
 					</PrimaryButton>
 				</div>
 				<div className="ownerwaiting input">
 					Room Code: {roomCode}
 				</div>
-				<div className="ownerwaiting button-container">
+				<div className="ownerwaiting button-container">			
 				<button className="ownerwaiting button-box" onClick ={ () => {
 						// navigator.clipboard.writeText(roomCode);
 						copyToClipboard(roomCode)

@@ -100,8 +100,11 @@
     height: 15%;
     margin-left: 1%;
     border-radius: 0.75em;
-    border: none;
+    //border: none;
     background-color: rgba(209, 217, 224, 0.3);
+    border: 1px dashed #ccc;
+    outline: none;
+    cursor: pointer;
   }
   &.errorMessage {
     color: indianred;
