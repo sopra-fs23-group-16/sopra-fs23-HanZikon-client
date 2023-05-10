@@ -26,7 +26,6 @@
     padding-right: 2px; 
     gap: 10px; 
     }
-
   &.button {
     width: 36px;
     height: 36px;
@@ -36,6 +35,7 @@
     justify-content: center;
     background-color: #fff;
     border: 0.25px solid #000;
+    cursor: pointer;
     }
 
 }
