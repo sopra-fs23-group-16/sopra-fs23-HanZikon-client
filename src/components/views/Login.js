@@ -71,8 +71,8 @@ const Login = props => {
 
 			const user = new User(response.data);
 
-			localStorage.setItem('token', user.token);
-			localStorage.setItem('loggedInUser', user.id);
+			await localStorage.setItem('token', user.token);
+			await localStorage.setItem('loggedInUser', user.id);
 
 			history.push(`/lobby`);
 		} catch (error) {

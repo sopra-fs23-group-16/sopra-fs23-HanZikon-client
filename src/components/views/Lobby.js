@@ -5,26 +5,11 @@ import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Lobby.scss";
 import User from 'models/User';
+import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const Lobby = () => {
 
 	useEffect(() => {
-		// fetch localuser's information by token
-		async function fetchLocalUser() {
-			try {
-				const requestBody = JSON.stringify({ token: localStorage.getItem("token") });
-				const response = await api.post(`/users/localUser`, requestBody);
-
-				const user = new User(response.data);
-				console.log("Confirm local user:",user);
-				localStorage.setItem('loggedInUser', user.id);
-
-			} catch (error) {
-				alert("You are not logged in!");
-				localStorage.removeItem('token');
-				history.push('/login');
-			}
-		}
 		fetchLocalUser();
 	}, []);
 
@@ -32,10 +17,10 @@ const Lobby = () => {
 	const [users, setUsers] = useState(null);
 	let id = localStorage.getItem("loggedInUser");
 
-	const logout = () => {
-		localStorage.removeItem('token');
-		localStorage.removeItem("loggedInUser");
-		const response = api.get('/logout/'+id);
+	const logout = async () => {
+		await localStorage.removeItem('token');
+		await localStorage.removeItem("loggedInUser");
+		const response = await api.get('/logout/'+id);
 		history.push('/login');
 	}
   
