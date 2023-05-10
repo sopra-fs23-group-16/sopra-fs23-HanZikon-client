@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {Spinner} from 'components/ui/Spinner';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {useHistory, useParams} from 'react-router-dom';
 import 'styles/views/Inspect.scss';
 import BaseContainer from "components/ui/BaseContainer";
@@ -101,18 +101,18 @@ const Inspect = () => {
                         />
                     </div>
 				<div className="inspect button-container">
-					<Button
+					<PrimaryButton
 						width="70%"
 						onClick={() => history.push(`/Setting/${userId}`)}>
 						Edit
-					</Button>
+					</PrimaryButton>
 				</div>
 				<div className="inspect button-container">
-					<Button
+					<PrimaryButton
 						width="70%"
 						onClick={() => history.push('/lobby')}>
 						Back to game overview
-					</Button>
+					</PrimaryButton>
 				</div>
 			</div>
 		</div>

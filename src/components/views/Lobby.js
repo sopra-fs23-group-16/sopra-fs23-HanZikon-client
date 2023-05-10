@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Lobby.scss";
@@ -32,36 +32,36 @@ const Lobby = () => {
 				<h1>Game Overview</h1>
 				<div className="lobby form">
 					<div className="lobby button-container">
-						<Button 
+						<PrimaryButton 
 							width="70%"
 							onClick={() => history.push(`/gamerule`)}
 						>
 						Game Rule
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="lobby button-container">
-						<Button
+						<PrimaryButton
 							width="70%"
 							onClick={() => history.push(`/roomcreation`)}
 						>
 						Competition Mode
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="lobby button-container">
-						<Button
+						<PrimaryButton
 							width="70%"
 							onClick={() => history.push(`/users/${id}`)}
 						>
 						Your Profile
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="lobby button-container">
-						<Button
+						<PrimaryButton
 							width="70%"
 							onClick={() => logout()}
 						>
 						Exit
-						</Button>
+						</PrimaryButton>
 					</div>
 				</div>
 			</div>

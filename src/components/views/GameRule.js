@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {api} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/GameRule.scss";
 import User from 'models/User';
@@ -50,20 +50,20 @@ const GameRule = () => {
 					<br />
 					<br />
 					<div className="lobby button-container">
-						<Button 
+						<PrimaryButton
 							width="12%"
 							onClick={() => history.push(`/lobby`)}
 						>
 						Back to Lobby
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="lobby button-container">
-						<Button
+						<PrimaryButton
 							width="12%"
 							onClick={() => history.push(`/roomcreation`)}
 						>
 						Start a Game
-						</Button>
+						</PrimaryButton>
 					</div>	
 				</div>
         </center>

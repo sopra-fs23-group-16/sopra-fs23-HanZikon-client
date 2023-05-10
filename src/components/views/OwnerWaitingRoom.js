@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
@@ -120,33 +120,34 @@ const OwnerWaitingRoom = props => {
 		content = (
 			<center>
 				<div className="ownerwaiting button-container">
-					<Button
+					<PrimaryButton
 						width="15%"
 						disabled = {!players.every(player => player.ready)}
 						onClick={() => startGame() }
 					>
 						Start Game
-					</Button>
+					</PrimaryButton>
 				</div>
 				<div className="ownerwaiting button-container">
-					<Button
+					<PrimaryButton
 						width="15%"
 						onClick={() => exitRoom() }
 					>
 						Exit Room
-					</Button>
+					</PrimaryButton>
 				</div>
 				<div className="ownerwaiting input">
-					{roomCode}
-					<button onClick ={ () => {
+					Room Code: {roomCode}
+				</div>
+				<div className="ownerwaiting button-container">
+				<button className="ownerwaiting button-box" onClick ={ () => {
 						// navigator.clipboard.writeText(roomCode);
 						copyToClipboard(roomCode)
 						setCopied(true);
 						setTimeout(() => {
-							setCopied(false);
+						setCopied(false);
 						}, 5000);
-					}} >{copied ? "Code copied!" : "Copy code"}</button>
-				</div>
+					}} >{copied ? "Code copied!" : "Copy code"}</button></div>
 			</center>
 		)
 	}

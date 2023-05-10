@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import User from 'models/User';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import {useHistory, useParams } from 'react-router-dom';
@@ -203,28 +203,28 @@ const NormalWaitingRoom = props => {
 				<div className="normalwaiting form">
 					<center>
 					<div className="normalwaiting button-container">
-				<Button
+				<PrimaryButton
 					width="15%"
 					onClick={() => getReady()}
 					>
 					Get Ready
-				</Button>
+				</PrimaryButton>
 				</div>
 				<div className="normalwaiting button-container">
-				<Button
+				<PrimaryButton
 					width="15%"
 					onClick={() => cancelReady()}
 					>
 					Cancel Ready
-				</Button>
+				</PrimaryButton>
 				</div>
 				<div className="normalwaiting button-container">
-				<Button
+				<PrimaryButton
 					width="15%"
 					onClick={() => exitRoom()}
 					>
 					Exit Room
-				</Button>
+				</PrimaryButton>
 				</div>
 				</center>
 				</div>

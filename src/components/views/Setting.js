@@ -3,7 +3,7 @@ import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {useHistory, useParams} from 'react-router-dom';
 import {Spinner} from 'components/ui/Spinner';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -121,20 +121,20 @@ const Setting = props => {
                     onChange={p => setPassword(p)}
                 />
 				&nbsp;
-                <Button
+                <PrimaryButton
 					disabled={!icon && !username && !password}
                     width="100%"
                     onClick={() => confirm()}
                 >
                     Confirm
-                </Button>
+                </PrimaryButton>
                 &nbsp;
-                <Button
+                <PrimaryButton
                     width="100%"
                     onClick={() => history.push(`/users/${userId}`)}
                 >
                     Cancel
-                </Button>
+                </PrimaryButton>
             </div>
         );
     }

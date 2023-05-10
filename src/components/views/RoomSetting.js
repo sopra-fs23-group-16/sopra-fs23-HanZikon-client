@@ -1,6 +1,6 @@
 import { api, handleError, client } from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
@@ -128,29 +128,29 @@ const RoomSetting = () => {
 						</select>
 					</div>
 					<div className="roomsetting button-container">
-						<Button
+						<PrimaryButton
 							disabled={!level || !numPlayers || !questionType}
 							width="100%"
 							onClick={() => goWaiting()}
 						>
 						Confirm
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="roomsetting button-container">
-						<Button
+						<PrimaryButton
 							width="100%"
 							onClick={() => history.push(`/roomcreation`)}
 						>
 						Cancel
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="roomsetting button-container">
-						<Button
+						<PrimaryButton
 							width="100%"
 							onClick={() => goInvite()}
 						>
 						Generate Invitation Link
-						</Button>
+						</PrimaryButton>
 					</div>
 				</div>
 			</div>

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {useHistory} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -97,21 +97,21 @@ const Login = props => {
 						onChange={n => setPassword(n)}
 					/>
 					<div className="login button-container">
-						<Button
+						<PrimaryButton
 							disabled={!username || !password}
 							width="80%"
 							onClick={() => doLogin()}
 						>
 							Log in
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="login button-container">
-						<Button
+						<PrimaryButton
 							width="80%"
 							onClick={() => history.push(`/register`)}
 						>
 							Go to Register
-						</Button>
+						</PrimaryButton>
 					</div>
 				</div>
 			</div>

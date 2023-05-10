@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/ChoiceResult.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
@@ -96,56 +96,56 @@ const ChoiceResult = props => {
 					<center>
 						{Object.keys(players).length > 0 ? (
 							<div className="choiceresult record">
-								<Button
+								<PrimaryButton
 									width="70%"
 								>
 									{players[0][0] + ": " + players[0][1]}
-								</Button>
+								</PrimaryButton>
 							</div>) : null}
 
 						{Object.keys(players).length > 1 ? (
 							<div className="choiceresult record">
-								<Button
+								<PrimaryButton
 									width="70%"
 								>
 									{players[1][0] + ": " + players[1][1]}
-								</Button>
+								</PrimaryButton>
 							</div>) : null}
 
 						{Object.keys(players).length > 2 ? (
 							<div className="choiceresult record">
-								<Button
+								<PrimaryButton
 									width="70%"
 								>
 									{players[2][0] + ": " + players[2][1]}
-								</Button>
+								</PrimaryButton>
 							</div>) : null}
 
 						{Object.keys(players).length > 3 ? (
 							<div className="choiceresult record">
-								<Button
+								<PrimaryButton
 									width="70%"
 								>
 									{players[3][0] + ": " + players[3][1]}
-								</Button>
+								</PrimaryButton>
 							</div>) : null}
 
 						{Object.keys(players).length > 4 ? (
 							<div className="choiceresult record">
-								<Button
+								<PrimaryButton
 									width="70%"
 								>
 									{players[4][0] + ": " + players[4][1]}
-								</Button>
+								</PrimaryButton>
 							</div>) : null}
 
 						{Object.keys(players).length > 5 ? (
 							<div className="choiceresult record">
-								<Button
+								<PrimaryButton
 									width="70%"
 								>
 									{players[5][0] + ": " + players[5][1]}
-								</Button>
+								</PrimaryButton>
 							</div>) : null}
 
 					</center>

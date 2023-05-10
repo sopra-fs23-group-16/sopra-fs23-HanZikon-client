@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import User from 'models/User';
 import {useHistory, useParams} from 'react-router-dom';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/RoomEntrance.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -103,29 +103,29 @@ const RoomEntrance = props => {
 						onChange={n => setRoomCode(n)}
 					/>
 					<div className="entrance button-container">
-						<Button
+						<PrimaryButton
 							disabled={!roomcode}
 							width="80%"
 							onClick={() => enterRoom()}
 						>
 						Enter the room
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="entrance button-container">
-						<Button
+						<PrimaryButton
 							width="80%"
 							onClick={() => window.location.href = `/roomcreation`}
 						>
 						Cancel
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="creation button-container">
-						<Button
+						<PrimaryButton
 							width="80%"
 							onClick={() => logout()}
 						>
 						Exit
-						</Button>
+						</PrimaryButton>
 					</div>
 				</div>
 			</div>

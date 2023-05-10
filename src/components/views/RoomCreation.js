@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
-import {Button} from 'components/ui/Button';
+import {PrimaryButton} from 'components/ui/PrimaryButton';
 import Room from 'models/Room';
 import {Link, useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
@@ -39,7 +39,7 @@ const RoomCreation = () => {
 				<h1>Competition Mode</h1>
 				<div className="creation form">
 					<div className="creation button-container">
-						<Button 
+						<PrimaryButton
 							width="70%"
 							onClick={
 							//() => history.push(`/roomsetting/`)
@@ -47,31 +47,31 @@ const RoomCreation = () => {
 						}
 						>
 						Create A New Room
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="creation button-container">
-						<Button
+						<PrimaryButton
 							width="70%"
 							onClick={() => window.location.href =`/roomentrance`}
 						>
 						Join An Existing Room
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="creation button-container">
-						<Button
+						<PrimaryButton
 							width="70%"
 							onClick={() => window.location.href = `/lobby`}
 						>
 						Back to Lobby
-						</Button>
+						</PrimaryButton>
 					</div>
 					<div className="creation button-container">
-						<Button
+						<PrimaryButton
 							width="70%"
 							onClick={() => logout()}
 						>
 						Exit
-						</Button>
+						</PrimaryButton>
 					</div>
 				</div>
 			</div>
