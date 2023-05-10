@@ -95,7 +95,8 @@ const RoomEntrance = props => {
 	return (
 		<BaseContainer>
 			<div className="entrance container">
-				<h2>Please enter the room detail!</h2>
+				{/* <h2>Please enter the room detail!</h2> */}
+				<div className="entrance text">Please enter the room detail!</div>
 				<div className="entrance form">
 					<FormFieldRoomCode
 						label="Room Code"

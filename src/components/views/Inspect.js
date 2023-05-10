@@ -111,7 +111,7 @@ const Inspect = () => {
 					<PrimaryButton
 						width="70%"
 						onClick={() => history.push('/lobby')}>
-						Back to game overview
+						Back to Lobby
 					</PrimaryButton>
 				</div>
 			</div>

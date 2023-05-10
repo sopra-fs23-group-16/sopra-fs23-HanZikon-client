@@ -29,7 +29,8 @@ const Lobby = () => {
 	return (
 		<BaseContainer>
 			<div className="lobby container">
-				<h1>Game Overview</h1>
+				{/* <h1>Lobby</h1> */}
+				<div className="lobby label">Lobby</div>
 				<div className="lobby form">
 				<div className="lobby button-container">
 						<PrimaryButton

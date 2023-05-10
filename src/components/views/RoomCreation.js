@@ -36,7 +36,8 @@ const RoomCreation = () => {
 	return (
 		<BaseContainer>
 			<div className="creation container">
-				<h1>Competition Mode</h1>
+				{/* <h1>Competition Mode</h1> */}
+				<div className="lobby label">Competition Mode</div>
 				<div className="creation form">
 					<div className="creation button-container">
 						<PrimaryButton
