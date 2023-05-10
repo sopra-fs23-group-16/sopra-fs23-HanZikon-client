@@ -54,10 +54,10 @@ const ImitationVote = props => {
 							const playersImitationsArray = Object.entries(playersImitationsParse)
 							console.log(playersImitationsParse);
 							console.log(playersImitationsArray.length);
-							/*for (var i=0; i<playersImitationsArray.length; i++)
+							for (var i=0; i<playersImitationsArray.length; i++)
 							{
 								playersImitationsArray[i][1] = 
-							}*/
+							}
 
 							const myMap = new Map();
 							for (const key in playersImitationsParse) {

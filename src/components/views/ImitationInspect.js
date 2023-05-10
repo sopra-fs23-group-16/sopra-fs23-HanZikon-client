@@ -13,7 +13,7 @@ const ImitationInspect = props => {
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
-	const [countdown, setCountdown] = useState(30);
+	const [countdown, setCountdown] = useState(15);
 
 	const horizontalStyles = {
 		display: 'flex',
