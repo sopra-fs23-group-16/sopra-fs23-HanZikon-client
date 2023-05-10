@@ -198,7 +198,7 @@ const ChoiceGame = props => {
 						{!loaded && <center><Spinner /></center>}
 						<div className={loaded ? "content" : "content hidden"}>
 							<center>
-							<div>
+							<div className="choicegame label">
 								<Countdown
 									date={Date.now() + countdownSeconds * 1000} // 10s
 									intervalDelay={1000}
