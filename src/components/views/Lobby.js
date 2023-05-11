@@ -10,9 +10,9 @@ import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const Lobby = () => {
 
-	useEffect(() => {
-		fetchLocalUser();
-	}, []);
+	// useEffect(() => {
+	// 	fetchLocalUser();
+	// }, []);
 
 	const history = useHistory();
 	const [users, setUsers] = useState(null);

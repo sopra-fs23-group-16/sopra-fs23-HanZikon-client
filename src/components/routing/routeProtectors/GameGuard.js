@@ -1,5 +1,9 @@
-import {Redirect} from "react-router-dom";
+import {Redirect, useHistory} from "react-router-dom";
 import PropTypes from "prop-types";
+import {fetchLocalUser} from "../../../helpers/confirmLocalUser";
+import React, {useEffect, useState} from "react";
+import {Spinner} from "../../ui/Spinner";
+import BaseContainer from "../../ui/BaseContainer";
 
 /**
  * routeProtectors interfaces can tell the router whether or not it should allow navigation to a requested route.
@@ -10,11 +14,19 @@ import PropTypes from "prop-types";
  * @Guard
  * @param props
  */
+
 export const GameGuard = props => {
-  if (localStorage.getItem("token")) {
-    return props.children;
-  }
-  return <Redirect to="/login"/>;
+  const history = useHistory();
+  useEffect(() => {
+    const fetchData = async () => {
+      await fetchLocalUser();
+      if (!localStorage.getItem('token')) {
+        history.push('/login');
+      }
+    };
+    fetchData();
+  }, [history]);
+  return props.children;
 };
 
 GameGuard.propTypes = {

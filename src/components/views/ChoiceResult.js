@@ -22,7 +22,7 @@ const ChoiceResult = props => {
 
 	useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
 		// startCountdown();
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:

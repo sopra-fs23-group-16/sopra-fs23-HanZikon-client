@@ -23,7 +23,7 @@ const ImitationVote = props => {
 
 	useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
 		async function stompConnect() {
 			try {

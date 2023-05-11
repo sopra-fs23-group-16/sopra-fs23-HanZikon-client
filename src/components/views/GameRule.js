@@ -10,10 +10,10 @@ import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const GameRule = () => {
 
-	useEffect(() => {
-		// fetch localuser's information by token
-		fetchLocalUser();
-	}, []);
+	// useEffect(() => {
+	// 	// fetch localuser's information by token
+	// 	fetchLocalUser();
+	// }, []);
 
     const history = useHistory();
 	const [users, setUsers] = useState(null);

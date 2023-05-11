@@ -8,11 +8,9 @@ export async function fetchLocalUser(){
         const user = new User(response.data);
         console.log("Confirm local user:",user);
         await localStorage.setItem('loggedInUser', user.id);
-
     } catch (error) {
-        alert("You are not logged in!");
+        alert("You are not logged in!")
         await localStorage.removeItem('token');
         await localStorage.removeItem('loggedInUser');
-        window.location.href = '/login';
     }
 }
