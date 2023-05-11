@@ -64,4 +64,10 @@
     margin-bottom: 5%;
     margin-top: 0.8em;
   }
+  &.roomFull {
+    //color: $textColor;
+    margin-bottom: 12px;
+    justify-content: center;
+    color: lightsalmon;
+  }
 }
