@@ -15,7 +15,7 @@ const ImitationVote = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const [buttonClicked, setButtonClicked] = useState(false);
-	const [playerImitations, setPlayerImitations] = useState([]);
+	const [playerImitationNames, setPlayerImitationNames] = useState([]);
 
 	const history = useHistory();
 
@@ -34,18 +34,19 @@ const ImitationVote = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
 							const playersImitationsParse = JSON.parse(playersImitations);
-							alert("playersImitationsParse is " + playersImitationsParse)
 							const playersImitationsArray = Array.from(playersImitationsParse);
+							const playerImitationNames = Array.from(playersImitationsParse);
+
 
 							for (var i=0; i<playersImitationsParse.length; i++){
 								playersImitationsArray[i] = "data:image/png;base64," + playersImitationsParse[i].imitationBytes;
 								const string = "playerImitation" + i;
+								playerImitationNames[i] = playersImitationsParse[i].username;
 
 								document.getElementById(string).src = playersImitationsArray[i];
-								document.getElementById(string).alt = playersImitationsArray[i].userName;
 							}
 							setPlayers(playersImitationsArray);
-							setPlayerImitations(playersImitationsParse);
+							setPlayerImitationNames(playerImitationNames);
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/" + roomID + "/players/records", {}, requestBody)
@@ -175,6 +176,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									disabled={buttonClicked}
 									width="10%"
+									id="playerImitationDiv0"
 									padding-right = "5%"
 									onClick={() => {
 										if (!buttonClicked) {
@@ -183,7 +185,7 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like it"}
+									{"Like "}{playerImitationNames[0]}
 								</PrimaryButton>
 							):null}
 							{players.length > 1 ? (
@@ -201,7 +203,7 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like it"}
+									{"Like "}{playerImitationNames[1]}
 								</PrimaryButton>
 							):null}
 							{players.length > 2 ? (
@@ -219,7 +221,7 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like it"}
+									{"Like "}{playerImitationNames[2]}
 								</PrimaryButton>
 							):null}
 						</div>
@@ -242,7 +244,7 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like it"}
+									{"Like "}{playerImitationNames[3]}
 								</PrimaryButton>
 							):null}
 							{players.length > 4 ? (
@@ -260,7 +262,7 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like it"}
+									{"Like "}{playerImitationNames[4]}
 								</PrimaryButton>
 							):null}
 							{players.length > 5 ? (
@@ -278,12 +280,13 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like it"}
+									{"Like "}{playerImitationNames[5]}
 								</PrimaryButton>
 							):null}
 						</div>
 					</center>
 				</div>
+
 			</div>
 		</BaseContainer>
 	);
