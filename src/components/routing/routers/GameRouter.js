@@ -1,16 +1,11 @@
 import {Redirect, Route} from "react-router-dom";
-import Lobby from "components/views/Lobby";
-import Game from "components/views/Game";
-import RoomSetting from "components/views/RoomSetting";
 import PropTypes from 'prop-types';
-import RoomCreation from "components/views/RoomCreation";
-import RoomEntrance from "components/views/RoomEntrance";
-import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
-import NormalWaitingRoom from "components/views/NormalWaitingRoom";
-import ChoiceRecord from "components/views/ChoiceResult";
 import ImitationInspect from "components/views/ImitationInspect";
 import ImitationVote from "components/views/ImitationVote";
 import GameRule from "components/views/GameRule";
+import ChoiceResult from "components/views/ChoiceResult";
+import ChoiceGame from "../../views/ChoiceGame";
+import ImitationGame from "../../views/ImitationGame";
 
 const GameRouter = props => {
   /**
@@ -18,38 +13,23 @@ const GameRouter = props => {
    */
   return (
     <div style={{display: 'flex', flexDirection: 'column'}}>
-      <Route exact path={`${props.base}/lobby`}>
-        <GameRule/>
+      <Route exact path={`${props.base}/rule`}>
+          <GameRule/>
       </Route>
-      <Route exact path={`${props.base}/gamerule`}>
-        <Lobby/>
+      <Route exact path={`${props.base}/:roomID/multiChoice`}>
+          <ChoiceGame/>
       </Route>
-      <Route exact path={`${props.base}/roomsetting`}>
-        <RoomSetting/>
+	  <Route exact path={`${props.base}/:roomID/imitatePrep`}>
+          <ImitationInspect/>
       </Route>
-      <Route exact path={`${props.base}/roomcreation`}>
-        <RoomCreation/>
+      <Route exact path={`${props.base}/:roomID/imitateWrite`}>
+          <ImitationGame/>
       </Route>
-	  <Route exact path={`${props.base}/games/record/:roomID`}>
-        <ChoiceRecord/>
+      <Route exact path={`${props.base}/:roomID/imitateVote`}>
+          <ImitationVote/>
       </Route>
-      <Route exact path={`${props.base}/room/:roomID/owner`}>
-        <OwnerWaitingRoom/>
-      </Route>
-      <Route exact path={`${props.base}/roomentrance`}>
-        <RoomEntrance/>
-      </Route>
-      <Route exact path={`${props.base}/room/:roomID/participants`}>
-        <NormalWaitingRoom/>
-      </Route>
-	  <Route exact path={`${props.base}/games/imitationinspect/:roomID`}>
-        <ImitationInspect/>
-      </Route>
-      <Route exact path={`${props.base}/games/imitationvote/:roomID`}>
-        <ImitationVote/>
-      </Route>
-      <Route exact path={`${props.base}`}>
-        <Redirect to={`${props.base}/login`}/>
+      <Route exact path={`${props.base}/:roomID/result/`}>
+          <ChoiceResult/>
       </Route>
     </div>
   );

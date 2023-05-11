@@ -2,6 +2,7 @@ import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 import {GameGuard} from "components/routing/routeProtectors/GameGuard";
 import {LobbyGuard} from "components/routing/routeProtectors/LobbyGuard";
 import Lobby from "components/views/Lobby";
+import RoomRouter from "components/routing/routers/RoomRouter";
 import GameRouter from "components/routing/routers/GameRouter";
 import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
@@ -28,6 +29,7 @@ import {ImitationInspectGuard} from "components/routing/routeProtectors/Imitatio
 import ImitationVote from "components/views/ImitationVote";
 import {ImitationVoteGuard} from "components/routing/routeProtectors/ImitationVoteGuard";
 import GameRule from "components/views/GameRule";
+import UserRouter from "./UserRouter";
 
 /**
  * Main router of your application.
@@ -42,117 +44,36 @@ const AppRouter = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route path="/game">
+				<Route path="/rooms">
 					<GameGuard>
-						<GameRouter base="/game"/>
+						<RoomRouter base="/rooms"/>
 					</GameGuard>
 				</Route>
-				
-				<Route exact path="/">
-					<Redirect to="/login"/>
+				<Route path="/games">
+					<GameGuard>
+						<GameRouter base="/games"/>
+					</GameGuard>
 				</Route>
-				
-				<Route path="/lobby">
-					<LobbyGuard>
-						<Lobby/>
-					</LobbyGuard>
+				<Route path="/users">
+					<GameGuard>
+						<UserRouter base="/users"/>
+					</GameGuard>
 				</Route>
-
-				<Route path="/gamerule">
-						<GameRule/>
-				</Route>
-		
-				<Route path="/roomsetting">
-					<RoomSettingGuard>
-						<RoomSetting/>
-					</RoomSettingGuard>
-				</Route>
-
-				<Route path="/roomcreation">
-					<RoomCreationGuard>
-						<RoomCreation/>
-					</RoomCreationGuard>
-				</Route>
-
-				<Route path="/rooms/:roomID/owner">
-					<OwnerWaitingRoomGuard>
-						<OwnerWaitingRoom/>
-					</OwnerWaitingRoomGuard>
-				</Route>
-
-				<Route path="/roomentrance">
-					<RoomEntrance/>
-				</Route>
-
-				<Route path="/rooms/:roomID/participants">
-					<NormalWaitingRoomGuard>
-						<NormalWaitingRoom/>
-					</NormalWaitingRoomGuard>
-				</Route>
-
-				<Route path="/games/multiplechoice/:roomID">
-					<ChoiceGame/>
-				</Route>
-
-				<Route path="/games/record/:roomID">
-					<ChoiceRecordGuard>
-						<ChoiceRecord/>
-					</ChoiceRecordGuard>
-				</Route>
-
-				<Route path="/games/imitation/:roomID">
-					<ImitationGame />
-				</Route>
-
-				<Route path="/games/imitationinspect/:roomID">
-					<ImitationInspectGuard>
-						<ImitationInspect/>
-					</ImitationInspectGuard>
-				</Route>
-
-				<Route path="/games/imitationvote/:roomID">
-					<ImitationVoteGuard>
-						<ImitationVote/>
-					</ImitationVoteGuard>
-				</Route>
-
 				<Route exact path="/login">
 					<LoginGuard>
 						<Login/>
 					</LoginGuard>
 				</Route>
-		
 				<Route exact path="/register">
 					<RegisterGuard>
 						<Register/>
 					</RegisterGuard>
 				</Route>
-		
-				<Route path ="/users/:userId">
-					<Inspect/>
+				<Route exact path="/">
+					<Redirect to="/rooms"/>
 				</Route>
-				
-				<Route path ="/users/:userId">
-					<InspectGuard>
-						<Inspect/>
-					</InspectGuard>
-				</Route>
-		
-				<Route path ="/Setting/:userId">
-					<Setting/>
-				</Route>
-		
-				<Route path ="/users/:userId">
-					<Setting/>
-				</Route>
-		
-				<Route path ="/logout/:userId">
-					<LoginGuard>
-						<Login/>
-					</LoginGuard>
-				</Route>
-      </Switch>
-    </BrowserRouter>
+      		</Switch>
+    	</BrowserRouter>
   );
 };
 
