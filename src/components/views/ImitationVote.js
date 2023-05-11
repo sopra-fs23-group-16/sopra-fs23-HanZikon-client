@@ -14,8 +14,8 @@ const ImitationVote = props => {
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
-	const playerImitations = [[],[]];
 	const [buttonClicked, setButtonClicked] = useState(false);
+	const [playerImitations, setPlayerImitations] = useState([]);
 
 	const history = useHistory();
 
@@ -34,25 +34,18 @@ const ImitationVote = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
 							const playersImitationsParse = JSON.parse(playersImitations);
-							const playersImitationsArray = Object.entries(playersImitationsParse)
-							console.log(playersImitationsArray);
-							for (var i=0; i<playersImitationsArray.length; i++)
-							{
-								playersImitationsArray[i][1] = "data:image/png;base64," + playersImitationsArray[i][1];
+							alert("playersImitationsParse is " + playersImitationsParse)
+							const playersImitationsArray = Array.from(playersImitationsParse);
+
+							for (var i=0; i<playersImitationsParse.length; i++){
+								playersImitationsArray[i] = "data:image/png;base64," + playersImitationsParse[i].imitationBytes;
 								const string = "playerImitation" + i;
-								/*const string2 = "playerImitation" + (i+1);
-								const string3 = "playerImitation" + (i+2);
-								const string4 = "playerImitation" + (i+3);
-								const string5 = "playerImitation" + (i+4);
-								const string6 = "playerImitation" + (i+5);*/
-								document.getElementById(string).src = playersImitationsArray[i][1];
-								/*document.getElementById(string2).src = playersImitationsArray[i][1];
-								document.getElementById(string3).src = playersImitationsArray[i][1];
-								document.getElementById(string4).src = playersImitationsArray[i][1];
-								document.getElementById(string5).src = playersImitationsArray[i][1];
-								document.getElementById(string6).src = playersImitationsArray[i][1];*/
+
+								document.getElementById(string).src = playersImitationsArray[i];
+								document.getElementById(string).alt = playersImitationsArray[i].userName;
 							}
 							setPlayers(playersImitationsArray);
+							setPlayerImitations(playersImitationsParse);
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/" + roomID + "/players/records", {}, requestBody)
@@ -173,9 +166,9 @@ const ImitationVote = props => {
 						<div id="countdown" className="">
 						</div>
 						<div>
-							<img id="playerImitation0" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
-							<img id="playerImitation1" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
-							<img id="playerImitation2" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation0" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation1" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation2" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 						</div>
 						<div className="imitationvote votevater">
 							{players.length > 0 ? (
@@ -232,9 +225,9 @@ const ImitationVote = props => {
 						</div>
 						<br/>
 						<div>
-							<img id="playerImitation3" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
-							<img id="playerImitation4" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
-							<img id="playerImitation5" src="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation3" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation4" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
+							<img id="playerImitation5" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>
 						</div>
 						<div className="imitationvote votevater">	
 							{players.length > 3 ? (
