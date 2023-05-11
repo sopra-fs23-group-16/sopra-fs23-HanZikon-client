@@ -53,18 +53,10 @@ const GameRule = () => {
 					<div className="lobby button-container">
 						<PrimaryButton
 							width="12%"
-							onClick={() => history.push(`/roomcreation`)}
-						>
-						Start Gaming!
-						</PrimaryButton>
-					</div>	
-					<div className="lobby button-container">
-						<SecondaryButton
-							width="12%"
-							onClick={() => history.push(`/lobby`)}
+							onClick={() => history.push(`/rooms/lobby`)}
 						>
 						Back to Lobby
-						</SecondaryButton>
+						</PrimaryButton>
 					</div>
 				</div>
         </center>

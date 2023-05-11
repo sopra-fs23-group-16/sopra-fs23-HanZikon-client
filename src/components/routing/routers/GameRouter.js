@@ -4,8 +4,8 @@ import ImitationInspect from "components/views/ImitationInspect";
 import ImitationVote from "components/views/ImitationVote";
 import GameRule from "components/views/GameRule";
 import ChoiceResult from "components/views/ChoiceResult";
-import ChoiceGame from "../../views/ChoiceGame";
-import ImitationGame from "../../views/ImitationGame";
+import ChoiceGame from "components/views/ChoiceGame";
+import ImitationGame from "components/views/ImitationGame";
 
 const GameRouter = props => {
   /**

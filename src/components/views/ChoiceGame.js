@@ -156,7 +156,7 @@ const ChoiceGame = props => {
 		// setTimeout(submitScore(), 50);
 		submitScore();
 		setTimeout(function () {
-		window.location.href = "/games/record/" + roomID;
+		window.location.href = `/games/${roomID}/result`;
 		}, 50);
 		setChoicesEN([]) // reset the choices
 	}

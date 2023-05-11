@@ -115,7 +115,7 @@ const OwnerWaitingRoom = props => {
 		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
 		
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
-		window.location.href = "/lobby";
+		window.location.href = "/rooms/lobby";
     };
 
 

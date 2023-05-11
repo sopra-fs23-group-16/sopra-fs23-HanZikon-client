@@ -286,7 +286,7 @@ const ImitationGame = props => {
 				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					window.location.href = "/games/imitationvote/" + roomID;
+					window.location.href = `/games/${roomID}/imitateVote`;
 				}, 500);
 			}
 		}, 1000);

@@ -103,14 +103,14 @@ const Inspect = () => {
 				<div className="inspect button-container">
 					<PrimaryButton
 						width="70%"
-						onClick={() => history.push(`/Setting/${userId}`)}>
+						onClick={() => history.push(`/users/${userId}/edit`)}>
 						Edit
 					</PrimaryButton>
 				</div>
 				<div className="inspect button-container">
 					<PrimaryButton
 						width="70%"
-						onClick={() => history.push('/lobby')}>
+						onClick={() => history.push('/rooms/lobby')}>
 						Back to Lobby
 					</PrimaryButton>
 				</div>
