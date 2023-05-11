@@ -15,6 +15,7 @@ const ImitationVote = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const playerImitations = [[],[]];
+	const [buttonClicked, setButtonClicked] = useState(false);
 
 	const history = useHistory();
 
@@ -79,26 +80,16 @@ const ImitationVote = props => {
 	console.log(players.length);
 	console.log(players[0]);
 
-	/*
-	const submitScore = () => {
-		///////////////////////////////////////////////
-		//    make sure it is the right userID       //
-		///////////////////////////////////////////////
-		const userID = localStorage.getItem('loggedInUser')
-		let systemScore = 0;
-		if (localStorage.getItem("roundPoints")) {
-			systemScore = parseInt(localStorage.getItem("roundPoints"));
-			setTimeout(function () {
-				console.log("roundPoints", systemScore);
-			}, 50);
-		}
-		const requestBody = {userID,scoreBoard: {systemScore}};
+	const submitScore = (userOrder) => {
+		var votedScore = 10;
+		const userID = players[userOrder][0];
+		const requestBody = {userID,scoreBoard: {votedScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-	}*/
+	}
 
 	window.addEventListener("load", function() {
 
-		var countdown = 600;
+		var countdown = 20;
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
@@ -191,6 +182,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
+									onClick={submitScore(0)}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -202,6 +194,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
+									onClick={submitScore(1)}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -213,6 +206,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
+									onClick={submitScore(2)}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -229,6 +223,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
+									onClick={submitScore(3)}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -240,6 +235,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
+									onClick={submitScore(4)}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -251,6 +247,7 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
+									onClick={submitScore(5)}
 								>
 									{"Like it"}
 								</PrimaryButton>
