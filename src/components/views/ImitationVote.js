@@ -180,6 +180,7 @@ const ImitationVote = props => {
 						<div className="imitationvote votevater">
 							{players.length > 0 ? (
 								<PrimaryButton
+									disabled={buttonClicked}
 									width="10%"
 									padding-right = "5%"
 									onClick={() => {
@@ -197,6 +198,7 @@ const ImitationVote = props => {
 							):null}
 							{players.length > 1 ? (
 								<PrimaryButton
+									disabled={buttonClicked}
 									width="10%"
 									padding-right = "5%"
 									onClick={() => {
@@ -214,6 +216,7 @@ const ImitationVote = props => {
 							):null}
 							{players.length > 2 ? (
 								<PrimaryButton
+									disabled={buttonClicked}
 									width="10%"
 									padding-right = "5%"
 									onClick={() => {
@@ -236,6 +239,7 @@ const ImitationVote = props => {
 						<div className="imitationvote votevater">	
 							{players.length > 3 ? (
 								<PrimaryButton
+									disabled={buttonClicked}
 									width="10%"
 									padding-right = "5%"
 									onClick={() => {
@@ -253,6 +257,7 @@ const ImitationVote = props => {
 							):null}
 							{players.length > 4 ? (
 								<PrimaryButton
+									disabled={buttonClicked}
 									width="10%"
 									padding-right = "5%"
 									onClick={() => {
@@ -270,6 +275,7 @@ const ImitationVote = props => {
 							):null}
 							{players.length > 5 ? (
 								<PrimaryButton
+									disabled={buttonClicked}
 									width="10%"
 									padding-right = "5%"
 									onClick={() => {
