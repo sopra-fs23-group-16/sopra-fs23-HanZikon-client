@@ -3,6 +3,7 @@ import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {useHistory} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/Register.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -104,12 +105,12 @@ const Register = props => {
 					</PrimaryButton>
 				</div>
 				<div className="register button-container">
-					<PrimaryButton
+					<SecondaryButton
 						width="70%"
 						onClick={() => history.push(`/login`)}
 					>
 					Back to Login
-					</PrimaryButton>
+					</SecondaryButton>
 				</div>
 			</div>
 		</div>

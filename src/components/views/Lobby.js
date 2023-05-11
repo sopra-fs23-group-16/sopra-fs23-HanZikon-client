@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import {useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Lobby.scss";
@@ -41,20 +42,20 @@ const Lobby = () => {
 						</PrimaryButton>
 					</div>
 					<div className="lobby button-container">
-						<PrimaryButton 
+						<SecondaryButton
 							width="70%"
 							onClick={() => history.push(`/gamerule`)}
 						>
 						Game Rule
-						</PrimaryButton>
+						</SecondaryButton>
 					</div>
 					<div className="lobby button-container">
-						<PrimaryButton
+						<SecondaryButton
 							width="70%"
 							onClick={() => history.push(`/users/${id}`)}
 						>
 						Your Profile
-						</PrimaryButton>
+						</SecondaryButton>
 					</div>
 					{/* <div className="lobby button-container">
 						<PrimaryButton

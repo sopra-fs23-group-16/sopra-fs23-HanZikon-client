@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
@@ -129,12 +130,12 @@ const OwnerWaitingRoom = props => {
 					</PrimaryButton>
 				</div>
 				<div className="ownerwaiting button-container">
-					<PrimaryButton
+					<SecondaryButton
 						width="15%"
 						onClick={() => exitRoom() }
 					>
 						Exit Room 
-					</PrimaryButton>
+					</SecondaryButton>
 				</div>
 				<div className="ownerwaiting input">
 					Room Code: {roomCode}

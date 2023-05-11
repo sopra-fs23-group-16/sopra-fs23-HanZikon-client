@@ -3,6 +3,7 @@ import {api, handleError, client} from 'helpers/api';
 import User from 'models/User';
 import {useHistory, useParams} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/RoomEntrance.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -113,12 +114,12 @@ const RoomEntrance = props => {
 						</PrimaryButton>
 					</div>
 					<div className="entrance button-container">
-						<PrimaryButton
+						<SecondaryButton
 							width="80%"
 							onClick={() => window.location.href = `/roomcreation`}
 						>
 						Cancel
-						</PrimaryButton>
+						</SecondaryButton>
 					</div>
 					{/* <div className="creation button-container">
 						<PrimaryButton

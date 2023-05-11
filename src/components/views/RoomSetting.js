@@ -1,6 +1,7 @@
 import { api, handleError, client } from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import React, { useEffect, useState } from 'react'
 import PropTypes from "prop-types";
@@ -137,12 +138,12 @@ const RoomSetting = () => {
 						</PrimaryButton>
 					</div>
 					<div className="roomsetting button-container">
-						<PrimaryButton
+						<SecondaryButton
 							width="100%"
 							onClick={() => history.push(`/roomcreation`)}
 						>
 						Cancel
-						</PrimaryButton>
+						</SecondaryButton>
 					</div>
 					{/* <div className="roomsetting button-container">
 						<PrimaryButton

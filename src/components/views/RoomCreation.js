@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import Room from 'models/Room';
 import {Link, useHistory} from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
@@ -59,12 +60,12 @@ const RoomCreation = () => {
 						</PrimaryButton>
 					</div>
 					<div className="creation button-container">
-						<PrimaryButton
+						<SecondaryButton
 							width="70%"
 							onClick={() => window.location.href = `/lobby`}
 						>
 						Back to Lobby
-						</PrimaryButton>
+						</SecondaryButton>
 					</div>
 					{/* <div className="creation button-container">
 						<PrimaryButton

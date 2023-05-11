@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
 import User from 'models/User';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import {useHistory, useParams } from 'react-router-dom';
@@ -211,20 +212,20 @@ const NormalWaitingRoom = props => {
 				</PrimaryButton>
 				</div>
 				<div className="normalwaiting button-container">
-				<PrimaryButton
+				<SecondaryButton
 					width="15%"
 					onClick={() => cancelReady()}
 					>
 					Cancel Ready
-				</PrimaryButton>
+				</SecondaryButton>
 				</div>
 				<div className="normalwaiting button-container">
-				<PrimaryButton
+				<SecondaryButton
 					width="15%"
 					onClick={() => exitRoom()}
 					>
 					Exit Room
-				</PrimaryButton>
+				</SecondaryButton>
 				</div>
 				</center>
 				</div>
