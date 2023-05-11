@@ -15,7 +15,8 @@ const NormalWaitingRoom = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const history = useHistory();
-	
+
+	const [gameMode, setgameMode] = useState([]);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
 	// const userID = localStorage.getItem("loggedInUser");
@@ -39,7 +40,10 @@ const NormalWaitingRoom = props => {
 							const players = roomparse["players"]
 
 							console.log(roomparse);
-							setPlayers(players);						
+							setPlayers(players);	
+							
+							const gameMode = roomparse["gameParam"]["questionType"]
+							setgameMode(gameMode);
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
@@ -48,10 +52,10 @@ const NormalWaitingRoom = props => {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);	
-
+							
 							const players = roomparse["players"]
-							setPlayers(players);		
-						
+							setPlayers(players);
+
 							const userIDs = players.map(player => player.userID)
 							let userId = localStorage.getItem("loggedInUser");
 
@@ -203,6 +207,7 @@ const NormalWaitingRoom = props => {
 				<div className="normalwaiting col">
 				<div className="normalwaiting form">
 					<center>
+					<div className="ownerwaiting label">{gameMode}</div>
 					<div className="normalwaiting button-container">
 				<PrimaryButton
 					width="15%"

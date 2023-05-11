@@ -24,6 +24,8 @@ const OwnerWaitingRoom = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
+	const [gameMode, setgameMode] = useState([]);
+
 	const [copied, setCopied] = useState(false);
 
 	const requestBody = JSON.stringify({ roomID });
@@ -42,10 +44,13 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							console.log(players[0]);	
+							//console.log(players[0]);	
 							//console.log(getUserIcon(players[0]));	
 							setRoomcode(roomcode);	
-							setPlayers(players);					
+							setPlayers(players);	
+
+							const gameMode = roomparse["gameParam"]["questionType"]
+							setgameMode(gameMode);			
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
@@ -53,7 +58,7 @@ const OwnerWaitingRoom = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							console.log(roomparse);							
+							//console.log(roomparse);							
 						});
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
 							const questionList = response.body;
@@ -120,6 +125,7 @@ const OwnerWaitingRoom = props => {
 	if (roomCode) {
 		content = (
 			<center>
+				<div className="ownerwaiting label">{gameMode}</div>
 				<div className="ownerwaiting button-container">
 					<PrimaryButton
 						width="15%"
