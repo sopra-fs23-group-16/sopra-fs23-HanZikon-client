@@ -203,13 +203,15 @@ const ImitationGame = props => {
 				const byteArr = new Uint8Array(buffer);
 				const byteArrString = String.fromCharCode.apply(null, byteArr);
 				const byteArrString64 = btoa(byteArrString);
+				const round = parseInt(localStorage.getItem("round"));
 
 				console.log("Player is sending img:", loggedInUserID);
-				console.log("The img buffer string 64 is sending :"+ byteArrString64); // Object ArrayBuffer  // This is working
+				console.log("The img buffer string 64 is sending :"+ byteArrString64); // Object ArrayBuffer
 
 				const requestgetready = {
 					userID: loggedInUserID,
-					imitationBytes: byteArrString64
+					imitationBytes: byteArrString64,
+					round: round
 				};
 				client.send("/app/multi/rooms/"+ roomID + "/players/imitations",{}, JSON.stringify(requestgetready))
 			};

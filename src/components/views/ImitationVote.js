@@ -16,6 +16,7 @@ const ImitationVote = props => {
 	const playerNames = players.map(player => player.playerName)
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
+	const round = parseInt(localStorage.getItem("round"));
 
 	const history = useHistory();
 
@@ -49,7 +50,10 @@ const ImitationVote = props => {
 							setPlayerImitationNames(playerImitationNames);
 						});
 						setTimeout(function () {
-							client.send("/app/multi/rooms/" + roomID + "/players/records", {}, requestBody)
+							const requestBody = {
+								round: round
+							};
+							client.send("/app/multi/rooms/" + roomID + "/players/records",{}, JSON.stringify(requestBody))
 						}, 500);
 					});
 				}
