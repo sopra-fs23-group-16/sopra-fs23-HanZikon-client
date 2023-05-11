@@ -13,7 +13,7 @@ const ImitationVote = props => {
 
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
-	const playerNames = players.map(player => player.username)
+	const playerNames = players.map(player => player.playerName)
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
 	const round = parseInt(localStorage.getItem("round"));
@@ -31,13 +31,24 @@ const ImitationVote = props => {
 				if (!client['connected']) {
 					client.connect({}, function () {
 						console.log('connected to stomp');
+						client.subscribe("/topic/multi/rooms/" + roomID + "/info", function (response) {
+							const room = response.body;
+							const roomparse = JSON.parse(room);
+							const players = roomparse["players"]
+							console.log(players);
+							console.log(roomparse);
+							setPlayers(players);
+						});
+						setTimeout(function () {
+							client.send("/app/multi/rooms/" + roomID + "/info", {}, requestBody)
+						}, 500);
 
 						client.subscribe('/topic/multi/rooms/' + roomID + '/imitations', function (response) {
 							const playersImitations = response.body;
 							const playersImitationsParse = JSON.parse(playersImitations);
 							const playersImitationsArray = Array.from(playersImitationsParse);
 							const playerImitationNames = Array.from(playersImitationsParse);
-							setPlayers(playersImitationsArray);
+
 
 							for (var i=0; i<playersImitationsParse.length; i++){
 								playersImitationsArray[i] = "data:image/png;base64," + playersImitationsParse[i].imitationBytes;
@@ -46,7 +57,7 @@ const ImitationVote = props => {
 
 								document.getElementById(string).src = playersImitationsArray[i];
 							}
-
+							// setPlayers(playersImitationsArray);
 							setPlayerImitationNames(playerImitationNames);
 						});
 						setTimeout(function () {
@@ -55,6 +66,7 @@ const ImitationVote = props => {
 							};
 							client.send("/app/multi/rooms/" + roomID + "/players/records",{}, JSON.stringify(requestBody))
 						}, 500);
+
 					});
 				}
 			} catch (error) {
@@ -114,14 +126,14 @@ const ImitationVote = props => {
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 0 ? (
-						<div className="imitationvote label"> {playerImitationNames[0]}</div>
+						<div className="imitationvote label"> {playerNames[0]}</div>
 					) : null}
 					{players.length > 1 ? (
 						<div className="imitationvote card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 1 ? (
-						<div className="imitationvote label"> {playerImitationNames[1]}</div>
+						<div className="imitationvote label"> {playerNames[1]}</div>
 					) : null}
 
 					{players.length > 2 ? (
@@ -129,7 +141,7 @@ const ImitationVote = props => {
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 2 ? (
-						<div className="imitationvote label"> {playerImitationNames[2]}</div>
+						<div className="imitationvote label"> {playerNames[2]}</div>
 					) : null}
 
 					{players.length > 3 ? (
@@ -137,7 +149,7 @@ const ImitationVote = props => {
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 3 ? (
-						<div className="imitationvote label"> {playerImitationNames[3]}</div>
+						<div className="imitationvote label"> {playerNames[3]}</div>
 					) : null}
 
 					{players.length > 4 ? (
@@ -145,7 +157,7 @@ const ImitationVote = props => {
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 4 ? (
-						<div className="imitationvote label"> {playerImitationNames[4]}</div>
+						<div className="imitationvote label"> {playerNames[4]}</div>
 					) : null}
 
 					{players.length > 5 ? (
@@ -153,7 +165,7 @@ const ImitationVote = props => {
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 5 ? (
-						<div className="imitationvote label"> {playerImitationNames[5]}</div>
+						<div className="imitationvote label"> {playerNames[5]}</div>
 					) : null}
 
 					{players.length > 6 ? (
@@ -161,7 +173,7 @@ const ImitationVote = props => {
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 6 ? (
-						<div className="imitationvote label"> {playerImitationNames[6]}</div>
+						<div className="imitationvote label"> {playerNames[6]}</div>
 					) : null}
 
 				</div>
