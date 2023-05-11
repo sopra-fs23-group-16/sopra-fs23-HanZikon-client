@@ -1,35 +1,12 @@
 import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
-import {GameGuard} from "components/routing/routeProtectors/GameGuard";
-import {LobbyGuard} from "components/routing/routeProtectors/LobbyGuard";
-import Lobby from "components/views/Lobby";
 import RoomRouter from "components/routing/routers/RoomRouter";
 import GameRouter from "components/routing/routers/GameRouter";
+import UserRouter from "./UserRouter";
+import {GameGuard} from "components/routing/routeProtectors/GameGuard";
 import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
-import {RegisterGuard} from "components/routing/routeProtectors/RegisterGuard";
 import Register from "components/views/Register";
-import {InspectGuard} from "components/routing/routeProtectors/InspectGuard";
-import Inspect from "components/views/Inspect";
-import Setting from "components/views/Setting";
-import {RoomCreationGuard} from "components/routing/routeProtectors/RoomCreationGuard";
-import RoomCreation from "components/views/RoomCreation";
-import {RoomSettingGuard} from "components/routing/routeProtectors/RoomSettingGuard";
-import RoomSetting from "components/views/RoomSetting";
-import RoomEntrance from "components/views/RoomEntrance";
-import OwnerWaitingRoom from "components/views/OwnerWaitingRoom";
-import {OwnerWaitingRoomGuard} from "components/routing/routeProtectors/OwnerWaitingRoomGuard";
-import NormalWaitingRoom from "components/views/NormalWaitingRoom";
-import {NormalWaitingRoomGuard} from "components/routing/routeProtectors/NormalWaitingRoomGuard";
-import ChoiceGame from "components/views/ChoiceGame";
-import ImitationGame from "components/views/ImitationGame";
-import ChoiceRecord from "components/views/ChoiceResult";
-import {ChoiceRecordGuard} from "components/routing/routeProtectors/ChoiceRecordGuard";
-import ImitationInspect from "components/views/ImitationInspect";
-import {ImitationInspectGuard} from "components/routing/routeProtectors/ImitationInspectGuard";
-import ImitationVote from "components/views/ImitationVote";
-import {ImitationVoteGuard} from "components/routing/routeProtectors/ImitationVoteGuard";
-import GameRule from "components/views/GameRule";
-import UserRouter from "./UserRouter";
+
 
 /**
  * Main router of your application.
@@ -65,9 +42,9 @@ const AppRouter = () => {
 					</LoginGuard>
 				</Route>
 				<Route exact path="/register">
-					<RegisterGuard>
+					<LoginGuard>
 						<Register/>
-					</RegisterGuard>
+					</LoginGuard>
 				</Route>
 				<Route exact path="/">
 					<Redirect to="/rooms"/>
