@@ -182,7 +182,12 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
-									onClick={submitScore(0)}
+									onClick={() => {
+										if (!buttonClicked) {
+											setButtonClicked(true);
+											submitScore(0);
+										}
+									}}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -194,7 +199,12 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
-									onClick={submitScore(1)}
+									onClick={() => {
+										if (!buttonClicked) {
+											setButtonClicked(true);
+											submitScore(1);
+										}
+									}}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -206,7 +216,12 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
-									onClick={submitScore(2)}
+									onClick={() => {
+										if (!buttonClicked) {
+											setButtonClicked(true);
+											submitScore(2);
+										}
+									}}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -223,7 +238,12 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
-									onClick={submitScore(3)}
+									onClick={() => {
+										if (!buttonClicked) {
+											setButtonClicked(true);
+											submitScore(3);
+										}
+									}}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -235,7 +255,12 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
-									onClick={submitScore(4)}
+									onClick={() => {
+										if (!buttonClicked) {
+											setButtonClicked(true);
+											submitScore(4);
+										}
+									}}
 								>
 									{"Like it"}
 								</PrimaryButton>
@@ -247,7 +272,12 @@ const ImitationVote = props => {
 								<PrimaryButton
 									width="10%"
 									padding-right = "5%"
-									onClick={submitScore(5)}
+									onClick={() => {
+										if (!buttonClicked) {
+											setButtonClicked(true);
+											submitScore(5);
+										}
+									}}
 								>
 									{"Like it"}
 								</PrimaryButton>
