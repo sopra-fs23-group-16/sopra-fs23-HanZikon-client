@@ -20,11 +20,11 @@ const FormField = props => {
 			<label className="inspect label">
 				{props.label}
 			</label>
-			<input
+			<input type="text" disabled
 				className="inspect input"
-				placeholder="Not defined"
+				//placeholder="Not defined"
 				value={props.value}
-				onChange={e => props.onChange(e.target.value)}
+				//onChange={e => props.onChange(e.target.value)}
 			/>
 		</div>
 	);
@@ -97,7 +97,7 @@ const Inspect = () => {
                         <FormField
                             label="username"
                             value={user.username}
-                            onChange={un => setUsername(un)}
+                            //onChange={un => setUsername(un)}
                         />
                     </div>
 				<div className="inspect button-container">
