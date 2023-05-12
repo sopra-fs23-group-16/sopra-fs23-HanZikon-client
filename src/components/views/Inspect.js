@@ -87,10 +87,9 @@ const Inspect = () => {
 	return user && (
 		<BaseContainer>
 		<div className="inspect container">
-			<h1>My Profile</h1>
+		<div className="inspect label-title">My Profile </div>
 			<div className="inspect form">
-					<div className="">
-						
+					<div className="inspect form">
 						<img src={userIcon} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} />
 					</div>
                     <div className="user overview">
