@@ -85,16 +85,17 @@ const Register = props => {
 			<h1>No account? Please register here!</h1>
 			<div className="register form">
 				<FormField
-					type="register"
+					className="register"
 					label="Username"
 					value={username}
 					placeholder="Enter your username here"
 					onChange={un => setUsername(un)}
 				/>
 				<FormField
-					type="register"
+					className="register"
 					label="Password"
 					value={password}
+					type="password"
 					placeholder="Enter your password here"
 					onChange={n => setPassword(n)}
 				/>
