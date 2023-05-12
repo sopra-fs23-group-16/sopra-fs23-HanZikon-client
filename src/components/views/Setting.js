@@ -4,6 +4,7 @@ import User from 'models/User';
 import {useHistory, useParams} from 'react-router-dom';
 import {Spinner} from 'components/ui/Spinner';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
@@ -129,12 +130,12 @@ const Setting = props => {
                     Confirm
                 </PrimaryButton>
                 &nbsp;
-                <PrimaryButton
+                <SecondaryButton
                     width="100%"
                     onClick={() => history.push(`/users/${userId}`)}
                 >
                     Cancel
-                </PrimaryButton>
+                </SecondaryButton>
             </div>
         );
     }
