@@ -16,4 +16,19 @@
         top: 0;
         left: 0;
     }
+	&.timer {
+        height: 40px;
+		width: 6%;
+        padding-left: 0px;
+		padding-right: 0px;
+		padding-top: 6px;
+        border: none;
+        border-radius: 0.75em;
+        backdrop-filter: blur(3px);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+        border-left: 2px rgba(255, 255, 255, .1);
+        border-top: 2px solid rgba(255, 255, 255, .1);
+        background-color: background;
+        color: rgb(0, 0, 0);
+    }
 }

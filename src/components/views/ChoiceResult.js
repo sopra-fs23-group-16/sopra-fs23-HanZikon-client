@@ -85,7 +85,7 @@ const ChoiceResult = props => {
 		content = (
 			<div className="choiceresult container">
 				{/*<p className="choiceresult timer">{countdown}s</p>*/}
-				<div className="choiceresult label">
+				<div className="choiceresult timer">
 					<Countdown
 						date={Date.now() + 10000} // 10s
 						intervalDelay={1000}

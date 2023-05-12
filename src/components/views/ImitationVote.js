@@ -180,7 +180,7 @@ const ImitationVote = props => {
 
 				<div className="imitationvote form">
 					<center>
-						<div id="countdown" className="">
+						<div id="countdown" className="imitationvote timer">
 						</div>
 						<div>
 							<img id="playerImitation0" src="" alt="" style={{ width: '15%', height: 'auto', margin: 'auto' }}/>

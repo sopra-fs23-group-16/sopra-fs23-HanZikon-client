@@ -357,7 +357,7 @@ const ImitationGame = props => {
 				</div>
 				<div className="choicegame col">
 					<center>
-						<div id="countdown" className="">
+						<div id="countdown" className="choicegame timer">
 						</div>
 						<br />
 						<br />
