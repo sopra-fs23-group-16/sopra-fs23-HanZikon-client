@@ -89,17 +89,17 @@ const Inspect = () => {
 		<BaseContainer>
 		<div className="inspect container">
 		<div className="inspect label-title">My Profile </div>
-			<div className="inspect form">
+			<div className="inspect form-box">
 					<div className="inspect form">
 						<img src={userIcon} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} />
 					</div>
-                    <div className="user overview">
+                    {/* <div className="inspect form"> */}
                         <FormField
                             label="username"
                             value={user.username}
                             //onChange={un => setUsername(un)}
                         />
-                    </div>
+                    {/* </div> */}
 				<div className="inspect button-container">
 					<PrimaryButton
 						width="100%"
