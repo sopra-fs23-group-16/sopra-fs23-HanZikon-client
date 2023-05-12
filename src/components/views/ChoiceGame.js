@@ -156,7 +156,7 @@ const ChoiceGame = props => {
 		// setTimeout(submitScore(), 50);
 		submitScore();
 		setTimeout(function () {
-		window.location.href = `/games/${roomID}/result`;
+		window.location.href = `/game/${roomID}/result`;
 		}, 50);
 		setChoicesEN([]) // reset the choices
 	}
@@ -209,7 +209,7 @@ const ChoiceGame = props => {
 							</div>
 
 							<br /><br />
-							<img src={currentQuestion.oracleURL} alt="player1" onLoad={()=>handleCmpLoad(1)}
+							<img src={currentQuestion.oracleURL} alt="oracleURL" onLoad={()=>handleCmpLoad(1)}
 								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
 							<br /><br /><br />
 							{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (

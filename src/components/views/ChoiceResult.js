@@ -5,10 +5,10 @@ import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/ChoiceResult.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
-import User from 'models/User';
+// import User from 'models/User';
 import Countdown from 'react-countdown-now';
 import {Spinner} from "../ui/Spinner";
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ChoiceResult = props => {
 	

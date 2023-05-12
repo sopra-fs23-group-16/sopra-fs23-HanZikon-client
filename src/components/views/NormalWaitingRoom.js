@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError, client} from 'helpers/api';
-import User from 'models/User';
+// import User from 'models/User';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/NormalWaitingRoom.scss';
@@ -8,7 +8,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import {useHistory, useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
 import {nextRound} from "../../helpers/nextRound";
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const NormalWaitingRoom = props => {
     const {roomID} = useParams();
@@ -66,7 +66,7 @@ const NormalWaitingRoom = props => {
 							// console.log("userIDS",typeof userIDs[0])
 							if (!userIDs.includes(parseInt(userId))) {
 								alert("You are no longer in the room!");
-								 window.location.href = "/rooms/lobby";
+								 window.location.href = "/room/lobby";
 							}
 						});
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {

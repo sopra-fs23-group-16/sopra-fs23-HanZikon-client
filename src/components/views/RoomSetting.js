@@ -41,7 +41,7 @@ const RoomSetting = () => {
 							// const room = response.body;
 							const room = JSON.parse(response.body);
 							console.log(room);
-							window.location.href = "/rooms/" + room["roomID"] + "/waitingRoom/owner";
+							window.location.href = "/room/" + room["roomID"] + "/waitingroom/owner";
 						});
 					});
                 }

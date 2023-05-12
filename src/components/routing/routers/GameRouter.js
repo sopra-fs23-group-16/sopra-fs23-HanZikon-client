@@ -16,16 +16,16 @@ const GameRouter = props => {
       <Route exact path={`${props.base}/rule`}>
           <GameRule/>
       </Route>
-      <Route exact path={`${props.base}/:roomID/multiChoice`}>
+      <Route exact path={`${props.base}/:roomID/oracleguessing`}>
           <ChoiceGame/>
       </Route>
-	  <Route exact path={`${props.base}/:roomID/imitatePrep`}>
+	  <Route exact path={`${props.base}/:roomID/imitationlearning`}>
           <ImitationInspect/>
       </Route>
-      <Route exact path={`${props.base}/:roomID/imitateWrite`}>
+      <Route exact path={`${props.base}/:roomID/imitationwriting`}>
           <ImitationGame/>
       </Route>
-      <Route exact path={`${props.base}/:roomID/imitateVote`}>
+      <Route exact path={`${props.base}/:roomID/imitationvoting`}>
           <ImitationVote/>
       </Route>
       <Route exact path={`${props.base}/:roomID/result/`}>

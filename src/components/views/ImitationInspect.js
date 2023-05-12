@@ -4,10 +4,10 @@ import { useHistory, useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import 'styles/views/ImitationInspect.scss';
-import User from 'models/User';
+// import User from 'models/User';
 import HanziWriter from "hanzi-writer";
 import {Spinner} from "../ui/Spinner";
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ImitationInspect = props => {
 
@@ -114,7 +114,7 @@ const ImitationInspect = props => {
 
 		setTimeout(() => {
 			clearInterval(timer);
-			window.location.href = `/games/${roomID}/imitateWrite/`;
+			window.location.href = `/game/${roomID}/imitationwriting/`;
 		}, 15000);
 		
 		return () => clearInterval(timer);

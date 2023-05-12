@@ -15,16 +15,16 @@ const RoomRouter = props => {
             <Route exact path={`${props.base}/lobby`}>
                 <Lobby/>
             </Route>
-            <Route exact path={`${props.base}/create`}>
+            <Route exact path={`${props.base}/creation`}>
                 <RoomSetting/>
             </Route>
-            <Route exact path={`${props.base}/join`}>
+            <Route exact path={`${props.base}/joining`}>
                 <RoomEntrance/>
             </Route>
-            <Route exact path={`${props.base}/:roomID/waitingRoom/owner`}>
+            <Route exact path={`${props.base}/:roomID/waitingroom/owner`}>
                 <OwnerWaitingRoom/>
             </Route>
-            <Route exact path={`${props.base}/:roomID/waitingRoom/participate`}>
+            <Route exact path={`${props.base}/:roomID/waitingroom/participant`}>
                 <NormalWaitingRoom/>
             </Route>
             <Route exact path={`${props.base}`}>

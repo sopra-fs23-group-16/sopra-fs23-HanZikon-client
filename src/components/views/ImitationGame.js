@@ -6,8 +6,8 @@ import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationGame.scss';
-import User from 'models/User';
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import User from 'models/User';
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ImitationGame = props => {
 
@@ -288,7 +288,7 @@ const ImitationGame = props => {
 				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					window.location.href = `/games/${roomID}/imitateVote`;
+					window.location.href = `/game/${roomID}/imitationvoting`;
 				}, 500);
 			}
 		}, 1000);

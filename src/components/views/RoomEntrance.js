@@ -82,7 +82,7 @@ const RoomEntrance = props => {
 				checkRoomFull(roomparse);
 				if(roomFull === false){
 					console.log("The room is not full!");
-					window.location.href = "/rooms/" + roomparse["roomID"] + "/waitingRoom/participate";
+					window.location.href = "/room/" + roomparse["roomID"] + "/waitingroom/participant";
 				} else {
 					console.log("The room is full!");
 				}
@@ -140,7 +140,7 @@ const RoomEntrance = props => {
 					<div className="entrance button-container">
 						<SecondaryButton
 							width="80%"
-							onClick={() => window.location.href = `/rooms/lobby`}
+							onClick={() => window.location.href = `/room/lobby`}
 						>
 						Cancel
 						</SecondaryButton>

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
-import User from 'models/User';
-import {Spinner} from 'components/ui/Spinner';
+// import User from 'models/User';
+// import {Spinner} from 'components/ui/Spinner';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import {useHistory, useParams} from 'react-router-dom';
@@ -13,7 +13,7 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const FormField = props => {
 	return (
@@ -60,7 +60,7 @@ const Inspect = () => {
 		userIcon = owl;
 	}
 	
-    let {userId} = useParams();
+    let {userID} = useParams();
 
     useEffect(() => {
 
@@ -69,7 +69,7 @@ const Inspect = () => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
             try {
-                const response = await api.get('/users/'+userId);
+                const response = await api.get('/users/' + userID);
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 setUser(response.data);
 
@@ -103,14 +103,14 @@ const Inspect = () => {
 				<div className="inspect button-container">
 					<PrimaryButton
 						width="100%"
-						onClick={() => history.push(`/users/${userId}/edit`)}>
+						onClick={() => history.push(`/users/${userID}/edit`)}>
 						Edit
 					</PrimaryButton>
 				</div>
 				<div className="inspect button-container">
 					<SecondaryButton
 						width="100%"
-						onClick={() => history.push('/rooms/lobby')}>
+						onClick={() => history.push('/room/lobby')}>
 						Back to Lobby
 					</SecondaryButton>
 				</div>

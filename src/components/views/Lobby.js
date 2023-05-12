@@ -32,7 +32,7 @@ const Lobby = () => {
 						<div className="lobby button-container">
 							<PrimaryButton
 								width="70%"
-								onClick={() => window.location.href = `/rooms/create`}
+								onClick={() => window.location.href = `/room/creation`}
 							>
 								New Room
 							</PrimaryButton>
@@ -40,7 +40,7 @@ const Lobby = () => {
 						<div className="lobby button-container">
 							<PrimaryButton
 								width="70%"
-								onClick={() => window.location.href = `/rooms/join`}
+								onClick={() => window.location.href = `/room/joining`}
 							>
 								Join Room
 							</PrimaryButton>
@@ -48,7 +48,7 @@ const Lobby = () => {
 						<div className="lobby button-container">
 							<SecondaryButton
 								width="70%"
-								onClick={() => history.push(`/games/rule`)}
+								onClick={() => history.push(`/game/rule`)}
 							>
 							Game Rule
 							</SecondaryButton>

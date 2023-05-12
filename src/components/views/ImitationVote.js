@@ -3,10 +3,10 @@ import {api, handleError, client } from 'helpers/api';
 import { useHistory, useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
-import recognizeHandwriting from "../../helpers/recognizeHandwriting";
+// import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationVote.scss';
-import User from 'models/User';
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import User from 'models/User';
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 
 const ImitationVote = props => {
@@ -110,7 +110,7 @@ const ImitationVote = props => {
 				clearInterval(timer);
 				//setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					window.location.href = `/games/${roomID}/result`;
+					window.location.href = `/game/${roomID}/result`;
 				}, 500);
 			}
 		}, 1000);

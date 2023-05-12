@@ -8,8 +8,8 @@ import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-import dog from 'image/dog.png';
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import dog from 'image/dog.png';
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const FormField = props => {
 	return (
@@ -39,7 +39,7 @@ const Setting = props => {
 	const [username, setUsername] = useState(null);
 	const [password, setPassword] = useState(null);
 	const [icon, setIcon] = useState(null);
-	let {userId} = useParams();
+	let {userID} = useParams();
 	
 	const handleChangeIcon = (event) =>{
 		const icon = event.target.value;
@@ -54,12 +54,12 @@ const Setting = props => {
         console.warn("item", item)
         try {
             const requestBody = JSON.stringify({username, password});
-            const response = await api.put('/users/' + userId, requestBody);
+            const response = await api.put('/users/' + userID, requestBody);
 
             // Get the returned user and update a new object.
             const user = new User(response.data);
 			//localStorage.setItem("loggedInUser", user.id);
-            history.push(`/users/${userId}`);
+            history.push(`/users/${userID}`);
 
         } catch (error) {
             alert(`Something went wrong: \n${handleError(error)}`);
@@ -78,7 +78,7 @@ const Setting = props => {
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
             try {
-                const response = await api.get('/users/'+userId);
+                const response = await api.get('/users/'+ userID);
 
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 setUser(response.data);
@@ -132,7 +132,7 @@ const Setting = props => {
                 &nbsp;
                 <SecondaryButton
                     width="100%"
-                    onClick={() => history.push(`/users/${userId}`)}
+                    onClick={() => history.push(`/users/${userID}`)}
                 >
                     Cancel
                 </SecondaryButton>

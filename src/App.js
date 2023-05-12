@@ -1,4 +1,3 @@
-import Header from "components/views/Header";
 import AppRouter from "components/routing/routers/AppRouter";
 import NavigationBar from "components/views/NavigationBar";
 
