@@ -3,6 +3,7 @@ import {api, handleError} from 'helpers/api';
 import User from 'models/User';
 import {Spinner} from 'components/ui/Spinner';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import {SecondaryButton} from 'components/ui/SecondaryButton';
 import {useHistory, useParams} from 'react-router-dom';
 import 'styles/views/Inspect.scss';
 import BaseContainer from "components/ui/BaseContainer";
@@ -101,17 +102,17 @@ const Inspect = () => {
                     </div>
 				<div className="inspect button-container">
 					<PrimaryButton
-						width="70%"
+						width="100%"
 						onClick={() => history.push(`/users/${userId}/edit`)}>
 						Edit
 					</PrimaryButton>
 				</div>
 				<div className="inspect button-container">
-					<PrimaryButton
-						width="70%"
+					<SecondaryButton
+						width="100%"
 						onClick={() => history.push('/rooms/lobby')}>
 						Back to Lobby
-					</PrimaryButton>
+					</SecondaryButton>
 				</div>
 			</div>
 		</div>

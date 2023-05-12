@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import {api} from 'helpers/api';
 import {useHistory, useParams} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
-import {SecondaryButton} from 'components/ui/SecondaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/GameRule.scss";
 import User from 'models/User';
