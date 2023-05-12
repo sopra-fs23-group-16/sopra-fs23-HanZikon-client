@@ -56,7 +56,7 @@ const ImitationGame = props => {
 
 	useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -288,7 +288,7 @@ const ImitationGame = props => {
 				submitDrawing();
 				setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					window.location.href = "/games/imitationvote/" + roomID;
+					window.location.href = `/games/${roomID}/imitateVote`;
 				}, 500);
 			}
 		}, 1000);

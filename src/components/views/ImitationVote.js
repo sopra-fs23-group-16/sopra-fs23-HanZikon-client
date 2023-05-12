@@ -24,7 +24,7 @@ const ImitationVote = props => {
 
 	useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
 		async function stompConnect() {
 			try {
@@ -110,7 +110,7 @@ const ImitationVote = props => {
 				clearInterval(timer);
 				//setTimeout(submitScore(), 50);
 				setTimeout(function () {
-					window.location.href = "/games/record/" + roomID;
+					window.location.href = `/games/${roomID}/result`;
 				}, 500);
 			}
 		}, 1000);

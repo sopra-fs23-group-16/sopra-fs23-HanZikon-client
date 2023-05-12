@@ -32,7 +32,7 @@ const RoomSetting = () => {
 
     useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -44,7 +44,7 @@ const RoomSetting = () => {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
-							window.location.href = "/rooms/" + roomparse["roomID"] + "/owner";
+							window.location.href = "/rooms/" + roomparse["roomID"] + "/waitingRoom/owner";
 						});
 					});
                 }
@@ -140,7 +140,7 @@ const RoomSetting = () => {
 					<div className="roomsetting button-container">
 						<SecondaryButton
 							width="100%"
-							onClick={() => history.push(`/roomcreation`)}
+							onClick={() => history.push(`/rooms/lobby`)}
 						>
 						Cancel
 						</SecondaryButton>

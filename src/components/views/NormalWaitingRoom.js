@@ -26,7 +26,7 @@ const NormalWaitingRoom = props => {
 
 	useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
@@ -63,7 +63,7 @@ const NormalWaitingRoom = props => {
 							// console.log("userIDS",typeof userIDs[0])
 							if (!userIDs.includes(parseInt(userId))) {
 								alert("You are no longer in the room!");
-								 window.location.href = "/lobby";
+								 window.location.href = "/rooms/lobby";
 							}
 						});
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
@@ -132,7 +132,6 @@ const NormalWaitingRoom = props => {
 		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
 
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
-		window.location.href = "/lobby";
     };
 
 	return (

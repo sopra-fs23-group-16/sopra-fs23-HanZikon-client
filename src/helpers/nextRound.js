@@ -9,7 +9,7 @@ export const nextRound = (roomID) => {
 
         // go back to lobby for now
         // waitingRoom need clarify owner or player
-        window.location.href = "/lobby"
+        window.location.href = "/rooms/lobby"
     }else{
         // round++
         round = round + 1;
@@ -20,9 +20,9 @@ export const nextRound = (roomID) => {
         const questionList = JSON.parse(localStorage.getItem('questionList'));
         const nextQuestion = questionList[round - 1];
         if (nextQuestion.questionType == "MultipleChoice") {
-            window.location.href = "/games/multiplechoice/" + roomID;
+            window.location.href = `/games/${roomID}/multiChoice/`;
         } else {
-            window.location.href = '/games/imitationinspect/' + roomID;
+            window.location.href = `/games/${roomID}/imitatePrep/`;
         }
     }
 }

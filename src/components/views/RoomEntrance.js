@@ -51,7 +51,7 @@ const RoomEntrance = props => {
 	
 	useEffect(() => {
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
@@ -105,7 +105,7 @@ const RoomEntrance = props => {
 			checkRoomFull(roomparse);
 			if(roomFull === false){
 				console.log("The room is not full!");
-				window.location.href = "/rooms/" + roomparse["roomID"] + "/participants";
+				window.location.href = "/rooms/" + roomparse["roomID"] + "/waitingRoom/participate";
 			} else {
 				console.log("The room is full!");
 			}
@@ -139,7 +139,7 @@ const RoomEntrance = props => {
 					<div className="entrance button-container">
 						<SecondaryButton
 							width="80%"
-							onClick={() => window.location.href = `/roomcreation`}
+							onClick={() => window.location.href = `/rooms/lobby`}
 						>
 						Cancel
 						</SecondaryButton>

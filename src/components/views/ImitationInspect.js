@@ -44,7 +44,7 @@ const ImitationInspect = props => {
 	useEffect(() => {
 		
 
-		fetchLocalUser();
+		// fetchLocalUser();
 		
 		startCountdown();
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
@@ -114,7 +114,7 @@ const ImitationInspect = props => {
 
 		setTimeout(() => {
 			clearInterval(timer);
-			window.location.href = "/games/imitation/" + roomID;
+			window.location.href = `/games/${roomID}/imitateWrite/`;
 		}, 15000);
 		
 		return () => clearInterval(timer);

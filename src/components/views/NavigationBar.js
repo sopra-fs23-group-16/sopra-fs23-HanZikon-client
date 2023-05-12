@@ -7,15 +7,14 @@ import {useState} from 'react';
 
 const NavigationBar = () => {
 
-
-	const history = useHistory();
-	const [users, setUsers] = useState(null);
-	let id = localStorage.getItem("loggedInUser");
+	// const history = useHistory();
+	// const [users, setUsers] = useState(null);
+	// let id = localStorage.getItem("loggedInUser");
 
   const logout = async () => {
+        const response = await api.get('/logout/'+localStorage.getItem("loggedInUser"));
 		await localStorage.removeItem('token');
 		await localStorage.removeItem("loggedInUser");
-		const response = await api.get('/logout/'+id);
 		window.location.href = '/login';
 	}
     
@@ -27,8 +26,8 @@ const NavigationBar = () => {
       </div>
 
       <div className="navbar button-container">
-            <div className="navbar button" onClick={() => window.location.href = "/lobby"}><i class="material-icons md-36 text-red">home</i></div>
-            <div className="navbar button" onClick={() => window.location.href = "/users/" + id}><i class="material-icons md-36 text-red">person</i></div>
+            <div className="navbar button" onClick={() => window.location.href = "/rooms/lobby"}><i class="material-icons md-36 text-red">home</i></div>
+            <div className="navbar button" onClick={() => window.location.href = "/users/" + localStorage.getItem("loggedInUser")}><i class="material-icons md-36 text-red">person</i></div>
             <div className="navbar button" onClick={() => logout()}><i class="material-icons md-36 text-red">logout</i></div>
       </div>
     </div>
