@@ -1,24 +1,20 @@
 import React, {useEffect, useState} from 'react';
-import {api, handleError, client} from 'helpers/api';
-import {useHistory, useParams} from 'react-router-dom';
+import { handleError, client} from 'helpers/api';
+import {useParams} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
-import User from 'models/User';
+
 import {Spinner} from "../ui/Spinner";
 import dog from "image/dog.png";
-import cat from "image/cat.jpg";
-import seelion from "image/seelion.jpg";
-import owl from "image/owl.jpg";
-import cattle from "image/cattle.jpg";
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+
 import copyToClipboard from "../../helpers/copyToClipboard";
 
 const OwnerWaitingRoom = props => {
 	
-	const history = useHistory();
+	// const history = useHistory();
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [players, setPlayers] = useState([]);
@@ -38,7 +34,7 @@ const OwnerWaitingRoom = props => {
             try {
                 if (!client['connected']) {
                     client.connect({}, function () {
-						console.log('connected to stomp');
+						// console.log('connected to stomp');
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/info", function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
@@ -55,11 +51,11 @@ const OwnerWaitingRoom = props => {
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
 						},100);
-						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							//console.log(roomparse);							
-						});
+						// client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
+						// 	const room = response.body;
+						// 	const roomparse = JSON.parse(room);
+						// 	//console.log(roomparse);
+						// });
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
@@ -78,7 +74,7 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"];
 							setPlayers(players);
-							console.log(roomparse);	
+							// console.log(roomparse);
 						});
 					});
                 }

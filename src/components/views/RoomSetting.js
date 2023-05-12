@@ -1,34 +1,31 @@
-import { api, handleError, client } from 'helpers/api';
-import {useHistory, useParams} from 'react-router-dom';
+import { handleError, client } from 'helpers/api';
+import {useHistory} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import React, { useEffect, useState } from 'react'
-import PropTypes from "prop-types";
 import 'styles/views/RoomSetting.scss';
-import User from 'models/User';
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const RoomSetting = () => {
 
 	const history = useHistory();
-	const [users, setUsers] = useState(null);
-	let userId = localStorage.getItem("loggedInUser");
+	// const [users, setUsers] = useState(null);
+	// let userId = localStorage.getItem("loggedInUser");
 	
-	const [Room, setRoom] = useState(null);
+	// const [Room, setRoom] = useState(null);
 	const [numPlayers, setNumPlayers] = useState("");
 	const [level, setLevel] = useState("");
 	const [questionType, setQuestionType] = useState("");
 	
-	const handleChangenp = (event) =>{
-		setNumPlayers(event.target.value);
-	};
-	const handleChangeqt = (event) =>{
-		setQuestionType(event.target.value);
-	};
-	const handleChangedl = (event) =>{
-		setLevel(event.target.value);
-	};
+	// const handleChangenp = (event) =>{
+	// 	setNumPlayers(event.target.value);
+	// };
+	// const handleChangeqt = (event) =>{
+	// 	setQuestionType(event.target.value);
+	// };
+	// const handleChangedl = (event) =>{
+	// 	setLevel(event.target.value);
+	// };
 
     useEffect(() => {
 
@@ -40,11 +37,11 @@ const RoomSetting = () => {
 				if (!client['connected']) {
                     client.connect({}, () => {
 						console.log('connected to stomp');
-						client.subscribe('/topic/multi/create/' + userId, function (response) {
-							const room = response.body;
-							const roomparse = JSON.parse(room);
-							console.log(roomparse);
-							window.location.href = "/rooms/" + roomparse["roomID"] + "/waitingRoom/owner";
+						client.subscribe('/topic/multi/create/' + localStorage.getItem("loggedInUser"), function (response) {
+							// const room = response.body;
+							const room = JSON.parse(response.body);
+							console.log(room);
+							window.location.href = "/rooms/" + room["roomID"] + "/waitingRoom/owner";
 						});
 					});
                 }
@@ -66,18 +63,19 @@ const RoomSetting = () => {
 		};
     }, []);
 
-	const goWaiting = () => {
+	const doCreate = () => {
+		// will be redirected to waiting room when new message received
 		const requestBody = JSON.stringify({level, numPlayers, questionType});
-		client.send('/app/multi/create/' + userId, {}, requestBody);
+		client.send('/app/multi/create/' + localStorage.getItem("loggedInUser"), {}, requestBody);
     };
 	
-	const goInvite = () => {
-    /*try {
-      history.push(`/invitation`);
-    } catch (error) {
-      alert(`Something is wrong: \n${handleError(error)}`);
-    }*/
-    };
+	// const goInvite = () => {
+    // /*try {
+    //   history.push(`/invitation`);
+    // } catch (error) {
+    //   alert(`Something is wrong: \n${handleError(error)}`);
+    // }*/
+    // };
 
     return (
 		<BaseContainer>
@@ -95,20 +93,22 @@ const RoomSetting = () => {
 						<label className="roomsetting label">
 							Number of Players
 						</label>
-						<select value = {numPlayers} className="roomsetting select" onChange = {handleChangenp}>
+						<select value={numPlayers} className="roomsetting select" onChange={e => {
+							setNumPlayers(e.target.value);
+						}}>
 							<option value="-" selected>Please select...</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
+							{[2, 3, 4, 5, 6].map((value) => (
+								<option key={value} value={value}>{value}</option>
+							))}
 						</select>
 					</div>
 					<div className="roomsetting field">
 						<label className="roomsetting label">
 							Question Type
 						</label>
-						<select value = {questionType} className="roomsetting select" onChange = {handleChangeqt}>
+						<select value = {questionType} className="roomsetting select" onChange = {e=> {
+							setQuestionType(e.target.value);
+						}}>
 							<option value="-" selected>Please select...</option>
 							<option value="MultipleChoice">Oracle Guessing</option>
 							<option value="HanziDrawing">Hanzi Imitation</option>
@@ -119,20 +119,20 @@ const RoomSetting = () => {
 						<label className="roomsetting label">
 							Difficulty Level
 						</label>
-						<select value = {level} className="roomsetting select" onChange = {handleChangedl}>
+						<select value = {level} className="roomsetting select" onChange = {e=> {
+							setLevel(e.target.value);
+						}}>
 							<option value="-" selected>Please select...</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>				
+							{[1,2, 3, 4, 5].map((value) => (
+								<option key={value} value={value}>{value}</option>
+							))}
 						</select>
 					</div>
 					<div className="roomsetting button-container">
 						<PrimaryButton
 							disabled={!level || !numPlayers || !questionType}
 							width="100%"
-							onClick={() => goWaiting()}
+							onClick={() => doCreate()}
 						>
 						Confirm
 						</PrimaryButton>
