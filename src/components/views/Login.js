@@ -87,16 +87,17 @@ const Login = props => {
 				<h1>Please log into your account!</h1>
 				<div className="login form">
 					<FormField
-						type="login"
+						className="login"
 						label="Username"
 						value={username}
 						placeholder="Enter your username here"
 						onChange={un => setUsername(un)}
 					/>
 					<FormField
-						type="login"
+						className="login"
 						label="Password"
 						value={password}
+						type="password"
 						placeholder="Enter your password here"
 						onChange={n => setPassword(n)}
 					/>
