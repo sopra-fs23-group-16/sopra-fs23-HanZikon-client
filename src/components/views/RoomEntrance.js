@@ -123,7 +123,7 @@ const RoomEntrance = props => {
 				<div className="entrance text">Please enter the room detail!</div>
 				<div className="entrance form">
 					<FormField
-						type="entrance"
+						className="entrance"
 						label="Room Code"
 						value={roomCode}
 						onChange={n => setRoomCode(n)}
