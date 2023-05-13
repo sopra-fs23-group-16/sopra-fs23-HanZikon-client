@@ -1,6 +1,6 @@
 @import 'styles/theme';
 
-.choiceresult {
+.gameresult {
     &.container {
         margin-top: 3em;
 		min-height: 250px;
@@ -12,9 +12,9 @@
         display: flex;
 		flex-direction: column;
 		justify-content: center;
-		width: 230%;
+		width: 300%;
 		margin-top: 0.5em;
-		max-width: 22em;
+		max-width: 35em;
 		height: 20em;
 		font-size: 22px;
 		font-weight: 400;
@@ -29,9 +29,12 @@
     }
 	
 	&.timer {
+		display: flex;
+		justify-content: center;
         height: 40px;
-        padding-left: 15px;
-		padding-right: 15px;
+		width: 70%;
+        // padding-left: 32px;
+		// padding-right: 16px;
 		padding-top: 6px;
         border: none;
         border-radius: 0.75em;

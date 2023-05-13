@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {api, handleError, client} from 'helpers/api';
+import {handleError, client} from 'helpers/api';
 // import User from 'models/User';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import {useHistory, useParams } from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import dog from 'image/dog.png';
 import {nextRound} from "../../helpers/nextRound";
 import {normalizeGameMode} from "../../helpers/normalizeGameMode";
@@ -16,7 +16,7 @@ const NormalWaitingRoom = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName);
 	const loggedInUserID = localStorage.getItem("loggedInUser");
-	const localPlayer = players.find(player => player.userID == Number(loggedInUserID));
+	const localPlayer = players.find(player => player.userID === Number(loggedInUserID));
 	const isReady = localPlayer && localPlayer.ready;
 	// const history = useHistory();
 
@@ -144,7 +144,7 @@ const NormalWaitingRoom = props => {
 
 	const exitRoom = () => {
 		const loggedInUserID = localStorage.getItem("loggedInUser");
-		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+		const playerToUpdate = players.find(player => player.userID === Number(loggedInUserID));
 
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
     };
@@ -157,7 +157,7 @@ const NormalWaitingRoom = props => {
 					<>
 						{players.length > index ? (
 							<div className="ownerwaiting card">
-								<img src={dog}  style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
+								<img src={dog} alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 							</div>
 						) : null}
 						{/*player ready*/}

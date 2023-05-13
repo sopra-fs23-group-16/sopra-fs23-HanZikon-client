@@ -109,7 +109,7 @@ const OwnerWaitingRoom = props => {
 
 	const exitRoom = () => {
 		const loggedInUserID = localStorage.getItem("loggedInUser");
-		const playerToUpdate = players.find(player => player.userID == Number(loggedInUserID));
+		const playerToUpdate = players.find(player => player.userID === Number(loggedInUserID));
 		
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/room/lobby";
@@ -164,11 +164,11 @@ const OwnerWaitingRoom = props => {
 						<>
 							{players.length > index ? (
 								<div className="ownerwaiting card">
-									<img src={dog}  style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
+									<img src={dog}  alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 								</div>
 							) : null}
 							{/* owner*/}
-							{playerNames.length > index && index == 0 ? (
+							{playerNames.length > index && index === 0 ? (
 								<div className="ownerwaiting label" >&#x2705; {playerNames[index]}</div>
 							) : null}
 							{/*player ready*/}

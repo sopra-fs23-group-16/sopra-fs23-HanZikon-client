@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import {api, handleError, client } from 'helpers/api';
-import { useHistory, useParams } from 'react-router-dom';
+import React, {useEffect, useState } from 'react';
+import {handleError, client } from 'helpers/api';
+import {useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import 'styles/views/ImitationInspect.scss';
@@ -11,7 +11,7 @@ import {Spinner} from "../ui/Spinner";
 
 const ImitationInspect = props => {
 
-	const history = useHistory();
+	//const history = useHistory();
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
@@ -19,12 +19,12 @@ const ImitationInspect = props => {
 	const chineseScriptEvolution = ["Oracle Bone","Bronze","Seal","Clerical","Standard"]
 	const chineseScriptTime = ["1600-1046 BC","1046-256 BC","221 - 207 BC","206 BC - 220 AD","618-907 AD"]
 
-	const horizontalStyles = {
-		display: 'flex',
-		flexDirection: 'row', // align children horizontally
-		justifyContent: 'center', // distribute children evenly
-		alignItems: 'center', // vertically align children
-	};
+	// const horizontalStyles = {
+	// 	display: 'flex',
+	// 	flexDirection: 'row', // align children horizontally
+	// 	justifyContent: 'center', // distribute children evenly
+	// 	alignItems: 'center', // vertically align children
+	// };
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -88,7 +88,7 @@ const ImitationInspect = props => {
 		});
 		writer.loopCharacterAnimation();
 
-		var imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
+		let imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
 			width: 100,
 			height: 100,
 			showCharacter: true,
@@ -129,7 +129,7 @@ const ImitationInspect = props => {
 
 	const handleImgLoad = (num) => {
 		loadedImg++;
-		if(loadedImg==num){
+		if(loadedImg === num){
 			setImgLoaded(true);
 		}
 	}

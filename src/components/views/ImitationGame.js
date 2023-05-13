@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import {api, handleError, client } from 'helpers/api';
-import { useHistory, useParams } from 'react-router-dom';
+import {handleError, client } from 'helpers/api';
+import {useParams} from 'react-router-dom';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
@@ -29,15 +29,15 @@ const ImitationGame = props => {
 	}, []);
 
 	const { roomID } = useParams();
-	const [roomCode, setRoomcode] = useState('');
+	//const [roomCode, setRoomcode] = useState('');
 	const [players, setPlayers] = useState([]);
 	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
 	//console.log(playerNames);
 	const [canvasSize,setcanvasSize] = useState([])
-	const history = useHistory();
+	//const history = useHistory();
 	const strokeHistory = [[],[]];
-	const playerImitations = [[],[]];
+	//const playerImitations = [[],[]];
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -67,11 +67,11 @@ const ImitationGame = props => {
 						client.subscribe("/topic/multi/rooms/" + roomID + "/info", function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							const roomcode = roomparse["roomCode"]
+							//const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
 							console.log(players);
 							console.log(roomparse);
-							setRoomcode(roomcode);
+							//setRoomcode(roomcode);
 							setPlayers(players);
 						});
 						setTimeout(function () {

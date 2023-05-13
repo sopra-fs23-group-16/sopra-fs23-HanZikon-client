@@ -42,7 +42,7 @@
   }
   &.select {
     height: 35px;
-	min-width: 25em;
+	  min-width: 25em;
     padding-left: 10px;
     margin-left: 0px;
     border: none;
@@ -51,7 +51,7 @@
 
   }
   &.text {
-    color: $textColor;
+    //color: $textColor;
 	  font-size: 18px;
 	  margin-top: 4px;
     margin-bottom: 20px;

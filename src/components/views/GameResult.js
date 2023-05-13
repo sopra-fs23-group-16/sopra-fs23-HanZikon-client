@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {api, handleError, client} from 'helpers/api';
-import {useHistory, useParams} from 'react-router-dom';
+import {handleError, client} from 'helpers/api';
+import {useParams} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
-import 'styles/views/ChoiceResult.scss';
+import 'styles/views/GameResult.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
 // import User from 'models/User';
@@ -10,13 +10,13 @@ import Countdown from 'react-countdown-now';
 import {Spinner} from "../ui/Spinner";
 // import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
-const ChoiceResult = props => {
+const GameResult = props => {
 	
 	// const history = useHistory();
 
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
-	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
+	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	
 	// const [countdown, setCountdown] = useState(5);
 
@@ -79,13 +79,13 @@ const ChoiceResult = props => {
 	// 	return () => clearInterval(timer);
 	// };
 
-	let content = <center><div className="choiceresult container"><Spinner /></div></center>;
+	let content = <center><div className="gameresult container"><Spinner /></div></center>;
 
 	if (players.length !== 0) {
 		content = (
-			<div className="choiceresult container">
+			<div className="gameresult container">
 				{/*<p className="choiceresult timer">{countdown}s</p>*/}
-				<div className="choiceresult timer">
+				<div className="gameresult timer">
 					<Countdown
 						date={Date.now() + 10000} // 10s
 						intervalDelay={1000}
@@ -94,10 +94,10 @@ const ChoiceResult = props => {
 						onComplete={() => nextRound(roomID)}
 					/>
 				</div>
-				<div className="choiceresult form">
+				<div className="gameresult form">
 					<center>
 						{Object.keys(players).length > 0 ? (
-							<div className="choiceresult record">
+							<div className="gameresult record">
 								<PrimaryButton
 									width="70%"
 								>
@@ -106,7 +106,7 @@ const ChoiceResult = props => {
 							</div>) : null}
 
 						{Object.keys(players).length > 1 ? (
-							<div className="choiceresult record">
+							<div className="gameresult record">
 								<PrimaryButton
 									width="70%"
 								>
@@ -115,7 +115,7 @@ const ChoiceResult = props => {
 							</div>) : null}
 
 						{Object.keys(players).length > 2 ? (
-							<div className="choiceresult record">
+							<div className="gameresult record">
 								<PrimaryButton
 									width="70%"
 								>
@@ -124,7 +124,7 @@ const ChoiceResult = props => {
 							</div>) : null}
 
 						{Object.keys(players).length > 3 ? (
-							<div className="choiceresult record">
+							<div className="gameresult record">
 								<PrimaryButton
 									width="70%"
 								>
@@ -133,7 +133,7 @@ const ChoiceResult = props => {
 							</div>) : null}
 
 						{Object.keys(players).length > 4 ? (
-							<div className="choiceresult record">
+							<div className="gameresult record">
 								<PrimaryButton
 									width="70%"
 								>
@@ -142,7 +142,7 @@ const ChoiceResult = props => {
 							</div>) : null}
 
 						{Object.keys(players).length > 5 ? (
-							<div className="choiceresult record">
+							<div className="gameresult record">
 								<PrimaryButton
 									width="70%"
 								>
@@ -168,4 +168,4 @@ const ChoiceResult = props => {
  * You can get access to the history object's properties via the withRouter.
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
-export default ChoiceResult;
+export default GameResult;
