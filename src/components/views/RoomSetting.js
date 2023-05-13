@@ -16,6 +16,7 @@ const RoomSetting = () => {
 	const [numPlayers, setNumPlayers] = useState("");
 	const [level, setLevel] = useState("");
 	const [questionType, setQuestionType] = useState("");
+	const [numQuestion, setNumQuestion] = useState("");
 	
 	// const handleChangenp = (event) =>{
 	// 	setNumPlayers(event.target.value);
@@ -65,7 +66,8 @@ const RoomSetting = () => {
 
 	const doCreate = () => {
 		// will be redirected to waiting room when new message received
-		const requestBody = JSON.stringify({level, numPlayers, questionType});
+		const requestBody = JSON.stringify({level, numPlayers, questionType,numQuestion});
+		console.log("gameParam request",requestBody)
 		client.send('/app/multi/create/' + localStorage.getItem("loggedInUser"), {}, requestBody);
     };
 	
@@ -128,9 +130,22 @@ const RoomSetting = () => {
 							))}
 						</select>
 					</div>
+					<div className="roomsetting field">
+						<label className="roomsetting label">
+							Number of Questions
+						</label>
+						<select value = {numQuestion} className="roomsetting select" onChange = {e=> {
+							setNumQuestion(e.target.value);
+						}}>
+							<option value="-" selected>Please select...</option>
+							{[4,6,8,10].map((value) => (
+								<option key={value} value={value}>{value}</option>
+							))}
+						</select>
+					</div>
 					<div className="roomsetting button-container">
 						<PrimaryButton
-							disabled={!level || !numPlayers || !questionType}
+							disabled={!level || !numPlayers || !questionType || !numQuestion}
 							width="100%"
 							onClick={() => doCreate()}
 						>
