@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import {api, handleError, client } from 'helpers/api';
-import { useHistory, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { handleError, client } from 'helpers/api';
+import { useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 // import recognizeHandwriting from "../../helpers/recognizeHandwriting";
@@ -18,7 +18,7 @@ const ImitationVote = props => {
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
 	const round = parseInt(localStorage.getItem("round"));
 
-	const history = useHistory();
+	// const history = useHistory();
 
 	const requestBody = JSON.stringify({ roomID });
 
@@ -91,7 +91,7 @@ const ImitationVote = props => {
 	console.log(players[0]);
 
 	const submitScore = (userOrder) => {
-		var votedScore = 10;
+		const votedScore = 10;
 		const userID = players[userOrder][0];
 		const requestBody = {userID,scoreBoard: {votedScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
@@ -99,10 +99,10 @@ const ImitationVote = props => {
 
 	window.addEventListener("load", function() {
 
-		var countdown = 20;
-		var countdownElement = document.getElementById("countdown");
+		let countdown = 20;
+		let countdownElement = document.getElementById("countdown");
 
-		var timer = setInterval(function() {
+		let timer = setInterval(function() {
 			countdown--;
 			countdownElement.innerHTML = countdown + "s";
 

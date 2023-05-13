@@ -87,7 +87,7 @@ const ImitationInspect = props => {
 		});
 		writer.loopCharacterAnimation();
 
-		var imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
+		let imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
 			width: 100,
 			height: 100,
 			showCharacter: false,
