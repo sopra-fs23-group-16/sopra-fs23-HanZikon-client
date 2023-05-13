@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useState } from 'react';
-import {api, handleError, client } from 'helpers/api';
-import { useHistory, useParams } from 'react-router-dom';
+import React, {useEffect, useState } from 'react';
+import {handleError, client } from 'helpers/api';
+import {useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import 'styles/views/ImitationInspect.scss';
@@ -11,19 +11,19 @@ import {Spinner} from "../ui/Spinner";
 
 const ImitationInspect = props => {
 
-	const history = useHistory();
+	//const history = useHistory();
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const [imgLoaded, setImgLoaded] = useState(false);
 
 
-	const horizontalStyles = {
-		display: 'flex',
-		flexDirection: 'row', // align children horizontally
-		justifyContent: 'center', // distribute children evenly
-		alignItems: 'center', // vertically align children
-	};
+	// const horizontalStyles = {
+	// 	display: 'flex',
+	// 	flexDirection: 'row', // align children horizontally
+	// 	justifyContent: 'center', // distribute children evenly
+	// 	alignItems: 'center', // vertically align children
+	// };
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -126,7 +126,7 @@ const ImitationInspect = props => {
 
 	const handleImgLoad = (num) => {
 		loadedImg++;
-		if(loadedImg==num){
+		if(loadedImg === num){
 			setImgLoaded(true);
 		}
 	}

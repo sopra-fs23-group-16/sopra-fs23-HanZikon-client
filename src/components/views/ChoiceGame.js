@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import {api, handleError, client} from 'helpers/api';
-import {useHistory, useParams} from 'react-router-dom';
+import {handleError, client} from 'helpers/api';
+import {useParams} from 'react-router-dom';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
 import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
-import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 import getTranslationURL from "../../helpers/getTranslation";
 
 const ChoiceGame = props => {
-	const history = useHistory();
+	// const history = useHistory();
 	const [loaded, setLoaded] = useState(false);
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
@@ -166,7 +166,7 @@ const ChoiceGame = props => {
 
 	const handleCmpLoad = (num) => {
 		loadedCmp++;
-		if(loadedCmp==num){
+		if(loadedCmp === num){
 			setLoaded(true);
 		}
 	}

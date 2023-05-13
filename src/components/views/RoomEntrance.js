@@ -99,7 +99,7 @@ const RoomEntrance = props => {
 		players.forEach(player => {
 			console.log("local userID is" + userID);
 			console.log("player userID is" +player.userID);
-			if(player.userID == userID){
+			if(player.userID === userID){
 				roomFull= false;
 				setRoomFull(false);
 			}

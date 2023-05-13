@@ -1,9 +1,9 @@
-import {Redirect, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import PropTypes from 'prop-types';
 import ImitationInspect from "components/views/ImitationInspect";
 import ImitationVote from "components/views/ImitationVote";
 import GameRule from "components/views/GameRule";
-import ChoiceResult from "components/views/ChoiceResult";
+import GameResult from "components/views/GameResult";
 import ChoiceGame from "components/views/ChoiceGame";
 import ImitationGame from "components/views/ImitationGame";
 
@@ -29,7 +29,7 @@ const GameRouter = props => {
           <ImitationVote/>
       </Route>
       <Route exact path={`${props.base}/:roomID/result/`}>
-          <ChoiceResult/>
+          <GameResult/>
       </Route>
     </div>
   );
