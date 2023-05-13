@@ -11,6 +11,7 @@ import {Spinner} from "../ui/Spinner";
 import dog from "image/dog.png";
 
 import copyToClipboard from "../../helpers/copyToClipboard";
+import {normalizeGameMode} from "../../helpers/normalizeGameMode";
 
 const OwnerWaitingRoom = props => {
 	
@@ -20,7 +21,7 @@ const OwnerWaitingRoom = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
-	const [gameMode, setgameMode] = useState([]);
+	const [gameMode, setgameMode] = useState("");
 
 	const [copied, setCopied] = useState(false);
 
@@ -121,7 +122,7 @@ const OwnerWaitingRoom = props => {
 	if (roomCode) {
 		content = (
 			<center>
-				<div className="ownerwaiting label">{gameMode}</div>
+				<div className="ownerwaiting label">Game Mode: {normalizeGameMode(gameMode)}</div>
 				<div className="ownerwaiting button-container">
 					<PrimaryButton
 						width="15%"

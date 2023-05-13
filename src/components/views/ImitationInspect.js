@@ -16,7 +16,7 @@ const ImitationInspect = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const [imgLoaded, setImgLoaded] = useState(false);
-	const [countdown, setCountdown] = useState(15);
+
 
 	const horizontalStyles = {
 		display: 'flex',
@@ -41,11 +41,12 @@ const ImitationInspect = props => {
 
 	const requestBody = JSON.stringify({ roomID });
 
+	const [countdown, setCountdown] = useState(10 + parseInt(currentQuestion["level"]) * 5); // time adjust regarding difficult level
+
 	useEffect(() => {
 		
 
 		// fetchLocalUser();
-		
 		startCountdown();
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -107,6 +108,7 @@ const ImitationInspect = props => {
 	}, []);
 
 	const startCountdown = () => {
+		const countdownCopy = (10 + parseInt(currentQuestion["level"]) * 5) * 1000;
 		
 		const timer = setInterval(() => {
 			setCountdown(countdown => countdown - 1);
@@ -115,7 +117,7 @@ const ImitationInspect = props => {
 		setTimeout(() => {
 			clearInterval(timer);
 			window.location.href = `/game/${roomID}/imitationwriting/`;
-		}, 15000);
+		}, countdownCopy);
 		
 		return () => clearInterval(timer);
 	};
@@ -132,7 +134,6 @@ const ImitationInspect = props => {
 	return (
 		<BaseContainer>
 			<div className="imitationinspect container">
-				
 				<div className="imitationinspect col">
 
 					{players.length > 0 ? (

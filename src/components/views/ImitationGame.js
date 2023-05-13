@@ -160,7 +160,6 @@ const ImitationGame = props => {
 			];
 		});
 		setIsDrawing(false);
-
 	};
 
 	const draw = ({ nativeEvent }) => {
@@ -222,7 +221,13 @@ const ImitationGame = props => {
 		saveStrokes(lines);
 		console.log("canvasSize",canvasSize)
 		console.log("strokehIS",strokeHistory)
-		recognizeHandwriting(canvasSize,[strokeHistory],10,handleResponse)
+
+		if(strokeHistory[0].length === 0 &&  strokeHistory[1].length === 0){
+			localStorage.setItem("roundPoints", 0);
+		}
+		else{
+			recognizeHandwriting(canvasSize,[strokeHistory],10,handleResponse)
+		}
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
@@ -276,7 +281,7 @@ const ImitationGame = props => {
 
 	window.addEventListener("load", function() {
 
-		var countdown = 8;
+		var countdown = 10 + parseInt(currentQuestion["level"]) * 5; // time adjust regarding difficult level
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {

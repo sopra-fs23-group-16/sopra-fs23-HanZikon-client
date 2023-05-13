@@ -21,8 +21,6 @@ const ChoiceGame = props => {
 	const colorWrong = "red";
 	let systemScore = 0;
 
-	const [countdownSeconds, setCountdownSeconds] = useState(10);
-
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
 		alert("Game crashed! Retrieve questions failed!")
@@ -37,6 +35,7 @@ const ChoiceGame = props => {
 
 	const [choiceEN,setChoice] = useState();
 	const [choicesEN, setChoicesEN] = useState([]);
+	const [countdownSeconds, setCountdownSeconds] = useState(15);
 
 
 	async function fetchTranslation(cn_character) {
@@ -156,9 +155,11 @@ const ChoiceGame = props => {
 		// setTimeout(submitScore(), 50);
 		submitScore();
 		setTimeout(function () {
-		window.location.href = `/game/${roomID}/result`;
-		}, 50);
-		setChoicesEN([]) // reset the choices
+			window.location.href = `/game/${roomID}/result`;
+			setChoicesEN([]) // reset the choices
+		}, 2000);
+		// Make sure even if the player made the choice at the last minute
+		// he still has 2 sec to see the answers
 	}
 
 	let loadedCmp = 0;
