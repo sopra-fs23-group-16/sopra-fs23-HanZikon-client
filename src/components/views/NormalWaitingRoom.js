@@ -8,6 +8,7 @@ import BaseContainer from "components/ui/BaseContainer";
 import {useHistory, useParams } from 'react-router-dom';
 import dog from 'image/dog.png';
 import {nextRound} from "../../helpers/nextRound";
+import {normalizeGameMode} from "../../helpers/normalizeGameMode";
 // import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const NormalWaitingRoom = props => {
@@ -237,7 +238,7 @@ const NormalWaitingRoom = props => {
 				<div className="normalwaiting col">
 				<div className="normalwaiting form">
 					<center>
-					<div className="ownerwaiting label">{gameMode}</div>
+					<div className="ownerwaiting label">Game Mode: {normalizeGameMode(gameMode)}</div>
 					<div className="normalwaiting button-container">
 				<PrimaryButton
 					width="15%"
