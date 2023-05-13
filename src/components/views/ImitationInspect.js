@@ -17,7 +17,7 @@ const ImitationInspect = props => {
 	const playerNames = players.map(player => player.playerName)
 	const [imgLoaded, setImgLoaded] = useState(false);
 	const chineseScriptEvolution = ["Oracle Bone","Bronze","Seal","Clerical","Standard"]
-	const chineseScriptTime = ["1600-1046 BC","1046-256 BC","221 - 207 BC","206 BC - 220 AD","618-907 AD"]
+	const chineseScriptTime = ["1600-1046 BC","1046-256 BC","221-207 BC","206 BC - 220 AD","618-907 AD"]
 
 	// const horizontalStyles = {
 	// 	display: 'flex',
