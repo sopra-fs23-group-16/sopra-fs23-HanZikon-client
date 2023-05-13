@@ -16,7 +16,7 @@ const ImitationInspect = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const [imgLoaded, setImgLoaded] = useState(false);
-	const [countdown, setCountdown] = useState(15);
+
 
 	const horizontalStyles = {
 		display: 'flex',
@@ -40,6 +40,8 @@ const ImitationInspect = props => {
 	//console.log(url);
 
 	const requestBody = JSON.stringify({ roomID });
+
+	const [countdown, setCountdown] = useState(10 + parseInt(currentQuestion["level"]) * 5); // time adjust regarding difficult level
 
 	useEffect(() => {
 		
