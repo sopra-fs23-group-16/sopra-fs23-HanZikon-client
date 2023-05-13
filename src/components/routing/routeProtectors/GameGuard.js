@@ -1,7 +1,7 @@
-import {Redirect, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 import PropTypes from "prop-types";
 import {fetchLocalUser} from "../../../helpers/confirmLocalUser";
-import React, {useEffect, useState} from "react";
+import {useEffect} from "react";
 // import {Spinner} from "../../ui/Spinner";
 // import BaseContainer from "../../ui/BaseContainer";
 

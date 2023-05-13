@@ -9,7 +9,6 @@ import NavigationBar from "components/views/NavigationBar";
 const App = () => {
   return (
     <div>
-      {/* <Header height="100"/> */}
       <NavigationBar height="100"/>
       <AppRouter/>
     </div>

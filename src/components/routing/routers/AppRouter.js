@@ -6,6 +6,7 @@ import {GameGuard} from "components/routing/routeProtectors/GameGuard";
 import {LoginGuard} from "components/routing/routeProtectors/LoginGuard";
 import Login from "components/views/Login";
 import Register from "components/views/Register";
+import Welcome from "components/views/Welcome";
 
 
 /**
@@ -21,6 +22,9 @@ const AppRouter = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
+				<Route path="/welcome">			
+					<Welcome/>		
+				</Route>
 				<Route path="/room">
 					<GameGuard>
 						<RoomRouter base="/room"/>
