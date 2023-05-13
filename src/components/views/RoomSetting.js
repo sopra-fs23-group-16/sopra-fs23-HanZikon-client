@@ -140,7 +140,7 @@ const RoomSetting = () => {
 					<div className="roomsetting button-container">
 						<SecondaryButton
 							width="100%"
-							onClick={() => history.push(`/rooms/lobby`)}
+							onClick={() => history.push(`/room/lobby`)}
 						>
 						Cancel
 						</SecondaryButton>
