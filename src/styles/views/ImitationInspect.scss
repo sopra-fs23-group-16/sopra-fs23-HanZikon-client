@@ -71,8 +71,23 @@
         color: #7397ab;
         text-transform: capitalize;
         font-weight: 1000;
-        font-size: 20pt;
+        font-size: 12pt;
         font-weight: bold;
+        justify-content: center;
+    }
+
+    &.textlabel {
+        font-style: sans-serif;
+        color: #7397ab;
+        text-transform: capitalize;
+        font-size: 12pt;
+        justify-content: center;
+    }
+
+    &.evolutiontimelabel {
+        font-style: sans-serif;
+        color: rgb(144, 172, 230);
+        font-size: 9pt;
         justify-content: center;
     }
 	
