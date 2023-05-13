@@ -76,7 +76,22 @@
         font-weight: bold;
         justify-content: center;
     }
-	
+
+    &.textlabel {
+        font-style: sans-serif;
+        color: #7397ab;
+        text-transform: capitalize;
+        font-size: 12pt;
+        justify-content: center;
+    }
+
+    &.evolutiontimelabel {
+        font-style: sans-serif;
+        color: rgb(144, 172, 230);
+        font-size: 9pt;
+        justify-content: center;
+    }
+
 	&.timer {
         height: 40px;
 		width: 6%;

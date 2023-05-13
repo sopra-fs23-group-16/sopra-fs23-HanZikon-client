@@ -16,7 +16,8 @@ const ImitationInspect = props => {
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
 	const [imgLoaded, setImgLoaded] = useState(false);
-
+	const chineseScriptEvolution = ["Oracle Bone","Bronze","Seal","Clerical","Standard"]
+	const chineseScriptTime = ["1600-1046 BC","1046-256 BC","221-207 BC","206 BC - 220 AD","618-907 AD"]
 
 	// const horizontalStyles = {
 	// 	display: 'flex',
@@ -90,8 +91,10 @@ const ImitationInspect = props => {
 		let imitator = HanziWriter.create('character-quiz-div', currentQuestion.character, {
 			width: 100,
 			height: 100,
-			showCharacter: false,
+			showCharacter: true,
+			showOutline: true,
 			showHintAfterMisses: 1,
+			highlightOnComplete: true,
 			padding: 5
 		});
 		imitator.quiz();
@@ -199,34 +202,35 @@ const ImitationInspect = props => {
 						<div className={imgLoaded ? "content" : "content hidden"}>
 							<center>
 								<p className="imitationinspect timer">{countdown}s</p>
-								<div >
+								<div className="imitationinspect textlabel" >
 									<text>
 										Demo
 									</text>
 									<div id="character-demo-div"></div>
 								</div>
-								<div>
+								<div className="imitationinspect textlabel" >
 									<text>
 										Quiz Yourself
 									</text>
 									<div id="character-quiz-div"></div>
 								</div>
 								<br />
-								<div>
+								<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
 									{evolutions.map((evolution, index) => (
 										(evolution !== "n.a.") && (
-											<img
-												key={index}
-												src={evolution}
-												alt="player1"
-												onLoad={() => handleImgLoad(evolutions.length)}
-												style={{ width: '10%', height: 'auto', margin: 'auto' }}
-											/>
+											<div key={index}  style={{ textAlign: 'center', margin: '5px' }}>
+												<img
+													src={evolution}
+													alt="player1"
+													onLoad={() => handleImgLoad(evolutions.length)}
+													style={{ width: '50%', height: '50%', margin: 'auto' }}
+												/>
+												<div className="imitationinspect textlabel" style={{ marginTop: '2px' }}>{chineseScriptEvolution[index]}</div>
+												<div className="imitationinspect evolutiontimelabel" style={{ marginTop: '2px' }}>{chineseScriptTime[index]}</div>
+											</div>
 										)
 									))}
 								</div>
-								<br />
-								<br />
 								<div className="imitationinspect meaninglabel"> {meaning}</div>
 							</center>
 						</div>
