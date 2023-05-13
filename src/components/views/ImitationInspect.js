@@ -47,7 +47,6 @@ const ImitationInspect = props => {
 		
 
 		// fetchLocalUser();
-		
 		startCountdown();
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -109,6 +108,7 @@ const ImitationInspect = props => {
 	}, []);
 
 	const startCountdown = () => {
+		const countdownCopy = (10 + parseInt(currentQuestion["level"]) * 5) * 1000;
 		
 		const timer = setInterval(() => {
 			setCountdown(countdown => countdown - 1);
@@ -117,7 +117,7 @@ const ImitationInspect = props => {
 		setTimeout(() => {
 			clearInterval(timer);
 			window.location.href = `/game/${roomID}/imitationwriting/`;
-		}, 15000);
+		}, countdownCopy);
 		
 		return () => clearInterval(timer);
 	};
@@ -134,7 +134,6 @@ const ImitationInspect = props => {
 	return (
 		<BaseContainer>
 			<div className="imitationinspect container">
-				
 				<div className="imitationinspect col">
 
 					{players.length > 0 ? (
