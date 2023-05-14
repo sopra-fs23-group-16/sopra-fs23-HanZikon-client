@@ -9,7 +9,7 @@ export async function fetchLocalUser(){
         console.log("Confirm local user:",user);
         await localStorage.setItem('loggedInUser', user.id);
     } catch (error) {
-        alert("You are not logged in!")
+        console.log("You are not logged in!")
         await localStorage.removeItem('token');
         await localStorage.removeItem('loggedInUser');
     }

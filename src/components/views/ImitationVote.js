@@ -8,6 +8,7 @@ import 'styles/views/ImitationVote.scss';
 // import User from 'models/User';
 // import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import { FaHeart } from "react-icons/fa";
 
 const ImitationVote = props => {
 
@@ -16,7 +17,9 @@ const ImitationVote = props => {
 	const playerNames = players.map(player => player.playerName)
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
+	const [playerImitations, setPlayerImitations] = useState([]);
 	const round = parseInt(localStorage.getItem("round"));
+	const loggedInUserID = localStorage.getItem("loggedInUser");
 
 	// const history = useHistory();
 
@@ -57,7 +60,7 @@ const ImitationVote = props => {
 
 								document.getElementById(string).src = playersImitationsArray[i];
 							}
-							// setPlayers(playersImitationsArray);
+							setPlayerImitations(playersImitationsParse);
 							setPlayerImitationNames(playerImitationNames);
 						});
 						setTimeout(function () {
@@ -90,11 +93,20 @@ const ImitationVote = props => {
 	console.log(players.length);
 	console.log(players[0]);
 
-	const submitScore = (userOrder) => {
+	const submitScoreB1 = (userOrder) => {
 		const votedScore = 10;
 		const userID = players[userOrder][0];
 		const requestBody = {userID,scoreBoard: {votedScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+	}
+
+	const submitScore = (userOrder) => {
+		const votedTimes = 1;
+		const userID = playerImitations[userOrder].userID;
+		const fromUserID = loggedInUserID;
+		// alert("from userID is " + fromUserID + "to userID is " + userID);
+		const requestBody = {userID, fromUserID, votedTimes, round};
+		client.send("/app/multi/rooms/" + roomID + "/players/votes", {}, JSON.stringify(requestBody))
 	}
 
 	window.addEventListener("load", function() {
@@ -192,7 +204,6 @@ const ImitationVote = props => {
 								<PrimaryButton
 									disabled={buttonClicked}
 									width="10%"
-									id="playerImitationDiv0"
 									padding-right = "5%"
 									onClick={() => {
 										if (!buttonClicked) {
@@ -201,7 +212,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[0]}
+									{buttonClicked ? (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
+									) : (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
+									)}{playerImitationNames[0]}
 								</PrimaryButton>
 							):null}
 							{players.length > 1 ? (
@@ -219,7 +234,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[1]}
+									{buttonClicked ? (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
+									) : (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
+									)}{playerImitationNames[1]}
 								</PrimaryButton>
 							):null}
 							{players.length > 2 ? (
@@ -237,7 +256,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[2]}
+									{buttonClicked ? (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
+									) : (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
+									)}{playerImitationNames[2]}
 								</PrimaryButton>
 							):null}
 						</div>
@@ -260,7 +283,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[3]}
+									{buttonClicked ? (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
+									) : (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
+									)}{playerImitationNames[3]}
 								</PrimaryButton>
 							):null}
 							{players.length > 4 ? (
@@ -278,7 +305,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[4]}
+									{buttonClicked ? (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
+									) : (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
+									)}{playerImitationNames[4]}
 								</PrimaryButton>
 							):null}
 							{players.length > 5 ? (
@@ -296,7 +327,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[5]}
+									{buttonClicked ? (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
+									) : (
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
+									)}{playerImitationNames[5]}
 								</PrimaryButton>
 							):null}
 						</div>

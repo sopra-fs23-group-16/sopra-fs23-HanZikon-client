@@ -281,7 +281,7 @@ const ImitationGame = props => {
 
 	window.addEventListener("load", function() {
 
-		var countdown = 10 + parseInt(currentQuestion["level"]) * 5; // time adjust regarding difficult level
+		var countdown = 8 + parseInt(currentQuestion["level"]) * 2; // time adjust regarding difficult level
 		var countdownElement = document.getElementById("countdown");
 
 		var timer = setInterval(function() {
