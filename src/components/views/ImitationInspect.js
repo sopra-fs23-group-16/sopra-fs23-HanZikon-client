@@ -185,14 +185,14 @@ const ImitationInspect = props => {
 					{playerNames.length > 5 ? (
 						<div className="imitationinspect label"> {playerNames[5]}</div>
 					) : null}
-
+{/* 
 					{players.length > 6 ? (
 						<div className="imitationinspect card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 6 ? (
 						<div className="imitationinspect label"> {playerNames[6]}</div>
-					) : null}
+					) : null} */}
 
 				</div>
 				

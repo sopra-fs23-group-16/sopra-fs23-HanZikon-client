@@ -351,24 +351,30 @@ const ImitationGame = props => {
 						<div className="choicegame label"> {playerNames[5]}</div>
 					) : null}
 
-					{players.length > 6 ? (
+					{/* {players.length > 6 ? (
 						<div className="choicegame card">
 							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 6 ? (
 						<div className="choicegame label"> {playerNames[6]}</div>
-					) : null}
+					) : null} */}
 
 				</div>
+				<div className="choicegame form">
 				<div className="choicegame col">
 					<center>
-						<div id="countdown" className="choicegame timer">
+						<div id="countdown" className="imitationgame timer">
 						</div>
 						<br />
 						<br />
+						<div>
+						<button onClick={undo}>Undo</button>
+						<button onClick={clearCanvas}>Clear</button>
+						<button onClick={submitDrawing}>Submit</button>
+						</div>
 					</center>
 					<div className="imitationgame canvas-container">
-						<center>
+						<center >
 							<canvas id = 'imitationCanvas'
 								onMouseDown={startDrawing}
 								onMouseUp={finishDrawing}
@@ -390,16 +396,11 @@ const ImitationGame = props => {
 								}}
 								ref={canvasRef}
 							></canvas>
+
 						</center>
 					</div>
 				</div>
-				<div>
-					<button onClick={undo}>Undo</button>
-					<button onClick={clearCanvas}>Clear</button>
-					<button onClick={submitDrawing}>Submit</button>
-
 				</div>
-
 			</div>
 		</BaseContainer>
 	);
