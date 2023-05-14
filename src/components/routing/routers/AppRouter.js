@@ -22,7 +22,7 @@ const AppRouter = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route path="/welcome">			
+				<Route exact path="/welcome">			
 					<Welcome/>		
 				</Route>
 				<Route path="/room">

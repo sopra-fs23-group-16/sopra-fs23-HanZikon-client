@@ -113,7 +113,7 @@ const Register = props => {
 						width="70%"
 						onClick={() => history.push(`/login`)}
 					>
-					Back to Login
+					Go to Login
 					</SecondaryButton>
 				</div>
 			</div>
