@@ -17,6 +17,8 @@ const ChoiceGame = props => {
 	const playerNames = players.map(player => player.playerName)
 
 	const [isDisabled, setDisabled] = useState(false);
+	const [isClicked, setClicked] = useState(false);
+
 	const colorRight = "green";
 	const colorWrong = "red";
 	let systemScore = 0;
@@ -117,17 +119,18 @@ const ChoiceGame = props => {
 			systemScore = 10;
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-
+			setDisabled(true);
 			setTimeout(() => {
-				setDisabled(true);
+				setClicked(true);
 			}, 500);
 
 		} else {
 			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+			setDisabled(true);
 			setTimeout(() => {
-				setDisabled(true);
+				setClicked(true)
 				// show the right answer after the choice
 				document.getElementById(optionIDs[currentQuestion.answerIndex]).style.backgroundColor = colorRight
 			}, 1500);
@@ -216,7 +219,7 @@ const ChoiceGame = props => {
 							{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (
 								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
 									{/*{isDisabled ?  choice + <span>searchTranslation(choice)</span>: choice}*/}
-									{choice} {isDisabled ? (
+									{choice} {isClicked ? (
 										<button className="choicegame option small" disabled={true}>{searchTranslation(choice)}</button>
 									) : ("")}
 								</button>
