@@ -77,6 +77,7 @@ const NormalWaitingRoom = props => {
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
 							// initialise
+							localStorage.setItem('numRound', qListparse.length)
 							localStorage.setItem('round', 0)
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 

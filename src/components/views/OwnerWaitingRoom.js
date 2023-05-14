@@ -61,6 +61,7 @@ const OwnerWaitingRoom = props => {
 							const qListparse = JSON.parse(questionList);
 							// initialise round (0: not started)
 							// save questions
+							localStorage.setItem('numRound', qListparse.length)
 							localStorage.setItem('round', 0)
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
