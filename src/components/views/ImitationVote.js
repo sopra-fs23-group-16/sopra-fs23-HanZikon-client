@@ -203,9 +203,9 @@ const ImitationVote = props => {
 									}}
 								>
 									{buttonClicked ? (
-										<FaHeart color="red" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
-										<FaHeart color="white" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
 									)}{playerImitationNames[0]}
 								</PrimaryButton>
 							):null}
@@ -225,9 +225,9 @@ const ImitationVote = props => {
 									}}
 								>
 									{buttonClicked ? (
-										<FaHeart color="red" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
-										<FaHeart color="white" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
 									)}{playerImitationNames[1]}
 								</PrimaryButton>
 							):null}
@@ -247,9 +247,9 @@ const ImitationVote = props => {
 									}}
 								>
 									{buttonClicked ? (
-										<FaHeart color="red" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
-										<FaHeart color="white" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
 									)}{playerImitationNames[2]}
 								</PrimaryButton>
 							):null}
@@ -274,9 +274,9 @@ const ImitationVote = props => {
 									}}
 								>
 									{buttonClicked ? (
-										<FaHeart color="red" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
-										<FaHeart color="white" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
 									)}{playerImitationNames[3]}
 								</PrimaryButton>
 							):null}
@@ -296,9 +296,9 @@ const ImitationVote = props => {
 									}}
 								>
 									{buttonClicked ? (
-										<FaHeart color="red" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
-										<FaHeart color="white" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
 									)}{playerImitationNames[4]}
 								</PrimaryButton>
 							):null}
@@ -318,9 +318,9 @@ const ImitationVote = props => {
 									}}
 								>
 									{buttonClicked ? (
-										<FaHeart color="red" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
-										<FaHeart color="white" />
+										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
 									)}{playerImitationNames[5]}
 								</PrimaryButton>
 							):null}
