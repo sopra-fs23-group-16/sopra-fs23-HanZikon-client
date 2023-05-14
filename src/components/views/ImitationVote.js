@@ -8,6 +8,7 @@ import 'styles/views/ImitationVote.scss';
 // import User from 'models/User';
 // import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 import {PrimaryButton} from 'components/ui/PrimaryButton';
+import { FaHeart } from "react-icons/fa";
 
 const ImitationVote = props => {
 
@@ -201,7 +202,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[0]}
+									{buttonClicked ? (
+										<FaHeart color="red" />
+									) : (
+										<FaHeart color="white" />
+									)}{playerImitationNames[0]}
 								</PrimaryButton>
 							):null}
 							{players.length > 1 ? (
@@ -219,7 +224,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[1]}
+									{buttonClicked ? (
+										<FaHeart color="red" />
+									) : (
+										<FaHeart color="white" />
+									)}{playerImitationNames[1]}
 								</PrimaryButton>
 							):null}
 							{players.length > 2 ? (
@@ -237,7 +246,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[2]}
+									{buttonClicked ? (
+										<FaHeart color="red" />
+									) : (
+										<FaHeart color="white" />
+									)}{playerImitationNames[2]}
 								</PrimaryButton>
 							):null}
 						</div>
@@ -260,7 +273,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[3]}
+									{buttonClicked ? (
+										<FaHeart color="red" />
+									) : (
+										<FaHeart color="white" />
+									)}{playerImitationNames[3]}
 								</PrimaryButton>
 							):null}
 							{players.length > 4 ? (
@@ -278,7 +295,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[4]}
+									{buttonClicked ? (
+										<FaHeart color="red" />
+									) : (
+										<FaHeart color="white" />
+									)}{playerImitationNames[4]}
 								</PrimaryButton>
 							):null}
 							{players.length > 5 ? (
@@ -296,7 +317,11 @@ const ImitationVote = props => {
 										}
 									}}
 								>
-									{"Like "}{playerImitationNames[5]}
+									{buttonClicked ? (
+										<FaHeart color="red" />
+									) : (
+										<FaHeart color="white" />
+									)}{playerImitationNames[5]}
 								</PrimaryButton>
 							):null}
 						</div>
