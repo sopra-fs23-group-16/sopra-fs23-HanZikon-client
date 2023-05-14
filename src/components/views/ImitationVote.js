@@ -17,7 +17,9 @@ const ImitationVote = props => {
 	const playerNames = players.map(player => player.playerName)
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
+	const [playerImitations, setPlayerImitations] = useState([]);
 	const round = parseInt(localStorage.getItem("round"));
+	const loggedInUserID = localStorage.getItem("loggedInUser");
 
 	// const history = useHistory();
 
@@ -58,7 +60,7 @@ const ImitationVote = props => {
 
 								document.getElementById(string).src = playersImitationsArray[i];
 							}
-							// setPlayers(playersImitationsArray);
+							setPlayerImitations(playersImitationsParse);
 							setPlayerImitationNames(playerImitationNames);
 						});
 						setTimeout(function () {
@@ -91,11 +93,20 @@ const ImitationVote = props => {
 	console.log(players.length);
 	console.log(players[0]);
 
-	const submitScore = (userOrder) => {
+	const submitScoreB1 = (userOrder) => {
 		const votedScore = 10;
 		const userID = players[userOrder][0];
 		const requestBody = {userID,scoreBoard: {votedScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+	}
+
+	const submitScore = (userOrder) => {
+		const votedTimes = 1;
+		const userID = playerImitations[userOrder].userID;
+		const fromUserID = loggedInUserID;
+		// alert("from userID is " + fromUserID + "to userID is " + userID);
+		const requestBody = {userID, fromUserID, votedTimes, round};
+		client.send("/app/multi/rooms/" + roomID + "/players/votes", {}, JSON.stringify(requestBody))
 	}
 
 	window.addEventListener("load", function() {
@@ -193,7 +204,6 @@ const ImitationVote = props => {
 								<PrimaryButton
 									disabled={buttonClicked}
 									width="10%"
-									id="playerImitationDiv0"
 									padding-right = "5%"
 									onClick={() => {
 										if (!buttonClicked) {
