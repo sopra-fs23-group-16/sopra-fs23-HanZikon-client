@@ -37,7 +37,7 @@ const ChoiceGame = props => {
 
 	const [choiceEN,setChoice] = useState();
 	const [choicesEN, setChoicesEN] = useState([]);
-	const [countdownSeconds, setCountdownSeconds] = useState(15);
+	const [countdownSeconds, setCountdownSeconds] = useState(10);
 
 
 	async function fetchTranslation(cn_character) {
