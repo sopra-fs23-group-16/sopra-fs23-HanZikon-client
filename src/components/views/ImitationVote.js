@@ -18,6 +18,12 @@ const ImitationVote = props => {
 	const playerNames = players.map(player => player.playerName)
 	const playerIcons = players.map(player => player.icon);
 	const [buttonClicked, setButtonClicked] = useState(false);
+	const [button0Clicked, setButton0Clicked] = useState(false);
+	const [button1Clicked, setButton1Clicked] = useState(false);
+	const [button2Clicked, setButton2Clicked] = useState(false);
+	const [button3Clicked, setButton3Clicked] = useState(false);
+	const [button4Clicked, setButton4Clicked] = useState(false);
+	const [button5Clicked, setButton5Clicked] = useState(false);
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
 	const [playerImitations, setPlayerImitations] = useState([]);
 	const round = parseInt(localStorage.getItem("round"));
@@ -204,11 +210,12 @@ const ImitationVote = props => {
 									onClick={() => {
 										if (!buttonClicked) {
 											setButtonClicked(true);
+											setButton0Clicked(true);
 											submitScore(0);
 										}
 									}}
 								>
-									{buttonClicked ? (
+									{button0Clicked ? (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
@@ -226,11 +233,12 @@ const ImitationVote = props => {
 									onClick={() => {
 										if (!buttonClicked) {
 											setButtonClicked(true);
+											setButton1Clicked(true);
 											submitScore(1);
 										}
 									}}
 								>
-									{buttonClicked ? (
+									{button1Clicked ? (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
@@ -248,11 +256,12 @@ const ImitationVote = props => {
 									onClick={() => {
 										if (!buttonClicked) {
 											setButtonClicked(true);
+											setButton2Clicked(true);
 											submitScore(2);
 										}
 									}}
 								>
-									{buttonClicked ? (
+									{button2Clicked ? (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
@@ -275,11 +284,12 @@ const ImitationVote = props => {
 									onClick={() => {
 										if (!buttonClicked) {
 											setButtonClicked(true);
+											setButton3Clicked(true);
 											submitScore(3);
 										}
 									}}
 								>
-									{buttonClicked ? (
+									{button3Clicked ? (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
@@ -297,11 +307,12 @@ const ImitationVote = props => {
 									onClick={() => {
 										if (!buttonClicked) {
 											setButtonClicked(true);
+											setButton4Clicked(true);
 											submitScore(4);
 										}
 									}}
 								>
-									{buttonClicked ? (
+									{button4Clicked ? (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
@@ -319,11 +330,12 @@ const ImitationVote = props => {
 									onClick={() => {
 										if (!buttonClicked) {
 											setButtonClicked(true);
+											setButton5Clicked(true);
 											submitScore(5);
 										}
 									}}
 								>
-									{buttonClicked ? (
+									{button5Clicked ? (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />
 									) : (
 										<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="white" />
