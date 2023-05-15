@@ -211,7 +211,7 @@ const ImitationInspect = props => {
 									<div id="character-quiz-div"></div>
 								</div>
 								<br />
-								<div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+								<div className="imitationinspect infocontainer">
 									{evolutions.map((evolution, index) => (
 										(evolution !== "n.a.") && (
 											<div key={index}  style={{ textAlign: 'center', margin: '5px' }}>
@@ -227,7 +227,7 @@ const ImitationInspect = props => {
 										)
 									))}
 								</div>
-								<div className="imitationinspect meaninglabel"> {meaning}</div>
+								<div className="imitationinspect meaninglabel">Meaning: {meaning}</div>
 							</center>
 						</div>
 					</div>

@@ -20,6 +20,19 @@
         transform: translate(-50%, -50%);
     }
 
+    &.infocontainer {
+        display: flex;
+        flexWrap: wrap;
+        justifyContent: center;
+        border-radius: 15px;
+        background-color: rgba(255, 255, 255, .2);
+        box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
+        transition: opacity 0.5s ease;
+        width: fit-content;
+        height: fit-content;
+        position: relative;
+    }
+
     &.form {
         display: flex;
         flex-direction: column;
@@ -69,10 +82,10 @@
 
     &.meaninglabel {
         font-style: sans-serif;
-        color: #7397ab;
+        color: #516a78;
         text-transform: capitalize;
         //font-weight: 1000;
-        font-size: 20pt;
+        font-size: 14pt;
         font-weight: bold;
         justify-content: center;
     }
