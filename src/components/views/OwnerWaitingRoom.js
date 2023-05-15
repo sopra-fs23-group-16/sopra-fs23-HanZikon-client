@@ -127,7 +127,7 @@ const OwnerWaitingRoom = props => {
 	if (roomCode) {
 		content = (
 			<center>
-				<div className="ownerwaiting label">Game Mode: {normalizeGameMode(gameMode)}</div>
+				<div className="ownerwaiting mode">{normalizeGameMode(gameMode)}</div>
 				<div className="ownerwaiting button-container">
 					<PrimaryButton
 						width="15%"
@@ -146,7 +146,7 @@ const OwnerWaitingRoom = props => {
 					</SecondaryButton>
 				</div>
 				<div className="ownerwaiting input">
-					Room Code: {roomCode}
+					{roomCode}
 				</div>
 				<div className="ownerwaiting button-container">			
 				<button className="ownerwaiting button-box" onClick ={ () => {
@@ -156,7 +156,7 @@ const OwnerWaitingRoom = props => {
 						setTimeout(() => {
 						setCopied(false);
 						}, 5000);
-					}} >{copied ? "Code copied!" : "Copy code"}</button></div>
+					}} >{copied ? "Code copied!" : "Copy"}</button></div>
 			</center>
 		)
 	}

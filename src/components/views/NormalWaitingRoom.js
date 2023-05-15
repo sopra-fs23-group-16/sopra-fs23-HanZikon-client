@@ -238,7 +238,7 @@ const NormalWaitingRoom = props => {
 				<div className="normalwaiting col">
 				<div className="normalwaiting form">
 					<center>
-					<div className="normalwaiting label">Game Mode: {normalizeGameMode(gameMode)}</div>
+					<div className="normalwaiting mode">{normalizeGameMode(gameMode)}</div>
 					<div className="normalwaiting button-container">
 				<PrimaryButton
 					width="15%"

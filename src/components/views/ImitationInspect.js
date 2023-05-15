@@ -227,7 +227,7 @@ const ImitationInspect = props => {
 										)
 									))}
 								</div>
-								<div className="imitationinspect meaninglabel">Meaning: {meaning}</div>
+								<div className="imitationinspect meaninglabel">{meaning}</div>
 							</center>
 						</div>
 					</div>
