@@ -22,8 +22,10 @@ const ChoiceGame = props => {
 	const [isDisabled, setDisabled] = useState(false);
 	const [isClicked, setClicked] = useState(false);
 
-	const colorRight = "green";
-	const colorWrong = "red";
+	//const colorRight = "#88d6bf";
+	const colorRight ="rgba(136, 214, 191, 0.5)"
+	const colorWrong = "rgba(251, 178, 173, 0.5)";
+	//const colorWrong = "#fbb2ad";
 	let systemScore = 0;
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
@@ -130,8 +132,8 @@ const ChoiceGame = props => {
 			systemScore = 10;
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-			setDisabled(true);
-			setTimeout(() => {
+				setDisabled(true);
+				setTimeout(() => {
 				setClicked(true);
 			}, 500);
 
@@ -139,8 +141,8 @@ const ChoiceGame = props => {
 			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-			setDisabled(true);
-			setTimeout(() => {
+				setDisabled(true);
+				setTimeout(() => {
 				setClicked(true)
 				// show the right answer after the choice
 				document.getElementById(optionIDs[currentQuestion.answerIndex]).style.backgroundColor = colorRight
@@ -226,14 +228,18 @@ const ChoiceGame = props => {
 							<img src={currentQuestion.oracleURL} alt="oracleURL" onLoad={()=>handleCmpLoad(1)}
 								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
 							<br /><br /><br />
+							<div className="choicegame button-container">
 							{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (
-								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
-									{/*{isDisabled ?  choice + <span>searchTranslation(choice)</span>: choice}*/}
-									{choice} {isClicked ? (
-										<button className="choicegame option small" disabled={true}>{searchTranslation(choice)}</button>
-									) : ("")}
-								</button>
+								<div key={index} className="choicegame">
+									<button id={String.fromCharCode(65 + index)} className="option" disabled={isDisabled}  style={{ margin: "10px" }} onClick={() => handleClick(index)}>
+										{choice}
+									</button>
+									{isClicked && (
+										<div className="label-translation" disabled={true}>{searchTranslation(choice)}</div>
+									)}
+								</div>
 							))}
+							</div>
 						</center>
 						</div>
 					</div>

@@ -94,14 +94,14 @@
         color:black  
     }
 
-    &.label-rangking {
-        font-style: sans-serif;
-        color: black;
-        text-transform: capitalize;
-        font-weight: 360;
-        font-weight: bold;
-        justify-content: center;
-    }
+    // &.label-rangking {
+    //     font-style: sans-serif;
+    //     color: black;
+    //     text-transform: capitalize;
+    //     font-weight: 360;
+    //     font-weight: bold;
+    //     justify-content: center;
+    // }
 
     &.label-option {
         font-style: sans-serif;
@@ -120,29 +120,25 @@
     }
 
     .option {
-        background-color: #fdd835;
+        background-color: rgba(157, 173, 184, .6);
         border: 2px solid #d6d6d6;
         border-radius: 20px;
         box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
         color: #333;
-        font-size: 16px;
+        font-size: 30px;
         font-weight: bold;
-        padding: 10px 20px;
+        margin-right: 10%;
+        padding: 8px 50px;
         transition: all 0.3s ease;
     }
-
-    .small {
-        background-color: #AFD3E2;
-        font-size: 12px;
+    .label-translation {
+        font-size: 20px;
         padding: 3px;
-        color: #537188;
-        border: 1px solid #d6d6d6;
-        border-radius: 5px;
-        box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.3);
+        color: #9eaab1;
+        font-weight: bold;
     }
-
     .option:hover {
-        background-color: #ffe082;
+        background-color: #ecf3f8e8;;
         border: 2px solid #fff;
         box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.3);
     }
