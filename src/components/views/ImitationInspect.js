@@ -2,29 +2,24 @@ import React, {useEffect, useState } from 'react';
 import {handleError, client } from 'helpers/api';
 import {useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
-import dog from 'image/dog.png';
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 import 'styles/views/ImitationInspect.scss';
-// import User from 'models/User';
 import HanziWriter from "hanzi-writer";
 import {Spinner} from "../ui/Spinner";
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ImitationInspect = props => {
-
-	//const history = useHistory();
+	
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	const playerIcons = players.map(player => player.icon);
 	const [imgLoaded, setImgLoaded] = useState(false);
 	const chineseScriptEvolution = ["Oracle Bone","Bronze","Seal","Clerical","Standard"]
 	const chineseScriptTime = ["1600-1046 BC","1046-256 BC","221-207 BC","206 BC - 220 AD","618-907 AD"]
-
-	// const horizontalStyles = {
-	// 	display: 'flex',
-	// 	flexDirection: 'row', // align children horizontally
-	// 	justifyContent: 'center', // distribute children evenly
-	// 	alignItems: 'center', // vertically align children
-	// };
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -38,16 +33,26 @@ const ImitationInspect = props => {
 
 	const evolutions = currentQuestion.evolution;
 	const meaning = currentQuestion.meaning;
-	//console.log(url);
 
 	const requestBody = JSON.stringify({ roomID });
 
 	const [countdown, setCountdown] = useState(8 + parseInt(currentQuestion["level"]) * 2); // time adjust regarding difficult level
 
-	useEffect(() => {
-		
+	function defineIcon(icon){
+		if (icon === "dog") {
+			return dog;
+		} else if (icon === "cat") {
+			return cat;
+		} else if (icon === "seelion") {
+			return seelion;
+		} else if (icon === "cattle") {
+			return cattle;
+		} else if (icon === "owl") {
+			return owl;
+		}
+	}
 
-		// fetchLocalUser();
+	useEffect(() => {
 		startCountdown();
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -141,14 +146,14 @@ const ImitationInspect = props => {
 
 					{players.length > 0 ? (
 						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[0])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 0 ? (
 						<div className="imitationinspect label"> {playerNames[0]}</div>
 					) : null}
 					{players.length > 1 ? (
 						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[1])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 1 ? (
 						<div className="imitationinspect label"> {playerNames[1]}</div>
@@ -156,7 +161,7 @@ const ImitationInspect = props => {
 
 					{players.length > 2 ? (
 						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[2])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 2 ? (
 						<div className="imitationinspect label"> {playerNames[2]}</div>
@@ -164,7 +169,7 @@ const ImitationInspect = props => {
 
 					{players.length > 3 ? (
 						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[3])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 3 ? (
 						<div className="imitationinspect label"> {playerNames[3]}</div>
@@ -172,7 +177,7 @@ const ImitationInspect = props => {
 
 					{players.length > 4 ? (
 						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[4])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 4 ? (
 						<div className="imitationinspect label"> {playerNames[4]}</div>
@@ -180,20 +185,11 @@ const ImitationInspect = props => {
 
 					{players.length > 5 ? (
 						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[5])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 5 ? (
 						<div className="imitationinspect label"> {playerNames[5]}</div>
 					) : null}
-{/* 
-					{players.length > 6 ? (
-						<div className="imitationinspect card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 6 ? (
-						<div className="imitationinspect label"> {playerNames[6]}</div>
-					) : null} */}
-
 				</div>
 				
 				<div className="imitationinspect col">
