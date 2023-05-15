@@ -57,7 +57,6 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							console.log(players[0].icon);	
 							setRoomcode(roomcode);	
 							setPlayers(players);	
 

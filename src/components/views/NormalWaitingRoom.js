@@ -1,36 +1,44 @@
 import React, {useEffect, useState} from 'react';
 import {handleError, client} from 'helpers/api';
-// import User from 'models/User';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/NormalWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import {useParams} from 'react-router-dom';
-import dog from 'image/dog.png';
 import {nextRound} from "../../helpers/nextRound";
 import {normalizeGameMode} from "../../helpers/normalizeGameMode";
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 
 const NormalWaitingRoom = props => {
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName);
+	const playerIcons = players.map(player => player.icon);
 	const loggedInUserID = localStorage.getItem("loggedInUser");
 	const localPlayer = players.find(player => player.userID === Number(loggedInUserID));
 	const isReady = localPlayer && localPlayer.ready;
-	// const history = useHistory();
 
 	const [gameMode, setgameMode] = useState([]);
-	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
-	// const userID = localStorage.getItem("loggedInUser");
-	// const playerToUpdate = players.find(player => player.userID == Number(userID));
-
+	function defineIcon(icon){
+		if (icon === "dog") {
+			return dog;
+		} else if (icon === "cat") {
+			return cat;
+		} else if (icon === "seelion") {
+			return seelion;
+		} else if (icon === "cattle") {
+			return cattle;
+		} else if (icon === "owl") {
+			return owl;
+		}
+	}
 
 	useEffect(() => {
-
-		// fetchLocalUser();
-		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
@@ -41,8 +49,6 @@ const NormalWaitingRoom = props => {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"]
-							//
-							// console.log(roomparse);
 							setPlayers(players);	
 							
 							const gameMode = roomparse["gameParam"]["questionType"]
@@ -55,7 +61,6 @@ const NormalWaitingRoom = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							// console.log(roomparse);
 							
 							const players = roomparse["players"]
 							setPlayers(players);
@@ -63,8 +68,6 @@ const NormalWaitingRoom = props => {
 							const userIDs = players.map(player => player.userID)
 							let userId = localStorage.getItem("loggedInUser");
 
-							// console.log("userId",typeof userId)
-							// console.log("userIDS",typeof userIDs[0])
 							if (!userIDs.includes(parseInt(userId))) {
 								alert("You are no longer in the room!");
 								 window.location.href = "/room/lobby";
@@ -83,12 +86,8 @@ const NormalWaitingRoom = props => {
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
 							nextRound(roomID);
-
-							// window.location.href = '/games/multiplechoice/' + roomID;
-
 						});
 					});
-					//console.log("2 the client is ",client['connected'])
                 }
             } catch (error) {
                 console.error(`Something went wrong: \n${handleError(error)}`);
@@ -157,17 +156,17 @@ const NormalWaitingRoom = props => {
 				{players.map((player, index) => (
 					<>
 						{players.length > index ? (
-							<div className="ownerwaiting card">
-								<img src={dog} alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<div className="normalwaiting card">
+								<img src={defineIcon(playerIcons[index])} alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 							</div>
 						) : null}
 						{/*player ready*/}
 						{playerNames.length > index && players[index]?.ready ?(
-							<div className="ownerwaiting label" >&#x2705; {playerNames[index]}</div>
+							<div className="normalwaiting label" >&#x2705; {playerNames[index]}</div>
 						) : null}
 						{/*player not ready*/}
 						{playerNames.length > index && !players[index]?.ready ? (
-							<div className="ownerwaiting label" >&#x274C; {playerNames[index]}</div>
+							<div className="normalwaiting label" >&#x274C; {playerNames[index]}</div>
 						) : null}
 					</>
 				))}
@@ -239,7 +238,7 @@ const NormalWaitingRoom = props => {
 				<div className="normalwaiting col">
 				<div className="normalwaiting form">
 					<center>
-					<div className="ownerwaiting label">Game Mode: {normalizeGameMode(gameMode)}</div>
+					<div className="normalwaiting label">Game Mode: {normalizeGameMode(gameMode)}</div>
 					<div className="normalwaiting button-container">
 				<PrimaryButton
 					width="15%"
