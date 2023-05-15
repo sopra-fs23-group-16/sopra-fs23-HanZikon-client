@@ -375,10 +375,10 @@ const ImitationGame = props => {
 						</div>
 						<br />
 						<br />
-						<div>
-						<button onClick={undo}>Undo</button>
-						<button onClick={clearCanvas}>Clear</button>
-						<button onClick={submitDrawing}>Submit</button>
+						<div className="imitationgame sumitbox"> 
+						<button className="imitationgame button-submit" onClick={undo}>Undo</button>
+						<button className="imitationgame button-submit" onClick={clearCanvas}>Clear</button>
+						<button className="imitationgame button-submit" onClick={submitDrawing}>Submit</button>
 						</div>
 					</center>
 					<div className="imitationgame canvas-container">

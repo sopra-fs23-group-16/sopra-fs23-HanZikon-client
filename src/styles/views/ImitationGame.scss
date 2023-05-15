@@ -35,4 +35,21 @@
         margin-top: 1%;;
         margin-bottom: 1%;
     }
+    &.sumitbox {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        height: 50%;
+    }
+    &.button-submit {
+        width: 100%;
+        height: 50%;
+        margin-left: 2%;
+        margin-right: 2%;
+        border-radius: 0.75em;
+        background-color: rgba(209, 217, 224, 0.3);
+        border: 1px dashed #ccc;
+        outline: none;
+        cursor: pointer;
+      }
 }
