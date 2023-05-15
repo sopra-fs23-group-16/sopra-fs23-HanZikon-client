@@ -8,6 +8,7 @@ import { nextRound } from "helpers/nextRound";
 // import User from 'models/User';
 import Countdown from 'react-countdown-now';
 import {Spinner} from "../ui/Spinner";
+import {SecondaryButton} from "../ui/SecondaryButton";
 // import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const GameResult = props => {
@@ -16,6 +17,7 @@ const GameResult = props => {
 
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
+
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	
 	// const [countdown, setCountdown] = useState(5);
@@ -91,7 +93,7 @@ const GameResult = props => {
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
 						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
-						onComplete={() => nextRound(roomID)}
+						onComplete={() => {nextRound(roomID);}}
 					/>
 				</div>
 				<div className="gameresult form">
@@ -149,9 +151,16 @@ const GameResult = props => {
 									{players[5][0] + ": " + players[5][1]}
 								</PrimaryButton>
 							</div>) : null}
-
+						<div className="gameresult button-container">
+							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
+							<SecondaryButton
+								width="70%"
+								onClick={() => window.location.href = `/room/lobby`}
+							>
+								Back to Lobby
+							</SecondaryButton>}
+						</div>
 					</center>
-
 				</div>
 			</div>
 		)
