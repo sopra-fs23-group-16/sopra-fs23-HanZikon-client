@@ -3,11 +3,13 @@ import {handleError, client } from 'helpers/api';
 import {useParams} from 'react-router-dom';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
-import dog from 'image/dog.png';
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationGame.scss';
-// import User from 'models/User';
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const ImitationGame = props => {
 
@@ -29,15 +31,11 @@ const ImitationGame = props => {
 	}, []);
 
 	const { roomID } = useParams();
-	//const [roomCode, setRoomcode] = useState('');
 	const [players, setPlayers] = useState([]);
-	//console.log(players);
 	const playerNames = players.map(player => player.playerName)
-	//console.log(playerNames);
+	const playerIcons = players.map(player => player.icon);
 	const [canvasSize,setcanvasSize] = useState([])
-	//const history = useHistory();
 	const strokeHistory = [[],[]];
-	//const playerImitations = [[],[]];
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	if (questionList === null) {
@@ -51,12 +49,22 @@ const ImitationGame = props => {
 	console.log(currentQuestion);
 
 	const requestBody = JSON.stringify({ roomID });
-
-
+	
+	function defineIcon(icon){
+		if (icon === "dog") {
+			return dog;
+		} else if (icon === "cat") {
+			return cat;
+		} else if (icon === "seelion") {
+			return seelion;
+		} else if (icon === "cattle") {
+			return cattle;
+		} else if (icon === "owl") {
+			return owl;
+		}
+	}
 
 	useEffect(() => {
-
-		// fetchLocalUser();
 		
 		// effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
@@ -82,7 +90,6 @@ const ImitationGame = props => {
 							const roomparse = JSON.parse(room);
 							console.log(roomparse);
 						});
-						 
 					});
 				}
 			} catch (error) {
@@ -147,8 +154,6 @@ const ImitationGame = props => {
 		}
 		console.log("Save strokes complete:",strokeHistory)
 	}
-
-
 
 	const finishDrawing = () => {
 		setLines(prevState => {
@@ -306,14 +311,14 @@ const ImitationGame = props => {
 
 					{players.length > 0 ? (
 						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[0])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 0 ? (
 						<div className="choicegame label"> {playerNames[0]}</div>
 					) : null}
 					{players.length > 1 ? (
 						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[1])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 1 ? (
 						<div className="choicegame label"> {playerNames[1]}</div>
@@ -321,7 +326,7 @@ const ImitationGame = props => {
 
 					{players.length > 2 ? (
 						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[2])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 2 ? (
 						<div className="choicegame label"> {playerNames[2]}</div>
@@ -329,7 +334,7 @@ const ImitationGame = props => {
 
 					{players.length > 3 ? (
 						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[3])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 3 ? (
 						<div className="choicegame label"> {playerNames[3]}</div>
@@ -337,7 +342,7 @@ const ImitationGame = props => {
 
 					{players.length > 4 ? (
 						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[4])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 4 ? (
 						<div className="choicegame label"> {playerNames[4]}</div>
@@ -345,19 +350,11 @@ const ImitationGame = props => {
 
 					{players.length > 5 ? (
 						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[5])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 5 ? (
 						<div className="choicegame label"> {playerNames[5]}</div>
 					) : null}
-
-					{/* {players.length > 6 ? (
-						<div className="choicegame card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 6 ? (
-						<div className="choicegame label"> {playerNames[6]}</div>
-					) : null} */}
 
 				</div>
 				<div className="choicegame form">
