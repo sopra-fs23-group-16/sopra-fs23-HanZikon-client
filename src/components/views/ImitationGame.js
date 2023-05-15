@@ -224,13 +224,23 @@ const ImitationGame = props => {
 
 		if(strokeHistory[0].length === 0 &&  strokeHistory[1].length === 0){
 			localStorage.setItem("roundPoints", 0);
-		}
-		else{
+		} else{
 			recognizeHandwriting(canvasSize,[strokeHistory],10,handleResponse)
 		}
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
+
+		// Submit system score
+		var countdown = 1;
+		var timer = setInterval(function() {
+			countdown--;
+
+			if (countdown <= 0) {
+				clearInterval(timer);
+				setTimeout(submitScore(), 50);
+			}
+		}, 1000);
 	}
 
 	function evaluateWriting(response, character) {
@@ -256,6 +266,7 @@ const ImitationGame = props => {
 		} else {
 			console.log('Response:', response);
 			const score = evaluateWriting(response,currentQuestion.character);
+			alert("evaluated Points is " + score);
 			localStorage.setItem("roundPoints", score);
 			console.log("Score",score)
 			// Handle the response data in some way, such as updating the UI or storing it in a database
@@ -275,6 +286,7 @@ const ImitationGame = props => {
 				console.log("roundPoints", systemScore);
 			}, 50);
 		}
+		alert("Submitted systemscore is " + systemScore);
 		const requestBody = {userID,scoreBoard: {systemScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 	}
@@ -291,7 +303,7 @@ const ImitationGame = props => {
 			if (countdown <= 0) {
 				clearInterval(timer);
 				submitDrawing();
-				setTimeout(submitScore(), 50);
+				// setTimeout(submitScore(), 50);
 				setTimeout(function () {
 					window.location.href = `/game/${roomID}/imitationvoting`;
 				}, 500);
