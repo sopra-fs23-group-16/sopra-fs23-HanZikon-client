@@ -23,9 +23,7 @@ const FormField = props => {
 			</label>
 			<input type="text" disabled
 				className="inspect input"
-				//placeholder="Not defined"
 				value={props.value}
-				//onChange={e => props.onChange(e.target.value)}
 			/>
 		</div>
 	);
@@ -42,29 +40,10 @@ const Inspect = () => {
     const history = useHistory();
     const [user, setUser] = useState(null);
     const [username, setUsername] = useState("");
-	const [icon, setIcon] = useState(localStorage.getItem("icon") || "");
-	var userIcon;
-	if (icon == "dog"){
-		userIcon = dog;
-	}
-	else if (icon == "cat"){
-		userIcon = cat;
-	}
-	else if (icon == "seelion"){
-		userIcon = seelion;
-	}
-	else if (icon == "cattle"){
-		userIcon = cattle;
-	}
-	else if (icon == "owl"){
-		userIcon = owl;
-	}
-	
+	const [userIcon, setUserIcon] = useState(null);
     let {userID} = useParams();
 
     useEffect(() => {
-
-		// fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
@@ -72,9 +51,20 @@ const Inspect = () => {
                 const response = await api.get('/users/' + userID);
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 setUser(response.data);
+				if (response.data.icon === "dog") {
+					setUserIcon(dog);
+				} else if (response.data.icon === "cat") {
+					setUserIcon(cat);
+				} else if (response.data.icon === "seelion") {
+					setUserIcon(seelion);
+				} else if (response.data.icon === "cattle") {
+					setUserIcon(cattle);
+				} else if (response.data.icon === "owl") {
+					setUserIcon(owl);
+				}
 
                 // See here to get more data.
-                console.log(response);
+                console.log(response.data);
             } catch (error) {
                 console.error(`Something went wrong while fetching the users: \n${handleError(error)}`);
                 console.error("Details:", error);
@@ -90,16 +80,13 @@ const Inspect = () => {
 		<div className="inspect container">
 		<div className="inspect label-title">My Profile </div>
 			<div className="inspect form-box">
-					<div className="inspect form">
-						<img src={userIcon} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} />
-					</div>
-                    {/* <div className="inspect form"> */}
-                        <FormField
-                            label="username"
-                            value={user.username}
-                            //onChange={un => setUsername(un)}
-                        />
-                    {/* </div> */}
+				<div className="inspect icon">
+					<img src={userIcon} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} />
+				</div>
+                <FormField
+                    label="username"
+                    value={user.username}
+                />
 				<div className="inspect button-container">
 					<PrimaryButton
 						width="100%"
@@ -119,6 +106,5 @@ const Inspect = () => {
 		</BaseContainer>
 	);
 }
-
 
 export default Inspect;

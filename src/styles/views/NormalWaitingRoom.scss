@@ -64,13 +64,14 @@
     flex-direction: column;
     justify-content: center;
   }
+
   &.input {
-    height: 40px;
-    padding-left: 15px;
-    margin-left: 0px;
+    width: fit-content;
+    height: fit-content;
     border: none;
     border-radius: 0.75em;
-    margin-bottom: 15px;
+    margin-top: 1%;
+    padding: 0.5%;
     backdrop-filter: blur(3px);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
     border-left: 2px rgba(255, 255, 255, .1);
@@ -78,6 +79,7 @@
     background-color: transparent;
     color: rgb(32, 42, 54);
   }
+
   &.label {
     font-style: sans-serif;
     color: rgb(144, 172, 230);
@@ -86,6 +88,27 @@
     font-weight:bold;
 	  justify-content: center;
   }
+
+  &.mode {
+    font-style: sans-serif;
+    color: rgb(144, 172, 230);
+    //text-transform: capitalize;
+    font-weight: bold;
+    font-style: italic;
+    justify-content: center;
+  }
+
+  .mode::before {
+    content: "Mode: ";
+    font-style: normal;
+    font-weight: normal;
+    color: #a6aaaf;
+  }
+
+  .mode::after {
+    content: attr(data-value);
+  }
+
   &.button-container {
     display: flex;
     justify-content: center;

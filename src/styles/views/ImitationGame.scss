@@ -18,7 +18,7 @@
     }
 	&.timer {
         height: 40px;
-		width: 6%;
+		width: 60%;
         padding-left: 0px;
 		padding-right: 0px;
 		padding-top: 6px;
@@ -28,7 +28,11 @@
         box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
         border-left: 2px rgba(255, 255, 255, .1);
         border-top: 2px solid rgba(255, 255, 255, .1);
-        background-color: background;
+        background-color: white;
         color: rgb(0, 0, 0);
+    }
+    &.button-box {
+        margin-top: 1%;;
+        margin-bottom: 1%;
     }
 }

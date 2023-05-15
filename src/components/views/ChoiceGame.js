@@ -4,19 +4,24 @@ import {useParams} from 'react-router-dom';
 import 'styles/views/ChoiceGame.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 import getTranslationURL from "../../helpers/getTranslation";
 
 const ChoiceGame = props => {
-	// const history = useHistory();
 	const [loaded, setLoaded] = useState(false);
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	const playerIcons = players.map(player => player.icon);
 
 	const [isDisabled, setDisabled] = useState(false);
+	const [isClicked, setClicked] = useState(false);
+
 	const colorRight = "green";
 	const colorWrong = "red";
 	let systemScore = 0;
@@ -35,8 +40,21 @@ const ChoiceGame = props => {
 
 	const [choiceEN,setChoice] = useState();
 	const [choicesEN, setChoicesEN] = useState([]);
-	const [countdownSeconds, setCountdownSeconds] = useState(15);
-
+	const [countdownSeconds, setCountdownSeconds] = useState(10);
+	
+	function defineIcon(icon){
+		if (icon === "dog") {
+			return dog;
+		} else if (icon === "cat") {
+			return cat;
+		} else if (icon === "seelion") {
+			return seelion;
+		} else if (icon === "cattle") {
+			return cattle;
+		} else if (icon === "owl") {
+			return owl;
+		}
+	}
 
 	async function fetchTranslation(cn_character) {
 		try {
@@ -58,11 +76,7 @@ const ChoiceGame = props => {
 		console.log("choicesEN",choicesEN)
 	}, [choiceEN]);
 
-
-
 	useEffect(() => {
-
-		// fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
@@ -98,7 +112,6 @@ const ChoiceGame = props => {
 		}
 		setChoicesEN(choicesEN.slice(1,5)) // choose those that corresponds to choices
 
-
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
@@ -117,22 +130,22 @@ const ChoiceGame = props => {
 			systemScore = 10;
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-
+			setDisabled(true);
 			setTimeout(() => {
-				setDisabled(true);
+				setClicked(true);
 			}, 500);
 
 		} else {
 			document.getElementById(optionIDs[idx]).style.backgroundColor = colorWrong
 			const requestBody = {userID,scoreBoard: {systemScore}};
 			client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+			setDisabled(true);
 			setTimeout(() => {
-				setDisabled(true);
+				setClicked(true)
 				// show the right answer after the choice
 				document.getElementById(optionIDs[currentQuestion.answerIndex]).style.backgroundColor = colorRight
 			}, 1500);
 		};
-
 	};
 
 	const submitScore = () => {
@@ -189,7 +202,7 @@ const ChoiceGame = props => {
 				<div className="choicegame col">
 					{players.map((player, index) => (
 						<div key={index} className="choicegame card">
-							<img src={dog} alt={`player${index+1}`} style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[index])} alt={`player${index+1}`} style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 							{index < playerNames.length && <div className="choicegame label"><center>{playerNames[index]}</center></div>}
 						</div>
 					))}
@@ -216,7 +229,7 @@ const ChoiceGame = props => {
 							{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (
 								<button key={index} id={String.fromCharCode(65+index)} className="choicegame option" disabled={isDisabled} onClick={() => handleClick(index)}>
 									{/*{isDisabled ?  choice + <span>searchTranslation(choice)</span>: choice}*/}
-									{choice} {isDisabled ? (
+									{choice} {isClicked ? (
 										<button className="choicegame option small" disabled={true}>{searchTranslation(choice)}</button>
 									) : ("")}
 								</button>

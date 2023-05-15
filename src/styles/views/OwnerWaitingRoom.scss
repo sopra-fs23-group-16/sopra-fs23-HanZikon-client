@@ -64,22 +64,36 @@
     flex-direction: column;
     justify-content: center;
   }
+
   &.input {
-    width: 15%;
-    height: 20%;
-    padding-left: 15px;
-    //padding-top: 5px;
+    width: fit-content;
+    height: fit-content;
     border: none;
     border-radius: 0.75em;
     margin-top: 1%;
-    padding-top: 0.5%;
+    padding: 0.5%;
     backdrop-filter: blur(3px);
     box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
     border-left: 2px rgba(255, 255, 255, .1);
     border-top: 2px solid rgba(255, 255, 255, .1);
     background-color: transparent;
-    color: rgb(32, 42, 54);
+    font-weight: bold;
+    color: #363f4a;
   }
+
+  .input::before {
+    content: "Room Code: ";
+    font-size: 12pt;
+    color: #a6aaaf;
+    font-weight: lighter;
+  }
+
+  .input::after {
+    content: attr(data-value);
+    font-size: 12pt;
+
+  }
+
   &.label {
     font-style: sans-serif;
     color: rgb(144, 172, 230);
@@ -87,6 +101,26 @@
     font-weight: 360;
     font-weight:bold;
 	  justify-content: center;
+  }
+
+  &.mode {
+    font-style: sans-serif;
+    color: rgb(144, 172, 230);
+    //text-transform: capitalize;
+    font-weight: bold;
+    font-style: italic;
+    justify-content: center;
+  }
+
+  .mode::before {
+    content: "Mode: ";
+    font-style: normal;
+    font-weight: normal;
+    color: #a6aaaf;
+  }
+
+  .mode::after {
+    content: attr(data-value);
   }
   &.button-container {
     display: flex;

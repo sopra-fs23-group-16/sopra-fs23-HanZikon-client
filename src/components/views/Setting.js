@@ -8,8 +8,11 @@ import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/Setting.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
-// import dog from 'image/dog.png';
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 
 const FormField = props => {
 	return (
@@ -41,19 +44,15 @@ const Setting = props => {
 	const [icon, setIcon] = useState(null);
 	let {userID} = useParams();
 	
-	const handleChangeIcon = (event) =>{
-		const icon = event.target.value;
+	const iconset = (icon) => {
 		setIcon(icon);
-		localStorage.setItem('icon', icon);
-		localStorage.setItem("loggedInUser", user.id);
-		console.log(icon);
-	};
+	}
 	
 	const confirm = async () => {
-        let item = {username, password}
+        let item = {username, password, icon}
         console.warn("item", item)
         try {
-            const requestBody = JSON.stringify({username, password});
+            const requestBody = JSON.stringify({username, password, icon});
             const response = await api.put('/users/' + userID, requestBody);
 
             // Get the returned user and update a new object.
@@ -67,13 +66,6 @@ const Setting = props => {
     }
 
     useEffect(() => {
-		
-		const localIcon = localStorage.getItem("icon");
-		if (localIcon) {
-			setIcon(localIcon);
-		}
-
-		// fetchLocalUser();
 		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function fetchData() {
@@ -98,18 +90,15 @@ const Setting = props => {
     if (user) {
         content = (
             <div className="">
-				<div className="setting field">
-					<label className="setting label">
-						icon
-					</label>
-					<select value = {icon} className="setting select" onChange = {handleChangeIcon}>
-						<option value="-" selected>Please select...</option>
-						<option value="cat">cat</option>
-						<option value="cattle">cattle</option>
-						<option value="dog">dog</option>
-						<option value="seelion">seelion</option>
-						<option value="owl">owl</option>
-					</select>
+				<label className="setting label">
+					icon
+				</label>
+				<div className="setting icon">
+					<img src={dog} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("dog");}} />
+					<img src={cat} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("cat");}} />
+					<img src={seelion} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("seelion");}} />
+					<img src={owl} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("owl");}} />
+					<img src={cattle} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("cattle");}} />
 				</div>
                 <FormField
                     label="username"
@@ -145,7 +134,7 @@ const Setting = props => {
 			<div className="setting container">
 				<div className="">
 					<p className="setting text">
-						You could change your username and password here. (Optional)
+						You could change your icon, username and password here. (Optional)
 					</p>
 					{content}
 				</div>

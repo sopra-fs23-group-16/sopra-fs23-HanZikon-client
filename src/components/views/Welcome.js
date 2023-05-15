@@ -1,6 +1,7 @@
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Welcome.scss";
+import Logo from "image/logo_book.png";
 
 const Welcome = () => {
 
@@ -8,23 +9,24 @@ const Welcome = () => {
 		<BaseContainer>
 			<div className="welcome container">
 				<div className="welcome label">Welcome to Hanzikon!</div>
+				<img src={Logo} style={{ width: '50%', height: 'auto', display: 'block', marginLeft: "8%" }}/>
 					<div className="welcome form">
 						<div className="welcome button-container">
 							<PrimaryButton
 								width="70%"
 								onClick={() => window.location.href = `/register`}
 							>
-								Register
+								Explore
 							</PrimaryButton>
 						</div>
-						<div className="welcome button-container">
+						{/* <div className="welcome button-container">
 							<PrimaryButton
 								width="70%"
 								onClick={() => window.location.href = `/login`}
 							>
 								Login
 							</PrimaryButton>
-						</div>
+						</div> */}
 				</div>
 			</div>
 		</BaseContainer>
