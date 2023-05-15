@@ -138,7 +138,6 @@ const ImitationVote = props => {
 		<BaseContainer>
 			<div className="imitationvote container">
 				<div className="imitationvote col">
-
 					{players.length > 0 ? (
 						<div className="imitationvote card">
 							<img src={defineIcon(playerIcons[0])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
@@ -185,7 +184,6 @@ const ImitationVote = props => {
 					{playerNames.length > 5 ? (
 						<div className="imitationvote label"> {playerNames[5]}</div>
 					) : null}
-					
 				</div>
 
 				<div className="imitationvote form">
