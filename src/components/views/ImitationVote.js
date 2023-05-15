@@ -3,31 +3,42 @@ import { handleError, client } from 'helpers/api';
 import { useParams } from 'react-router-dom';
 import BaseContainer from "components/ui/BaseContainer";
 import dog from 'image/dog.png';
-// import recognizeHandwriting from "../../helpers/recognizeHandwriting";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 import 'styles/views/ImitationVote.scss';
-// import User from 'models/User';
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import { FaHeart } from "react-icons/fa";
 
 const ImitationVote = props => {
-
+	
 	const { roomID } = useParams();
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.map(player => player.playerName)
+	const playerIcons = players.map(player => player.icon);
 	const [buttonClicked, setButtonClicked] = useState(false);
 	const [playerImitationNames, setPlayerImitationNames] = useState([]);
 	const [playerImitations, setPlayerImitations] = useState([]);
 	const round = parseInt(localStorage.getItem("round"));
 	const loggedInUserID = localStorage.getItem("loggedInUser");
-
-	// const history = useHistory();
-
 	const requestBody = JSON.stringify({ roomID });
+	
+	function defineIcon(icon){
+		if (icon === "dog") {
+			return dog;
+		} else if (icon === "cat") {
+			return cat;
+		} else if (icon === "seelion") {
+			return seelion;
+		} else if (icon === "cattle") {
+			return cattle;
+		} else if (icon === "owl") {
+			return owl;
+		}
+	}
 
 	useEffect(() => {
-
-		// fetchLocalUser();
 		
 		async function stompConnect() {
 			try {
@@ -51,7 +62,6 @@ const ImitationVote = props => {
 							const playersImitationsParse = JSON.parse(playersImitations);
 							const playersImitationsArray = Array.from(playersImitationsParse);
 							const playerImitationNames = Array.from(playersImitationsParse);
-
 
 							for (var i=0; i<playersImitationsParse.length; i++){
 								playersImitationsArray[i] = "data:image/png;base64," + playersImitationsParse[i].imitationBytes;
@@ -88,10 +98,6 @@ const ImitationVote = props => {
 			}
 		};
 	}, []);
-	
-	console.log(players);
-	console.log(players.length);
-	console.log(players[0]);
 
 	const submitScoreB1 = (userOrder) => {
 		const votedScore = 10;
@@ -135,14 +141,14 @@ const ImitationVote = props => {
 
 					{players.length > 0 ? (
 						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[0])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 0 ? (
 						<div className="imitationvote label"> {playerNames[0]}</div>
 					) : null}
 					{players.length > 1 ? (
 						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[1])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 1 ? (
 						<div className="imitationvote label"> {playerNames[1]}</div>
@@ -150,7 +156,7 @@ const ImitationVote = props => {
 
 					{players.length > 2 ? (
 						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[2])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 2 ? (
 						<div className="imitationvote label"> {playerNames[2]}</div>
@@ -158,7 +164,7 @@ const ImitationVote = props => {
 
 					{players.length > 3 ? (
 						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[3])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 3 ? (
 						<div className="imitationvote label"> {playerNames[3]}</div>
@@ -166,7 +172,7 @@ const ImitationVote = props => {
 
 					{players.length > 4 ? (
 						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[4])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 4 ? (
 						<div className="imitationvote label"> {playerNames[4]}</div>
@@ -174,20 +180,12 @@ const ImitationVote = props => {
 
 					{players.length > 5 ? (
 						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
+							<img src={defineIcon(playerIcons[5])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
 						</div>) : null}
 					{playerNames.length > 5 ? (
 						<div className="imitationvote label"> {playerNames[5]}</div>
 					) : null}
-
-					{players.length > 6 ? (
-						<div className="imitationvote card">
-							<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 6 ? (
-						<div className="imitationvote label"> {playerNames[6]}</div>
-					) : null}
-
+					
 				</div>
 
 				<div className="imitationvote form">
