@@ -271,7 +271,6 @@ const ImitationGame = props => {
 		} else {
 			console.log('Response:', response);
 			const score = evaluateWriting(response,currentQuestion.character);
-			alert("evaluated Points is " + score);
 			localStorage.setItem("roundPoints", score);
 			console.log("Score",score)
 			// Handle the response data in some way, such as updating the UI or storing it in a database
@@ -291,7 +290,7 @@ const ImitationGame = props => {
 				console.log("roundPoints", systemScore);
 			}, 50);
 		}
-		alert("Submitted systemscore is " + systemScore);
+		console.log("Submitted systemscore is " + systemScore);
 		const requestBody = {userID,scoreBoard: {systemScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 	}
