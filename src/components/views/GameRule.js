@@ -1,51 +1,44 @@
-import {useEffect, useState} from 'react';
-// import {api} from 'helpers/api';
-import {useHistory, useParams} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/GameRule.scss";
-// import User from 'models/User';
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
 
 const GameRule = () => {
-
-	// useEffect(() => {
-	// 	// fetch localuser's information by token
-	// 	fetchLocalUser();
-	// }, []);
-
     const history = useHistory();
-	const [users, setUsers] = useState(null);
-	let id = localStorage.getItem("loggedInUser");
-
-	// const logout = () => {
-	// 	localStorage.removeItem('token');
-	// 	localStorage.removeItem("loggedInUser");
-	// 	const response = api.get('/logout/'+id);
-	// 	history.push('/login');
-	// }
-  
-	//const params = new URLSearchParams(window.location.search);
 
 	return (
 		<BaseContainer>
         <center>
 				<h1>Game Rule</h1>
 				<div className="gamerule form">
-                <div className="gamerule label">
+
+                <div className="gamerule label-title-big">
                 Game Modes:<br /><br />
-				<b>1. HanziDrawing</b><br /><br />
-					a. Learn to write Chinese characters from Live Demo and a guided imitation.<br />
-					b. Browse the evolution of Chinese characters dating back to 2nd millennium BC.<br />
-					c. "Draw" the Chinese character from your memory.<br />
-					d. Peer review all your teammates' works and take a vote!<br /><br />
-					<b>2. OracleGuessing</b><br /><br />
-					a. An Oracle bone script, together with the English meaning of the word, will be displayed.<br />
-					b. Four choices of modern Chinese characters will be displayed.<br />
-					c. Only one answer is correct.<br /><br />
-					<b>Note: </b> Empirical evidence suggests, a prior knowledge in Chinese isn't going to help. Just trust your gut and have fun!<br /><br />
-					<b>3. A bit of Both</b><br /><br />
-					a. Just like its name, a bit of both modes coming in random order.
+				</div>
+
+				<div className="gamerule label-title">
+				A. Hanzi Drawing
+				</div>
+
+				<br />
+				<div className="gamerule label-text">
+					1. Learn to write Chinese characters from Live Demo and a guided imitation.<br />
+					2. Browse the evolution of Chinese characters dating back to 2nd millennium BC.<br />
+					3. "Draw" the Chinese character from your memory.<br />
+					4. Peer review all your teammates' works and take a vote!
+					</div>
+					<br />
+					<div className="gamerule label-title"><b>B. Oracle Guessing</b></div>
+					<br />
+					<div className="gamerule label-text">
+					1. An Oracle bone script, together with the English meaning of the word, will be displayed.<br />
+					2. Four choices of modern Chinese characters will be displayed.<br />
+					3. Only one answer is correct.<br /><br />
+					</div>
+					<div className="gamerule label-text"><b>Note: Empirical evidence suggests, a prior knowledge in Chinese isn't going to help. Just trust your gut and have fun!</b></div><br />
+					<div className="gamerule label-title"><b>C. A bit of Both</b></div>
+					<br />
+					<div className="gamerule label-text">1. Just like its name, a bit of both modes coming in random order.
                     </div>
 					<br />
 					<br />
