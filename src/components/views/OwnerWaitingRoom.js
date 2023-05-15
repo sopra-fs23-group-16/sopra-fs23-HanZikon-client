@@ -6,9 +6,13 @@ import {SecondaryButton} from 'components/ui/SecondaryButton';
 import 'styles/views/OwnerWaitingRoom.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
+import dog from "image/dog.png";
+import cat from "image/cat.jpg";
+import seelion from "image/seelion.jpg";
+import owl from "image/owl.jpg";
+import cattle from "image/cattle.jpg";
 
 import {Spinner} from "../ui/Spinner";
-import dog from "image/dog.png";
 
 import copyToClipboard from "../../helpers/copyToClipboard";
 import {normalizeGameMode} from "../../helpers/normalizeGameMode";
@@ -20,29 +24,40 @@ const OwnerWaitingRoom = props => {
 	const [roomCode, setRoomcode] = useState('');
 	const [players, setPlayers] = useState([]);
 	const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
+	const playerIcons = players.length > 0 ? players.map(player => player.icon) : [];
 
 	const [gameMode, setgameMode] = useState("");
 
 	const [copied, setCopied] = useState(false);
 
 	const requestBody = JSON.stringify({ roomID });
+	
+	function defineIcon(icon){
+		if (icon === "dog") {
+			return dog;
+		} else if (icon === "cat") {
+			return cat;
+		} else if (icon === "seelion") {
+			return seelion;
+		} else if (icon === "cattle") {
+			return cattle;
+		} else if (icon === "owl") {
+			return owl;
+		}
+	}
 
 	useEffect(() => {
-		// fetchLocalUser();
-		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
                 if (!client['connected']) {
                     client.connect({}, function () {
-						// console.log('connected to stomp');
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/info", function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							//console.log(players[0]);	
-							//console.log(getUserIcon(players[0]));	
+							console.log(players[0].icon);	
 							setRoomcode(roomcode);	
 							setPlayers(players);	
 
@@ -52,11 +67,6 @@ const OwnerWaitingRoom = props => {
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/info",{}, requestBody)
 						},100);
-						// client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
-						// 	const room = response.body;
-						// 	const roomparse = JSON.parse(room);
-						// 	//console.log(roomparse);
-						// });
 						client.subscribe('/topic/multi/games/' + roomID + '/questions', function (response) {
 							const questionList = response.body;
 							const qListparse = JSON.parse(questionList);
@@ -67,9 +77,6 @@ const OwnerWaitingRoom = props => {
 							localStorage.setItem('questionList', JSON.stringify(qListparse));
 
 							nextRound(roomID);
-
-							// window.location.href = '/games/imitation/' + roomID;
-
 						});
 						client.subscribe('/topic/multi/rooms/' + roomID + '/drop', function (response) {
 							const room = response.body;
@@ -115,8 +122,6 @@ const OwnerWaitingRoom = props => {
 		client.send('/app/multi/rooms/' + roomID + '/drop', {}, JSON.stringify(playerToUpdate))
 		window.location.href = "/room/lobby";
     };
-
-
 
 	let content = <center><Spinner /></center>;
 
@@ -165,7 +170,7 @@ const OwnerWaitingRoom = props => {
 						<>
 							{players.length > index ? (
 								<div className="ownerwaiting card">
-									<img src={dog}  alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
+									<img src={defineIcon(playerIcons[index])}  alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
 								</div>
 							) : null}
 							{/* owner*/}
