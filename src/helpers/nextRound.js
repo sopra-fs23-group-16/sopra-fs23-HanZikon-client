@@ -1,4 +1,5 @@
 import {client} from "./api";
+import {PrimaryButton} from "../components/ui/PrimaryButton";
 
 export const nextRound = (roomID) => {
     let round = parseInt(localStorage.getItem("round"));
@@ -6,10 +7,6 @@ export const nextRound = (roomID) => {
     if (round == localStorage.getItem("numRound")) {
         // Reset the game board after ending rounds
         client.send("/app/multi/games/" + roomID + "/rounds/end", {})
-
-        // go back to lobby for now
-        // waitingRoom need clarify owner or player
-        window.location.href = "/room/lobby"
     }else{
         // round++
         round = round + 1;
