@@ -16,6 +16,7 @@ const ImitationGame = props => {
 	const canvasRef = useRef(null);
 	const [lines, setLines] = useState([[],[]]);
 	const [isDrawing, setIsDrawing] = useState(false);
+	const [disabled, setDisabled] = useState(false);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -235,17 +236,18 @@ const ImitationGame = props => {
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
+		setTimeout(submitScore(), 50);
 
-		// Submit system score
-		var countdown = 1;
-		var timer = setInterval(function() {
-			countdown--;
-
-			if (countdown <= 0) {
-				clearInterval(timer);
-				setTimeout(submitScore(), 50);
-			}
-		}, 1000);
+		// // Submit system score
+		// var countdown = 1;
+		// var timer = setInterval(function() {
+		// 	countdown--;
+		//
+		// 	if (countdown <= 0) {
+		// 		clearInterval(timer);
+		// 		setTimeout(submitScore(), 50);
+		// 	}
+		// }, 1000);
 	}
 
 	function evaluateWriting(response, character) {
@@ -293,6 +295,7 @@ const ImitationGame = props => {
 		console.log("Submitted systemscore is " + systemScore);
 		const requestBody = {userID,scoreBoard: {systemScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+		setDisabled(true);
 	}
 
 	window.addEventListener("load", function() {
@@ -376,9 +379,9 @@ const ImitationGame = props => {
 						<br />
 						<br />
 						<div className="imitationgame sumitbox"> 
-						<button className="imitationgame button-submit" onClick={undo}>Undo</button>
-						<button className="imitationgame button-submit" onClick={clearCanvas}>Clear</button>
-						<button className="imitationgame button-submit" onClick={submitDrawing}>Submit</button>
+						<button className="imitationgame button-submit" disabled={disabled} onClick={undo}>Undo</button>
+						<button className="imitationgame button-submit" disabled={disabled} onClick={clearCanvas}>Clear</button>
+						<button className="imitationgame button-submit" disabled={disabled} onClick={submitDrawing}>{disabled?"Submitted":"Submit"}</button>
 						</div>
 					</center>
 					<div className="imitationgame canvas-container">
