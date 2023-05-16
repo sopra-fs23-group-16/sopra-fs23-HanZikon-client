@@ -16,6 +16,7 @@ import {Spinner} from "../ui/Spinner";
 
 import copyToClipboard from "../../helpers/copyToClipboard";
 import {normalizeGameMode} from "../../helpers/normalizeGameMode";
+import PlayerCard from "../ui/PlayerCard";
 
 const OwnerWaitingRoom = props => {
 	
@@ -166,25 +167,11 @@ const OwnerWaitingRoom = props => {
 			<div  className="ownerwaiting container">
 				<div className="ownerwaiting col">
 					{players.map((player, index) => (
-						<>
-							{players.length > index ? (
-								<div className="ownerwaiting card">
-									<img src={defineIcon(playerIcons[index])}  alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-								</div>
-							) : null}
-							{/* owner*/}
-							{playerNames.length > index && index === 0 ? (
-								<div className="ownerwaiting label" >&#x2705; {playerNames[index]}</div>
-							) : null}
-							{/*player ready*/}
-							{playerNames.length > index && index !== 0 && players[index]?.ready ? (
-								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x2705; {playerNames[index]}</div>
-							) : null}
-							{/*player not ready*/}
-							{playerNames.length > index && index !== 0 && !players[index]?.ready ? (
-								<div className="ownerwaiting label" onClick={() => kickout(player)}>&#x1F6AB; &#x274C; {playerNames[index]}</div>
-							) : null}
-						</>
+					players.length > index &&
+						<PlayerCard waiting={true} host={true} isHost={index===0} ready={players[index].ready}
+						src={defineIcon(playerIcons[index])} label={playerNames[index]}
+						onClick={()=>kickout(player)}>
+						</PlayerCard>
 					))}
 				</div>
 				<div className="ownerwaiting col">

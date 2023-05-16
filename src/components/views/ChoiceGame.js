@@ -11,6 +11,7 @@ import cattle from "image/cattle.jpg";
 import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
 import getTranslationURL from "../../helpers/getTranslation";
+import PlayerCard from "../ui/PlayerCard";
 
 const ChoiceGame = props => {
 	const [loaded, setLoaded] = useState(false);
@@ -201,12 +202,12 @@ const ChoiceGame = props => {
 	return (
 		<BaseContainer>
 			<div  className="choicegame container">
-				<div className="choicegame col">
+				<div className="normalwaiting col">
 					{players.map((player, index) => (
-						<div key={index} className="choicegame card">
-							<img src={defineIcon(playerIcons[index])} alt={`player${index+1}`} style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-							{index < playerNames.length && <div className="choicegame label"><center>{playerNames[index]}</center></div>}
-						</div>
+						players.length > index &&
+						<PlayerCard waiting={false} ready={players[index].ready}
+									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+						</PlayerCard>
 					))}
 				</div>
 				<div className="choicegame col">
