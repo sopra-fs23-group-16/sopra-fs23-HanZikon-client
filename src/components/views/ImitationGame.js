@@ -236,18 +236,7 @@ const ImitationGame = props => {
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
-		setTimeout(submitScore(), 50);
 
-		// // Submit system score
-		// var countdown = 1;
-		// var timer = setInterval(function() {
-		// 	countdown--;
-		//
-		// 	if (countdown <= 0) {
-		// 		clearInterval(timer);
-		// 		setTimeout(submitScore(), 50);
-		// 	}
-		// }, 1000);
 	}
 
 	function evaluateWriting(response, character) {
@@ -276,6 +265,9 @@ const ImitationGame = props => {
 			localStorage.setItem("roundPoints", score);
 			console.log("Score",score)
 			// Handle the response data in some way, such as updating the UI or storing it in a database
+
+			// Submit system score
+			submitScore();
 
 		}
 	}
