@@ -98,59 +98,20 @@ const GameResult = props => {
 				</div>
 				<div className="gameresult form">
 					<center>
-						{Object.keys(players).length > 0 ? (
-							<div className="gameresult record">
-								<PrimaryButton
-									width="70%"
-								>
-									{players[0][0] + ": " + players[0][1]}
-								</PrimaryButton>
-							</div>) : null}
-
-						{Object.keys(players).length > 1 ? (
-							<div className="gameresult record">
-								<PrimaryButton
-									width="70%"
-								>
-									{players[1][0] + ": " + players[1][1]}
-								</PrimaryButton>
-							</div>) : null}
-
-						{Object.keys(players).length > 2 ? (
-							<div className="gameresult record">
-								<PrimaryButton
-									width="70%"
-								>
-									{players[2][0] + ": " + players[2][1]}
-								</PrimaryButton>
-							</div>) : null}
-
-						{Object.keys(players).length > 3 ? (
-							<div className="gameresult record">
-								<PrimaryButton
-									width="70%"
-								>
-									{players[3][0] + ": " + players[3][1]}
-								</PrimaryButton>
-							</div>) : null}
-
-						{Object.keys(players).length > 4 ? (
-							<div className="gameresult record">
-								<PrimaryButton
-									width="70%"
-								>
-									{players[4][0] + ": " + players[4][1]}
-								</PrimaryButton>
-							</div>) : null}
-
-						{Object.keys(players).length > 5 ? (
-							<div className="gameresult record">
-								<PrimaryButton
-									width="70%"
-								>
-									{players[5][0] + ": " + players[5][1]}
-								</PrimaryButton>
-							</div>) : null}
+						{[0, 1, 2, 3, 4, 5].map(index => {
+							if (index < Object.keys(players).length) {
+								return (
+									<div className="gameresult record" key={index}>
+										<PrimaryButton
+											width="70%"
+										>
+											{players[index][0] + ": " + players[index][1]}
+										</PrimaryButton>
+									</div>
+								);
+							}
+							return null;
+						})}
 						<div className="gameresult button-container">
 							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
 							<SecondaryButton
