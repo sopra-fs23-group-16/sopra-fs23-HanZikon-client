@@ -10,6 +10,7 @@ import cattle from "image/cattle.jpg";
 import 'styles/views/ImitationInspect.scss';
 import HanziWriter from "hanzi-writer";
 import {Spinner} from "../ui/Spinner";
+import PlayerCard from "../ui/PlayerCard";
 
 const ImitationInspect = props => {
 	
@@ -142,54 +143,13 @@ const ImitationInspect = props => {
 	return (
 		<BaseContainer>
 			<div className="imitationinspect container">
-				<div className="imitationinspect col">
-
-					{players.length > 0 ? (
-						<div className="imitationinspect card">
-							<img src={defineIcon(playerIcons[0])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 0 ? (
-						<div className="imitationinspect label"> {playerNames[0]}</div>
-					) : null}
-					{players.length > 1 ? (
-						<div className="imitationinspect card">
-							<img src={defineIcon(playerIcons[1])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 1 ? (
-						<div className="imitationinspect label"> {playerNames[1]}</div>
-					) : null}
-
-					{players.length > 2 ? (
-						<div className="imitationinspect card">
-							<img src={defineIcon(playerIcons[2])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 2 ? (
-						<div className="imitationinspect label"> {playerNames[2]}</div>
-					) : null}
-
-					{players.length > 3 ? (
-						<div className="imitationinspect card">
-							<img src={defineIcon(playerIcons[3])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 3 ? (
-						<div className="imitationinspect label"> {playerNames[3]}</div>
-					) : null}
-
-					{players.length > 4 ? (
-						<div className="imitationinspect card">
-							<img src={defineIcon(playerIcons[4])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 4 ? (
-						<div className="imitationinspect label"> {playerNames[4]}</div>
-					) : null}
-
-					{players.length > 5 ? (
-						<div className="imitationinspect card">
-							<img src={defineIcon(playerIcons[5])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 5 ? (
-						<div className="imitationinspect label"> {playerNames[5]}</div>
-					) : null}
+				<div className="normalwaiting col">
+					{players.map((player, index) => (
+						players.length > index &&
+						<PlayerCard waiting={false} ready={players[index].ready}
+									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+						</PlayerCard>
+					))}
 				</div>
 				
 				<div className="imitationinspect col">

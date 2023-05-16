@@ -10,6 +10,7 @@ import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationGame.scss';
+import PlayerCard from "../ui/PlayerCard";
 
 const ImitationGame = props => {
 
@@ -321,55 +322,13 @@ const ImitationGame = props => {
 	return (
 		<BaseContainer>
 			<div className="choicegame container">
-				<div className="choicegame col">
-
-					{players.length > 0 ? (
-						<div className="choicegame card">
-							<img src={defineIcon(playerIcons[0])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 0 ? (
-						<div className="choicegame label"> {playerNames[0]}</div>
-					) : null}
-					{players.length > 1 ? (
-						<div className="choicegame card">
-							<img src={defineIcon(playerIcons[1])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 1 ? (
-						<div className="choicegame label"> {playerNames[1]}</div>
-					) : null}
-
-					{players.length > 2 ? (
-						<div className="choicegame card">
-							<img src={defineIcon(playerIcons[2])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 2 ? (
-						<div className="choicegame label"> {playerNames[2]}</div>
-					) : null}
-
-					{players.length > 3 ? (
-						<div className="choicegame card">
-							<img src={defineIcon(playerIcons[3])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 3 ? (
-						<div className="choicegame label"> {playerNames[3]}</div>
-					) : null}
-
-					{players.length > 4 ? (
-						<div className="choicegame card">
-							<img src={defineIcon(playerIcons[4])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 4 ? (
-						<div className="choicegame label"> {playerNames[4]}</div>
-					) : null}
-
-					{players.length > 5 ? (
-						<div className="choicegame card">
-							<img src={defineIcon(playerIcons[5])} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-						</div>) : null}
-					{playerNames.length > 5 ? (
-						<div className="choicegame label"> {playerNames[5]}</div>
-					) : null}
-
+				<div className="normalwaiting col">
+					{players.map((player, index) => (
+						players.length > index &&
+						<PlayerCard waiting={false} ready={players[index].ready}
+									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+						</PlayerCard>
+					))}
 				</div>
 				<div className="choicegame form">
 				<div className="choicegame col">

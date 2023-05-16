@@ -12,6 +12,7 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
+import PlayerCard from "../ui/PlayerCard";
 
 const NormalWaitingRoom = props => {
     const {roomID} = useParams();
@@ -152,88 +153,13 @@ const NormalWaitingRoom = props => {
 	return (
 		<BaseContainer>
 			<div  className="normalwaiting container">
-			<div className="normalwaiting col">
-				{players.map((player, index) => (
-					<>
-						{players.length > index ? (
-							<div className="normalwaiting card">
-								<img src={defineIcon(playerIcons[index])} alt={"icon"} style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />
-							</div>
-						) : null}
-						{/*player ready*/}
-						{playerNames.length > index && players[index]?.ready ?(
-							<div className="normalwaiting label" >&#x2705; {playerNames[index]}</div>
-						) : null}
-						{/*player not ready*/}
-						{playerNames.length > index && !players[index]?.ready ? (
-							<div className="normalwaiting label" >&#x274C; {playerNames[index]}</div>
-						) : null}
-					</>
-				))}
-				{/*{players.length > 0 ? (*/}
-				{/*	<div className="normalwaiting card">*/}
-				{/*		<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />*/}
-				{/*	</div>) : null}*/}
-				{/*	{playerNames.length > 0 && players[0]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x2705; {playerNames[0]}</div>*/}
-				{/*		) : (playerNames.length > 0 && !players[0]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x274C; {playerNames[0]}</div>*/}
-				{/*	) : null)}*/}
-				{/*{players.length > 1 ? (*/}
-				{/*	<div className="normalwaiting card">*/}
-				{/*		<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />*/}
-				{/*	</div>) : null}*/}
-				{/*	{playerNames.length > 1 && players[1]?.["ready"] ? (*/}
-				{/*		<div className="normalwaiting label">&#x2705; {playerNames[1]}</div>*/}
-				{/*		) : (playerNames.length > 1 && !players[1]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x274C; {playerNames[1]}</div>*/}
-				{/*	) : null)}*/}
-				{/*{players.length > 2 ? (	*/}
-				{/*	<div className="normalwaiting card">*/}
-				{/*		<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />*/}
-				{/*	</div>) : null}*/}
-				{/*	{playerNames.length > 2 && players[2]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x2705; {playerNames[2]}</div>*/}
-				{/*		) : (playerNames.length > 2 && !players[2]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x274C; {playerNames[2]}</div>*/}
-				{/*	) : null)}*/}
-				{/*{players.length > 3 ? (*/}
-				{/*	<div className="normalwaiting card">*/}
-				{/*		<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />*/}
-				{/*	</div>) : null}*/}
-				{/*	{playerNames.length > 3 && players[3]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x2705; {playerNames[3]}</div>*/}
-				{/*		) : (playerNames.length > 3 && !players[3]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x274C; {playerNames[3]}</div>*/}
-				{/*	) : null)}*/}
-				{/*{players.length > 4 ? (*/}
-				{/*	<div className="normalwaiting card">*/}
-				{/*		<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />*/}
-				{/*	</div>) : null}*/}
-				{/*	{playerNames.length > 4 && players[4]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x2705; {playerNames[4]}</div>*/}
-				{/*		) : (playerNames.length > 4 && !players[4]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x274C; {playerNames[4]}</div>*/}
-				{/*	) : null)}*/}
-
-				{/*{players.length > 5 ? (*/}
-				{/*	<div className="normalwaiting card">*/}
-				{/*		<img src={dog} alt="player1" style={{ width: '100%', height: 'auto', display: 'block', margin: 'auto' }} />*/}
-				{/*	</div>) : null}*/}
-				{/*	{playerNames.length > 5 && players[5]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x2705; {playerNames[5]}</div>*/}
-				{/*		) : (playerNames.length > 5 && !players[5]?.ready ? (*/}
-				{/*		<div className="normalwaiting label">&#x274C; {playerNames[5]}</div>*/}
-				{/*	) : null)}*/}
-				{/* {players.length > 6 ? (
-					<div className="normalwaiting card">
-						<img src={dog} alt="player1" style={{ width: '80%', height: 'auto', display: 'block', margin: 'auto' }} />
-					</div>) : null}
-					{playerNames.length > 6 && players[6]?.ready ? (
-						<div className="normalwaiting label">&#x2705; {playerNames[6]}</div>
-						) : (playerNames.length > 6 && !players[6]?.ready ? (
-						<div className="normalwaiting label">&#x274C; {playerNames[6]}</div>
-					) : null)} */}
+				<div className="normalwaiting col">
+					{players.map((player, index) => (
+						players.length > index &&
+						<PlayerCard waiting={true} isHost={index===0} ready={players[index].ready}
+									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+						</PlayerCard>
+					))}
 				</div>
 				<div className="normalwaiting col">
 				<div className="normalwaiting form">
