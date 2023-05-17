@@ -5,27 +5,21 @@ import {PrimaryButton} from 'components/ui/PrimaryButton';
 import 'styles/views/GameResult.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import { nextRound } from "helpers/nextRound";
-// import User from 'models/User';
 import Countdown from 'react-countdown-now';
 import {Spinner} from "../ui/Spinner";
 import {SecondaryButton} from "../ui/SecondaryButton";
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import { FaHeart } from "react-icons/fa";
 
 const GameResult = props => {
 	
-	// const history = useHistory();
-
     const {roomID} = useParams();
 	const [players, setPlayers] = useState([]);
-
+	const questionList = JSON.parse(localStorage.getItem('questionList'));
+	const round = localStorage.getItem('round');
+	console.log((questionList[round-1]).questionType);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
-	
-	// const [countdown, setCountdown] = useState(5);
 
 	useEffect(() => {
-
-		// fetchLocalUser();
-		
 		// startCountdown();
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
@@ -35,6 +29,7 @@ const GameResult = props => {
 						console.log('connected to stomp');
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/scores", function (response) {
 							const ranking = response.body;
+							console.log(ranking);
 							const newPlayers = JSON.parse(ranking);
 							const sortedArray = Object.entries(newPlayers).sort((a, b) => b[1] - a[1]);
 							//const sortedObject = Object.fromEntries(sortedArray);
@@ -43,6 +38,17 @@ const GameResult = props => {
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
+						},100);
+
+						client.subscribe("/topic/multi/rooms/"+ roomID +"/players/votes", function (response) {
+							const votedTimes = response.body;
+							console.log(votedTimes);
+							const votedTimesParse = JSON.parse(votedTimes);
+							console.log("votedTimesParse = " + votedTimesParse);
+						});
+						setTimeout(function () {
+							const requestBody = {round};
+							client.send("/app/multi/rooms/" + roomID + "/players/voteTimes", {}, JSON.stringify(requestBody))
 						},100);
 					});
                 }
@@ -64,8 +70,6 @@ const GameResult = props => {
 		};
 		
     }, []);
-	
-	console.log(players[0]);
 	
 	// const startCountdown = () => {
 	//
