@@ -155,7 +155,7 @@ const RoomEntrance = props => {
 					</div> */}
 
 					{roomFull &&
-						<div className="entrance roomFull" >This room is full, you may join another one!</div>
+						<div className="entrance roomFull" >This room is invalid, you may join another one!</div>
 					}
 				</div>
 			</div>
