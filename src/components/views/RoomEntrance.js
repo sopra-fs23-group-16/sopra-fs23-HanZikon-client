@@ -73,6 +73,7 @@ const RoomEntrance = props => {
 			}
 		}
 		stompConnect();
+		setRoomFull(false);
 		if(roomCode.length === 4){
 			client.subscribe('/topic/multi/rooms/' + roomCode + '/join', function (response) {
 				console.log(response.body)
