@@ -193,7 +193,7 @@ const ImitationGame = props => {
 	};
 
 	const clearCanvas = () => {
-		setLines([]);
+		setLines(prevState => prevState.slice(0, 0));
 	};
 
 	const saveCanvasImgs = () => {
