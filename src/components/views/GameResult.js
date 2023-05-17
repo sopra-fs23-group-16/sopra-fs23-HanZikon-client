@@ -91,7 +91,7 @@ const GameResult = props => {
 				{/*<p className="choiceresult timer">{countdown}s</p>*/}
 				<div className="gameresult timer">
 					<Countdown
-						date={Date.now() + 100000} // 10s
+						date={Date.now() + 10000} // 10s
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
 						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
