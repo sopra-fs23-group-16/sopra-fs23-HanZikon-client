@@ -16,6 +16,7 @@ const GameResult = props => {
 	const [players, setPlayers] = useState([]);
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	const round = localStorage.getItem('round');
+	
 	console.log((questionList[round-1]).questionType);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
@@ -43,6 +44,10 @@ const GameResult = props => {
 							const ranking2 = response.body;
 							console.log(response.body);						
 						});
+						setTimeout(function () {
+							const requestBody = {round};
+							client.send("/app/multi/rooms/"+ roomID + "/players/votes",{}, JSON.stringify(requestBody));
+						},100);
 					});
                 }
             } catch (error) {
