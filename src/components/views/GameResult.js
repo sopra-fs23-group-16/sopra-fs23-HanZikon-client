@@ -39,6 +39,17 @@ const GameResult = props => {
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
 						},100);
+
+						client.subscribe("/topic/multi/rooms/"+ roomID +"/players/votes", function (response) {
+							const votedTimes = response.body;
+							console.log(votedTimes);
+							const votedTimesParse = JSON.parse(votedTimes);
+							alert("votedTimesParse = " + votedTimesParse);
+						});
+						setTimeout(function () {
+							const requestBody = {round};
+							client.send("/app/multi/rooms/" + roomID + "/players/voteTimes", {}, JSON.stringify(requestBody))
+						},100);
 					});
                 }
             } catch (error) {
