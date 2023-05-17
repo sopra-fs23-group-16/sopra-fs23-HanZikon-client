@@ -340,6 +340,7 @@ const ImitationGame = props => {
 							<canvas id = 'imitationCanvas'
 								onMouseDown={startDrawing}
 								onMouseUp={finishDrawing}
+								onMouseOut={finishDrawing}
 								onMouseMove={draw}
 								onTouchStart={(e) => {
 									const touch = e.touches[0];
