@@ -109,11 +109,14 @@ const RoomEntrance = props => {
 	};
 
 	const enterRoom = () => {
-		const requestBody = JSON.stringify({ userID });
-
-		setTimeout(function () {
-			client.send('/app/multi/rooms/' + roomCode + '/join', {}, requestBody);
-		},100);
+		if(roomCode.length!==4){
+			setRoomFull(true);
+		}else{
+			const requestBody = JSON.stringify({ userID });
+			setTimeout(function () {
+				client.send('/app/multi/rooms/' + roomCode + '/join', {}, requestBody);
+			},50);
+		}
 	};
 
 	return (
