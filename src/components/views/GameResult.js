@@ -16,6 +16,7 @@ const GameResult = props => {
 	const [players, setPlayers] = useState([]);
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	const round = localStorage.getItem('round');
+	const [votedTimes, setVotedTimes] = useState([]);
 	console.log((questionList[round-1]).questionType);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 
@@ -34,7 +35,7 @@ const GameResult = props => {
 							const sortedArray = Object.entries(newPlayers).sort((a, b) => b[1] - a[1]);
 							//const sortedObject = Object.fromEntries(sortedArray);
 							setPlayers(sortedArray);	
-							console.log(sortedArray[0][1]);							
+							console.log(sortedArray[0][0]);							
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
@@ -42,9 +43,10 @@ const GameResult = props => {
 
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/players/votes", function (response) {
 							const votedTimes = response.body;
-							console.log(votedTimes);
 							const votedTimesParse = JSON.parse(votedTimes);
-							console.log("votedTimesParse = " + votedTimesParse);
+							setVotedTimes(votedTimesParse)
+							console.log(votedTimesParse[0].userName);
+							console.log(votedTimesParse.length);
 						});
 						setTimeout(function () {
 							const requestBody = {round};
@@ -109,8 +111,25 @@ const GameResult = props => {
 										<PrimaryButton
 											width="70%"
 										>
-											{players[index][0] + ": " + players[index][1]}
+											{players[index][0]}
 										</PrimaryButton>
+										<PrimaryButton
+											width="70%"
+										>
+											{players[index][1]}
+										</PrimaryButton>
+										{votedTimes.map((votedTime, i)=>{
+											if (votedTime.userName == players[index][0]){
+												return (
+													<PrimaryButton
+														key={i}
+														width="70%"
+													>
+														{votedTime.votedTimes}
+													</PrimaryButton>
+												)
+											}
+										})}
 									</div>
 								);
 							}
