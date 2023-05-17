@@ -39,6 +39,10 @@ const GameResult = props => {
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
 						},100);
+						client.subscribe("/topic/multi/rooms/"+ roomID +"/players/votes", function (response) {
+							const ranking2 = response.body;
+							console.log(response.body);						
+						});
 					});
                 }
             } catch (error) {
