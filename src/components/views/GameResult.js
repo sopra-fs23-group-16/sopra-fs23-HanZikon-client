@@ -44,7 +44,7 @@ const GameResult = props => {
 							const votedTimes = response.body;
 							console.log(votedTimes);
 							const votedTimesParse = JSON.parse(votedTimes);
-							alert("votedTimesParse = " + votedTimesParse);
+							console.log("votedTimesParse = " + votedTimesParse);
 						});
 						setTimeout(function () {
 							const requestBody = {round};
