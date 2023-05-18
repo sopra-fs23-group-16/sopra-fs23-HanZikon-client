@@ -21,6 +21,7 @@ const GameResult = props => {
 	console.log((questionList[round-1]).questionType);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	const animation = new AnimationItems();
+	const currentQuesType = (questionList[round-1]).questionType;
 
 	useEffect(() => {
 		// startCountdown();
@@ -116,57 +117,46 @@ const GameResult = props => {
 				</div>
 				<div className="gameresult form">
 					<center>
+						{currentQuesType === "MultipleChoice" && (
+							<table className="gameresult table">
+								<thead>
+								<tr>
+									<th>Username</th>
+									<th>Score</th>
+								</tr>
+								</thead>
+								<tbody>
+								{players.map((player, index) => (
+									<tr key={player[0]}>
+										<td>{player[0]}</td>
+										<td>{player[1]}</td>
+									</tr>
+								))}
+								</tbody>
+							</table>
+						)}
 
-						{[0, 1, 2, 3, 4, 5].map(index => {
-							if (index < Object.keys(players).length) {
-								return (
-									<table className="gameresult table">
-										<thead>
-										<tr>
-											<th>Username</th>
-											<th>Score</th>
-											<th>Like</th>
-										</tr>
-										</thead>
-										<tbody>
-										{players.map(player => (
-											<tr key={index}>
-												<td>{players[index][0]}</td>
-												<td>{players[index][1]}</td>
-												<td>{players[index][1]}</td>
-											</tr>
-										))}
-										</tbody>
-									</table>
+						{currentQuesType === "HanziDrawing" && (
+							<table className="gameresult table">
+								<thead>
+								<tr>
+									<th>Username</th>
+									<th>Score</th>
+									<th>Like</th>
+								</tr>
+								</thead>
+								<tbody>
+								{players.map((player, index) => (
+									<tr key={player[0]}>
+										<td>{player[0]}</td>
+										<td>{player[1]}</td>
+										<td>{player[2]}</td>
+									</tr>
+								))}
+								</tbody>
+							</table>
+						)}
 
-									// <div className="gameresult record" key={index}>
-									// 	<PrimaryButton
-									// 		width="70%"
-									// 	>
-									// 		{players[index][0]}
-									// 	</PrimaryButton>
-									// 	<PrimaryButton
-									// 		width="70%"
-									// 	>
-									// 		{players[index][1]}
-									// 	</PrimaryButton>
-									// 	{votedTimes.map((votedTime, i)=>{
-									// 		if (votedTime.userName == players[index][0]){
-									// 			return (
-									// 				<PrimaryButton
-									// 					key={i}
-									// 					width="70%"
-									// 				>
-									// 					{votedTime.votedTimes}
-									// 				</PrimaryButton>
-									// 			)
-									// 		}
-									// 	})}
-									// </div>
-								);
-							}
-							return null;
-						})}
 						<div className="gameresult button-container">
 							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
 								<SecondaryButton
@@ -194,3 +184,28 @@ const GameResult = props => {
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
 export default GameResult;
+
+// <div className="gameresult record" key={index}>
+// 	<PrimaryButton
+// 		width="70%"
+// 	>
+// 		{players[index][0]}
+// 	</PrimaryButton>
+// 	<PrimaryButton
+// 		width="70%"
+// 	>
+// 		{players[index][1]}
+// 	</PrimaryButton>
+// 	{votedTimes.map((votedTime, i)=>{
+// 		if (votedTime.userName == players[index][0]){
+// 			return (
+// 				<PrimaryButton
+// 					key={i}
+// 					width="70%"
+// 				>
+// 					{votedTime.votedTimes}
+// 				</PrimaryButton>
+// 			)
+// 		}
+// 	})}
+// </div>
