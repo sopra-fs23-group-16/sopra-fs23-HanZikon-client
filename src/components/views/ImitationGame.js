@@ -19,6 +19,8 @@ const ImitationGame = props => {
 	const [isDrawing, setIsDrawing] = useState(false);
 	const [disabled, setDisabled] = useState(false);
 
+	const roundSum = localStorage.getItem('numRound');
+
 	useEffect(() => {
 		const canvas = canvasRef.current;
 		const preventTouchScroll = (e) => {
@@ -325,6 +327,7 @@ const ImitationGame = props => {
 				<div className="choicegame form">
 				<div className="choicegame col">
 					<center>
+					<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
 						<div id="countdown" className="imitationgame timer">
 						</div>
 						<br />

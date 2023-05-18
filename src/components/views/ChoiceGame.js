@@ -23,6 +23,8 @@ const ChoiceGame = props => {
 	const [isDisabled, setDisabled] = useState(false);
 	const [isClicked, setClicked] = useState(false);
 
+	const roundSum = localStorage.getItem('numRound');
+
 	//const colorRight = "#88d6bf";
 	const colorRight ="rgba(136, 214, 191, 0.5)"
 	const colorWrong = "rgba(251, 178, 173, 0.5)";
@@ -215,6 +217,7 @@ const ChoiceGame = props => {
 						{!loaded && <center><Spinner /></center>}
 						<div className={loaded ? "content" : "content hidden"}>
 							<center>
+								<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
 							<div className="choicegame timer">
 								<Countdown
 									date={Date.now() + countdownSeconds * 1000} // 10s
