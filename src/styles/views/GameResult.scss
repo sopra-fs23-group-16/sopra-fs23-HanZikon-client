@@ -77,7 +77,7 @@
 		margin-bottom: 0.8em;
   }
 	.table {
-		width: 60%;
+		width: 100%;
 		border-collapse: collapse;
 		font-size: 14px;
 		background-color: #b1c8d6;
@@ -93,6 +93,28 @@
 	}
 
 	.table th {
+		background-color: #b1c8d6;
+		font-weight: bold;
+		border-radius: 10px;
+	}
+	
+	.table2 {
+		width: 70%;
+		border-collapse: collapse;
+		font-size: 14px;
+		background-color: #b1c8d6;
+		border-radius: 10px;
+	}
+
+	.table2 th,
+	.table2 td {
+		padding: 10px;
+		text-align: center;
+		color: #3a4c56;
+		border-bottom: 1px solid #ccc;
+	}
+
+	.table2 th {
 		background-color: #b1c8d6;
 		font-weight: bold;
 		border-radius: 10px;

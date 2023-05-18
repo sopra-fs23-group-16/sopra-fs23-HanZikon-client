@@ -21,6 +21,7 @@ const GameResult = props => {
 	console.log((questionList[round-1]).questionType);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	const animation = new AnimationItems();
+	const currentQuesType = (questionList[round-1]).questionType;
 
 	useEffect(() => {
 		// startCountdown();
@@ -107,14 +108,14 @@ const GameResult = props => {
 				{/*<p className="choiceresult timer">{countdown}s</p>*/}
 				<div className="gameresult timer">
 					<Countdown
-						date = {Date.now() + 20000} // 10s
+						date = {Date.now() + 10000} // 10s
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
 						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
 						onComplete={() => {nextRound(roomID);}}
 					/>
 				</div>
-				{(questionList[round-1]).questionType !== "MultipleChoice"?(
+				{currentQuesType !== "MultipleChoice"?(
 					<div className="gameresult form">
 						<center>
 							{[0, 1, 2, 3, 4, 5].map(index => {
@@ -164,7 +165,7 @@ const GameResult = props => {
 							{[0, 1, 2, 3, 4, 5].map(index => {
 								if (index < Object.keys(players).length) {
 									return (
-										<table className="gameresult table">
+										<table className="gameresult table2">
 											<thead>
 											<tr>
 												<th>Name</th>
@@ -211,3 +212,28 @@ const GameResult = props => {
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
 export default GameResult;
+
+// <div className="gameresult record" key={index}>
+// 	<PrimaryButton
+// 		width="70%"
+// 	>
+// 		{players[index][0]}
+// 	</PrimaryButton>
+// 	<PrimaryButton
+// 		width="70%"
+// 	>
+// 		{players[index][1]}
+// 	</PrimaryButton>
+// 	{votedTimes.map((votedTime, i)=>{
+// 		if (votedTime.userName == players[index][0]){
+// 			return (
+// 				<PrimaryButton
+// 					key={i}
+// 					width="70%"
+// 				>
+// 					{votedTime.votedTimes}
+// 				</PrimaryButton>
+// 			)
+// 		}
+// 	})}
+// </div>
