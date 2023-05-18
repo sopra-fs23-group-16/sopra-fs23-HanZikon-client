@@ -52,19 +52,19 @@
   }
   &.text {
     //color: $textColor;
-	  font-size: 18px;
+    font-family: "Imprint MT Shadow";
+	  font-size: 28px;
 	  margin-top: 4px;
     margin-bottom: 20px;
-    font-weight: 350;
 	  justify-content: center;
-    color:black;
+    color:#333333;
   }
   &.label {
-    color: black;
+    color: #666666;
     //color: $textColor;
     margin-bottom: 12px;
+    font-weight: bold;
     text-transform: capitalize;
-    font-weight: 350;
 	  justify-content: center;
   }
   &.button-container {

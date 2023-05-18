@@ -62,7 +62,7 @@ const RoomSetting = () => {
 			<div className="roomsetting container">
 				<div className="">
 					<p className="roomsetting text">
-						You could set parameters of your game here.
+						Set the parameters of your game !
 					</p>
 					<div className="roomsetting field">
 						<label className="roomsetting label">
