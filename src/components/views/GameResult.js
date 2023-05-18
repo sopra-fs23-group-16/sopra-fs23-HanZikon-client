@@ -136,7 +136,6 @@ const GameResult = props => {
 							</table>
 						)}
 
-<<<<<<< HEAD
 						{currentQuesType === "HanziDrawing" && (
 							<table className="gameresult table">
 								<thead>
