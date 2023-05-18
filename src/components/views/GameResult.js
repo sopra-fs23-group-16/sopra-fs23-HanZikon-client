@@ -9,6 +9,7 @@ import Countdown from 'react-countdown-now';
 import {Spinner} from "../ui/Spinner";
 import {SecondaryButton} from "../ui/SecondaryButton";
 import { FaHeart } from "react-icons/fa";
+import AnimationItems from "helpers/FlowerVisualEffect"
 
 const GameResult = props => {
 	
@@ -19,6 +20,7 @@ const GameResult = props => {
 	const [votedTimes, setVotedTimes] = useState([]);
 	console.log((questionList[round-1]).questionType);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
+	const animation = new AnimationItems();
 
 	useEffect(() => {
 		// startCountdown();
@@ -72,6 +74,16 @@ const GameResult = props => {
 		};
 		
     }, []);
+
+
+	useEffect(() => {
+		if (localStorage.getItem("round") === localStorage.getItem("numRound")) {
+			animation.start();//开始
+			setTimeout(() => {
+				animation.stop();//停止
+			}, 10000)
+		}
+	}, []);
 	
 	// const startCountdown = () => {
 	//
@@ -137,7 +149,7 @@ const GameResult = props => {
 						})}
 						<div className="gameresult button-container">
 							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
-							<SecondaryButton
+								<SecondaryButton
 								width="70%"
 								onClick={() => window.location.href = `/room/lobby`}
 							>
