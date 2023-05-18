@@ -124,7 +124,7 @@ const ImitationVote = props => {
 
 	window.addEventListener("load", function() {
 
-		let countdown = 20;
+		let countdown = 10;
 		let countdownElement = document.getElementById("countdown");
 
 		let timer = setInterval(function() {
