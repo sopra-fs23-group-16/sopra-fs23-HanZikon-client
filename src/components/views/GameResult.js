@@ -123,7 +123,7 @@ const GameResult = props => {
 									<table className="gameresult table">
 										<thead>
 										<tr>
-											<th>Username</th>
+											<th>Name</th>
 											<th>Score</th>
 											<th>Like</th>
 										</tr>
@@ -133,7 +133,14 @@ const GameResult = props => {
 											<tr key={index}>
 												<td>{players[index][0]}</td>
 												<td>{players[index][1]}</td>
-												<td>{players[index][1]}</td>
+												{votedTimes.map((votedTime, i)=>{
+													if (votedTime.userName == players[index][0]){
+														return (
+															<td>{votedTime.votedTimes}</td>
+														)
+													}
+												})}
+												
 											</tr>
 										))}
 										</tbody>
