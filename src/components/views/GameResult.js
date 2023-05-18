@@ -18,7 +18,7 @@ const GameResult = props => {
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
 	const round = localStorage.getItem('round');
 	const [votedTimes, setVotedTimes] = useState([]);
-	console.log((questionList[round-1]).questionType);
+	const [showButton, setShowButton] = useState(false);
 	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
 	const animation = new AnimationItems();
 	const currentQuesType = (questionList[round-1]).questionType;
@@ -75,7 +75,14 @@ const GameResult = props => {
 		};
 		
     }, []);
-
+	
+	useEffect(() => {
+		if (round === localStorage.getItem("numRound")) {
+			setTimeout(() => {
+				setShowButton(true);
+			}, 10000)
+		}
+	}, []);
 
 	useEffect(() => {
 		if (localStorage.getItem("round") === localStorage.getItem("numRound")) {
@@ -112,7 +119,7 @@ const GameResult = props => {
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
 						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
-						onComplete={() => {nextRound(roomID);}}
+						onComplete={() => {nextRound(roomID)}}
 					/>
 				</div>
 				{currentQuesType !== "MultipleChoice"?(
@@ -184,15 +191,17 @@ const GameResult = props => {
 									);
 								}
 							})}
-							<div className="gameresult button-container">
-								{localStorage.getItem("round")===localStorage.getItem("numRound") &&
-									<SecondaryButton
-									width="70%"
-									onClick={() => window.location.href = `/room/lobby`}
-								>
-									Back to Lobby
-								</SecondaryButton>}
-							</div>
+							{showButton && (
+								<div className="gameresult button-container">
+									{localStorage.getItem("round")===localStorage.getItem("numRound") &&
+										<SecondaryButton
+											width="70%"
+											onClick={() => window.location.href = `/room/lobby`}
+										>
+											Back to Lobby
+										</SecondaryButton>}
+								</div>
+							)}
 						</center>
 					</div>
 				)}
