@@ -9,24 +9,10 @@ import 'styles/views/RoomSetting.scss';
 const RoomSetting = () => {
 
 	const history = useHistory();
-	// const [users, setUsers] = useState(null);
-	// let userId = localStorage.getItem("loggedInUser");
-	
-	// const [Room, setRoom] = useState(null);
 	const [numPlayers, setNumPlayers] = useState("");
 	const [level, setLevel] = useState("");
 	const [questionType, setQuestionType] = useState("");
 	const [numQuestion, setNumQuestion] = useState("");
-	
-	// const handleChangenp = (event) =>{
-	// 	setNumPlayers(event.target.value);
-	// };
-	// const handleChangeqt = (event) =>{
-	// 	setQuestionType(event.target.value);
-	// };
-	// const handleChangedl = (event) =>{
-	// 	setLevel(event.target.value);
-	// };
 
     useEffect(() => {
 
@@ -70,22 +56,9 @@ const RoomSetting = () => {
 		console.log("gameParam request",requestBody)
 		client.send('/app/multi/create/' + localStorage.getItem("loggedInUser"), {}, requestBody);
     };
-	
-	// const goInvite = () => {
-    // /*try {
-    //   history.push(`/invitation`);
-    // } catch (error) {
-    //   alert(`Something is wrong: \n${handleError(error)}`);
-    // }*/
-    // };
 
     return (
 		<BaseContainer>
-			{/*<SockJSClient url = {"http://localhost:8080/websocket"} topics = {["topic/create"]}*/}
-			{/*	onMessage={handleMsg} ref = {(client) => setClient(client)}*/}
-			{/*	onConnect = {console.log("connected")}*/}
-			{/*	onDisconnect = {console.log("disconnected")}*/}
-			{/*	debug = {false} />*/}
 			<div className="roomsetting container">
 				<div className="">
 					<p className="roomsetting text">
@@ -106,33 +79,33 @@ const RoomSetting = () => {
 					</div>
 					<div className="roomsetting field">
 						<label className="roomsetting label">
-							Question Type
+							Game Mode
 						</label>
 						<select value = {questionType} className="roomsetting select" onChange = {e=> {
 							setQuestionType(e.target.value);
 						}}>
 							<option value="-" selected>Please select...</option>
-							<option value="MultipleChoice">Oracle Guessing</option>
+							<option value="MultipleChoice">Riddle of Oracle Script</option>
 							<option value="HanziDrawing">Hanzi Imitation</option>
-							<option value="Mixed">I WANT BOTH</option>
+							<option value="Mixed">Grown-ups DON'T Choose</option>
 						</select>
 					</div>
 					<div className="roomsetting field">
 						<label className="roomsetting label">
-							Difficulty Level
+							Difficulty
 						</label>
 						<select value = {level} className="roomsetting select" onChange = {e=> {
 							setLevel(e.target.value);
 						}}>
-							<option value="-" selected>Please select...</option>
-							{[1,2, 3, 4, 5].map((value) => (
+							<option value="-" selected>Please select... (1: Easiest)</option>
+							{[1,2,3,4,5].map((value) => (
 								<option key={value} value={value}>{value}</option>
 							))}
 						</select>
 					</div>
 					<div className="roomsetting field">
 						<label className="roomsetting label">
-							Number of Questions
+							Number of Rounds
 						</label>
 						<select value = {numQuestion} className="roomsetting select" onChange = {e=> {
 							setNumQuestion(e.target.value);
