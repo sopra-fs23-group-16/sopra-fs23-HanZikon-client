@@ -56,4 +56,25 @@
 		margin-top: 0.8em;
 		margin-bottom: 0.8em;
   }
+	.table {
+		width: 60%;
+		border-collapse: collapse;
+		font-size: 14px;
+		background-color: #b1c8d6;
+		border-radius: 10px;
+	}
+
+	.table th,
+	.table td {
+		padding: 10px;
+		text-align: center;
+		color: #3a4c56;
+		border-bottom: 1px solid #ccc;
+	}
+
+	.table th {
+		background-color: #b1c8d6;
+		font-weight: bold;
+		border-radius: 10px;
+	}
 }

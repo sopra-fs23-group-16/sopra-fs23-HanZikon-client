@@ -37,7 +37,7 @@ const GameResult = props => {
 							const sortedArray = Object.entries(newPlayers).sort((a, b) => b[1] - a[1]);
 							//const sortedObject = Object.fromEntries(sortedArray);
 							setPlayers(sortedArray);	
-							console.log(sortedArray[0][0]);							
+							console.log("sorted values",sortedArray[0][1]);
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
@@ -116,33 +116,53 @@ const GameResult = props => {
 				</div>
 				<div className="gameresult form">
 					<center>
+
 						{[0, 1, 2, 3, 4, 5].map(index => {
 							if (index < Object.keys(players).length) {
 								return (
-									<div className="gameresult record" key={index}>
-										<PrimaryButton
-											width="70%"
-										>
-											{players[index][0]}
-										</PrimaryButton>
-										<PrimaryButton
-											width="70%"
-										>
-											{players[index][1]}
-										</PrimaryButton>
-										{votedTimes.map((votedTime, i)=>{
-											if (votedTime.userName == players[index][0]){
-												return (
-													<PrimaryButton
-														key={i}
-														width="70%"
-													>
-														{votedTime.votedTimes}
-													</PrimaryButton>
-												)
-											}
-										})}
-									</div>
+									<table className="gameresult table">
+										<thead>
+										<tr>
+											<th>Username</th>
+											<th>Score</th>
+											<th>Like</th>
+										</tr>
+										</thead>
+										<tbody>
+										{players.map(player => (
+											<tr key={index}>
+												<td>{players[index][0]}</td>
+												<td>{players[index][1]}</td>
+												<td>{players[index][1]}</td>
+											</tr>
+										))}
+										</tbody>
+									</table>
+
+									// <div className="gameresult record" key={index}>
+									// 	<PrimaryButton
+									// 		width="70%"
+									// 	>
+									// 		{players[index][0]}
+									// 	</PrimaryButton>
+									// 	<PrimaryButton
+									// 		width="70%"
+									// 	>
+									// 		{players[index][1]}
+									// 	</PrimaryButton>
+									// 	{votedTimes.map((votedTime, i)=>{
+									// 		if (votedTime.userName == players[index][0]){
+									// 			return (
+									// 				<PrimaryButton
+									// 					key={i}
+									// 					width="70%"
+									// 				>
+									// 					{votedTime.votedTimes}
+									// 				</PrimaryButton>
+									// 			)
+									// 		}
+									// 	})}
+									// </div>
 								);
 							}
 							return null;
