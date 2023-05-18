@@ -107,84 +107,94 @@ const GameResult = props => {
 				{/*<p className="choiceresult timer">{countdown}s</p>*/}
 				<div className="gameresult timer">
 					<Countdown
-						date = {Date.now() + 10000} // 10s
+						date = {Date.now() + 20000} // 10s
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
 						renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
 						onComplete={() => {nextRound(roomID);}}
 					/>
 				</div>
-				<div className="gameresult form">
-					<center>
-
-						{[0, 1, 2, 3, 4, 5].map(index => {
-							if (index < Object.keys(players).length) {
-								return (
-									<table className="gameresult table">
-										<thead>
-										<tr>
-											<th>Name</th>
-											<th>Score</th>
-											<th>Like</th>
-										</tr>
-										</thead>
-										<tbody>
-										{players.map(player => (
-											<tr key={index}>
-												<td>{players[index][0]}</td>
-												<td>{players[index][1]}</td>
-												{votedTimes.map((votedTime, i)=>{
-													if (votedTime.userName == players[index][0]){
-														return (
-															<td>{votedTime.votedTimes}</td>
-														)
-													}
-												})}
-												
+				{(questionList[round-1]).questionType !== "MultipleChoice"?(
+					<div className="gameresult form">
+						<center>
+							{[0, 1, 2, 3, 4, 5].map(index => {
+								if (index < Object.keys(players).length) {
+									return (
+										<table className="gameresult table">
+											<thead>
+											<tr>
+												<th>Name</th>
+												<th>Score</th>
+												<th>Liked</th>
 											</tr>
-										))}
-										</tbody>
-									</table>
-
-									// <div className="gameresult record" key={index}>
-									// 	<PrimaryButton
-									// 		width="70%"
-									// 	>
-									// 		{players[index][0]}
-									// 	</PrimaryButton>
-									// 	<PrimaryButton
-									// 		width="70%"
-									// 	>
-									// 		{players[index][1]}
-									// 	</PrimaryButton>
-									// 	{votedTimes.map((votedTime, i)=>{
-									// 		if (votedTime.userName == players[index][0]){
-									// 			return (
-									// 				<PrimaryButton
-									// 					key={i}
-									// 					width="70%"
-									// 				>
-									// 					{votedTime.votedTimes}
-									// 				</PrimaryButton>
-									// 			)
-									// 		}
-									// 	})}
-									// </div>
-								);
-							}
-							return null;
-						})}
-						<div className="gameresult button-container">
-							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
-								<SecondaryButton
-								width="70%"
-								onClick={() => window.location.href = `/room/lobby`}
-							>
-								Back to Lobby
-							</SecondaryButton>}
-						</div>
-					</center>
-				</div>
+											</thead>
+											<tbody>
+												{players.map(player => (
+													<tr key={index}>
+														<td>{players[index][0]}</td>
+														<td>{players[index][1]}</td>
+														{votedTimes.map((votedTime, i)=>{
+															if (votedTime.userName == players[index][0]){
+																return (
+																	<td>{votedTime.votedTimes}</td>
+																)
+															}
+														})}
+													</tr>
+												))}
+											</tbody>
+										</table>
+									);
+								}
+							})}
+							<div className="gameresult button-container">
+								{localStorage.getItem("round")===localStorage.getItem("numRound") &&
+									<SecondaryButton
+									width="70%"
+									onClick={() => window.location.href = `/room/lobby`}
+								>
+									Back to Lobby
+								</SecondaryButton>}
+							</div>
+						</center>
+					</div>
+				) : (
+					<div className="gameresult form2">
+						<center>
+							{[0, 1, 2, 3, 4, 5].map(index => {
+								if (index < Object.keys(players).length) {
+									return (
+										<table className="gameresult table">
+											<thead>
+											<tr>
+												<th>Name</th>
+												<th>Score</th>
+											</tr>
+											</thead>
+											<tbody>
+												{players.map(player => (
+													<tr key={index}>
+														<td>{players[index][0]}</td>
+														<td>{players[index][1]}</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									);
+								}
+							})}
+							<div className="gameresult button-container">
+								{localStorage.getItem("round")===localStorage.getItem("numRound") &&
+									<SecondaryButton
+									width="70%"
+									onClick={() => window.location.href = `/room/lobby`}
+								>
+									Back to Lobby
+								</SecondaryButton>}
+							</div>
+						</center>
+					</div>
+				)}
 			</div>
 		)
 	}
