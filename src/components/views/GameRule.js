@@ -71,7 +71,7 @@ const GameRule = () => {
 					</div>
 					<div className="module" onClick={toggle3}>
 						<div className="gamerule label-title">
-							Grown-ups NEVER Choose
+							Bit of Both
 						</div>
 						{isExpanded3 && (
 							<div className="gamerule label-text">
