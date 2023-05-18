@@ -87,7 +87,7 @@ const RoomSetting = () => {
 							<option value="-" selected>Please select...</option>
 							<option value="MultipleChoice">Riddle of Oracle Script</option>
 							<option value="HanziDrawing">Hanzi Imitation</option>
-							<option value="Mixed">Grown-ups DON'T Choose</option>
+							<option value="Mixed">Grown-ups NEVER Choose</option>
 						</select>
 					</div>
 					<div className="roomsetting field">
