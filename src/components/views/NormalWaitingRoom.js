@@ -188,14 +188,6 @@ const NormalWaitingRoom = props => {
 					{isReady? "Cancel Ready":"Get Ready"}
 				</PrimaryButton>
 				</div>
-				{/*<div className="normalwaiting button-container">*/}
-				{/*<SecondaryButton*/}
-				{/*	width="15%"*/}
-				{/*	onClick={() => cancelReady()}*/}
-				{/*	>*/}
-				{/*	Cancel Ready*/}
-				{/*</SecondaryButton>*/}
-				{/*</div>*/}
 				<div className="normalwaiting button-container">
 				<SecondaryButton
 					width="15%"
@@ -207,11 +199,6 @@ const NormalWaitingRoom = props => {
 				</center>
 				</div>
 			</div>
-			{/* <div className="normalwaiting col">
-					<div className="normalwaiting card-rule">
-						Game Rule
-					</div>
-				</div> */}
 			</div>
 		</BaseContainer>
 	);
