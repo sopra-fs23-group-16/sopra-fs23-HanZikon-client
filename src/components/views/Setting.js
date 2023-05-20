@@ -13,6 +13,11 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
+import dogandmice from "image/dogandmice.jpg";
+import alpaca from "image/alpaca.jpg";
+import seelionface from "image/seelionface.jpg";
+import chimpanzee from "image/chimpanzee.jpg";
+import panda from "image/panda.jpg";
 
 const FormField = props => {
 	return (
@@ -99,6 +104,13 @@ const Setting = props => {
 					<img src={seelion} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("seelion");}} />
 					<img src={owl} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("owl");}} />
 					<img src={cattle} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("cattle");}} />
+				</div>
+				<div className="setting icon">
+					<img src={dogandmice} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("dogandmice");}} />
+					<img src={chimpanzee} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("chimpanzee");}} />
+					<img src={seelionface} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("seelionface");}} />
+					<img src={alpaca} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("alpaca");}} />
+					<img src={panda} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("panda");}} />
 				</div>
                 <FormField
                     label="username"
