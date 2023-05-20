@@ -172,7 +172,7 @@ const ImitationInspect = props => {
 						{!imgLoaded && <center><Spinner /></center>}
 						<div className={imgLoaded ? "content" : "content hidden"}>
 							<center>
-								<p className="imitationinspect timer">{countdown}s</p>
+								<p className="imitationinspect timer">&#128358;&thinsp;{countdown}s</p>
 								<div className="imitationinspect textlabel" >
 									<text>
 										Demo

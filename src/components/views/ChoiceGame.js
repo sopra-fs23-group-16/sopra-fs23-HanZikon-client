@@ -234,6 +234,7 @@ const ChoiceGame = props => {
 							<center>
 								<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
 							<div className="choicegame timer">
+								<span className="choicegame clock-icon">&#128358;</span>
 								<Countdown
 									date={Date.now() + countdownSeconds * 1000} // 10s
 									intervalDelay={1000}

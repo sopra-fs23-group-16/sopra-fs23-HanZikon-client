@@ -315,7 +315,7 @@ const ImitationGame = props => {
 
 		var timer = setInterval(function() {
 			countdown--;
-			countdownElement.innerHTML = countdown + "s";
+			countdownElement.innerHTML = "&#128358;" + "&thinsp;" + countdown + "s";
 
 			if (countdown <= 0) {
 				clearInterval(timer);
