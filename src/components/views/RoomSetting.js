@@ -133,14 +133,6 @@ const RoomSetting = () => {
 						Cancel
 						</SecondaryButton>
 					</div>
-					{/* <div className="roomsetting button-container">
-						<PrimaryButton
-							width="100%"
-							onClick={() => goInvite()}
-						>
-						Generate Invitation Link
-						</PrimaryButton>
-					</div> */}
 				</div>
 			</div>
         </BaseContainer>

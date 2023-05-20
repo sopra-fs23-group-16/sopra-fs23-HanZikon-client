@@ -19,14 +19,6 @@ const Welcome = () => {
 								Explore
 							</PrimaryButton>
 						</div>
-						{/* <div className="welcome button-container">
-							<PrimaryButton
-								width="70%"
-								onClick={() => window.location.href = `/login`}
-							>
-								Login
-							</PrimaryButton>
-						</div> */}
 				</div>
 			</div>
 		</BaseContainer>
