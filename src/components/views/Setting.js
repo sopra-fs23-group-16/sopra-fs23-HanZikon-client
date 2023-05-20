@@ -99,18 +99,18 @@ const Setting = props => {
 					icon
 				</label>
 				<div className="setting icon">
-					<img src={dog} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("dog");}} />
-					<img src={cat} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("cat");}} />
-					<img src={seelion} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("seelion");}} />
-					<img src={owl} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("owl");}} />
-					<img src={cattle} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("cattle");}} />
+					<img src={dog} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'dog' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("dog");}} />
+					<img src={cat} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'cat' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("cat");}} />
+					<img src={seelion} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'seelion' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("seelion");}} />
+					<img src={owl} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'owl' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("owl");}} />
+					<img src={cattle} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'cattle' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("cattle");}} />
 				</div>
 				<div className="setting icon">
-					<img src={dogandmice} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("dogandmice");}} />
-					<img src={chimpanzee} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("chimpanzee");}} />
-					<img src={seelionface} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("seelionface");}} />
-					<img src={alpaca} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("alpaca");}} />
-					<img src={panda} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto' }} onClick={() => {iconset("panda");}} />
+					<img src={dogandmice} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'dogandmice' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("dogandmice");}} />
+					<img src={chimpanzee} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'chimpanzee' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("chimpanzee");}} />
+					<img src={seelionface} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'seelionface' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("seelionface");}} />
+					<img src={alpaca} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'alpaca' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("alpaca");}} />
+					<img src={panda} style={{ width: '50px', height: '50px', display: 'block', margin: 'auto', border: icon === 'panda' ? '3px solid #B7B7B7' : 'none' }} onClick={() => {iconset("panda");}} />
 				</div>
                 <FormField
                     label="username"
