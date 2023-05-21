@@ -131,12 +131,38 @@
         padding: 8px 50px;
         transition: all 0.3s ease;
     }
+
     .label-translation {
         font-size: 20px;
         padding: 3px;
         color: #9eaab1;
         font-weight: bold;
     }
+
+    .round-label {
+        font-size: 18px;
+        padding: 3px;
+        color: #52585c;
+        font-weight: bold;
+    }
+
+    .round-label .beforeSlash {
+        content: var(--before-content);
+        font-family: Arial, sans-serif;
+        font-weight: normal;
+        font-size: 22px;
+        color: #b1a59e;
+    }
+
+    .round-label .afterSlash {
+        content: var(--after-content);
+        font-family: Times New Roman, serif;
+        color: #9eaab1;
+        font-weight: normal;
+        font-size: 20px;
+    }
+
+
     .option:hover {
         background-color: #ecf3f8e8;;
         border: 2px solid #fff;

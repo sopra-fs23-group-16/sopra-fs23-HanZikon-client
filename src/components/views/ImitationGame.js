@@ -342,7 +342,13 @@ const ImitationGame = props => {
 				<div className="choicegame form">
 				<div className="choicegame col">
 					<center>
-					<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
+						<div className="choicegame round-label">
+							<span>Round  </span>
+							<span className="beforeSlash">{round}</span>
+							<span> / </span>
+							<span className="afterSlash">{roundSum}</span>
+						</div><br/>
+
 						<div id="countdown" className="imitationgame timer">
 						</div>
 						<br />

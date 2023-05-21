@@ -232,7 +232,12 @@ const ChoiceGame = props => {
 						{!loaded && <center><Spinner /></center>}
 						<div className={loaded ? "content" : "content hidden"}>
 							<center>
-								<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
+								<div className="choicegame round-label">
+									<span>Round  </span>
+									<span className="beforeSlash">{round}</span>
+									<span> / </span>
+									<span className="afterSlash">{roundSum}</span>
+								</div><br/>
 							<div className="choicegame timer">
 								<span className="choicegame clock-icon">&#128358;</span>
 								<Countdown
