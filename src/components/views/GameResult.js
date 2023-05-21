@@ -215,6 +215,7 @@ const GameResult = props => {
 				)}
 					{showButton && (
 						<div className="gameresult button-container">
+							<br />
 							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
 								<SecondaryButton
 									width="70%"
@@ -227,6 +228,7 @@ const GameResult = props => {
 
 				</center>
 			</div>
+			<div id="particles-js">
 				{ localStorage.getItem("round") === localStorage.getItem("numRound") &&
 					isParticle &&
 					(<Particles
@@ -240,7 +242,7 @@ const GameResult = props => {
 								"enable": true
 							},
 							"background": {
-								"color": "#ecf4f4"
+								"color":"transparent"
 							},
 							"emitters": {
 								"direction": "top",
@@ -393,7 +395,9 @@ const GameResult = props => {
 										"top": "none"
 									},
 									"trail": {
-										"fillColor": "#ecf4f4",
+										//"fillColor": "#FFFFFF",
+										"fillColor": "transparent",
+										//"fillColor": "rgb(255, 255, 255,0)",
 										"enable": true,
 										"length": 10
 									}
@@ -417,6 +421,7 @@ const GameResult = props => {
 						}}
 					/>)
 				}
+				</div>
 			</div>
 		)
 	}
