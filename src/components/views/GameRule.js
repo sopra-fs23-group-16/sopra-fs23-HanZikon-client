@@ -39,7 +39,7 @@ const GameRule = () => {
 				<div className="gamerule form">
 
                 <div className="gamerule label-title-big">
-                	Introduction by Modes
+                	Game Modes Intro
 				</div>
 
 				<br />
@@ -49,10 +49,12 @@ const GameRule = () => {
 						</div>
 						{isExpanded1 && (
 							<div className="gamerule label-text">
-								1. An Oracle bone script from Bronze Age China (c.1500 BC) is displayed.<br />
-								2. Four modern Chinese characters are the choices, only one is the correct answer.<br />
-								3. Choose the correct answer in your mind.<br />
-								<div className="gamerule label-text-note"> Trust your gut and choose the one that looks alike. Prior knowledge in Chinese won't help.</div>
+								Similar to old Egyptian letters, Oracle bone script look like the objects they represent.<br />
+								As the direct descendent, modern Chinese contains traces of them. <br /><br />
+								1. Question: An Oracle bone script from Bronze Age China (c.1500 BC) <br />
+								2. Choices:  Four modern Chinese characters.<br />
+								3. Take a guess based on similarities.<br />
+								<div className="gamerule label-text-note"> Trust your gut. Prior knowledge in Chinese won't help.</div>
 							</div>
 							)}
 					</div>
@@ -62,10 +64,10 @@ const GameRule = () => {
 						</div>
 						{isExpanded2 && (
 							<div className="gamerule label-text">
-								1. Learn to write Hanzi (Chinese character) from Live Demo and a guided Quiz.<br />
-								2.  Browse the evolution of Hanzi dating back to 2nd millennium BC.<br />
-								3. "Draw" the Hanzi from your memory.<br />
-								4. Peer review and take a vote!
+								1a. Learn to write Hanzi (Chinese character) from Demo and a guided Quiz.<br />
+								1b. Browse the evolution of Hanzi dating back to 2000 BC.<br />
+								2. "Draw" the Hanzi from your memory.<br />
+								3. Peer review and take a vote!
 							</div>
 						)}
 					</div>
@@ -81,15 +83,15 @@ const GameRule = () => {
 					</div>
 
 					<div>
-					{!isExpanded && (
-					<div className="lobby button-container">
-						<SecondaryButton
-							width="22%"
-							onClick={() => toggleModule()}
-						>
-							Unfold ALL
-						</SecondaryButton>
-					</div>)}
+					{/*{!isExpanded && (*/}
+					{/*<div className="lobby button-container">*/}
+					{/*	<SecondaryButton*/}
+					{/*		width="22%"*/}
+					{/*		onClick={() => toggleModule()}*/}
+					{/*	>*/}
+					{/*		Unfold ALL*/}
+					{/*	</SecondaryButton>*/}
+					{/*</div>)}*/}
 						<PrimaryButton
 							width="22%"
 							onClick={() => history.push(`/room/lobby`)}
