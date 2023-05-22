@@ -46,18 +46,6 @@ const RoomEntrance = props => {
 	// }
 	
 	useEffect(() => {
-
-		// return a function to disconnect on unmount
-		return function cleanup() {
-			if (client && client['connected']) {
-				client.disconnect(function () {
-					console.log('disconnected from stomp');
-				});
-			}
-		};
-    }, []);
-
-	useEffect(() => {
 		async function stompConnect() {
 			try {
 				if (!client['connected']) {
@@ -73,24 +61,18 @@ const RoomEntrance = props => {
 			}
 		}
 		stompConnect();
+		// return a function to disconnect on unmount
+		return function cleanup() {
+			if (client && client['connected']) {
+				client.disconnect(function () {
+					console.log('disconnected from stomp');
+				});
+			}
+		};
+    }, []);
+
+	useEffect(() => {
 		setRoomFull(false);
-		if(roomCode.length === 4){
-			client.subscribe('/topic/multi/rooms/' + roomCode + '/join', function (response) {
-				console.log(response.body)
-				const room = response.body;
-				const roomparse = JSON.parse(room);
-
-				checkRoomFull(roomparse);
-				if(roomFull === false){
-					console.log("The room is not full!");
-					window.location.href = "/room/" + roomparse["roomID"] + "/waitingroom/participant";
-				} else {
-					console.log("The room is full!");
-				}
-
-			});
-		}
-
 	}, [roomCode]);
 
 	const checkRoomFull = (roomparse) => {
@@ -113,10 +95,24 @@ const RoomEntrance = props => {
 		if(roomCode.length!==4){
 			setRoomFull(true);
 		}else{
+			client.subscribe('/topic/multi/rooms/' + roomCode + '/join', function (response) {
+				console.log(response.body)
+				const room = response.body;
+				const roomparse = JSON.parse(room);
+
+				checkRoomFull(roomparse);
+				if(roomFull === false){
+					console.log("The room is not full!");
+					window.location.href = "/room/" + roomparse["roomID"] + "/waitingroom/participant";
+				} else {
+					console.log("The room is full!");
+				}
+
+			});
 			const requestBody = JSON.stringify({ userID });
 			setTimeout(function () {
 				client.send('/app/multi/rooms/' + roomCode + '/join', {}, requestBody);
-			},50);
+			},500);
 		}
 	};
 
