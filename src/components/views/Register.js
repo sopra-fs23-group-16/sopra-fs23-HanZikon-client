@@ -25,8 +25,7 @@ const Register = props => {
 
 			history.push(`/room/lobby`);
 			} catch (error) {
-				console.log(`Login failed: \n${handleError(error)}`);
-				alert(error.response.data.message);
+				alert(`Login failed: \n${handleError(error)}`);
 			}
 	};
 
