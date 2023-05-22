@@ -55,7 +55,7 @@
 		width: 90%;
 		border-collapse: separate;
 		font-size: 16px;
-		background-color: #d0dee6;
+		background-color: rgba(208, 222, 230, 0.6);
 		border-radius: 10px;
 	}
 
@@ -76,9 +76,10 @@
 	}
 
 	.table th {
-		background-color: #d0dee6;
+		background-color: rgba(208, 222, 230, 0.8);
 		font-weight: bolder;
-		border-radius: 10px;
+		border-top-right-radius: 3px;
+		border-top-left-radius: 3px;
 		font-size: 20px;
 		color: #353c40;
 	}
