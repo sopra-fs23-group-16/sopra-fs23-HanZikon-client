@@ -185,6 +185,11 @@ const ChoiceGame = props => {
 	}, []);
 
 	const goNext = () => {
+		const optionIDs = "ABCD"
+		setDisabled(true);
+		setClicked(true);
+			// show the right answer after the choice
+		document.getElementById(optionIDs[currentQuestion.answerIndex]).style.backgroundColor = colorRight
 		// setTimeout(submitScore(), 50);
 		submitScore();
 		setTimeout(function () {
