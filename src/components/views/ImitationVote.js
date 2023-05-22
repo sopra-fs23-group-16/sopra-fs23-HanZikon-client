@@ -7,6 +7,11 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
+import dogandmice from "image/dogandmice.jpg";
+import alpaca from "image/alpaca.jpg";
+import seelionface from "image/seelionface.jpg";
+import chimpanzee from "image/chimpanzee.jpg";
+import panda from "image/panda.jpg";
 import 'styles/views/ImitationVote.scss';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import { FaHeart } from "react-icons/fa";
@@ -42,6 +47,16 @@ const ImitationVote = props => {
 			return cattle;
 		} else if (icon === "owl") {
 			return owl;
+		} else if (icon === "dogandmice") {
+			return dogandmice;
+		} else if (icon === "seelionface") {
+			return seelionface;
+		} else if (icon === "alpaca") {
+			return alpaca;
+		} else if (icon === "panda") {
+			return panda;
+		} else if (icon === "chimpanzee") {
+			return chimpanzee;
 		}
 	}
 
@@ -129,7 +144,7 @@ const ImitationVote = props => {
 
 		let timer = setInterval(function() {
 			countdown--;
-			countdownElement.innerHTML = countdown + "s";
+			countdownElement.innerHTML = "&#128358;" + "&thinsp;" + countdown + "s";
 
 			if (countdown <= 0) {
 				clearInterval(timer);

@@ -22,9 +22,9 @@ const AppRouter = () => {
 	return (
 		<BrowserRouter>
 			<Switch>
-				<Route exact path="/welcome">			
+				{/* <Route exact path="/welcome">			
 					<Welcome/>		
-				</Route>
+				</Route> */}
 				<Route path="/room">
 					<GameGuard>
 						<RoomRouter base="/room"/>

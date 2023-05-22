@@ -8,6 +8,11 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
+import dogandmice from "image/dogandmice.jpg";
+import alpaca from "image/alpaca.jpg";
+import seelionface from "image/seelionface.jpg";
+import chimpanzee from "image/chimpanzee.jpg";
+import panda from "image/panda.jpg";
 import recognizeHandwriting from "../../helpers/recognizeHandwriting";
 import 'styles/views/ImitationGame.scss';
 import PlayerCard from "../ui/PlayerCard";
@@ -65,6 +70,16 @@ const ImitationGame = props => {
 			return cattle;
 		} else if (icon === "owl") {
 			return owl;
+		} else if (icon === "dogandmice") {
+			return dogandmice;
+		} else if (icon === "seelionface") {
+			return seelionface;
+		} else if (icon === "alpaca") {
+			return alpaca;
+		} else if (icon === "panda") {
+			return panda;
+		} else if (icon === "chimpanzee") {
+			return chimpanzee;
 		}
 	}
 
@@ -300,7 +315,7 @@ const ImitationGame = props => {
 
 		var timer = setInterval(function() {
 			countdown--;
-			countdownElement.innerHTML = countdown + "s";
+			countdownElement.innerHTML = "&#128358;" + "&thinsp;" + countdown + "s";
 
 			if (countdown <= 0) {
 				clearInterval(timer);
@@ -327,7 +342,13 @@ const ImitationGame = props => {
 				<div className="choicegame form">
 				<div className="choicegame col">
 					<center>
-					<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
+						<div className="choicegame round-label">
+							<span>Round  </span>
+							<span className="beforeSlash">{round}</span>
+							<span> / </span>
+							<span className="afterSlash">{roundSum}</span>
+						</div><br/>
+
 						<div id="countdown" className="imitationgame timer">
 						</div>
 						<br />

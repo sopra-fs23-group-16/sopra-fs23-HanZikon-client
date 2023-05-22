@@ -62,10 +62,10 @@ const GameRule = () => {
 						</div>
 						{isExpanded2 && (
 							<div className="gamerule label-text">
-								1 a. Learn to write Hanzi (Chinese character) from Live Demo and a guided Quiz.<br />
-								1 b. Browse the evolution of Hanzi dating back to 2nd millennium BC.<br />
-								2. "Draw" the Hanzi from your memory.<br />
-								3. Peer review and take a vote!
+								1. Learn to write Hanzi (Chinese character) from Live Demo and a guided Quiz.<br />
+								2.  Browse the evolution of Hanzi dating back to 2nd millennium BC.<br />
+								3. "Draw" the Hanzi from your memory.<br />
+								4. Peer review and take a vote!
 							</div>
 						)}
 					</div>

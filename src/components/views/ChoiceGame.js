@@ -8,6 +8,11 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
+import dogandmice from "image/dogandmice.jpg";
+import alpaca from "image/alpaca.jpg";
+import seelionface from "image/seelionface.jpg";
+import chimpanzee from "image/chimpanzee.jpg";
+import panda from "image/panda.jpg";
 import {Spinner} from 'components/ui/Spinner';
 import Countdown from "react-countdown-now";
 import getTranslationURL from "../../helpers/getTranslation";
@@ -58,6 +63,16 @@ const ChoiceGame = props => {
 			return cattle;
 		} else if (icon === "owl") {
 			return owl;
+		} else if (icon === "dogandmice") {
+			return dogandmice;
+		} else if (icon === "seelionface") {
+			return seelionface;
+		} else if (icon === "alpaca") {
+			return alpaca;
+		} else if (icon === "panda") {
+			return panda;
+		} else if (icon === "chimpanzee") {
+			return chimpanzee;
 		}
 	}
 
@@ -217,8 +232,14 @@ const ChoiceGame = props => {
 						{!loaded && <center><Spinner /></center>}
 						<div className={loaded ? "content" : "content hidden"}>
 							<center>
-								<div className="choicegame label-translation">Current is the {round}/{roundSum} round!</div><br />
+								<div className="choicegame round-label">
+									<span>Round  </span>
+									<span className="beforeSlash">{round}</span>
+									<span> / </span>
+									<span className="afterSlash">{roundSum}</span>
+								</div><br/>
 							<div className="choicegame timer">
+								<span className="choicegame clock-icon">&#128358;</span>
 								<Countdown
 									date={Date.now() + countdownSeconds * 1000} // 10s
 									intervalDelay={1000}

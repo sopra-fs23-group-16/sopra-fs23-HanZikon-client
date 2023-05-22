@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {api, handleError} from 'helpers/api';
-// import User from 'models/User';
-// import {Spinner} from 'components/ui/Spinner';
 import {PrimaryButton} from 'components/ui/PrimaryButton';
 import {SecondaryButton} from 'components/ui/SecondaryButton';
 import {useHistory, useParams} from 'react-router-dom';
@@ -13,7 +11,11 @@ import cat from "image/cat.jpg";
 import seelion from "image/seelion.jpg";
 import owl from "image/owl.jpg";
 import cattle from "image/cattle.jpg";
-// import {fetchLocalUser} from "../../helpers/confirmLocalUser";
+import dogandmice from "image/dogandmice.jpg";
+import alpaca from "image/alpaca.jpg";
+import seelionface from "image/seelionface.jpg";
+import chimpanzee from "image/chimpanzee.jpg";
+import panda from "image/panda.jpg";
 
 const FormField = props => {
 	return (
@@ -61,6 +63,16 @@ const Inspect = () => {
 					setUserIcon(cattle);
 				} else if (response.data.icon === "owl") {
 					setUserIcon(owl);
+				} else if (response.data.icon === "panda") {
+					setUserIcon(panda);
+				} else if (response.data.icon === "seelionface") {
+					setUserIcon(seelionface);
+				} else if (response.data.icon === "dogandmice") {
+					setUserIcon(dogandmice);
+				} else if (response.data.icon === "chimpanzee") {
+					setUserIcon(chimpanzee);
+				} else if (response.data.icon === "alpaca") {
+					setUserIcon(alpaca);
 				}
 
                 // See here to get more data.

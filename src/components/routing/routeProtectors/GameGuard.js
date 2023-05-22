@@ -21,7 +21,7 @@ export const GameGuard = props => {
     const fetchData = async () => {
       await fetchLocalUser();
       if (!localStorage.getItem('token')) {
-        history.push('/welcome');
+        history.push('/login');
       }
     };
     fetchData();
