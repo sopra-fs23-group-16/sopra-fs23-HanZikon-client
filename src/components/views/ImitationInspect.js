@@ -42,7 +42,7 @@ const ImitationInspect = props => {
 
 	const requestBody = JSON.stringify({ roomID });
 
-	const [countdown, setCountdown] = useState(8 + parseInt(currentQuestion["level"]) * 2); // time adjust regarding difficult level
+	const [countdown, setCountdown] = useState(15 + parseInt(currentQuestion["level"]) * 5); // time adjust regarding difficult level
 
 	function defineIcon(icon){
 		if (icon === "dog") {
@@ -132,7 +132,7 @@ const ImitationInspect = props => {
 	}, []);
 
 	const startCountdown = () => {
-		const countdownCopy = (8 + parseInt(currentQuestion["level"]) * 2) * 1000;
+		const countdownCopy = (15 + parseInt(currentQuestion["level"]) * 5) * 1000;
 		
 		const timer = setInterval(() => {
 			setCountdown(countdown => countdown - 1);
