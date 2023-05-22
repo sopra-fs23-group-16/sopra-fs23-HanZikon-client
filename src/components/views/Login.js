@@ -8,57 +8,6 @@ import 'styles/views/Login.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import {FormField} from "../../helpers/formField";
 
-/*
-It is possible to add multiple components inside a single file,
-however be sure not to clutter your files with an endless amount!
-As a rule of thumb, use one file per component and only add small,
-specific components that belong to the main one in the same file.
- */
-// const FormFieldUsername = props => {
-// 	return (
-// 		<div className="login field">
-// 			<label className="login label">
-// 				{props.label}
-// 			</label>
-// 			<input
-// 				className="login input"
-// 				placeholder="Enter your username here"
-// 				value={props.value}
-// 				onChange={e => props.onChange(e.target.value)}
-// 			/>
-// 		</div>
-// 	);
-// };
-//
-// FormFieldUsername.propTypes = {
-// 	label: PropTypes.string,
-// 	value: PropTypes.string,
-// 	onChange: PropTypes.func
-// };
-//
-// const FormFieldPassword = props => {
-// 	return (
-// 		<div className="login field">
-// 			<label className="login label">
-// 				{props.label}
-// 			</label>
-// 			<input
-// 				type = "password"
-// 				className="login input"
-// 				placeholder="Enter your password here"
-// 				value={props.value}
-// 				onChange={e => props.onChange(e.target.value)}
-// 			/>
-// 		</div>
-// 	);
-// };
-//
-// FormFieldPassword.propTypes = {
-// 	label: PropTypes.string,
-// 	value: PropTypes.string,
-// 	onChange: PropTypes.func
-// };
-
 const Login = props => {
 	const history = useHistory();  
 	const [username, setUsername] = useState("");
@@ -76,7 +25,8 @@ const Login = props => {
 
 			history.push(`/room/lobby`);
 		} catch (error) {
-			alert(`Login failed: \n${handleError(error)}`);
+			console.log(`Login failed: \n${handleError(error)}`);
+			alert(error.response.data.message);
 			history.push(`/register`);
 		}
 	};

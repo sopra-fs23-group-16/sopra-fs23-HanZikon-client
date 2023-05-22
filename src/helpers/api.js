@@ -16,11 +16,11 @@ export const handleError = error => {
     let info = `\nrequest to: ${response.request.responseURL}`;
 
     if (response.data.status) {
-      //info += `\nstatus code: ${response.data.status}`;
-      //info += `\nerror: ${response.data.error}`;
+      info += `\nstatus code: ${response.data.status}`;
+      info += `\nerror: ${response.data.error}`;
       info += `\nerror message: ${response.data.message}`;
     } else {
-      //info += `\nstatus code: ${response.status}`;
+      info += `\nstatus code: ${response.status}`;
       info += `\nerror message:\n${response.data}`;
     }
 
