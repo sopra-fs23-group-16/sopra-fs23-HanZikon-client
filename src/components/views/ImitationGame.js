@@ -348,10 +348,8 @@ const ImitationGame = props => {
 							<span> / </span>
 							<span className="afterSlash">{roundSum}</span>
 						</div><br/>
-
 						<div id="countdown" className="imitationgame timer">
 						</div>
-						<br />
 						<br />
 						<div className="imitationgame sumitbox"> 
 						<button className="imitationgame button-submit" disabled={disabled} onClick={undo}>Undo</button>
