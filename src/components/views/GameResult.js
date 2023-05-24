@@ -13,6 +13,7 @@ import AnimationItems from "helpers/FlowerVisualEffect"
 import { useCallback } from "react";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
+import { FaTrophy } from 'react-icons/fa';
 
 const GameResult = props => {
 	
@@ -167,7 +168,7 @@ const GameResult = props => {
 								<tbody>
 									{players.map((player, index) => (
 										<tr key={player[0]} className={index === 0 ? "first-place" : index === 1 ? "second-place" : index === 2 ? "third-place" : ""}>
-											<td>{player[0]}</td>
+											<td>{index === 0 && <FaTrophy className="trophy-icon-1" />}{index === 1 && <FaTrophy className="trophy-icon-2" />}{index === 2 && <FaTrophy className="trophy-icon-3" />}{player[0]}</td>
 											<td>{player[1]}</td>
 										</tr>
 									))}
@@ -185,13 +186,13 @@ const GameResult = props => {
 								</thead>
 								<tbody>
 									{players.map((player, index) => (
-										<tr key={player[0]}>
-											<td>{player[0]}</td>
+										<tr key={player[0]} className={index === 0 ? "first-place" : index === 1 ? "second-place" : index === 2 ? "third-place" : ""}>
+											<td>{index === 0 && <FaTrophy className="trophy-icon-1" />}{index === 1 && <FaTrophy className="trophy-icon-2" />}{index === 2 && <FaTrophy className="trophy-icon-3" />}{player[0]}</td>
 											<td>{player[1]}</td>
 											{votedTimes.map((votedTime, i)=>{
 												if (votedTime.userName == player[0]){
 													return (
-														<td>{votedTime.votedTimes}</td>
+														<td>{<FaHeart style={{ padding: "4px 4px 0px 0px" }} color="red" />}{votedTime.votedTimes}</td>
 													)
 												}
 											})}
