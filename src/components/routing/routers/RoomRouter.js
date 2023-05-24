@@ -33,9 +33,6 @@ const RoomRouter = props => {
         </div>
     );
 };
-/*
-* Don't forget to export your component!
- */
 
 RoomRouter.propTypes = {
     base: PropTypes.string
