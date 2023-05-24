@@ -22,13 +22,8 @@ const GameResult = props => {
 	const round = localStorage.getItem('round');
 	const [votedTimes, setVotedTimes] = useState([]);
 	const [showButton, setShowButton] = useState(false);
-	//const playerNames = players.length > 0 ? players.map(player => player.playerName) : [];
-	//const animation = new AnimationItems();
 	const currentQuesType = (questionList[round-1]).questionType;
 	const [isParticle, setShowParticles] = useState(true);
-
-	// const [particlesInit, setParticleInit] = useState();
-	// const [particlesLoaded, setParticlesLoaded] = useState();
 
 	const particlesInit = useCallback(async engine => {
 		console.log(engine);
@@ -42,9 +37,7 @@ const GameResult = props => {
 		await console.log(container);
 	}, []);
 
-
 	useEffect(() => {
-		// startCountdown();
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
         async function stompConnect() {
             try {
@@ -53,12 +46,9 @@ const GameResult = props => {
 						console.log('connected to stomp');
 						client.subscribe("/topic/multi/rooms/"+ roomID +"/scores", function (response) {
 							const ranking = response.body;
-							console.log(ranking);
 							const newPlayers = JSON.parse(ranking);
 							const sortedArray = Object.entries(newPlayers).sort((a, b) => b[1] - a[1]);
-							//const sortedObject = Object.fromEntries(sortedArray);
 							setPlayers(sortedArray);	
-							console.log("sorted values",sortedArray[0][1]);
 						});
 						setTimeout(function () {
 							client.send("/app/multi/rooms/"+ roomID + "/players/scores",{}, '');
@@ -68,8 +58,6 @@ const GameResult = props => {
 							const votedTimes = response.body;
 							const votedTimesParse = JSON.parse(votedTimes);
 							setVotedTimes(votedTimesParse)
-							console.log(votedTimesParse[0].userName);
-							console.log(votedTimesParse.length);
 						});
 						setTimeout(function () {
 							const requestBody = {round};
@@ -111,7 +99,6 @@ const GameResult = props => {
 
 		return () => clearTimeout(timeout); // Clean up the timeout on component unmount
 	}, []);
-
 
 	// useEffect(() => {
 	// 	// if (localStorage.getItem("round") === localStorage.getItem("numRound")) {
@@ -157,7 +144,6 @@ const GameResult = props => {
 	if (players.length !== 0) {
 		content = (
 			<div className="gameresult container">
-				{/*<p className="choiceresult timer">{countdown}s</p>*/}
 				<div className="gameresult timer">
 					<Countdown
 						date = {Date.now() + 10000} // 10s
@@ -167,260 +153,261 @@ const GameResult = props => {
 						onComplete={() => {nextRound(roomID)}}
 					/>
 				</div>
-			<div className="gameresult form">
-				<center>
-				{currentQuesType === "MultipleChoice" && (
-					<table className="gameresult table">
-						<thead>
-						<tr>
-							<th>Name</th>
-							<th>Score</th>
-						</tr>
-						</thead>
-						<tbody>
-						{players.map((player, index) => (
-							<tr key={player[0]}>
-								<td>{player[0]}</td>
-								<td>{player[1]}</td>
-							</tr>
-						))}
-						</tbody>
-					</table>
-				)}
-				{currentQuesType === "HanziDrawing" && (
-					<table className="gameresult table">
-						<thead>
-						<tr>
-							<th>Name</th>
-							<th>Score</th>
-							<th>Like</th>
-						</tr>
-						</thead>
-						<tbody>
-						{players.map((player, index) => (
-							<tr key={player[0]}>
-								<td>{player[0]}</td>
-								<td>{player[1]}</td>
-								{votedTimes.map((votedTime, i)=>{
-									if (votedTime.userName == player[0]){
-										return (
-											<td>{votedTime.votedTimes}</td>
-										)
-									}
-								})}
-							</tr>
-						))}
-						</tbody>
-					</table>
-				)}
-					{showButton && (
-						<div className="gameresult button-container">
-							<br />
-							{localStorage.getItem("round")===localStorage.getItem("numRound") &&
-								<SecondaryButton
-									width="70%"
-									onClick={() => window.location.href = `/room/lobby`}
-								>
-									Back to Lobby
-								</SecondaryButton>}
-						</div>
-					)}
-
-				</center>
-			</div>
-			<div id="particles-js">
-				{ localStorage.getItem("round") === localStorage.getItem("numRound") &&
-					isParticle &&
-					(<Particles
-						className="gameresult particles"
-						id="tsparticles"
-						init={particlesInit}
-						loaded={particlesLoaded}
-						options={{
-							"name": "Fireworks",
-							"fullScreen": {
-								"enable": true
-							},
-							"background": {
-								"color":"transparent"
-							},
-							"emitters": {
-								"direction": "top",
-								"life": {
-									"count": 0,
-									"duration": 0.1,
-									"delay": 0.1
+				
+				<div className="gameresult form">
+					<center>
+						{currentQuesType === "MultipleChoice" && (
+							<table className="gameresult table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Score</th>
+									</tr>
+								</thead>
+								<tbody>
+									{players.map((player, index) => (
+										<tr key={player[0]} className={index === 0 ? "first-place" : index === 1 ? "second-place" : index === 2 ? "third-place" : ""}>
+											<td>{player[0]}</td>
+											<td>{player[1]}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+						)}
+						{currentQuesType === "HanziDrawing" && (
+							<table className="gameresult table">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Score</th>
+										<th>Like</th>
+									</tr>
+								</thead>
+								<tbody>
+									{players.map((player, index) => (
+										<tr key={player[0]}>
+											<td>{player[0]}</td>
+											<td>{player[1]}</td>
+											{votedTimes.map((votedTime, i)=>{
+												if (votedTime.userName == player[0]){
+													return (
+														<td>{votedTime.votedTimes}</td>
+													)
+												}
+											})}
+										</tr>
+									))}
+								</tbody>
+							</table>
+						)}
+						{showButton && (
+							<div className="gameresult button-container">
+								<br />
+								{localStorage.getItem("round")===localStorage.getItem("numRound") &&
+									<SecondaryButton
+										width="70%"
+										onClick={() => window.location.href = `/room/lobby`}
+									>
+										Back to Lobby
+									</SecondaryButton>}
+							</div>
+						)}
+					</center>
+				</div>
+			
+				<div id="particles-js">
+					{ localStorage.getItem("round") === localStorage.getItem("numRound") &&
+						isParticle &&
+						(<Particles
+							className="gameresult particles"
+							id="tsparticles"
+							init={particlesInit}
+							loaded={particlesLoaded}
+							options={{
+								"name": "Fireworks",
+								"fullScreen": {
+									"enable": true
 								},
-								"rate": {
-									"delay": 0.15,
-									"quantity": 1
+								"background": {
+									"color":"transparent"
 								},
-								"size": {
-									"width": 100,
-									"height": 0
-								},
-								"position": {
-									"y": 100,
-									"x": 50
-								}
-							},
-							"particles": {
-								"number": {
-									"value": 0
-								},
-								"destroy": {
-									"bounds": {
-										"top": 30
+								"emitters": {
+									"direction": "top",
+									"life": {
+										"count": 0,
+										"duration": 0.1,
+										"delay": 0.1
 									},
-									"mode": "split",
-									"split": {
-										"count": 1,
-										"factor": {
-											"value": 0.333333
+									"rate": {
+										"delay": 0.15,
+										"quantity": 1
+									},
+									"size": {
+										"width": 100,
+										"height": 0
+									},
+									"position": {
+										"y": 100,
+										"x": 50
+									}
+								},
+								"particles": {
+									"number": {
+										"value": 0
+									},
+									"destroy": {
+										"bounds": {
+											"top": 30
 										},
-										"rate": {
-											"value": 80
-										},
-										"particles": {
-											"stroke": {
-												"width": 0
+										"mode": "split",
+										"split": {
+											"count": 1,
+											"factor": {
+												"value": 0.333333
 											},
-											"color": {
-												"value": ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"]
+											"rate": {
+												"value": 80
 											},
-											"number": {
-												"value": 0
-											},
-											"collisions": {
-												"enable": false
-											},
-											"destroy": {
-												"bounds": {
-													"top": 0
-												}
-											},
-											"opacity": {
-												"value": {
-													"min": 0.1,
-													"max": 1
+											"particles": {
+												"stroke": {
+													"width": 0
 												},
-												"animation": {
-													"enable": true,
-													"speed": 0.7,
-													"sync": false,
-													"startValue": "max",
-													"destroy": "min"
-												}
-											},
-											"shape": {
-												"type": "circle"
-											},
-											"size": {
-												"value": 2,
-												"animation": {
+												"color": {
+													"value": ["#ff595e", "#ffca3a", "#8ac926", "#1982c4", "#6a4c93"]
+												},
+												"number": {
+													"value": 0
+												},
+												"collisions": {
 													"enable": false
-												}
-											},
-											"life": {
-												"count": 1,
-												"duration": {
-													"value": {
-														"min": 1,
-														"max": 2
+												},
+												"destroy": {
+													"bounds": {
+														"top": 0
 													}
-												}
-											},
-											"move": {
-												"enable": true,
-												"gravity": {
+												},
+												"opacity": {
+													"value": {
+														"min": 0.1,
+														"max": 1
+													},
+													"animation": {
+														"enable": true,
+														"speed": 0.7,
+														"sync": false,
+														"startValue": "max",
+														"destroy": "min"
+													}
+												},
+												"shape": {
+													"type": "circle"
+												},
+												"size": {
+													"value": 2,
+													"animation": {
+														"enable": false
+													}
+												},
+												"life": {
+													"count": 1,
+													"duration": {
+														"value": {
+															"min": 1,
+															"max": 2
+														}
+													}
+												},
+												"move": {
 													"enable": true,
-													"acceleration": 9.81,
-													"inverse": false
-												},
-												"decay": 0.1,
-												"speed": {
-													"min": 10,
-													"max": 25
-												},
-												"direction": "outside",
-												"random": true,
-												"straight": false,
-												"outModes": "destroy"
+													"gravity": {
+														"enable": true,
+														"acceleration": 9.81,
+														"inverse": false
+													},
+													"decay": 0.1,
+													"speed": {
+														"min": 10,
+														"max": 25
+													},
+													"direction": "outside",
+													"random": true,
+													"straight": false,
+													"outModes": "destroy"
+												}
 											}
+										}
+									},
+									"life": {
+										"count": 1
+									},
+									"shape": {
+										"type": "line"
+									},
+									"size": {
+										"value": {
+											"min": 0.1,
+											"max": 50
+										},
+										"animation": {
+											"enable": true,
+											"sync": true,
+											"speed": 90,
+											"startValue": "max",
+											"destroy": "min"
+										}
+									},
+									"stroke": {
+										"color": {
+											"value": "rgb(255, 255, 255,0)"
+										},
+										"width": 1
+									},
+									"rotate": {
+										"path": true
+									},
+									"move": {
+										"enable": true,
+										"gravity": {
+											"acceleration": 15,
+											"enable": true,
+											"inverse": true,
+											"maxSpeed": 100
+										},
+										"speed": {
+											"min": 10,
+											"max": 20
+										},
+										"outModes": {
+											"default": "destroy",
+											"top": "none"
+										},
+										"trail": {
+											//"fillColor": "#FFFFFF",
+											"fillColor": "transparent",
+											//"fillColor": "rgb(255, 255, 255,0)",
+											"enable": true,
+											"length": 10
 										}
 									}
 								},
-								"life": {
-									"count": 1
-								},
-								"shape": {
-									"type": "line"
-								},
-								"size": {
-									"value": {
-										"min": 0.1,
-										"max": 50
-									},
-									"animation": {
-										"enable": true,
-										"sync": true,
-										"speed": 90,
-										"startValue": "max",
-										"destroy": "min"
-									}
-								},
-								"stroke": {
-									"color": {
-										"value": "rgb(255, 255, 255,0)"
-									},
-									"width": 1
-								},
-								"rotate": {
-									"path": true
-								},
-								"move": {
-									"enable": true,
-									"gravity": {
-										"acceleration": 15,
-										"enable": true,
-										"inverse": true,
-										"maxSpeed": 100
-									},
-									"speed": {
-										"min": 10,
-										"max": 20
-									},
-									"outModes": {
-										"default": "destroy",
-										"top": "none"
-									},
-									"trail": {
-										//"fillColor": "#FFFFFF",
-										"fillColor": "transparent",
-										//"fillColor": "rgb(255, 255, 255,0)",
-										"enable": true,
-										"length": 10
-									}
+								"sounds": {
+									"enable": false,
+									"events": [
+										{
+											"event": "particleRemoved",
+											"filter": "explodeSoundCheck",
+											"audio": [
+												"https://particles.js.org/audio/explosion0.mp3",
+												"https://particles.js.org/audio/explosion1.mp3",
+												"https://particles.js.org/audio/explosion2.mp3"
+											]
+										}
+									],
+									"volume": 50
 								}
-							},
-							"sounds": {
-								"enable": false,
-								"events": [
-									{
-										"event": "particleRemoved",
-										"filter": "explodeSoundCheck",
-										"audio": [
-											"https://particles.js.org/audio/explosion0.mp3",
-											"https://particles.js.org/audio/explosion1.mp3",
-											"https://particles.js.org/audio/explosion2.mp3"
-										]
-									}
-								],
-								"volume": 50
-							}
-						}}
-					/>)
-				}
+							}}
+						/>)
+					}
 				</div>
 			</div>
 		)
@@ -438,28 +425,3 @@ const GameResult = props => {
  * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
  */
 export default GameResult;
-
-// <div className="gameresult record" key={index}>
-// 	<PrimaryButton
-// 		width="70%"
-// 	>
-// 		{players[index][0]}
-// 	</PrimaryButton>
-// 	<PrimaryButton
-// 		width="70%"
-// 	>
-// 		{players[index][1]}
-// 	</PrimaryButton>
-// 	{votedTimes.map((votedTime, i)=>{
-// 		if (votedTime.userName == players[index][0]){
-// 			return (
-// 				<PrimaryButton
-// 					key={i}
-// 					width="70%"
-// 				>
-// 					{votedTime.votedTimes}
-// 				</PrimaryButton>
-// 			)
-// 		}
-// 	})}
-// </div>
