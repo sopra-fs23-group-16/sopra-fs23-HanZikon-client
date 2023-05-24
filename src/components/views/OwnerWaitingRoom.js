@@ -24,8 +24,6 @@ import {normalizeGameMode} from "../../helpers/normalizeGameMode";
 import PlayerCard from "../ui/PlayerCard";
 
 const OwnerWaitingRoom = props => {
-	
-	// const history = useHistory();
     const {roomID} = useParams();
 	const [roomCode, setRoomcode] = useState('');
 	const [players, setPlayers] = useState([]);
@@ -98,7 +96,6 @@ const OwnerWaitingRoom = props => {
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"];
 							setPlayers(players);
-							// console.log(roomparse);
 						});
 					});
                 }
@@ -166,7 +163,6 @@ const OwnerWaitingRoom = props => {
 				</div>
 				<div className="ownerwaiting button-container">			
 				<button className="ownerwaiting button-box" onClick ={ () => {
-						// navigator.clipboard.writeText(roomCode);
 						copyToClipboard(roomCode)
 						setCopied(true);
 						setTimeout(() => {
@@ -201,8 +197,4 @@ const OwnerWaitingRoom = props => {
 	);
 };
 
-/**
- * You can get access to the history object's properties via the withRouter.
- * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
- */
 export default OwnerWaitingRoom;

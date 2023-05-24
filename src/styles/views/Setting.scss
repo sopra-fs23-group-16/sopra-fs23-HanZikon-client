@@ -22,7 +22,6 @@
     border-radius: 0.75em;
     background-color: $background;
     transition: opacity 0.5s ease, transform 0.5s ease;
-    //box-shadow: $dropShadow;
   }
   &.field {
     display: flex;
@@ -45,9 +44,7 @@
     border: none;
     border-radius: 0.75em;
     margin-bottom: 15px;
-    //background: transparentize(white, 0.85);
     background: transparentize(rgb(144, 155, 158), 0.85);
-    //color: $textColor;
     color: black;
   }
   &.label {

@@ -14,10 +14,7 @@ const RoomSetting = () => {
 	const [questionType, setQuestionType] = useState("");
 	const [numQuestion, setNumQuestion] = useState("");
 
-    useEffect(() => {
-
-		// fetchLocalUser();
-		
+    useEffect(() => {		
         // effect callbacks are synchronous to prevent race conditions. So we put the async function inside:
 		async function stompConnect() {
             try {
@@ -25,7 +22,6 @@ const RoomSetting = () => {
                     client.connect({}, () => {
 						console.log('connected to stomp');
 						client.subscribe('/topic/multi/create/' + localStorage.getItem("loggedInUser"), function (response) {
-							// const room = response.body;
 							const room = JSON.parse(response.body);
 							console.log(room);
 							window.location.href = "/room/" + room["roomID"] + "/waitingroom/owner";

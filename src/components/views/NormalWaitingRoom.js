@@ -116,7 +116,6 @@ const NormalWaitingRoom = props => {
 		// return a function to disconnect on unmount
 		return function cleanup() {
 			if (client && client['connected']) {
-				//controller.abort();
 				client.disconnect(function () {
 					console.log('disconnected from stomp');
 				});
@@ -124,31 +123,7 @@ const NormalWaitingRoom = props => {
 		};
     }, []);
 
-	// const getReady = () => {
-	// 	// const loggedInUserID = localStorage.getItem("loggedInUser");
-  	// 	const playerToUpdate = localPlayer;
-	//
-	// 	const requestgetready = {
-	// 		userID: playerToUpdate.userID,
-	// 		ready: true
-	// 	};
-	// 	client.send("/app/multi/rooms/"+ roomID + "/players/ready",{}, JSON.stringify(requestgetready))
-    // };
-	//
-	//
-	// const cancelReady = () => {
-	// 	// const loggedInUserID = localStorage.getItem("loggedInUser");
-  	// 	const playerToUpdate = localPlayer;
-	//
-	// 	const requestcancelready = {
-	// 		userID: playerToUpdate.userID,
-	// 		ready: false
-	// 	};
-	// 	client.send("/app/multi/rooms/"+ roomID + "/players/ready",{}, JSON.stringify(requestcancelready))
-    // };
-
 	const updateReady = (ready) => {
-		// const loggedInUserID = localStorage.getItem("loggedInUser");
 		const playerToUpdate = localPlayer;
 
 		const request = {
@@ -188,14 +163,6 @@ const NormalWaitingRoom = props => {
 					{isReady? "Cancel Ready":"Get Ready"}
 				</PrimaryButton>
 				</div>
-				{/*<div className="normalwaiting button-container">*/}
-				{/*<SecondaryButton*/}
-				{/*	width="15%"*/}
-				{/*	onClick={() => cancelReady()}*/}
-				{/*	>*/}
-				{/*	Cancel Ready*/}
-				{/*</SecondaryButton>*/}
-				{/*</div>*/}
 				<div className="normalwaiting button-container">
 				<SecondaryButton
 					width="15%"
@@ -207,18 +174,9 @@ const NormalWaitingRoom = props => {
 				</center>
 				</div>
 			</div>
-			{/* <div className="normalwaiting col">
-					<div className="normalwaiting card-rule">
-						Game Rule
-					</div>
-				</div> */}
 			</div>
 		</BaseContainer>
 	);
 };
 
-/**
- * You can get access to the history object's properties via the withRouter.
- * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
- */
 export default NormalWaitingRoom;

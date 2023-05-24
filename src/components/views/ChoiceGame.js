@@ -30,10 +30,8 @@ const ChoiceGame = props => {
 
 	const roundSum = localStorage.getItem('numRound');
 
-	//const colorRight = "#88d6bf";
 	const colorRight ="rgba(136, 214, 191, 0.5)"
 	const colorWrong = "rgba(251, 178, 173, 0.5)";
-	//const colorWrong = "#fbb2ad";
 	let systemScore = 0;
 
 	const questionList = JSON.parse(localStorage.getItem('questionList'));
@@ -91,7 +89,6 @@ const ChoiceGame = props => {
 	}
 
 	useEffect(() => {
-		//console.log('Choice has been updated:', choiceEN);
 		choicesEN.push(choiceEN)
 		console.log("choicesEN",choicesEN)
 	}, [choiceEN]);
@@ -279,8 +276,4 @@ const ChoiceGame = props => {
 	);
 };
 
-/**
- * You can get access to the history object's properties via the withRouter.
- * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
- */
 export default ChoiceGame;

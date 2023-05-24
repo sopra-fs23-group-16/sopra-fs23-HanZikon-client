@@ -6,44 +6,10 @@ import 'styles/views/RoomEntrance.scss';
 import BaseContainer from "components/ui/BaseContainer";
 import {FormField} from "../../helpers/formField";
 
-// const FormFieldRoomCode = props => {
-// 	return (
-// 		<div className="entrance field">
-// 			<label className="entrance label">
-// 				{props.label}
-// 			</label>
-// 			<input
-// 				className="entrance input"
-// 				placeholder="Enter the room code here"
-// 				value={props.value}
-// 				onChange={e => props.onChange(e.target.value)}
-// 			/>
-// 		</div>
-// 	);
-// };
-//
-// FormFieldRoomCode.propTypes = {
-// 	label: PropTypes.string,
-// 	value: PropTypes.string,
-// 	onChange: PropTypes.func
-// };
-
 const RoomEntrance = props => {
-	// const history = useHistory();
 	const [roomCode, setRoomCode] = useState("");
 	let [roomFull, setRoomFull] = useState(false);
 	let userID = localStorage.getItem("loggedInUser");
-	
-	// const handleChangerc = (event) =>{
-	// 	setRoomCode(event.target.value);
-	// };
-
-	// const logout = () => {
-	// 	localStorage.removeItem('token');
-	// 	localStorage.removeItem("loggedInUser");
-	// 	const response = api.get('/logout/'+userID);
-	// 	history.push('/login');
-	// }
 	
 	useEffect(() => {
 		async function stompConnect() {
@@ -119,7 +85,6 @@ const RoomEntrance = props => {
 	return (
 		<BaseContainer>
 			<div className="entrance container">
-				{/* <h2>Please enter the room detail!</h2> */}
 				<div className="entrance text">Please enter the room detail!</div>
 				<div className="entrance form">
 					<FormField
@@ -145,15 +110,6 @@ const RoomEntrance = props => {
 						Cancel
 						</SecondaryButton>
 					</div>
-					{/* <div className="creation button-container">
-						<PrimaryButton
-							width="80%"
-							onClick={() => logout()}
-						>
-						Exit
-						</PrimaryButton>
-					</div> */}
-
 					{roomFull &&
 						<div className="entrance roomFull" >This room is invalid, you may join another one!</div>
 					}

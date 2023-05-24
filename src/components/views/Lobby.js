@@ -5,28 +5,10 @@ import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/Lobby.scss";
 
 const Lobby = () => {
-
-	// useEffect(() => {
-	// 	fetchLocalUser();
-	// }, []);
-
 	const history = useHistory();
-	// const [users, setUsers] = useState(null);
-	// let id = localStorage.getItem("loggedInUser");
-
-	// const logout = async () => {
-	// 	await localStorage.removeItem('token');
-	// 	await localStorage.removeItem("loggedInUser");
-	// 	const response = await api.get('/logout/'+id);
-	// 	history.push('/login');
-	// }
-  
-	//const params = new URLSearchParams(window.location.search);
-
 	return (
 		<BaseContainer>
 			<div className="lobby container">
-				{/* <h1>Lobby</h1> */}
 				<div className="lobby label">Lobby</div>
 					<div className="lobby form">
 						<div className="lobby button-container">
@@ -61,14 +43,6 @@ const Lobby = () => {
 							Your Profile
 							</SecondaryButton>
 						</div>
-					{/* <div className="lobby button-container">
-						<PrimaryButton
-							width="70%"
-							onClick={() => logout()}
-						>
-						Exit
-						</PrimaryButton>
-					</div> */}
 				</div>
 			</div>
 		</BaseContainer>

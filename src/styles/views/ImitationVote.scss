@@ -10,10 +10,8 @@
         background-color: rgba(255, 255, 255, .2);
         box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
         transition: opacity 0.5s ease, transform 0.5s ease;
-        //box-shadow: $dropShadow;
         width: 98%;
         height: 90%;
-        // padding-left: 1%;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -30,7 +28,6 @@
         background-color: rgba(255, 255, 255, .2);
         box-shadow: 2px 2px 10px rgba(0, 0, 0, .2);
         transition: opacity 0.5s ease, transform 0.5s ease;
-        //box-shadow: $dropShadow;
         width: 89%;
         height: 97%;
         position: absolute;
@@ -62,7 +59,6 @@
         color: rgb(144, 172, 230);
         text-transform: capitalize;
         font-weight: 500;
-        //font-weight: bold;
         justify-content: center;
         color:black  
     }

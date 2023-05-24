@@ -101,45 +101,6 @@ const GameResult = props => {
 		return () => clearTimeout(timeout); // Clean up the timeout on component unmount
 	}, []);
 
-	// useEffect(() => {
-	// 	// if (localStorage.getItem("round") === localStorage.getItem("numRound")) {
-	// 	// 	animation.start();//开始
-	// 	// 	setTimeout(() => {
-	// 	// 		animation.stop();//停止
-	// 	// 	}, 10000)
-	// 	// }
-	//
-	// 	if (localStorage.getItem("round") === localStorage.getItem("numRound")) {
-	// 		const particlesInit = useCallback(async engine => {
-	// 			console.log(engine);
-	// 			// you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
-	// 			// this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-	// 			// starting from v2 you can add only the features you need reducing the bundle size
-	// 			await loadFull(engine);
-	// 		}, []);
-	// 		setParticleInit(particlesInit)
-	//
-	// 		const particlesLoaded = useCallback(async container => {
-	// 			await console.log(container);
-	// 		}, []);
-	// 		setParticlesLoaded(particlesLoaded)
-	// 	}
-	// }, []);
-	
-	// const startCountdown = () => {
-	//
-	// 	const timer = setInterval(() => {
-	// 		setCountdown(countdown => countdown - 1);
-	// 	}, 1000);
-	//
-	// 	setTimeout(() => {
-	// 		clearInterval(timer);
-	// 		nextRound(roomID);
-	// 	}, 5000);
-	//
-	// 	return () => clearInterval(timer);
-	// };
-
 	let content = <center><div className="gameresult container"><Spinner /></div></center>;
 
 	if (players.length !== 0) {
@@ -421,8 +382,4 @@ const GameResult = props => {
 	);
 };
 
-/**
- * You can get access to the history object's properties via the withRouter.
- * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
- */
 export default GameResult;

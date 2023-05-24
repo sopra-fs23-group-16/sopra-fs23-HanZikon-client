@@ -3,7 +3,6 @@ import {PrimaryButton} from 'components/ui/PrimaryButton';
 import BaseContainer from "components/ui/BaseContainer";
 import "styles/views/GameRule.scss";
 import {useState} from "react";
-import {SecondaryButton} from "../ui/SecondaryButton";
 
 const GameRule = () => {
     const history = useHistory();
@@ -35,13 +34,10 @@ const GameRule = () => {
 	return (
 		<BaseContainer>
         <center>
-				{/*<h1>Game Rule</h1>*/}
 				<div className="gamerule form">
-
                 <div className="gamerule label-title-big">
                 	Game Modes Intro
 				</div>
-
 				<br />
 					<div className="gamerule module" onClick={toggle1}>
 						<div className="gamerule label-title">
@@ -81,17 +77,7 @@ const GameRule = () => {
 							</div>
 						)}
 					</div>
-
 					<div>
-					{/*{!isExpanded && (*/}
-					{/*<div className="lobby button-container">*/}
-					{/*	<SecondaryButton*/}
-					{/*		width="22%"*/}
-					{/*		onClick={() => toggleModule()}*/}
-					{/*	>*/}
-					{/*		Unfold ALL*/}
-					{/*	</SecondaryButton>*/}
-					{/*</div>)}*/}
 						<PrimaryButton
 							width="22%"
 							onClick={() => history.push(`/room/lobby`)}
@@ -99,34 +85,6 @@ const GameRule = () => {
 							Back
 						</PrimaryButton>
 				</div>
-				{/*<div className="gamerule label-text">*/}
-				{/*	1. An Oracle bone script, together with the English meaning of the word, will be displayed.<br />*/}
-				{/*	2. Four choices of modern Chinese characters will be displayed.<br />*/}
-				{/*	3. Only one answer is correct.<br /><br />*/}
-				{/*	</div>*/}
-				{/*	<br />*/}
-				{/*	<div className="gamerule label-title"><b>B. Oracle Guessing</b></div>*/}
-				{/*	<br />*/}
-				{/*	<div className="gamerule label-text">*/}
-				{/*	1. An Oracle bone script, together with the English meaning of the word, will be displayed.<br />*/}
-				{/*	2. Four choices of modern Chinese characters will be displayed.<br />*/}
-				{/*	3. Only one answer is correct.<br /><br />*/}
-				{/*	</div>*/}
-				{/*	<div className="gamerule label-text"><b>Note: Empirical evidence suggests, a prior knowledge in Chinese isn't going to help. Just trust your gut and have fun!</b></div><br />*/}
-				{/*	<div className="gamerule label-title"><b>C. A bit of Both</b></div>*/}
-				{/*	<br />*/}
-				{/*	<div className="gamerule label-text">1. Just like its name, a bit of both modes coming in random order.*/}
-                {/*    </div>*/}
-				{/*	<br />*/}
-				{/*	<br />*/}
-				{/*	<div className="lobby button-container">*/}
-				{/*		<PrimaryButton*/}
-				{/*			width="12%"*/}
-				{/*			onClick={() => history.push(`/room/lobby`)}*/}
-				{/*		>*/}
-				{/*		Back to Lobby*/}
-				{/*		</PrimaryButton>*/}
-				{/*	</div>*/}
 				</div>
         </center>
 		</BaseContainer>

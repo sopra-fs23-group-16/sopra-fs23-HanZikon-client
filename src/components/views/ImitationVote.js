@@ -121,12 +121,12 @@ const ImitationVote = props => {
 		};
 	}, []);
 
-	const submitScoreB1 = (userOrder) => {
-		const votedScore = 10;
-		const userID = players[userOrder][0];
-		const requestBody = {userID,scoreBoard: {votedScore}};
-		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-	}
+	// const submitScoreB1 = (userOrder) => {
+	// 	const votedScore = 10;
+	// 	const userID = players[userOrder][0];
+	// 	const requestBody = {userID,scoreBoard: {votedScore}};
+	// 	client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
+	// }
 
 	const submitScore = (userOrder) => {
 		const votedTimes = 1;
@@ -327,8 +327,4 @@ const ImitationVote = props => {
 	);
 };
 
-/**
- * You can get access to the history object's properties via the withRouter.
- * withRouter will pass updated match, location, and history props to the wrapped component whenever it renders.
- */
 export default ImitationVote;
