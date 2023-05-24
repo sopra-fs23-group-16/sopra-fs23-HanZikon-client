@@ -167,7 +167,7 @@ const GameResult = props => {
 								</thead>
 								<tbody>
 									{players.map((player, index) => (
-										<tr key={player[0]} className={index === 0 ? "first-place" : index === 1 ? "second-place" : index === 2 ? "third-place" : ""}>
+										<tr key={player[0]} className={index === 0 ? "first-place" : index === 1 ? "second-place" : index === 2 ? "third-place" : index === 3 ? "other-place" : index === 4 ? "other-place" : index === 5 ? "other-place" : ""}>
 											<td>{index === 0 && <FaTrophy className="trophy-icon-1" />}{index === 1 && <FaTrophy className="trophy-icon-2" />}{index === 2 && <FaTrophy className="trophy-icon-3" />}{player[0]}</td>
 											<td>{player[1]}</td>
 										</tr>
