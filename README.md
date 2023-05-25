@@ -21,6 +21,7 @@ The aim of this application is getting to know Chinese characters in an interest
 - [RESTful](https://restfulapi.net/) - Web services for user control
 - [Websocket](https://spring.io/guides/gs/messaging-stomp-websocket/) -  Real-time bidirectional communication between client and server
 - [Google Translation API](https://cloud.google.com/translate) - Provide multi-linguial support
+- [Hanzi Writer API](https://hanziwriter.org/docs.html) - Demonstrate the strokes of Chinese characters
 
 ## High-level Components
 
