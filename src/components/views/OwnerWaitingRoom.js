@@ -150,14 +150,6 @@ const OwnerWaitingRoom = props => {
 						Start Game
 					</PrimaryButton>
 				</div>
-				<div className="ownerwaiting button-container">
-					<SecondaryButton
-						width="15%"
-						onClick={() => exitRoom() }
-					>
-						Exit Room 
-					</SecondaryButton>
-				</div>
 				<div className="ownerwaiting input">
 					{roomCode}
 				</div>
