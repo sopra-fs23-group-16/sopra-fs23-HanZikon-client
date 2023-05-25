@@ -1,4 +1,4 @@
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-server/blob/main/src/main/resources/Images/welcome.png" /><br/>
 </p>
 
@@ -65,47 +65,48 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Illustrations
 
 ### Game Rule
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/gamerule.png" /><br/>
 </p>
 
 ### User Profile
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/profile.png" /><br/>
 </p>
 
 ### Game Setting
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/gamesetting.png" /><br/>
 </p>
+In the Game Settings feature, users can customize various aspects of the game, including the number of players, question types, difficulty levels, and number of rounds. The number of players refers to the maximum limit of participants in a game room.
 
 ### Participant Waiting Room
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/normalwaitingroom.png" /><br/>
 </p>
 
 ### Owner Waiting Room
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/ownerwaitingroom.png" /><br/>
 </p>
 
 ### Imitation Learning
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationlearning.png" /><br/>
 </p>
 
 ### Imitation Writing
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationwriting.png" /><br/>
 </p>
 
 ### Imitation Voting
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationvoting.png" /><br/>
 </p>
 
 ### Result
-<p align="left">
+<p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/result.png" /><br/>
 </p>
 
