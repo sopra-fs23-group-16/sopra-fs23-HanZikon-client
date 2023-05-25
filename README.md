@@ -66,24 +66,48 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### Game Rule
 <p align="left">
-  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-server/blob/main/src/main/resources/Images/welcome.png" /><br/>
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/gamerule.png" /><br/>
 </p>
 
 ### User Profile
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/profile.png" /><br/>
+</p>
 
 ### Game Setting
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/gamesetting.png" /><br/>
+</p>
 
 ### Participant Waiting Room
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/normalwaitingroom.png" /><br/>
+</p>
 
 ### Owner Waiting Room
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/ownerwaitingroom.png" /><br/>
+</p>
 
 ### Imitation Learning
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationlearning.png" /><br/>
+</p>
 
 ### Imitation Writing
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationwriting.png" /><br/>
+</p>
 
 ### Imitation Voting
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationvoting.png" /><br/>
+</p>
 
 ### Result
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/result.png" /><br/>
+</p>
 
 ## Roadmap
 
