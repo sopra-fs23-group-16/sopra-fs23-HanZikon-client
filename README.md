@@ -45,19 +45,6 @@ The [Multiple Choice](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon
 
 The [Game Result](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/GameResult.js) page shows the ranking and accumulated scores that all the players got in the finished rounds. If the last question they finished was a Hanzi Imitation question, the time that they were voted would also be shown on this page.
 
-## Getting started
-
-Read and go through these Tutorials. It will make your life easier:)
-
-- Read the React [Docs](https://reactjs.org/docs/getting-started.html)
-- Do this React [Getting Started](https://reactjs.org/tutorial/tutorial.html) Tutorial (it doesn’t assume any existing React knowledge)
-- Get an Understanding of [CSS](https://www.w3schools.com/Css/), [SCSS](https://sass-lang.com/documentation/syntax), and [HTML](https://www.w3schools.com/html/html_intro.asp)!
-
-Next, there are two other technologies that you should look at:
-
-* [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start) offers declarative routing for React. It is a collection of navigational components that fit nicely with the application. 
-* [react-hooks](https://reactrouter.com/web/api/Hooks) let you access the router's state and perform navigation from inside your components.
-
 ## Prerequisites and Installation
 
 For your local development environment, you will need Node.js. You can download it [here](https://nodejs.org). All other dependencies, including React, get installed with:
