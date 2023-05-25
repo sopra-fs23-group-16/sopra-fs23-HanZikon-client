@@ -43,7 +43,7 @@ The [Multiple Choice](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon
 
 ### Game Result Page
 
-The [Game Result](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/GameResult.js) page shows the ranking and accumulated scores that all the players got in the finished turns. If the last question they finished was a Hanzi Imitation question, the time that they were voted would also be shown on this page.
+The [Game Result](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/GameResult.js) page shows the ranking and accumulated scores that all the players got in the finished rounds. If the last question they finished was a Hanzi Imitation question, the time that they were voted would also be shown on this page.
 
 ## Getting started
 
@@ -59,6 +59,7 @@ Next, there are two other technologies that you should look at:
 * [react-hooks](https://reactrouter.com/web/api/Hooks) let you access the router's state and perform navigation from inside your components.
 
 ## Prerequisites and Installation
+
 For your local development environment, you will need Node.js. You can download it [here](https://nodejs.org). All other dependencies, including React, get installed with:
 
 ```npm install```
@@ -72,12 +73,14 @@ Now you can open [http://localhost:3000](http://localhost:3000) to view it in th
 Notice that the page will reload if you make any edits. You will also see any lint errors in the console (use Google Chrome).
 
 ### Testing
+
 Testing is optional, and you can run the tests with `npm run test`.
 This launches the test runner in an interactive watch mode. See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
 > For macOS user running into a 'fsevents' error: https://github.com/jest-community/vscode-jest/issues/423
 
 ### Build
+
 Finally, `npm run build` builds the app for production to the `build` folder.<br>
 It correctly bundles React in production mode and optimizes the build for the best performance: the build is minified, and the filenames include hashes.<br>
 
@@ -86,52 +89,81 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Illustrations
 
 ### Game Rule
+
+After register or log in to the game, players could have a look at the game rule page, which could tell you how to play the game.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/gamerule.png" /><br/>
 </p>
 
-### User Profile
+### User Information Setting
+
+A logged in player would have some information saved in the database, including name, password and icon. The name and password of a new player were set by them while registering, while the icon was randomly set. Players could change these three information in this page.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/profile.png" /><br/>
 </p>
 
 ### Game Setting
+
+Players could create rooms for games. There are 4 parameters for a game, including the upper limitation of number of players (they could choose from 2 to 6), the game mode (they could choose from those three we introduced above), difficulty level of the game (they could choose from 1 to 5) and the number of rounds (they could choose from 4, 6, 8 and 10).
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/gamesetting.png" /><br/>
 </p>
-In the Game Settings feature, users can customize various aspects of the game, including the number of players, question types, difficulty levels, and number of rounds. The number of players refers to the maximum limit of participants in a game room.
-
-### Participant Waiting Room
-<p align="center">
-  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/normalwaitingroom.png" /><br/>
-</p>
 
 ### Owner Waiting Room
+
+The players that created the room by setting room parameters would be owners of rooms. An owner could see the following page. The owner could find the room code of the game, which was generated automatically, and copy for sending it to other players. The owner could see whether other players are ready and could kick other players out of the room. After all the players in the room have got ready, the owner could start the game.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/ownerwaitingroom.png" /><br/>
 </p>
 
+### Participants Waiting Room
+
+Players could use the room code of a room to join the room. After joining, the players could see the following page. They have to get ready if they want to play the game, and they could also choose to exit the room.
+
+<p align="center">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/normalwaitingroom.png" /><br/>
+</p>
+
 ### Imitation Learning
+
+Players could have 20-40 seconds (according to the difficulty level of the game) to learn the shape and structure, the history, and the meaning (in English) of a Chinese character while doing a Hanzi imitation question.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationlearning.png" /><br/>
 </p>
 
 ### Imitation Writing
+
+After learning, this page gives players 10-18 seconds (according to the difficulty level of the game) to reproduce the Chinese character they learned in the Hanzi Learning page. They could undo or clear if they feel not satisfied, and they have to submit after finishing.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationwriting.png" /><br/>
 </p>
 
 ### Imitation Voting
+
+This page allows players to see and gives players 10 seconds to evaluate other players' works. One player could vote the one he or she likes the most.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationvoting.png" /><br/>
 </p>
 
 ### Multiple Choice
+
+This page allows players to choose the chinese character of current age, which they think is the most similar one to the oracle bone script shown on that page. If they were correct, the button will be shown in green. If they were wrong, the button will be shown in red and the correct answer will also be shown in green. If they don't select any choice, the correct answer will be shown in green after 10 seconds for another 2 seconds. Meanings of those characters in English will also be shown after selecting or after 10 seconds.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/choice.png" /><br/>
 </p>
 
 ### Result
+
+This page shows the ranking and accumulated scores that all the players in the room got in the finished rounds. If the last question they finished was a Hanzi Imitation question, the time that they were voted would also be shown on this page.
+
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/result.png" /><br/>
 </p>
