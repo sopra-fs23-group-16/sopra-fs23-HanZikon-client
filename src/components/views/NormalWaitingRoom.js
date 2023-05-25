@@ -147,7 +147,7 @@ const NormalWaitingRoom = props => {
 					{players.map((player, index) => (
 						players.length > index &&
 						<PlayerCard waiting={true} isHost={index===0} ready={players[index].ready}
-									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+							src={defineIcon(playerIcons[index])} label={playerNames[index]}>
 						</PlayerCard>
 					))}
 				</div>

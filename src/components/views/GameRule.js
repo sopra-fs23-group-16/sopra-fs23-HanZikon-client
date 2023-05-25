@@ -52,7 +52,7 @@ const GameRule = () => {
 								3. Take a guess based on similarities.<br />
 								<div className="gamerule label-text-note"> Trust your gut. Prior knowledge in Chinese won't help.</div>
 							</div>
-							)}
+						)}
 					</div>
 					<div className="module" onClick={toggle2}>
 						<div className="gamerule label-title">

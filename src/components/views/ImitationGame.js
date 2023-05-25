@@ -23,7 +23,6 @@ const ImitationGame = props => {
 	const [lines, setLines] = useState([[],[]]);
 	const [isDrawing, setIsDrawing] = useState(false);
 	const [disabled, setDisabled] = useState(false);
-
 	const roundSum = localStorage.getItem('numRound');
 
 	useEffect(() => {
@@ -55,8 +54,6 @@ const ImitationGame = props => {
 		alert("Game crashed! Round is null!")
 	}
 	const currentQuestion = questionList[round - 1];
-	console.log(currentQuestion);
-
 	const requestBody = JSON.stringify({ roomID });
 	
 	function defineIcon(icon){
@@ -94,11 +91,7 @@ const ImitationGame = props => {
 						client.subscribe("/topic/multi/rooms/" + roomID + "/info", function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							//const roomcode = roomparse["roomCode"]
 							const players = roomparse["players"]
-							console.log(players);
-							console.log(roomparse);
-							//setRoomcode(roomcode);
 							setPlayers(players);
 						});
 						setTimeout(function () {
@@ -107,7 +100,6 @@ const ImitationGame = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							console.log(roomparse);
 						});
 					});
 				}
@@ -137,7 +129,6 @@ const ImitationGame = props => {
 		context.lineCap = "round";
 		context.strokeStyle = "black";
 		context.lineWidth = 5;
-		/*		context.strokeRect(0, 0, canvas.width, canvas.height);*/
 
 		lines.forEach(line => {
 			context.beginPath();
@@ -164,14 +155,11 @@ const ImitationGame = props => {
 
 	function saveStrokes(lines) {
 		for (const line in lines) {
-			//console.log("line",line)
 			for (const sample in lines[line]){
-				//console.log("sample",lines[line][sample])
 				strokeHistory[0].push(lines[line][sample].x);
 				strokeHistory[1].push(lines[line][sample].y)
 			}
 		}
-		console.log("Save strokes complete:",strokeHistory)
 	}
 
 	const finishDrawing = () => {
@@ -228,9 +216,6 @@ const ImitationGame = props => {
 				const byteArrString64 = btoa(byteArrString);
 				const round = parseInt(localStorage.getItem("round"));
 
-				console.log("Player is sending img:", loggedInUserID);
-				console.log("The img buffer string 64 is sending :"+ byteArrString64); // Object ArrayBuffer
-
 				const requestgetready = {
 					userID: loggedInUserID,
 					imitationBytes: byteArrString64,
@@ -243,8 +228,6 @@ const ImitationGame = props => {
 
 	const submitDrawing = () =>{
 		saveStrokes(lines);
-		console.log("canvasSize",canvasSize)
-		console.log("strokehIS",strokeHistory)
 
 		if(strokeHistory[0].length === 0 &&  strokeHistory[1].length === 0){
 			localStorage.setItem("roundPoints", 0);
@@ -254,7 +237,6 @@ const ImitationGame = props => {
 
 		// process cancas strokes as bytes
 		saveCanvasImgs();
-
 	}
 
 	function evaluateWriting(response, character) {
@@ -278,15 +260,12 @@ const ImitationGame = props => {
 			console.error('Error:', response.message);
 			// Handle the error in some way, such as displaying a message to the user or logging it
 		} else {
-			console.log('Response:', response);
 			const score = evaluateWriting(response,currentQuestion.character);
 			localStorage.setItem("roundPoints", score);
-			console.log("Score",score)
 			// Handle the response data in some way, such as updating the UI or storing it in a database
 
 			// Submit system score
 			submitScore();
-
 		}
 	}
 
@@ -302,7 +281,6 @@ const ImitationGame = props => {
 				console.log("roundPoints", systemScore);
 			}, 50);
 		}
-		console.log("Submitted systemscore is " + systemScore);
 		const requestBody = {userID,scoreBoard: {systemScore}};
 		client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
 		setDisabled(true);
@@ -381,7 +359,6 @@ const ImitationGame = props => {
 								}}
 								ref={canvasRef}
 							></canvas>
-
 						</center>
 					</div>
 				</div>

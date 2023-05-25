@@ -71,8 +71,6 @@ const ImitationVote = props => {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
 							const players = roomparse["players"]
-							console.log(players);
-							console.log(roomparse);
 							setPlayers(players);
 						});
 						setTimeout(function () {
@@ -89,7 +87,6 @@ const ImitationVote = props => {
 								playersImitationsArray[i] = "data:image/png;base64," + playersImitationsParse[i].imitationBytes;
 								const string = "playerImitation" + i;
 								playerImitationNames[i] = playersImitationsParse[i].username;
-
 								document.getElementById(string).src = playersImitationsArray[i];
 							}
 							setPlayerImitations(playersImitationsParse);
@@ -121,18 +118,10 @@ const ImitationVote = props => {
 		};
 	}, []);
 
-	// const submitScoreB1 = (userOrder) => {
-	// 	const votedScore = 10;
-	// 	const userID = players[userOrder][0];
-	// 	const requestBody = {userID,scoreBoard: {votedScore}};
-	// 	client.send("/app/multi/rooms/" + roomID + "/players/scoreBoard", {}, JSON.stringify(requestBody))
-	// }
-
 	const submitScore = (userOrder) => {
 		const votedTimes = 1;
 		const userID = playerImitations[userOrder].userID;
 		const fromUserID = loggedInUserID;
-		// alert("from userID is " + fromUserID + "to userID is " + userID);
 		const requestBody = {userID, fromUserID, votedTimes, round};
 		client.send("/app/multi/rooms/" + roomID + "/players/votes", {}, JSON.stringify(requestBody))
 	}
@@ -148,7 +137,6 @@ const ImitationVote = props => {
 
 			if (countdown <= 0) {
 				clearInterval(timer);
-				//setTimeout(submitScore(), 50);
 				setTimeout(function () {
 					window.location.href = `/game/${roomID}/result`;
 				}, 500);
@@ -163,7 +151,7 @@ const ImitationVote = props => {
 					{players.map((player, index) => (
 						players.length > index &&
 						<PlayerCard waiting={false} ready={players[index].ready}
-									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+							src={defineIcon(playerIcons[index])} label={playerNames[index]}>
 						</PlayerCard>
 					))}
 				</div>
@@ -321,7 +309,6 @@ const ImitationVote = props => {
 						</div>
 					</center>
 				</div>
-
 			</div>
 		</BaseContainer>
 	);

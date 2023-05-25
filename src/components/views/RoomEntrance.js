@@ -17,7 +17,6 @@ const RoomEntrance = props => {
 				if (!client['connected']) {
 					client.connect({}, function (frame) {
 						console.log('connected to stomp');
-
 					});
 				}
 			} catch (error) {
@@ -43,18 +42,14 @@ const RoomEntrance = props => {
 
 	const checkRoomFull = (roomparse) => {
 		const players = roomparse["players"];
-
 		roomFull= true;
 		players.forEach(player => {
-			console.log("local userID is" + userID);
-			console.log("player userID is" +player.userID);
 			if(player.userID == userID){
 				roomFull= false;
 				setRoomFull(false);
 			}
 		});
 		setRoomFull(roomFull);
-
 	};
 
 	const enterRoom = () => {
@@ -62,7 +57,6 @@ const RoomEntrance = props => {
 			setRoomFull(true);
 		}else{
 			client.subscribe('/topic/multi/rooms/' + roomCode + '/join', function (response) {
-				console.log(response.body)
 				const room = response.body;
 				const roomparse = JSON.parse(room);
 
@@ -73,7 +67,6 @@ const RoomEntrance = props => {
 				} else {
 					console.log("The room is full!");
 				}
-
 			});
 			const requestBody = JSON.stringify({ userID });
 			setTimeout(function () {

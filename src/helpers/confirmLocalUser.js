@@ -6,7 +6,6 @@ export async function fetchLocalUser(){
         const response = await api.post(`/users/localUser`, requestBody);
 
         const user = new User(response.data);
-        console.log("Confirm local user:",user);
         await localStorage.setItem('loggedInUser', user.id);
     } catch (error) {
         console.log("You are not logged in!")
