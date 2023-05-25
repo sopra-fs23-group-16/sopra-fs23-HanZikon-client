@@ -106,6 +106,11 @@ In the Game Settings feature, users can customize various aspects of the game, i
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/imitationvoting.png" /><br/>
 </p>
 
+### Choice
+<p align="center">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/choice.png" /><br/>
+</p>
+
 ### Result
 <p align="center">
   <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/image/result.png" /><br/>
