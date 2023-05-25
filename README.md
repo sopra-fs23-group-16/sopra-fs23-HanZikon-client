@@ -64,6 +64,27 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Illustrations
 
+### Game Rule
+<p align="left">
+  <img alt="hanzikon logo" src="https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-server/blob/main/src/main/resources/Images/welcome.png" /><br/>
+</p>
+
+### User Profile
+
+### Game Setting
+
+### Participant Waiting Room
+
+### Owner Waiting Room
+
+### Imitation Learning
+
+### Imitation Writing
+
+### Imitation Voting
+
+### Result
+
 ## Roadmap
 
 ### Tourist Mode
