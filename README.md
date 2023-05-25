@@ -6,10 +6,10 @@
 
 Hanzi (Chinese pinyin) means Chinese character. HanZikon is a Chinese character learning and writing APP.
 
-It has three game modes, Riddle of Oracle Script, Hanzi Imitation and Bit of Both Mode.
+It has three game modes, Riddle of Oracle Script, Hanzi Imitation and Bit of Both. All the three game modes have 5 difficulty levels (1-5 from easy to hard). Players are free to choose the mode and level they prefer.
 1. In Riddle of Oracle Script mode, player needs to choose the right chinese character of current age based on the oracle bone script dated back to 1500BC.
-2. In Hanzi Imitation mode, player would draw or paint the Chinese Character with short-term memory. Generally, there would be 15- 30 seconds for players to learn the shape and structure of the Chinese character, then 15 seconds for players to reproduce it. There would be three game modes with different levels (eg, 1 -5 from easy to hard ), players are free to choose the mode and level they prefer.
-3. In Bit of Both mode, player will have questions combined in above modes mentioned.
+2. In Hanzi Imitation mode, player would draw or paint the Chinese Character with short-term memory. Generally, there would be 20-40 seconds for players to learn the shape and structure of the Chinese character, then 10-18 seconds for players to reproduce it. 
+3. In Bit of Both mode, there will have questions consisted of those two modes.
 
 The aim of this application is getting to know Chinese characters in an interesting way. Or one can just simply take it as a game to practice your memory or painting skills with fun.
 
@@ -24,6 +24,26 @@ The aim of this application is getting to know Chinese characters in an interest
 - [Hanzi Writer API](https://hanziwriter.org/docs.html) - Demonstrate the strokes of Chinese characters
 
 ## High-level Components
+
+### Hanzi Learning Page
+
+The [Hanzi Learning](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ImitationInspect.js) page gives players 20-40 seconds (according to the difficulty level of the game) to learn the shape and structure, the history, and the meaning of a Chinese character. It serves as the first page of a Hanzi imitation question.
+
+### Hanzi Imitation Page
+
+The [Hanzi Imitation](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ImitationGame.js) page comes after the [Hanzi Learning](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ImitationInspect.js) page in a Hanzi imitation question. It gives players 10-18 seconds (according to the difficulty level of the game) to reproduce the Chinese character they learned in the [Hanzi Learning](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ImitationInspect.js) page.
+
+### Imitation Voting Page
+
+The [Imitation Voting](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ImitationVote.js) page is the last page of a Hanzi imitation question. It gives players 10 seconds to evaluate others' works in the [Hanzi Imitation](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ImitationGame.js) page. One player could vote the one he or she likes the most.
+
+### Multiple Choice Page
+
+The [Multiple Choice](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/ChoiceGame.js) page allows players to choose the chinese character of current age, which they think is the most similar one to the oracle bone script shown on that page.
+
+### Game Result Page
+
+The [Game Result](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-client/blob/main/src/components/views/GameResult.js) page shows the ranking and accumulated scores that all the players got in the finished turns. If the last question they finished was a Hanzi Imitation question, the time that they were voted would also be shown on this page.
 
 ## Getting started
 
