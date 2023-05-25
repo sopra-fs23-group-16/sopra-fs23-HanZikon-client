@@ -1,13 +1,13 @@
 @import 'styles/theme';
 
 .base-container {
-  margin-left: auto;
-  padding-left: 15px;
-  margin-right: auto;
-  padding-right: 15px;
-  margin-top: auto;
-  padding-top: 0px;
-  max-width: $DESKTOP_WIDTH;
-  color: $textColor;
-  //position: relative;
+	margin-left: auto;
+	padding-left: 15px;
+	margin-right: auto;
+	padding-right: 15px;
+	margin-top: auto;
+	padding-top: 0px;
+	max-width: $DESKTOP_WIDTH;
+	color: $textColor;
+	//position: relative;
 }

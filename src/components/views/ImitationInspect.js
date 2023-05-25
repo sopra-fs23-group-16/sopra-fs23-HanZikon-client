@@ -88,7 +88,6 @@ const ImitationInspect = props => {
 						client.subscribe('/topic/multi/rooms/' + roomID + '/join', function (response) {
 							const room = response.body;
 							const roomparse = JSON.parse(room);
-							console.log(roomparse);
 						});
 					});
 				}
@@ -128,7 +127,6 @@ const ImitationInspect = props => {
 				});
 			}
 		};
-
 	}, []);
 
 	const startCountdown = () => {
@@ -162,7 +160,7 @@ const ImitationInspect = props => {
 					{players.map((player, index) => (
 						players.length > index &&
 						<PlayerCard waiting={false} ready={players[index].ready}
-									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+							src={defineIcon(playerIcons[index])} label={playerNames[index]}>
 						</PlayerCard>
 					))}
 				</div>
@@ -206,7 +204,6 @@ const ImitationInspect = props => {
 							</center>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</BaseContainer>

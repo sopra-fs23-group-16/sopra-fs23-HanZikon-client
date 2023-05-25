@@ -42,7 +42,6 @@ const ChoiceGame = props => {
 	if (round === null) {
 		alert("Game crashed! Round is null!")
 	}
-	console.log("round",round);
 	const currentQuestion = questionList[round - 1];
 	const choices = currentQuestion.choices
 
@@ -81,7 +80,6 @@ const ChoiceGame = props => {
 			const response = await fetch(url);
 			const data = await response.json();
 
-			console.log("raw data",data)
 			setChoice({[cn_character]:data});
 		} catch (error) {
 			console.error(error);
@@ -90,7 +88,6 @@ const ChoiceGame = props => {
 
 	useEffect(() => {
 		choicesEN.push(choiceEN)
-		console.log("choicesEN",choicesEN)
 	}, [choiceEN]);
 
 	useEffect(() => {
@@ -185,16 +182,14 @@ const ChoiceGame = props => {
 		const optionIDs = "ABCD"
 		setDisabled(true);
 		setClicked(true);
-			// show the right answer after the choice
+		// show the right answer after the choice
 		document.getElementById(optionIDs[currentQuestion.answerIndex]).style.backgroundColor = colorRight
-		// setTimeout(submitScore(), 50);
 		submitScore();
 		setTimeout(function () {
 			window.location.href = `/game/${roomID}/result`;
 			setChoicesEN([]) // reset the choices
 		}, 2000);
-		// Make sure even if the player made the choice at the last minute
-		// he still has 2 sec to see the answers
+		// Make sure even if the player made the choice at the last minute, he or she will still have 2 sec to see the answers
 	}
 
 	let loadedCmp = 0;
@@ -210,7 +205,7 @@ const ChoiceGame = props => {
 	const searchTranslation = (chinese) =>{
 		for (const Key in choicesEN) {
 			try {
-				 let value = choicesEN[Key][chinese]
+				let value = choicesEN[Key][chinese]
 				return value['data']['translations'][0]['translatedText']
 			}
 			catch (e) {}
@@ -225,7 +220,7 @@ const ChoiceGame = props => {
 					{players.map((player, index) => (
 						players.length > index &&
 						<PlayerCard waiting={false} ready={players[index].ready}
-									src={defineIcon(playerIcons[index])} label={playerNames[index]}>
+							src={defineIcon(playerIcons[index])} label={playerNames[index]}>
 						</PlayerCard>
 					))}
 				</div>
@@ -240,34 +235,36 @@ const ChoiceGame = props => {
 									<span> / </span>
 									<span className="afterSlash">{roundSum}</span>
 								</div><br/>
-							<div className="choicegame timer">
-								<span className="choicegame clock-icon">&#128358;</span>
-								<Countdown
-									date={Date.now() + countdownSeconds * 1000} // 10s
-									intervalDelay={1000}
-									style={{ fontSize: '20px' }}
-									renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
-									onComplete={() => goNext()}
-								/>
-							</div>
-
-							<br /><br />
-							<img src={currentQuestion.oracleURL} alt="oracleURL" onLoad={()=>handleCmpLoad(1)}
-								 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
-							<br /><br /><br />
-							<div className="choicegame button-container">
-							{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (
-								<div key={index} className="choicegame">
-									<button id={String.fromCharCode(65 + index)} className="option" disabled={isDisabled}  style={{ margin: "10px" }} onClick={() => handleClick(index)}>
-										{choice}
-									</button>
-									{isClicked && (
-										<div className="label-translation" disabled={true}>{searchTranslation(choice)}</div>
-									)}
+								
+								<div className="choicegame timer">
+									<span className="choicegame clock-icon">&#128358;</span>
+									<Countdown
+										date={Date.now() + countdownSeconds * 1000} // 10s
+										intervalDelay={1000}
+										style={{ fontSize: '20px' }}
+										renderer={({ seconds }) => <span>{`${seconds}s`}</span>}
+										onComplete={() => goNext()}
+									/>
 								</div>
-							))}
-							</div>
-						</center>
+								<br /><br />
+								
+								<img src={currentQuestion.oracleURL} alt="oracleURL" onLoad={()=>handleCmpLoad(1)}
+									 style={{ width: '20%', height: 'auto', display: 'block', margin: 'auto' }} />
+								<br /><br /><br />
+								
+								<div className="choicegame button-container">
+								{choicesEN.length >= 4 && loaded && choices.map((choice, index) => (
+									<div key={index} className="choicegame">
+										<button id={String.fromCharCode(65 + index)} className="option" disabled={isDisabled}  style={{ margin: "10px" }} onClick={() => handleClick(index)}>
+											{choice}
+										</button>
+										{isClicked && (
+											<div className="label-translation" disabled={true}>{searchTranslation(choice)}</div>
+										)}
+									</div>
+								))}
+								</div>
+							</center>
 						</div>
 					</div>
 				</div>

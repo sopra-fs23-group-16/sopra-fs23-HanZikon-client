@@ -154,13 +154,15 @@ const OwnerWaitingRoom = props => {
 					{roomCode}
 				</div>
 				<div className="ownerwaiting button-container">			
-				<button className="ownerwaiting button-box" onClick ={ () => {
+					<button className="ownerwaiting button-box" onClick ={ () => {
 						copyToClipboard(roomCode)
 						setCopied(true);
 						setTimeout(() => {
-						setCopied(false);
+							setCopied(false);
 						}, 5000);
-					}} >{copied ? "Code copied!" : "Copy"}</button></div>
+					}} >{copied ? "Code copied!" : "Copy"}
+					</button>
+				</div>
 			</center>
 		)
 	}
@@ -170,21 +172,19 @@ const OwnerWaitingRoom = props => {
 			<div  className="ownerwaiting container">
 				<div className="ownerwaiting col">
 					{players.map((player, index) => (
-					players.length > index &&
+						players.length > index &&
 						<PlayerCard waiting={true} host={true} isHost={index===0} ready={players[index].ready}
-						src={defineIcon(playerIcons[index])} label={playerNames[index]}
-						onClick={()=>kickout(player)}>
+							src={defineIcon(playerIcons[index])} label={playerNames[index]}
+							onClick={()=>kickout(player)}>
 						</PlayerCard>
 					))}
 				</div>
 				<div className="ownerwaiting col">
-				<div className="ownerwaiting form">
-					{content}
+					<div className="ownerwaiting form">
+						{content}
+					</div>
 				</div>
 			</div>
-			</div>
-
-				
 		</BaseContainer>
 	);
 };

@@ -2,8 +2,8 @@ class AnimationItems {
     constructor() {
         this.timer = null;
         this.status = false;
-        this.num = 3;// 每秒出现花瓣个数
-        this.times = 3; // 每个出现时间
+        this.num = 3;
+        this.times = 3;
         this.start = function () {
             const body = document.getElementsByTagName('body')[0];
             const keyframes = `@keyframes animation_move {
@@ -29,7 +29,7 @@ class AnimationItems {
                 if (removeE.length > n-1) {
                     body.removeChild(removeE[0]);
                 }
-                const ran = Math.random()*10 * 0.72; //屏幕宽度采用720px，建议使用rem动态计算
+                const ran = Math.random()*10 * 0.72;
                 const e = document.createElement('div');
                 e.style.width = '50px';
                 e.style.height = '50px';

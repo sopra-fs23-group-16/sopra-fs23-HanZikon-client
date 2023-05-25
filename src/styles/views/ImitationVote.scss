@@ -17,7 +17,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
     &.form {
         display: flex;
         flex-direction: column;
@@ -35,7 +34,6 @@
         left: 52%;
         transform: translate(-47%, -50%);
     }
-
     &.col {
         display: flex;
         flex-direction: column;
@@ -43,7 +41,6 @@
         align-items: center;
         flex-basis: 10%
     }
-
     &.card {
         width: 92%;
         height: 15%;
@@ -53,7 +50,6 @@
         background-color: rgba(255, 255, 255, .2);
         margin-top: 5%;
     }
-
     &.label {
         font-style: sans-serif;
         color: rgb(144, 172, 230);

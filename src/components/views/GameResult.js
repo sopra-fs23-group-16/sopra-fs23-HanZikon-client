@@ -27,7 +27,6 @@ const GameResult = props => {
 	const [isParticle, setShowParticles] = useState(true);
 
 	const particlesInit = useCallback(async engine => {
-		console.log(engine);
 		// you can initiate the tsParticles instance (engine) here, adding custom shapes or presets
 		// this loads the tsparticles package bundle, it's the easiest method for getting everything ready
 		// starting from v2 you can add only the features you need reducing the bundle size
@@ -111,7 +110,7 @@ const GameResult = props => {
 						date = {Date.now() + 10000} // 10s
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
-						renderer={({ seconds }) => <h2>{localStorage.getItem("round")===localStorage.getItem("numRound") ? 'You have finished the game!' :'Waiting for Your Friends...'}</h2>}
+						renderer={({ seconds }) => <h2>{localStorage.getItem("round")===localStorage.getItem("numRound") ? 'You Have Finished The Game!' :'Waiting for Your Friends...'}</h2>}
 						onComplete={() => {nextRound(roomID)}}
 					/>
 				</div>
