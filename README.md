@@ -66,9 +66,25 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## Roadmap
 
+### Tourist Mode
+
+Our application currently only supports registered users. However, the separation of Player class and User allows further introducing a guest mode. By implementing a guest mode, users who haven't registered or logged in can still access and enjoy certain features of the application.
+
+### Single-player Mode
+
+Single-player mode can be designed as a limited feature to registered users by offering graded difficulty levels that allow them to progress through different stages and unlock new challenges. Additionally, the system can provide a way for guests to track and improve their performance by refreshing their records.
+
+### Game History
+
+For registered users, they can have access to advanced features that allow them to record both single-player game progress and multiplayer game records.
+
+### Mobile Adaptability
+
+Our application currently only caters to PC and tablet devices, and there is room for improvement in terms of the layout and scaling of the UI for mobile devices.
+
 ## Contribution
 
-Please read [CONTRIBUTIONS.md](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-server/blob/main/contributions.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTIONS.md](https://github.com/sopra-fs23-group-16/sopra-fs23-HanZikon-server/blob/main/contributions.md) for details on our code of conduct.
 
 ## License
 
