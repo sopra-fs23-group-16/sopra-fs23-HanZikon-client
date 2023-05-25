@@ -1,85 +1,82 @@
 @import 'styles/theme';
 
-/* For all other buttons. */
 .primary-button {
-  &:hover {
-    transform: translateY(-2px);
-  }
-  &:disabled {
-    cursor: default;
-    opacity: 0.4;
-    &:hover {
-      transform: none;
-    }
-  }
-  padding: 0px;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 18px;
-  text-align: center;
-  margin-top: 2px;
-  height: 46px;
-  border: none;
-  border-radius: $borderRadius;
-  cursor: pointer;
-  opacity: 1;
-  color: $background;
-  // background-color: #dd892d;
-  background-color: #7397ab;
-  transition: all 0.2s ease;
+	&:hover {
+		transform: translateY(-2px);
+	}
+	&:disabled {
+		cursor: default;
+		opacity: 0.4;
+		&:hover {
+		transform: none;
+		}
+	}
+	padding: 0px;
+	font-weight: 800;
+	text-transform: uppercase;
+	font-size: 18px;
+	text-align: center;
+	margin-top: 2px;
+	height: 46px;
+	border: none;
+	border-radius: $borderRadius;
+	cursor: pointer;
+	opacity: 1;
+	color: $background;
+	background-color: #7397ab;
+	transition: all 0.2s ease;
 }
 
 .secondary-button {
-  &:hover {
-    transform: translateY(-2px);
-  }
-  &:disabled {
-    cursor: default;
-    opacity: 0.4;
-    &:hover {
-      transform: none;
-    }
-  }
-  padding: 0px;
-  font-weight: 800;
-  text-transform: uppercase;
-  font-size: 18px;
-  text-align: center;
-  margin-top: 2px;
-  height: 46px;
-  border: none;
-  border-radius: $borderRadius;
-  cursor: pointer;
-  opacity: 1;
-  color: $background;
-  // background-color: #dd892d;
-  background-color: #b1c8d6;
-  transition: all 0.2s ease;
+	&:hover {
+		transform: translateY(-2px);
+	}
+	&:disabled {
+		cursor: default;
+		opacity: 0.4;
+		&:hover {
+		transform: none;
+		}
+	}
+	padding: 0px;
+	font-weight: 800;
+	text-transform: uppercase;
+	font-size: 18px;
+	text-align: center;
+	margin-top: 2px;
+	height: 46px;
+	border: none;
+	border-radius: $borderRadius;
+	cursor: pointer;
+	opacity: 1;
+	color: $background;
+	background-color: #b1c8d6;
+	transition: all 0.2s ease;
 }
 
 /* Only for game(old). Now it might be useful in 'waiting room' page */
 .user-button {
-  &:hover {
-    transform: translateY(-2px);
-  }
-  &:disabled {
-    cursor: default;
-    opacity: 0.4;
-    &:hover {
-      transform: none;
-    }
-  }
-  padding: 0px;
-  font-weight: 300;
-  text-transform: uppercase;
-  font-size: 24px;
-  text-align: center;
-  height: 80px;
-  border: none;
-  border-radius: $borderRadius;
-  cursor: pointer;
-  opacity: 1;
-  color: $accent;
-  background-color: $background;
-  transition: all 0.3s ease;
+	&:hover {
+		transform: translateY(-2px);
+	}
+	&:disabled {
+		cursor: default;
+		opacity: 0.4;
+		&:hover {
+		transform: none;
+		}
+	}
+	padding: 0px;
+	font-weight: 300;
+	text-transform: uppercase;
+	font-size: 24px;
+	text-align: center;
+	height: 80px;
+	border: none;
+	border-radius: $borderRadius;
+	cursor: pointer;
+	opacity: 1;
+	color: $accent;
+	background-color: $background;
+	transition: all 0.3s ease;
 }

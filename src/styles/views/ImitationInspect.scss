@@ -17,7 +17,6 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
-
     &.infocontainer {
         display: flex;
         border-radius: 15px;
@@ -28,11 +27,9 @@
         height: fit-content;
         position: relative;
     }
-
     .infocontainer.content {
         opacity: 100%;
     }
-
     &.form {
         display: flex;
         flex-direction: column;
@@ -50,7 +47,6 @@
         left: 52%;
         transform: translate(-47%, -50%);
     }
-
     &.col {
         display: flex;
         flex-direction: column;
@@ -58,7 +54,6 @@
         align-items: center;
         flex-basis: 10%
     }
-
     &.card {
         width: 92%;
         height: 15%;
@@ -68,7 +63,6 @@
         background-color: rgba(255, 255, 255, .2);
         margin-top: 5%;
     }
-
     &.label {
         font-style: sans-serif;
         color: black;
@@ -77,26 +71,22 @@
         font-weight: bold;
         justify-content: center;
     }
-
     &.meaninglabel {
         font-style: sans-serif;
         color: #516a78;
         justify-content: center;
     }
-
     .meaninglabel::before {
         content: "Meaning:  ";
         font-weight: bold;
         font-size: 12pt;
         color: #3a4c56;
     }
-
     .meaninglabel::after {
         content: attr(data-value);
         font-size: 14pt;
         color: #516a78;
     }
-
     &.textlabel {
         font-style: sans-serif;
         color: #7397ab;
@@ -104,14 +94,12 @@
         font-size: 12pt;
         justify-content: center;
     }
-
     &.evolutiontimelabel {
         font-style: sans-serif;
         color: rgb(144, 172, 230);
         font-size: 9pt;
         justify-content: center;
     }
-
 	&.timer {
         height: 40px;
 		width: 6%;

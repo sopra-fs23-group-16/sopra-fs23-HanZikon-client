@@ -36,72 +36,67 @@
         left: 50%;
         transform: translate(-49%, -50%);
     }
-  &.button-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 0.8em;
-	margin-bottom: 0.8em;
-  }
-  &.label-title {
-    font-style: sans-serif;
-    color:#3d505c;
-    font-size: 16pt;
-    font-weight: bold;
-    text-align: left;
-  }
+	
+	&.button-container {
+		display: flex;
+		justify-content: center;
+		margin-top: 0.8em;
+		margin-bottom: 0.8em;
+	}
+	
+	&.label-title {
+		font-style: sans-serif;
+		color:#3d505c;
+		font-size: 16pt;
+		font-weight: bold;
+		text-align: left;
+	}
+	&.label-title-big {
+		font-style: sans-serif;
+		color: black;
+		text-transform: capitalize;
+		font-size: 22pt;
+		font-weight: bold;
+		justify-content: center;
+	}
+	&.label-text {
+		font-style: sans-serif;
+		color: black;
+		font-size: 12pt;
+		text-align: left;
+		padding-top: 10px;
+	}
+	&.label-text-note {
+		font-style: sans-serif;
+		color: #d80d0d;
+		font-size: 12pt;
+		text-align: left;
+		padding-top: 10px;
+	}
+	.label-text-note::before {
+		content: "Note: ";
+		font-style: normal;
+		font-weight: bold;
+		color: #c00b0b;
+	}
 
-  &.label-title-big {
-    font-style: sans-serif;
-    color: black;
-    text-transform: capitalize;
-    font-size: 22pt;
-    font-weight: bold;
-    justify-content: center;
-  }
+	.mode::after {
+		content: attr(data-value);
+	}
 
-  &.label-text {
-    font-style: sans-serif;
-    color: black;
-    font-size: 12pt;
-    text-align: left;
-    padding-top: 10px;
-  }
-
-  &.label-text-note {
-    font-style: sans-serif;
-    color: #d80d0d;
-    font-size: 12pt;
-    text-align: left;
-    padding-top: 10px;
-  }
-
-  .label-text-note::before {
-    content: "Note: ";
-    font-style: normal;
-    font-weight: bold;
-    color: #c00b0b;
-  }
-
-  .mode::after {
-    content: attr(data-value);
-  }
-
-  .module {
-    background-color: rgba(216, 223, 226, 0.4);
-    border: 1px solid #879eae;
-    padding: 10px;
-    margin-bottom: 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  .module .label-text {
-    margin-bottom: 10px;
-  }
-
-  .module .content {
-    display: none;
-    padding-top: 10px;
-  }
-
+	.module {
+		background-color: rgba(216, 223, 226, 0.4);
+		border: 1px solid #879eae;
+		padding: 10px;
+		margin-bottom: 10px;
+		cursor: pointer;
+		border-radius: 5px;
+	}
+	.module .label-text {
+		margin-bottom: 10px;
+	}
+	.module .content {
+		display: none;
+		padding-top: 10px;
+	}
 }

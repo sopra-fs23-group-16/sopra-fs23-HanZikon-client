@@ -110,7 +110,7 @@ const GameResult = props => {
 						date = {Date.now() + 10000} // 10s
 						intervalDelay={1000}
 						style={{ fontSize: '20px' }}
-						renderer={({ seconds }) => <h2>{localStorage.getItem("round")===localStorage.getItem("numRound") ? 'You have finished the game!' :'Waiting for Your Friends...'}</h2>}
+						renderer={({ seconds }) => <h2>{localStorage.getItem("round")===localStorage.getItem("numRound") ? 'You Have Finished The Game!' :'Waiting for Your Friends...'}</h2>}
 						onComplete={() => {nextRound(roomID)}}
 					/>
 				</div>
